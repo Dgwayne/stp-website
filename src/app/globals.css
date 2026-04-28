@@ -1,26 +1,103 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: #0b1120;
+  --color-foreground: #e2e8f0;
+  --color-surface: #111827;
+  --color-surface-light: #1e293b;
+  --color-brand-orange: #f97316;
+  --color-brand-teal: #0ea5e9;
+  --color-brand-orange-dim: #c2410c;
+  --color-brand-teal-dim: #0284c7;
+  --color-muted: #94a3b8;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Phone mockup frame */
+.phone-frame {
+  position: relative;
+  width: 220px;
+  flex-shrink: 0;
+  border-radius: 2rem;
+  border: 4px solid #334155;
+  background: #0f172a;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.phone-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Screenshot scroll container */
+.screenshot-scroll {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding: 2rem 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.screenshot-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.screenshot-scroll::-webkit-scrollbar-track {
+  background: var(--color-surface);
+  border-radius: 3px;
+}
+
+.screenshot-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-surface-light);
+  border-radius: 3px;
+}
+
+.screenshot-scroll > * {
+  scroll-snap-align: center;
+}
+
+/* Fade-in animation */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out both;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #f97316, #0ea5e9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hero background */
+.hero-bg {
+  background: radial-gradient(ellipse at 50% 0%, rgba(14, 165, 233, 0.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 50%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+              var(--color-background);
 }
