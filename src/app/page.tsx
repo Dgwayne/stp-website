@@ -1,132 +1,103 @@
 import Image from "next/image";
-import Link from "next/link";
+import FeatureCard, { type Feature } from "@/components/FeatureCard";
+import ScreenshotStrip, { type Screenshot } from "@/components/ScreenshotStrip";
+import SectionHeader from "@/components/SectionHeader";
 
-/* ------------------------------------------------------------------ */
-/*  Data                                                               */
-/* ------------------------------------------------------------------ */
-
-const features = [
+const features: Feature[] = [
   {
     icon: "📡",
-    title: "GPS Beacon",
+    title: "Single-Site NEXRAD Radar",
     description:
-      "Transmit your real-time GPS position to Spotter Network so the NWS and fellow spotters can see exactly where you are during severe weather.",
+      "Real-time NEXRAD Level 2 decoded right on your phone — Reflectivity, Velocity, and Correlation Coefficient products at full resolution, per radar site.",
+    href: "/radar",
+  },
+  {
+    icon: "🎞️",
+    title: "Composite & Animated Radar",
+    description:
+      "CONUS composite mosaic plus a full transport bar — play, pause, scrub, change loop speed and frame count.",
+    href: "/radar",
+  },
+  {
+    icon: "🎨",
+    title: "Customizable Color Tables",
+    description:
+      "Sixteen built-in palettes plus import your own GR2Analyst-style .pal files for BR, BV, and CC.",
+    href: "/radar",
+  },
+  {
+    icon: "🚨",
+    title: "Smart Push Alerts",
+    description:
+      "Background watcher fires NWS warning notifications even when the app is closed — with watch zones, outbreak mode, custom sounds, and full-screen tornado-emergency takeover.",
+    href: "/alerts",
+  },
+  {
+    icon: "📍",
+    title: "GPS Beacon to Spotter Network",
+    description:
+      "Foreground and background beacon transmission so the NWS and fellow spotters see exactly where you are. Auto-restarts on device boot.",
+    href: "/features",
   },
   {
     icon: "⚠️",
-    title: "NWS Warnings & Watches",
+    title: "NWS, SPC & Convective Outlooks",
     description:
-      "View active tornado warnings, severe thunderstorm warnings, flood warnings, and watches overlaid directly on the map.",
+      "Warnings, watches, mesoscale discussions, and Day 1 / Day 2 categorical, tornado, wind, and hail outlooks — all overlaid on the map.",
+    href: "/alerts",
   },
   {
-    icon: "🌪️",
-    title: "Storm Reports",
+    icon: "🌡️",
+    title: "METARs & Storm Cell Picker",
     description:
-      "See today's SPC storm reports — tornadoes, hail, and damaging wind — plotted on the map in real time.",
+      "Live airport observations on the map, plus tap any storm cell to see its radar attributes and identifier.",
+    href: "/features",
   },
   {
     icon: "📋",
-    title: "Report Submission",
+    title: "Severe Weather Reporting",
     description:
-      "File severe weather reports (tornado, funnel cloud, hail, wind, flood, and more) directly to Spotter Network with optional photos.",
-  },
-  {
-    icon: "🔔",
-    title: "Alerts Dashboard",
-    description:
-      "Browse all active NWS alerts nationwide, filtered by type and severity — from Extreme tornado warnings to Minor advisories.",
-  },
-  {
-    icon: "📡",
-    title: "NEXRAD Radar",
-    description:
-      "Toggle a CONUS composite NEXRAD reflectivity mosaic on the map for at-a-glance precipitation context.",
-  },
-  {
-    icon: "🗺️",
-    title: "Map Layers",
-    description:
-      "Control exactly what you see: active spotters, storm reports, warnings, watches, and radar — each toggled independently.",
+      "Submit tornado, hail, wind, flood, funnel, wall-cloud, and damage reports directly to Spotter Network — with optional photos.",
+    href: "/features",
   },
 ];
 
-const screenshots: { src: string; alt: string; caption: string }[] = [
+const marqueeScreenshots: Screenshot[] = [
   {
-    src: "/images/screenshot-1.jpg",
-    alt: "Map view with active spotters",
-    caption: "Spotter Network map — see hundreds of active spotters across the US",
+    src: "/images/screenshots/home-map.jpg",
+    alt: "Composite radar map view",
+    caption: "Composite radar mosaic — at-a-glance precipitation context",
   },
   {
-    src: "/images/screenshot-2.jpg",
-    alt: "NWS warnings on the map",
-    caption: "Active beacon with NWS warning polygons and local alert banner",
+    src: "/images/screenshots/radar-br.jpg",
+    alt: "Single-site reflectivity with severe storm",
+    caption: "Single-site Level 2 reflectivity decoded in-app",
   },
   {
-    src: "/images/screenshot-3.jpg",
-    alt: "Storm reports and watches",
-    caption: "SPC storm reports, NWS watches, and warnings on the Oklahoma/Texas map",
+    src: "/images/screenshots/radar-bv.jpg",
+    alt: "Single-site velocity",
+    caption: "Single-site Level 2 velocity for rotation analysis",
   },
   {
-    src: "/images/screenshot-4.jpg",
-    alt: "Map layers panel",
-    caption: "Toggle map layers: spotters, reports, warnings, watches, and radar",
+    src: "/images/screenshots/layer-selector.jpg",
+    alt: "Map layer selector sheet",
+    caption: "Granular per-layer toggles with live status subtitles",
   },
   {
-    src: "/images/screenshot-5.jpg",
-    alt: "Severe weather report form",
-    caption: "Submit severe weather reports — tornado, hail, flood, and more",
+    src: "/images/screenshots/alert-outlook-day1.jpg",
+    alt: "SPC Day 1 convective outlook on the map",
+    caption: "SPC convective outlooks and mesoscale discussions",
   },
   {
-    src: "/images/screenshot-6.jpg",
-    alt: "Tornado warning detail",
-    caption: "Full NWS tornado warning detail with map polygon and threat info",
-  },
-  {
-    src: "/images/screenshot-7.jpg",
-    alt: "Alerts list",
-    caption: "Browse and filter all active NWS alerts by type and severity",
+    src: "/images/screenshots/alert-detail-sheet.jpg",
+    alt: "Alerts dashboard with severity filters",
+    caption: "Browse every active NWS alert with type and severity filters",
   },
 ];
-
-/* ------------------------------------------------------------------ */
-/*  Page                                                               */
-/* ------------------------------------------------------------------ */
 
 export default function Home() {
   return (
     <>
-      {/* ---- NAV ---- */}
-      <nav className="fixed top-0 z-50 w-full border-b border-white/5 bg-background/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
-          <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/images/stp-logo-256.png"
-              alt="STP Logo"
-              width={36}
-              height={36}
-              className="rounded-lg"
-            />
-            <span className="text-lg font-semibold tracking-tight">
-              Spotter Tools Pro
-            </span>
-          </Link>
-          <div className="flex items-center gap-6 text-sm text-muted">
-            <a href="#features" className="transition-colors hover:text-foreground">
-              Features
-            </a>
-            <a href="#screenshots" className="transition-colors hover:text-foreground">
-              Screenshots
-            </a>
-            <Link
-              href="/privacy"
-              className="transition-colors hover:text-foreground"
-            >
-              Privacy
-            </Link>
-          </div>
-        </div>
-      </nav>
-
       {/* ---- HERO ---- */}
       <section className="hero-bg flex flex-col items-center justify-center px-6 pt-36 pb-24 text-center">
         <div className="animate-fade-in-up">
@@ -142,9 +113,9 @@ export default function Home() {
             <span className="gradient-text">Spotter Tools Pro</span>
           </h1>
           <p className="mx-auto mb-8 max-w-xl text-lg text-muted sm:text-xl">
-            Professional-grade storm spotting for Android. Real-time GPS beacon,
-            NWS alerts, storm reports, and NEXRAD radar — built for certified
-            storm spotters.
+            Professional-grade storm spotting for Android. Real-time NEXRAD
+            Level 2 radar, smart push alerts, GPS beacon, and the full NWS /
+            SPC suite — built for certified storm spotters.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
@@ -170,28 +141,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---- FEATURES ---- */}
+      {/* ---- FEATURES (top-level cards) ---- */}
       <section id="features" className="px-6 py-24">
         <div className="mx-auto max-w-6xl">
-          <h2 className="mb-4 text-center text-3xl font-bold sm:text-4xl">
-            Everything a Spotter Needs
-          </h2>
-          <p className="mx-auto mb-16 max-w-2xl text-center text-muted">
-            Built from the ground up for Spotter Network members and certified
-            storm spotters. No ads, no tracking, no accounts — just tools.
-          </p>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <SectionHeader
+            eyebrow="Capabilities"
+            title="Everything a Spotter Needs"
+            description="Built from the ground up for Spotter Network members and certified storm spotters. No ads, no tracking, no accounts — just tools."
+          />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((f) => (
-              <div
-                key={f.title}
-                className="group rounded-2xl border border-white/5 bg-surface p-6 transition-all hover:border-brand-teal/30 hover:bg-surface-light"
-              >
-                <div className="mb-3 text-3xl">{f.icon}</div>
-                <h3 className="mb-2 text-lg font-semibold">{f.title}</h3>
-                <p className="text-sm leading-relaxed text-muted">
-                  {f.description}
-                </p>
-              </div>
+              <FeatureCard key={f.title} feature={f} />
             ))}
           </div>
         </div>
@@ -200,30 +160,12 @@ export default function Home() {
       {/* ---- SCREENSHOTS ---- */}
       <section id="screenshots" className="bg-surface px-6 py-24">
         <div className="mx-auto max-w-6xl">
-          <h2 className="mb-4 text-center text-3xl font-bold sm:text-4xl">
-            See It in Action
-          </h2>
-          <p className="mx-auto mb-12 max-w-xl text-center text-muted">
-            Scroll through real screenshots from Spotter Tools Pro.
-          </p>
-          <div className="screenshot-scroll px-4">
-            {screenshots.map((s, i) => (
-              <div key={i} className="flex flex-col items-center gap-3">
-                <div className="phone-frame">
-                  <Image
-                    src={s.src}
-                    alt={s.alt}
-                    width={440}
-                    height={960}
-                    className="object-cover"
-                  />
-                </div>
-                <p className="w-52 text-center text-xs leading-relaxed text-muted">
-                  {s.caption}
-                </p>
-              </div>
-            ))}
-          </div>
+          <SectionHeader
+            eyebrow="In the field"
+            title="See It in Action"
+            description="A few highlights from the app — explore the deep-dive pages for the full tour."
+          />
+          <ScreenshotStrip screenshots={marqueeScreenshots} />
         </div>
       </section>
 
@@ -255,39 +197,6 @@ export default function Home() {
           </p>
         </div>
       </section>
-
-      {/* ---- FOOTER ---- */}
-      <footer className="border-t border-white/5 bg-surface px-6 py-12">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 text-sm text-muted sm:flex-row sm:justify-between">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/images/stp-logo-256.png"
-              alt="STP Logo"
-              width={28}
-              height={28}
-              className="rounded-md"
-            />
-            <span>
-              &copy; {new Date().getFullYear()} DGWayne (Dustin Garner). All
-              rights reserved.
-            </span>
-          </div>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/privacy"
-              className="transition-colors hover:text-foreground"
-            >
-              Privacy Policy
-            </Link>
-            <a
-              href="mailto:dustin@dustingarner.com"
-              className="transition-colors hover:text-foreground"
-            >
-              Contact
-            </a>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }
