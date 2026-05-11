@@ -43,8 +43,14 @@ export default function SiteFooter() {
           >
             Privacy
           </Link>
+          <Link
+            href="/terms"
+            className="transition-colors hover:text-foreground"
+          >
+            Terms
+          </Link>
           <a
-            href="mailto:dustin@dustingarner.com"
+            href="mailto:spottertoolspro@gmail.com"
             className="transition-colors hover:text-foreground"
           >
             Contact

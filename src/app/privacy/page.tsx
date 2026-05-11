@@ -24,10 +24,10 @@ export default function PrivacyPage() {
           <br />
           <strong className="text-foreground">Contact:</strong>{" "}
           <a
-            href="mailto:dustin@dustingarner.com"
+            href="mailto:spottertoolspro@gmail.com"
             className="text-brand-teal hover:underline"
           >
-            dustin@dustingarner.com
+            spottertoolspro@gmail.com
           </a>
         </p>
 
@@ -357,10 +357,10 @@ export default function PrivacyPage() {
             <strong className="text-foreground">Dustin Garner</strong>
             <br />
             <a
-              href="mailto:dustin@dustingarner.com"
+              href="mailto:spottertoolspro@gmail.com"
               className="text-brand-teal hover:underline"
             >
-              dustin@dustingarner.com
+              spottertoolspro@gmail.com
             </a>
           </p>
         </section>

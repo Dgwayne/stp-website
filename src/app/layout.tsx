@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://spottertools.pro",
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://spottertoolspro.vercel.app",
   ),
   title: "Spotter Tools Pro — Professional Storm Spotting for Android",
   description:
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     "metar",
     "weather app",
   ],
-  authors: [{ name: "DGWayne", url: "mailto:dustin@dustingarner.com" }],
+  authors: [{ name: "DGWayne", url: "mailto:spottertoolspro@gmail.com" }],
   openGraph: {
     title: "Spotter Tools Pro",
     description:
