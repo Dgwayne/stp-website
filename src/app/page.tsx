@@ -119,7 +119,9 @@ export default function Home() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
-              href="#"
+              href="https://play.google.com/store/apps/details?id=com.dustin.spottertools"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-brand-orange px-6 py-3 font-semibold text-white shadow-lg transition-all hover:bg-brand-orange-dim hover:shadow-brand-orange/25"
             >
               <svg
@@ -129,7 +131,7 @@ export default function Home() {
               >
                 <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-1.4l2.575 1.49c.478.277.478.972 0 1.249l-2.575 1.49-2.556-2.556 2.556-2.673zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z" />
               </svg>
-              Google Play (Coming Soon)
+              Get it on Google Play
             </a>
             <a
               href="#features"
