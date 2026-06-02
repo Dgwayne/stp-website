@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy — Spotter Tools Pro",
   description:
-    "Privacy policy for Spotter Tools Pro, the professional storm spotting app for Android.",
+    "Privacy policy for Spotter Tools Pro, the professional storm spotting app for iOS and Android.",
 };
 
 export default function PrivacyPage() {
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
 
       <div className="prose-custom space-y-8 text-muted leading-relaxed">
         <p className="text-sm">
-          <strong className="text-foreground">Last updated:</strong> April 27,
+          <strong className="text-foreground">Last updated:</strong> June 2,
           2026
           <br />
           <strong className="text-foreground">Developer:</strong> DGWayne
@@ -87,9 +87,10 @@ export default function PrivacyPage() {
           </h3>
           <p>
             When you submit a storm report (tornado, hail, wind, etc.), the
-            report details — including type, description, location, time, and
-            optional photos — are transmitted to Spotter Network. Reports are
-            also stored locally on your device for your records.
+            report details — including type, description, location, and time —
+            are transmitted to Spotter Network. Reports are also stored locally
+            on your device for your records. The App does not capture or attach
+            photos.
           </p>
 
           <h3 className="mb-2 mt-6 text-lg font-semibold text-foreground">
@@ -99,6 +100,18 @@ export default function PrivacyPage() {
             The App accesses basic device manufacturer information solely to
             provide device-specific battery optimization instructions. This
             data is not transmitted or stored.
+          </p>
+
+          <h3 className="mb-2 mt-6 text-lg font-semibold text-foreground">
+            Crash &amp; Diagnostic Data
+          </h3>
+          <p>
+            To help us find and fix bugs, the App uses Sentry, a third-party
+            error-reporting service, to collect anonymous crash reports and
+            diagnostic data (such as the error, a stack trace, the app version,
+            and basic device/OS type) when the App encounters a problem. This
+            data is used solely to improve stability. It is not linked to your
+            identity, is not used to track you, and is never sold.
           </p>
         </section>
 
@@ -225,6 +238,25 @@ export default function PrivacyPage() {
                     </a>
                   </td>
                 </tr>
+                <tr>
+                  <td className="py-3 pr-4 font-medium text-foreground">
+                    Sentry
+                  </td>
+                  <td className="py-3 pr-4">
+                    Receives anonymous crash &amp; diagnostic reports to improve
+                    stability
+                  </td>
+                  <td className="py-3">
+                    <a
+                      href="https://sentry.io/privacy/"
+                      className="text-brand-teal hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      sentry.io/privacy
+                    </a>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -277,19 +309,10 @@ export default function PrivacyPage() {
                 </tr>
                 <tr>
                   <td className="py-3 pr-4 font-medium text-foreground">
-                    Camera
-                  </td>
-                  <td className="py-3">
-                    Attaching photos to storm reports
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-3 pr-4 font-medium text-foreground">
                     Notifications
                   </td>
                   <td className="py-3">
-                    Displaying beacon status and severe weather alerts in the
-                    notification bar
+                    Displaying beacon status and severe weather alerts
                   </td>
                 </tr>
                 <tr>
@@ -297,9 +320,9 @@ export default function PrivacyPage() {
                     Full-Screen Intent (Android 14+)
                   </td>
                   <td className="py-3">
-                    Optional alarm-style takeover for Tornado Emergency and
-                    PDS warnings — only used for the most life-threatening
-                    alerts
+                    Android only. Optional alarm-style takeover for Tornado
+                    Emergency and PDS warnings — only used for the most
+                    life-threatening alerts
                   </td>
                 </tr>
                 <tr>
@@ -307,8 +330,8 @@ export default function PrivacyPage() {
                     Boot Completed
                   </td>
                   <td className="py-3">
-                    Optional — restarts the beacon after a device reboot if
-                    you have that setting enabled
+                    Android only. Optional — restarts the beacon after a device
+                    reboot if you have that setting enabled
                   </td>
                 </tr>
                 <tr>

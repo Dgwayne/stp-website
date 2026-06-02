@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Terms of Service — Spotter Tools Pro",
   description:
-    "Terms of Service, license, and severe-weather disclaimer for Spotter Tools Pro, the professional storm spotting app for Android.",
+    "Terms of Service, license, and severe-weather disclaimer for Spotter Tools Pro, the professional storm spotting app for iOS and Android.",
 };
 
 export default function TermsPage() {
@@ -16,10 +16,10 @@ export default function TermsPage() {
 
       <div className="prose-custom space-y-8 text-muted leading-relaxed">
         <p className="text-sm">
-          <strong className="text-foreground">Last updated:</strong> May 10,
+          <strong className="text-foreground">Last updated:</strong> June 2,
           2026
           <br />
-          <strong className="text-foreground">Effective date:</strong> May 10,
+          <strong className="text-foreground">Effective date:</strong> June 2,
           2026
           <br />
           <strong className="text-foreground">Developer:</strong> DGWayne
@@ -88,9 +88,9 @@ export default function TermsPage() {
             Subject to your compliance with these Terms, the Developer grants
             you a limited, personal, non-exclusive, non-transferable,
             non-sublicensable, revocable license to install and use one copy
-            of the App on Android devices that you own or control, solely for
-            your personal, non-commercial storm spotting and severe weather
-            monitoring purposes.
+            of the App on iOS or Android devices that you own or control,
+            solely for your personal, non-commercial storm spotting and severe
+            weather monitoring purposes.
           </p>
           <p className="mt-3">
             This license is granted to you; it is not a sale of the App. All
@@ -255,7 +255,7 @@ export default function TermsPage() {
               timeframe, if at all
             </li>
             <li>
-              The App will be compatible with all Android devices, OS
+              The App will be compatible with all iOS or Android devices, OS
               versions, or carrier configurations
             </li>
           </ul>
@@ -318,8 +318,18 @@ export default function TermsPage() {
             10. Refunds and Purchases
           </h2>
           <p>
-            Spotter Tools Pro is sold as a one-time purchase through the
-            Google Play Store. Refunds are governed by{" "}
+            Spotter Tools Pro is sold as a one-time purchase through the Apple
+            App Store (iOS) and the Google Play Store (Android). Refunds are
+            governed by the policies of the store you purchased from —{" "}
+            <a
+              href="https://support.apple.com/en-us/HT204084"
+              className="text-brand-teal hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Apple&apos;s refund policy
+            </a>{" "}
+            or{" "}
             <a
               href="https://support.google.com/googleplay/answer/2479637"
               className="text-brand-teal hover:underline"
@@ -328,8 +338,8 @@ export default function TermsPage() {
             >
               Google Play&apos;s refund policy
             </a>{" "}
-            and are processed by Google, not the Developer. The Developer
-            cannot issue refunds directly.
+            — and are processed by Apple or Google, not the Developer. The
+            Developer cannot issue refunds directly.
           </p>
           <p className="mt-3">
             We do not offer subscriptions, in-app purchases, recurring
