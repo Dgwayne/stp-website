@@ -52,8 +52,8 @@ export const metadata: Metadata = {
     images: [{ url: "/images/stp-logo.png", width: 1024, height: 1024 }],
   },
   icons: {
-    icon: "/images/stp-logo-256.png",
-    apple: "/images/stp-logo-256.png",
+    icon: "/images/stp-logo-mark.png",
+    apple: "/images/stp-logo-mark.png",
   },
 };
 

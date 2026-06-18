@@ -537,7 +537,7 @@ export default function FeaturesPage() {
         <div className="mt-16 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/radar"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-orange px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-brand-orange-dim"
+            className="inline-flex items-center gap-2 rounded-full bg-brand-green px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-brand-green-dim"
           >
             Radar deep-dive <span aria-hidden>&rarr;</span>
           </Link>

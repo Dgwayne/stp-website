@@ -5,9 +5,9 @@
   --color-foreground: #e2e8f0;
   --color-surface: #111827;
   --color-surface-light: #1e293b;
-  --color-brand-orange: #f97316;
+  --color-brand-green: #4a9e24;
   --color-brand-teal: #0ea5e9;
-  --color-brand-orange-dim: #c2410c;
+  --color-brand-green-dim: #357517;
   --color-brand-teal-dim: #0284c7;
   --color-muted: #94a3b8;
   --font-sans: var(--font-geist-sans);
@@ -89,7 +89,7 @@ html {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #f97316, #0ea5e9);
+  background: linear-gradient(135deg, #5cc23a, #0ea5e9);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -97,7 +97,7 @@ html {
 
 /* Hero background */
 .hero-bg {
-  background: radial-gradient(ellipse at 50% 0%, rgba(14, 165, 233, 0.12) 0%, transparent 60%),
-              radial-gradient(ellipse at 80% 50%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+  background: radial-gradient(ellipse at 50% 0%, rgba(92, 194, 58, 0.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 50%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
               var(--color-background);
 }

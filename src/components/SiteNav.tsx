@@ -19,7 +19,7 @@ export default function SiteNav() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/images/stp-logo-256.png"
+            src="/images/stp-logo-mark.png"
             alt="STP Logo"
             width={36}
             height={36}

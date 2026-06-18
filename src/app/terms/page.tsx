@@ -36,9 +36,9 @@ export default function TermsPage() {
 
         <div
           role="alert"
-          className="rounded-lg border border-brand-orange/40 bg-brand-orange/10 p-5"
+          className="rounded-lg border border-brand-green/40 bg-brand-green/10 p-5"
         >
-          <p className="mb-2 font-semibold uppercase tracking-wide text-brand-orange">
+          <p className="mb-2 font-semibold uppercase tracking-wide text-brand-green">
             Severe Weather Disclaimer
           </p>
           <p className="text-sm text-foreground">

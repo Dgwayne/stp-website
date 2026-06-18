@@ -7,7 +7,7 @@ export default function SiteFooter() {
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 text-sm text-muted sm:flex-row sm:justify-between">
         <div className="flex items-center gap-3">
           <Image
-            src="/images/stp-logo-256.png"
+            src="/images/stp-logo-mark.png"
             alt="STP Logo"
             width={28}
             height={28}

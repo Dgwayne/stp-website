@@ -130,12 +130,12 @@ export default function Home() {
       <section className="hero-bg flex flex-col items-center justify-center px-6 pt-36 pb-24 text-center">
         <div className="animate-fade-in-up">
           <Image
-            src="/images/stp-logo.png"
+            src="/images/stp-logo-mark.png"
             alt="Spotter Tools Pro logo"
             width={160}
             height={160}
             priority
-            className="mx-auto mb-8 drop-shadow-2xl"
+            className="mx-auto mb-8 rounded-3xl drop-shadow-2xl"
           />
           <h1 className="mb-4 text-5xl font-extrabold tracking-tight sm:text-6xl">
             <span className="gradient-text">Spotter Tools Pro</span>
@@ -151,7 +151,7 @@ export default function Home() {
               href="https://play.google.com/store/apps/details?id=com.dustin.spottertools"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-brand-orange px-6 py-3 font-semibold text-white shadow-lg transition-all hover:bg-brand-orange-dim hover:shadow-brand-orange/25"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-green px-6 py-3 font-semibold text-white shadow-lg transition-all hover:bg-brand-green-dim hover:shadow-brand-green/25"
             >
               <svg
                 className="h-5 w-5"

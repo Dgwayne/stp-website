@@ -233,7 +233,7 @@ export default function AlertsPage() {
                         key={bullet}
                         className="flex gap-3 rounded-lg border border-white/5 bg-surface px-4 py-2.5"
                       >
-                        <span aria-hidden className="text-brand-orange">
+                        <span aria-hidden className="text-brand-green">
                           •
                         </span>
                         <span>{bullet}</span>
@@ -276,7 +276,7 @@ export default function AlertsPage() {
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/radar"
-              className="inline-flex items-center gap-2 rounded-full bg-brand-orange px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-brand-orange-dim"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-green px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-brand-green-dim"
             >
               Radar deep-dive <span aria-hidden>&rarr;</span>
             </Link>

@@ -245,7 +245,7 @@ export default function RadarPage() {
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/alerts"
-              className="inline-flex items-center gap-2 rounded-full bg-brand-orange px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-brand-orange-dim"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-green px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-brand-green-dim"
             >
               Smart push alerts <span aria-hidden>&rarr;</span>
             </Link>
