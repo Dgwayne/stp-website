@@ -6,7 +6,7 @@ import SectionHeader from "@/components/SectionHeader";
 export const metadata: Metadata = {
   title: "Radar — Spotter Tools Pro",
   description:
-    "Real-time NEXRAD Level 2 radar decoding, composite mosaic, full animation transport, custom GR2Analyst-style color tables, and storm cell picker — all on Android.",
+    "Real-time NEXRAD Level 2 radar decoding, the full TDWR terminal-radar network, composite mosaic, full animation transport, custom GR2Analyst-style color tables, and storm cell picker — on iOS and Android.",
   openGraph: {
     title: "Spotter Tools Pro — Radar",
     description:

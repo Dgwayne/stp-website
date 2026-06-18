@@ -6,38 +6,38 @@ import SectionHeader from "@/components/SectionHeader";
 const features: Feature[] = [
   {
     icon: "📡",
-    title: "Single-Site NEXRAD Radar",
+    title: "NEXRAD Level 2 & TDWR Radar",
     description:
-      "Real-time NEXRAD Level 2 decoded right on your phone — Reflectivity, Velocity, and Correlation Coefficient products at full resolution, per radar site.",
+      "Real-time NEXRAD Level 2 decoded right on your phone — Reflectivity, Velocity, Correlation Coefficient, and Echo Tops at full resolution. Now with the complete 45-site TDWR terminal-radar network.",
     href: "/radar",
   },
   {
     icon: "🎞️",
     title: "Composite & Animated Radar",
     description:
-      "CONUS composite mosaic plus a full transport bar — play, pause, scrub, change loop speed and frame count.",
+      "CONUS MRMS composite mosaic plus a full transport bar — play, pause, scrub, change loop speed and frame count.",
     href: "/radar",
   },
   {
-    icon: "🎨",
-    title: "Customizable Color Tables",
+    icon: "📹",
+    title: "Live Storm Chasers",
     description:
-      "Sixteen built-in palettes plus import your own GR2Analyst-style .pal files for BR, BV, and CC.",
-    href: "/radar",
+      "Watch major storm chasers stream live from the field via YouTube and Facebook Live, right on the map. Live badges update in real time so you always see who's broadcasting now.",
+    href: "/features",
+  },
+  {
+    icon: "📷",
+    title: "Live Traffic & Sky Cameras",
+    description:
+      "Tens of thousands of DOT traffic cameras across 37 states, plus FAA, Windy, NOAA buoy, USGS volcano, National Park, and ALERTWildfire cameras — live video where it's offered.",
+    href: "/features",
   },
   {
     icon: "🚨",
     title: "Smart Push Alerts",
     description:
-      "Background watcher fires NWS warning notifications even when the app is closed — with watch zones, outbreak mode, custom sounds, and full-screen tornado-emergency takeover.",
+      "Background watcher fires NWS warning notifications even when the app is closed — with watch zones, filter modes, custom sounds, and full-screen tornado-emergency takeover.",
     href: "/alerts",
-  },
-  {
-    icon: "📍",
-    title: "GPS Beacon to Spotter Network",
-    description:
-      "Foreground and background beacon transmission so the NWS and fellow spotters see exactly where you are. Auto-restarts on device boot.",
-    href: "/features",
   },
   {
     icon: "⚠️",
@@ -47,51 +47,79 @@ const features: Feature[] = [
     href: "/alerts",
   },
   {
-    icon: "🌡️",
-    title: "METARs & Storm Cell Picker",
+    icon: "🛰️",
+    title: "Weather Models",
     description:
-      "Live airport observations on the map, plus tap any storm cell to see its radar attributes and identifier.",
+      "Overlay HRRR and GFS forecast guidance — reflectivity, temperature, wind, CAPE, and precipitation — with an animated time bar and color legend.",
+    href: "/features",
+  },
+  {
+    icon: "🎯",
+    title: "Storm Track Projection",
+    description:
+      "Drag a heading line to draw a forecast cone with configurable speed and spread, then auto-detect every town inside it with an ETA.",
+    href: "/features",
+  },
+  {
+    icon: "📍",
+    title: "GPS Beacon to Spotter Network",
+    description:
+      "Foreground and background beacon transmission so the NWS and fellow spotters see exactly where you are. Auto-restarts on device boot.",
     href: "/features",
   },
   {
     icon: "📋",
     title: "Severe Weather Reporting",
     description:
-      "Submit tornado, hail, wind, flood, funnel, wall-cloud, and damage reports directly to Spotter Network — with optional photos.",
+      "Submit tornado, hail, wind, flood, funnel, wall-cloud, and damage reports straight to Spotter Network — with the exact fields the form expects and offline queueing.",
+    href: "/features",
+  },
+  {
+    icon: "🎨",
+    title: "Customizable Color Tables",
+    description:
+      "Sixteen built-in palettes plus import your own GR2Analyst-style .pal files for BR, BV, and CC.",
+    href: "/radar",
+  },
+  {
+    icon: "🌡️",
+    title: "METARs & Storm Cell Picker",
+    description:
+      "Live airport observations on the map, plus tap any storm cell to sample its radar attributes and identifier.",
     href: "/features",
   },
 ];
 
 const marqueeScreenshots: Screenshot[] = [
   {
-    src: "/images/screenshots/home-map.jpg",
-    alt: "Composite radar map view",
-    caption: "Composite radar mosaic — at-a-glance precipitation context",
+    src: "/images/screenshots/radar-single-site.jpg",
+    alt: "Single-site NEXRAD Level 2 reflectivity with warning polygons",
+    caption: "Single-site NEXRAD Level 2, decoded on-device, with warning polygons",
   },
   {
-    src: "/images/screenshots/radar-br.jpg",
-    alt: "Single-site reflectivity with severe storm",
-    caption: "Single-site Level 2 reflectivity decoded in-app",
+    src: "/images/screenshots/live-camera.jpg",
+    alt: "Live traffic camera streaming over the radar map",
+    caption: "Tens of thousands of live traffic & sky cameras, right on the map",
   },
   {
-    src: "/images/screenshots/radar-bv.jpg",
-    alt: "Single-site velocity",
-    caption: "Single-site Level 2 velocity for rotation analysis",
+    src: "/images/screenshots/live-chasers.jpg",
+    alt: "Live Storm Chasers panel with named chasers",
+    caption: "Live Storm Chasers — watch the field via YouTube & Facebook Live",
   },
   {
-    src: "/images/screenshots/layer-selector.jpg",
-    alt: "Map layer selector sheet",
-    caption: "Granular per-layer toggles with live status subtitles",
+    src: "/images/screenshots/camera-sources.jpg",
+    alt: "Camera source picker listing state DOT and agency feeds",
+    caption: "45 camera sources across 37 states — pick what you see",
   },
   {
-    src: "/images/screenshots/alert-outlook-day1.jpg",
-    alt: "SPC Day 1 convective outlook on the map",
-    caption: "SPC convective outlooks and mesoscale discussions",
+    src: "/images/screenshots/layers-models-cameras.jpg",
+    alt: "Map layers sheet with weather models and traffic cameras",
+    caption: "Granular layers: radar, weather models, cameras & more",
   },
   {
-    src: "/images/screenshots/alert-detail-sheet.jpg",
-    alt: "Alerts dashboard with severity filters",
-    caption: "Browse every active NWS alert with type and severity filters",
+    src: "/images/screenshots/field-tools-menu.jpg",
+    alt: "On-map quick action menu with field tools",
+    caption: "One-tap field tools — storm track, report, beacon, Live Chasers",
   },
 ];
 
@@ -113,9 +141,10 @@ export default function Home() {
             <span className="gradient-text">Spotter Tools Pro</span>
           </h1>
           <p className="mx-auto mb-8 max-w-xl text-lg text-muted sm:text-xl">
-            Professional-grade storm spotting for Android. Real-time NEXRAD
-            Level 2 radar, smart push alerts, GPS beacon, and the full NWS /
-            SPC suite — built for certified storm spotters.
+            Severe weather, in your pocket — for enthusiasts, storm chasers, and
+            spotters. On-device NEXRAD Level 2 &amp; TDWR radar, smart push
+            alerts, live storm chasers, tens of thousands of live cameras, a GPS
+            beacon, and the full NWS / SPC suite.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
@@ -134,6 +163,17 @@ export default function Home() {
               Get it on Google Play
             </a>
             <a
+              href="https://apps.apple.com/us/app/spotter-tools-pro/id6775985245"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-black shadow-lg transition-all hover:bg-white/90"
+            >
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09z" />
+              </svg>
+              Download on the App Store
+            </a>
+            <a
               href="#features"
               className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 font-semibold transition-all hover:border-white/30 hover:bg-white/5"
             >
@@ -148,8 +188,8 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <SectionHeader
             eyebrow="Capabilities"
-            title="Everything a Spotter Needs"
-            description="Built from the ground up for Spotter Network members and certified storm spotters. No ads, no tracking, no accounts — just tools."
+            title="Everything Severe Weather, in One App"
+            description="Pro-grade tools for weather enthusiasts, storm chasers, and certified spotters alike. No ads, no tracking, no accounts — just tools."
           />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((f) => (
@@ -175,17 +215,18 @@ export default function Home() {
       <section className="px-6 py-24">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mb-6 text-3xl font-bold sm:text-4xl">
-            Built for Spotters, by a Spotter
+            Built by a Spotter, for Everyone Who Watches the Sky
           </h2>
           <p className="mb-6 text-lg leading-relaxed text-muted">
-            Spotter Tools Pro is designed for{" "}
+            Spotter Tools Pro started as a focused field tool for{" "}
             <strong className="text-foreground">
               certified SKYWARN storm spotters
             </strong>{" "}
-            and Spotter Network members who need reliable, focused tools in the
-            field. No bloated features, no ads, no data harvesting — just the
-            essentials to keep you safe and connected to the National Weather
-            Service during severe weather events.
+            and Spotter Network members — and it still is. But the same
+            pro-grade radar, alerts, and live cameras now serve storm chasers
+            and weather enthusiasts too. No bloated features, no ads, no data
+            harvesting — just the tools to keep you informed during severe
+            weather.
           </p>
           <p className="text-lg leading-relaxed text-muted">
             Your position data goes directly to{" "}

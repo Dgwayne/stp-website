@@ -9,7 +9,7 @@ import SectionHeader from "@/components/SectionHeader";
 export const metadata: Metadata = {
   title: "Features — Spotter Tools Pro",
   description:
-    "The full Spotter Tools Pro feature list — GPS beacon, NEXRAD Level 2 radar, smart push alerts, NWS warnings, SPC outlooks, METARs, severe weather reporting, and more.",
+    "The full Spotter Tools Pro feature list — NEXRAD Level 2 & TDWR radar, live storm chasers, tens of thousands of live cameras, weather models, smart push alerts, GPS beacon, NWS warnings, SPC outlooks, and severe weather reporting.",
   openGraph: {
     title: "Spotter Tools Pro — Features",
     description:
@@ -121,6 +121,11 @@ const categories: Category[] = [
         description:
           "Geocode addresses, towns, and landmarks to jump anywhere on the map instantly.",
       },
+      {
+        title: "Storm track projection",
+        description:
+          "Drag a heading line to draw a forecast cone with configurable speed and spread — the app auto-detects every town inside it with an ETA.",
+      },
     ],
     screenshot: {
       src: "/images/screenshots/layer-selector.jpg",
@@ -131,14 +136,19 @@ const categories: Category[] = [
   {
     id: "radar",
     eyebrow: "Radar",
-    title: "Single-Site & Composite Radar",
+    title: "Single-Site, TDWR & Composite Radar",
     intro:
-      "Real, decoded NEXRAD Level 2 in your hand — plus a composite mosaic and a full animation transport.",
+      "Real, decoded NEXRAD Level 2 in your hand — now including the full TDWR terminal-radar network — plus a composite mosaic and a full animation transport.",
     features: [
       {
         title: "NEXRAD Level 2 decoding",
         description:
-          "Reflectivity (BR), Velocity (BV), and Correlation Coefficient (CC) products decoded directly from raw Level 2 data — no third-party tile server.",
+          "Reflectivity (BR), Velocity (BV), Correlation Coefficient (CC), and Echo Tops decoded directly from raw Level 2 data — no third-party tile server.",
+      },
+      {
+        title: "TDWR terminal radar",
+        description:
+          "The complete 45-site Terminal Doppler Weather Radar network at high resolution — extra low-level detail near major metro areas, with looping just like the WSR-88D sites.",
       },
       {
         title: "Composite radar mosaic",
@@ -172,6 +182,98 @@ const categories: Category[] = [
       caption: "Built-in palettes plus user-imported .pal files",
     },
     cta: { href: "/radar", label: "Radar deep-dive" },
+  },
+  {
+    id: "cameras",
+    eyebrow: "Live Cameras",
+    title: "Traffic & Sky Cameras",
+    intro:
+      "See conditions on the ground with tens of thousands of cameras on the map — live video where the agency streams it.",
+    features: [
+      {
+        title: "37 states of DOT traffic cameras",
+        description:
+          "State transportation cameras coast to coast — live HLS video where the agency offers it, frequently-updated stills where it doesn't.",
+      },
+      {
+        title: "Beyond the highways",
+        description:
+          "FAA WeatherCams, Windy community webcams, NOAA offshore buoy cams, USGS volcano cams, National Park vista cams, and ALERTWildfire fire-watch cameras.",
+      },
+      {
+        title: "Fullscreen & direction-aware",
+        description:
+          "Watch any feed fullscreen, and map icons point the direction each camera faces so you know what you're about to see.",
+      },
+      {
+        title: "Choose your sources",
+        description:
+          "Pick exactly which states and agencies appear on the map from a single Camera Sources sheet — keep it focused on your area.",
+      },
+    ],
+    screenshot: {
+      src: "/images/screenshots/live-camera.jpg",
+      alt: "Live traffic camera streaming over the radar map",
+      caption: "Live traffic & sky cameras, right over the radar",
+    },
+  },
+  {
+    id: "chasers",
+    eyebrow: "Live Chasers",
+    title: "Live Storm Chasers",
+    intro:
+      "Watch the chase as it happens — major storm chasers streaming live from the field, without leaving the app.",
+    features: [
+      {
+        title: "In-app live streams",
+        description:
+          "YouTube and Facebook Live embeds play right on top of the map — no app-switching to follow the action.",
+      },
+      {
+        title: "A roster of well-known chasers",
+        description:
+          "Reed Timmer, Ryan Hall Y'all, Max Velocity, WXChasing, Corey Gerken, Texas Storm Chasers, and more — curated in one panel.",
+      },
+      {
+        title: "Real-time LIVE badges",
+        description:
+          "The app checks who's broadcasting and surfaces live streams first, so you always land on someone actually on a storm.",
+      },
+    ],
+    screenshot: {
+      src: "/images/screenshots/live-chasers.jpg",
+      alt: "Live Storm Chasers panel with named chasers",
+      caption: "The Live Chasers panel — live-first, always fresh",
+    },
+  },
+  {
+    id: "models",
+    eyebrow: "Weather Models",
+    title: "Forecast Model Guidance",
+    intro:
+      "Look ahead with high-resolution model output overlaid right on the map.",
+    features: [
+      {
+        title: "HRRR & GFS overlays",
+        description:
+          "Pull HRRR and GFS guidance directly onto the map — reflectivity, 2 m temperature, wind, CAPE, precipitation, and more.",
+      },
+      {
+        title: "Animated time bar",
+        description:
+          "Scrub through forecast hours with a time bar and color legend to watch a system evolve before it arrives.",
+      },
+      {
+        title: "On-map control chips",
+        description:
+          "Quick chips switch model, product, and run without digging through menus.",
+      },
+    ],
+    screenshot: {
+      src: "/images/screenshots/layers-models-cameras.jpg",
+      alt: "Map layers sheet showing weather models and cameras",
+      caption: "Weather models, cameras, and every layer in one sheet",
+    },
   },
   {
     id: "alerts",
@@ -343,7 +445,7 @@ export default function FeaturesPage() {
         <SectionHeader
           eyebrow="Full feature list"
           title="Everything in Spotter Tools Pro"
-          description="Six categories. One app. Everything below ships in the current build — tap a deep-dive link for more on radar and alerts."
+          description="One app, every tool. Everything below ships in the current build — tap a deep-dive link for more on radar and alerts."
         />
 
         {/* Quick jump */}
