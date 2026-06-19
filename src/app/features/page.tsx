@@ -9,7 +9,7 @@ import SectionHeader from "@/components/SectionHeader";
 export const metadata: Metadata = {
   title: "Features — Spotter Tools Pro",
   description:
-    "The full Spotter Tools Pro feature list — NEXRAD Level 2 & TDWR radar, live storm chasers, tens of thousands of live cameras, weather models, smart push alerts, GPS beacon, NWS warnings, SPC outlooks, and severe weather reporting.",
+    "The full Spotter Tools Pro feature list — NEXRAD Level 2 & TDWR radar, live lightning, GOES satellite, tropical tracking, live storm chasers, tens of thousands of live cameras, weather models, smart push alerts, NWS warnings, SPC outlooks, and severe weather reporting.",
   openGraph: {
     title: "Spotter Tools Pro — Features",
     description:
@@ -151,6 +151,11 @@ const categories: Category[] = [
           "The complete 45-site Terminal Doppler Weather Radar network at high resolution — extra low-level detail near major metro areas, with looping just like the WSR-88D sites.",
       },
       {
+        title: "Level III storm attributes",
+        description:
+          "Overlay NWS Level III storm tracks and mesocyclone rotation markers on single-site radar to see where cells are headed and where rotation is tightening.",
+      },
+      {
         title: "Composite radar mosaic",
         description:
           "CONUS-wide WMS composite for at-a-glance precipitation context, with selectable sources.",
@@ -276,6 +281,30 @@ const categories: Category[] = [
     },
   },
   {
+    id: "imagery",
+    eyebrow: "Lightning, Satellite & Tropical",
+    title: "Lightning, Satellite & Tropical",
+    intro:
+      "Three new layers for the full atmospheric picture — strike-by-strike lightning, satellite imagery, and tropical tracking.",
+    features: [
+      {
+        title: "Live lightning (GOES GLM)",
+        description:
+          "Real-time GOES Global Lightning Mapper strikes on the map, with an adjustable display window, bolt size, radar-loop sync, and a flash glow as new strikes land.",
+      },
+      {
+        title: "GOES-East satellite",
+        description:
+          "Infrared, Water Vapor, and Visible imagery with animation playback and on-map product chips — drop it under the radar with adjustable opacity.",
+      },
+      {
+        title: "Tropical & hurricane tracking",
+        description:
+          "NHC Tropical Weather Outlook areas-to-watch, plus named-storm forecast cones, tracks, intensity, and the observed past track — tap any storm for a detail card.",
+      },
+    ],
+  },
+  {
     id: "alerts",
     eyebrow: "Alerts & Notifications",
     title: "Smart Push Alerts",
@@ -291,6 +320,11 @@ const categories: Category[] = [
         title: "Custom watch zones",
         description:
           "Track your current location, a fixed home zone, custom counties / forecast zones, or any combination at once.",
+      },
+      {
+        title: "Population inside the polygon",
+        description:
+          "Each warning shows an estimated number of people inside the polygon, so you can gauge the potential impact at a glance.",
       },
       {
         title: "Filter modes (including Outbreak)",

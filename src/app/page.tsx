@@ -8,7 +8,7 @@ const features: Feature[] = [
     icon: "📡",
     title: "NEXRAD Level 2 & TDWR Radar",
     description:
-      "Real-time NEXRAD Level 2 decoded right on your phone — Reflectivity, Velocity, Correlation Coefficient, and Echo Tops at full resolution. Now with the complete 45-site TDWR terminal-radar network.",
+      "Real-time NEXRAD Level 2 decoded right on your phone — Reflectivity, Velocity, Correlation Coefficient, and Echo Tops at full resolution, plus Level III storm tracks and mesocyclone rotation. Now with the complete 45-site TDWR terminal-radar network.",
     href: "/radar",
   },
   {
@@ -17,6 +17,27 @@ const features: Feature[] = [
     description:
       "CONUS MRMS composite mosaic plus a full transport bar — play, pause, scrub, change loop speed and frame count.",
     href: "/radar",
+  },
+  {
+    icon: "⚡",
+    title: "Live Lightning",
+    description:
+      "Real-time GOES GLM lightning strikes on the map, with an adjustable display window, bolt size, and radar-loop sync.",
+    href: "/features",
+  },
+  {
+    icon: "🛰️",
+    title: "GOES Satellite",
+    description:
+      "GOES-East satellite imagery — Infrared, Water Vapor, and Visible — with animation playback and on-map product chips.",
+    href: "/features",
+  },
+  {
+    icon: "🌀",
+    title: "Tropical & Hurricane Tracking",
+    description:
+      "NHC Tropical Weather Outlook areas-to-watch plus named-storm forecast cones, tracks, and intensity — tap any storm for details.",
+    href: "/features",
   },
   {
     icon: "📹",
@@ -36,7 +57,7 @@ const features: Feature[] = [
     icon: "🚨",
     title: "Smart Push Alerts",
     description:
-      "Background watcher fires NWS warning notifications even when the app is closed — with watch zones, filter modes, custom sounds, and full-screen tornado-emergency takeover.",
+      "Background watcher fires NWS warning notifications even when the app is closed — with watch zones, filter modes, custom sounds, full-screen tornado-emergency takeover, and an estimated population count inside each warning polygon.",
     href: "/alerts",
   },
   {
@@ -47,7 +68,7 @@ const features: Feature[] = [
     href: "/alerts",
   },
   {
-    icon: "🛰️",
+    icon: "📈",
     title: "Weather Models",
     description:
       "Overlay HRRR and GFS forecast guidance — reflectivity, temperature, wind, CAPE, and precipitation — with an animated time bar and color legend.",
@@ -142,9 +163,10 @@ export default function Home() {
           </h1>
           <p className="mx-auto mb-8 max-w-xl text-lg text-muted sm:text-xl">
             Severe weather, in your pocket — for enthusiasts, storm chasers, and
-            spotters. On-device NEXRAD Level 2 &amp; TDWR radar, smart push
-            alerts, live storm chasers, tens of thousands of live cameras, a GPS
-            beacon, and the full NWS / SPC suite.
+            spotters. On-device NEXRAD Level 2 &amp; TDWR radar, live lightning,
+            GOES satellite, tropical tracking, smart push alerts, live storm
+            chasers, tens of thousands of live cameras, and the full NWS / SPC
+            suite.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a

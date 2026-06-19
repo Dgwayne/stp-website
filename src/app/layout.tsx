@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   ),
   title: "Spotter Tools Pro — Severe Weather Radar, Alerts & Cameras",
   description:
-    "A severe weather app for enthusiasts, storm chasers, and spotters. On-device NEXRAD Level 2 + TDWR radar, smart push alerts, GPS beacon, live storm chasers, tens of thousands of live cameras, NWS warnings, and SPC outlooks. On iOS and Android.",
+    "A severe weather app for enthusiasts, storm chasers, and spotters. On-device NEXRAD Level 2 + TDWR radar, live lightning, GOES satellite, tropical tracking, smart push alerts, live storm chasers, tens of thousands of live cameras, and the full NWS / SPC suite. On iOS and Android.",
   keywords: [
     "storm spotter",
     "spotter network",
@@ -32,6 +32,10 @@ export const metadata: Metadata = {
     "NEXRAD radar",
     "level 2 radar",
     "TDWR terminal radar",
+    "lightning map",
+    "GOES satellite",
+    "tropical tracking",
+    "hurricane tracker",
     "nexrad animation",
     "gr2analyst pal",
     "weather models",
@@ -47,7 +51,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Spotter Tools Pro",
     description:
-      "Severe weather radar, alerts, live cameras, and storm chasers for enthusiasts, chasers, and spotters. On-device NEXRAD Level 2 + TDWR radar. iOS and Android.",
+      "Severe weather radar, lightning, satellite, tropical tracking, alerts, live cameras, and storm chasers — for enthusiasts, chasers, and spotters. iOS and Android.",
     type: "website",
     images: [{ url: "/images/stp-logo.png", width: 1024, height: 1024 }],
   },
