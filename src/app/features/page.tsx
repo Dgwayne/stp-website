@@ -9,7 +9,7 @@ import SectionHeader from "@/components/SectionHeader";
 export const metadata: Metadata = {
   title: "Features — Spotter Tools Pro",
   description:
-    "The full Spotter Tools Pro feature list — NEXRAD Level 2 & TDWR radar, live lightning, GOES satellite, tropical tracking, live storm chasers, tens of thousands of live cameras, weather models, smart push alerts, NWS warnings, SPC outlooks, and severe weather reporting.",
+    "The full Spotter Tools Pro feature list — GPU radar (Level 2, III & TDWR), on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras, weather models, smart push alerts, and severe weather reporting.",
   openGraph: {
     title: "Spotter Tools Pro — Features",
     description:
@@ -136,14 +136,24 @@ const categories: Category[] = [
   {
     id: "radar",
     eyebrow: "Radar",
-    title: "Single-Site, TDWR & Composite Radar",
+    title: "GPU Radar — Level 2, Level III & TDWR",
     intro:
-      "Real, decoded NEXRAD Level 2 in your hand — now including the full TDWR terminal-radar network — plus a composite mosaic and a full animation transport.",
+      "Real, decoded NEXRAD in your hand — GPU-rendered and crisp at any zoom, now with WSR-88D Level III, dual-pol products, the full TDWR network, and dual-view split-screen compare.",
     features: [
       {
         title: "NEXRAD Level 2 decoding",
         description:
           "Reflectivity (BR), Velocity (BV), Correlation Coefficient (CC), and Echo Tops decoded directly from raw Level 2 data — no third-party tile server.",
+      },
+      {
+        title: "GPU-rendered, sharp at any zoom",
+        description:
+          "A native GPU custom layer (OpenGL on Android, Metal on iOS) draws radar crisply at any zoom level — no blocky pre-baked tiles.",
+      },
+      {
+        title: "WSR-88D Level III & dual-pol",
+        description:
+          "RPG-processed super-resolution Level III velocity and reflectivity, plus dual-pol Differential Reflectivity (ZDR) and Hydrometeor Classification.",
       },
       {
         title: "TDWR terminal radar",
@@ -164,6 +174,11 @@ const categories: Category[] = [
         title: "Full animation transport",
         description:
           "Play, pause, scrub, change loop speed, and pick frame count — same controls you'd expect from a desktop radar app.",
+      },
+      {
+        title: "Dual-view split-screen",
+        description:
+          "Compare two radar views side by side — different products or two sites — each pane with its own independent controls.",
       },
       {
         title: "Custom GR2Analyst-style color tables",
@@ -295,12 +310,36 @@ const categories: Category[] = [
       {
         title: "GOES-East satellite",
         description:
-          "Infrared, Water Vapor, and Visible imagery with animation playback and on-map product chips — drop it under the radar with adjustable opacity.",
+          "Infrared, Water Vapor, Visible, and GeoColor (true-color day / IR night) imagery with animation playback and on-map product chips — drop it under the radar with adjustable opacity.",
       },
       {
-        title: "Tropical & hurricane tracking",
+        title: "Worldwide tropical & hurricane tracking",
         description:
-          "NHC Tropical Weather Outlook areas-to-watch, plus named-storm forecast cones, tracks, intensity, and the observed past track — tap any storm for a detail card.",
+          "Named storms in every basin — typhoons too — via a global feed, plus NHC outlook areas-to-watch, forecast cones, tracks, intensity, and the observed past track. Tap any storm for a detail card.",
+      },
+    ],
+  },
+  {
+    id: "soundings",
+    eyebrow: "Soundings",
+    title: "On-Device Soundings",
+    intro:
+      "Full atmospheric profiles without a desktop — skew-T, hodograph, and complete sounding analysis, right on your phone.",
+    features: [
+      {
+        title: "Skew-T & hodograph",
+        description:
+          "Read the vertical profile the way forecasters do — a skew-T log-P diagram and hodograph, rendered on-device.",
+      },
+      {
+        title: "Full sounding analysis",
+        description:
+          "Derived parameters and a complete sounding breakdown to size up instability, shear, and storm potential at a glance.",
+      },
+      {
+        title: "Observed + forecast profiles",
+        description:
+          "Pull observed balloon data or HRRR forecast profiles for a point — the current state or the hours ahead.",
       },
     ],
   },

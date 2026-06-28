@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   ),
   title: "Spotter Tools Pro — Severe Weather Radar, Alerts & Cameras",
   description:
-    "A severe weather app for enthusiasts, storm chasers, and spotters. On-device NEXRAD Level 2 + TDWR radar, live lightning, GOES satellite, tropical tracking, smart push alerts, live storm chasers, tens of thousands of live cameras, and the full NWS / SPC suite. On iOS and Android.",
+    "A severe weather app for enthusiasts, storm chasers, and spotters. GPU-rendered NEXRAD Level 2 + TDWR radar, on-device soundings, live lightning, GOES satellite, worldwide tropical, smart push alerts, live storm chasers, tens of thousands of live cameras, and the full NWS / SPC suite. On iOS and Android.",
   keywords: [
     "storm spotter",
     "spotter network",
@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     "NEXRAD radar",
     "level 2 radar",
     "TDWR terminal radar",
+    "skew-t sounding",
+    "hodograph",
+    "dual-view radar",
     "lightning map",
     "GOES satellite",
     "tropical tracking",

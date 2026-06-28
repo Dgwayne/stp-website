@@ -6,9 +6,9 @@ import SectionHeader from "@/components/SectionHeader";
 const features: Feature[] = [
   {
     icon: "📡",
-    title: "NEXRAD Level 2 & TDWR Radar",
+    title: "GPU Radar — Level 2, III & TDWR",
     description:
-      "Real-time NEXRAD Level 2 decoded right on your phone — Reflectivity, Velocity, Correlation Coefficient, and Echo Tops at full resolution, plus Level III storm tracks and mesocyclone rotation. Now with the complete 45-site TDWR terminal-radar network.",
+      "GPU-rendered and crisp at any zoom. NEXRAD Level 2 decoded on-device — Reflectivity, Velocity, Correlation Coefficient, Echo Tops — plus WSR-88D Level III velocity/reflectivity, dual-pol products (ZDR, Hydrometeor Classification), storm tracks, mesocyclone rotation, and the 45-site TDWR network.",
     href: "/radar",
   },
   {
@@ -17,6 +17,20 @@ const features: Feature[] = [
     description:
       "CONUS MRMS composite mosaic plus a full transport bar — play, pause, scrub, change loop speed and frame count.",
     href: "/radar",
+  },
+  {
+    icon: "🪟",
+    title: "Dual-View Radar Compare",
+    description:
+      "Split the screen to compare two radar views side by side — different products or two sites — each with its own controls.",
+    href: "/radar",
+  },
+  {
+    icon: "🎈",
+    title: "On-Device Soundings",
+    description:
+      "Pull full atmospheric profiles in the app — skew-T diagrams, hodographs, and complete sounding analysis from observed balloon data and HRRR forecasts.",
+    href: "/features",
   },
   {
     icon: "⚡",
@@ -29,14 +43,14 @@ const features: Feature[] = [
     icon: "🛰️",
     title: "GOES Satellite",
     description:
-      "GOES-East satellite imagery — Infrared, Water Vapor, and Visible — with animation playback and on-map product chips.",
+      "GOES-East satellite imagery — Infrared, Water Vapor, Visible, and GeoColor — with animation playback and on-map product chips.",
     href: "/features",
   },
   {
     icon: "🌀",
     title: "Tropical & Hurricane Tracking",
     description:
-      "NHC Tropical Weather Outlook areas-to-watch plus named-storm forecast cones, tracks, and intensity — tap any storm for details.",
+      "Worldwide tropical tracking — NHC outlook areas-to-watch plus named-storm forecast cones, tracks, and intensity in every basin (typhoons too). Tap any storm for details.",
     href: "/features",
   },
   {
@@ -163,10 +177,10 @@ export default function Home() {
           </h1>
           <p className="mx-auto mb-8 max-w-xl text-lg text-muted sm:text-xl">
             Severe weather, in your pocket — for enthusiasts, storm chasers, and
-            spotters. On-device NEXRAD Level 2 &amp; TDWR radar, live lightning,
-            GOES satellite, tropical tracking, smart push alerts, live storm
-            chasers, tens of thousands of live cameras, and the full NWS / SPC
-            suite.
+            spotters. GPU-rendered NEXRAD Level 2 &amp; TDWR radar, soundings,
+            live lightning, GOES satellite, worldwide tropical, smart push
+            alerts, live storm chasers, tens of thousands of live cameras, and
+            the full NWS / SPC suite.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
