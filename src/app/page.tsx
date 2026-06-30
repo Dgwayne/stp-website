@@ -247,6 +247,92 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---- PRICING / VALUE ---- */}
+      <section id="pricing" className="px-6 py-24">
+        <div className="mx-auto max-w-4xl">
+          <SectionHeader
+            eyebrow="Pricing"
+            title="Buy It Once. Keep It Forever."
+            description="Most weather apps in this class bill you every month or every year. Spotter Tools Pro is a one-time $19.99 purchase — no subscription, no ads, no account."
+          />
+
+          <div className="overflow-x-auto rounded-2xl border border-white/10">
+            <table className="w-full min-w-[560px] text-left text-sm">
+              <thead className="bg-surface text-muted">
+                <tr>
+                  <th className="px-5 py-4 font-semibold">App</th>
+                  <th className="px-5 py-4 font-semibold">Pricing model</th>
+                  <th className="px-5 py-4 font-semibold">What you pay</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                <tr className="bg-brand-green/10">
+                  <td className="px-5 py-4 font-bold text-foreground">
+                    Spotter Tools Pro
+                  </td>
+                  <td className="px-5 py-4 font-semibold text-brand-green">
+                    One-time purchase
+                  </td>
+                  <td className="px-5 py-4 font-bold text-foreground">
+                    $19.99 once — no subscription
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-5 py-4 font-medium text-foreground">
+                    RadarScope
+                  </td>
+                  <td className="px-5 py-4 text-muted">
+                    Paid app + Pro subscription
+                  </td>
+                  <td className="px-5 py-4 text-muted">
+                    $9.99 app + $9.99–$99.99 / year
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-5 py-4 font-medium text-foreground">
+                    RadarOmega
+                  </td>
+                  <td className="px-5 py-4 text-muted">
+                    Paid app + subscription
+                  </td>
+                  <td className="px-5 py-4 text-muted">
+                    $8.99 app + $49–$119 / year
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-5 py-4 font-medium text-foreground">
+                    WeatherWise
+                  </td>
+                  <td className="px-5 py-4 text-muted">
+                    Free app + subscription
+                  </td>
+                  <td className="px-5 py-4 text-muted">$69.99–$159.99 / year</td>
+                </tr>
+                <tr>
+                  <td className="px-5 py-4 font-medium text-foreground">
+                    WeatherFront
+                  </td>
+                  <td className="px-5 py-4 text-muted">
+                    Free app + subscription
+                  </td>
+                  <td className="px-5 py-4 text-muted">$99.99 / year</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p className="mt-6 text-center text-base text-muted">
+            Every other option here bills you again next year. Spotter Tools Pro
+            doesn&apos;t — pay $19.99 once and every feature is yours.
+          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-center text-xs leading-relaxed text-muted/70">
+            Competitor pricing as of June 2026, taken from each app&apos;s App
+            Store listing or official site; those prices are set by their makers
+            and may change. Comparison reflects pricing model only.
+          </p>
+        </div>
+      </section>
+
       {/* ---- ABOUT / FOR SPOTTERS ---- */}
       <section className="px-6 py-24">
         <div className="mx-auto max-w-3xl text-center">
