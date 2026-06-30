@@ -158,6 +158,57 @@ const marqueeScreenshots: Screenshot[] = [
   },
 ];
 
+const comparisonApps = [
+  "Spotter Tools Pro",
+  "RadarScope",
+  "RadarOmega",
+  "WeatherWise",
+  "WeatherFront",
+];
+
+// Cells use: "✓" = included in the price · "Free" = the app's free tier ·
+// a named tier = that app's paid subscription · "—" = not an advertised feature.
+// All competitor statuses taken from their App Store listings / official sites,
+// June 2026 (see docs / competitor-pricing notes).
+const comparisonRows: { feature: string; cells: string[] }[] = [
+  {
+    feature: "Skew-T soundings & hodographs",
+    cells: ["✓", "Pro Tier 2", "—", "—", "Advanced"],
+  },
+  {
+    feature: "Satellite imagery",
+    cells: ["✓", "Pro Tier 2", "Gamma+", "—", "Free"],
+  },
+  {
+    feature: "Forecast models (HRRR/GFS)",
+    cells: ["✓", "—", "Alpha", "—", "Free"],
+  },
+  {
+    feature: "Multi-view radar compare",
+    cells: ["✓", "Pro Tier 1", "Alpha", "Plus", "—"],
+  },
+  {
+    feature: "Extended radar animation",
+    cells: ["✓", "Pro tiers", "Gamma+", "Plus", "—"],
+  },
+  {
+    feature: "Population inside warnings",
+    cells: ["✓", "—", "—", "Pro", "—"],
+  },
+  {
+    feature: "Live traffic & sky cameras",
+    cells: ["✓", "—", "—", "—", "—"],
+  },
+  {
+    feature: "Live storm chasers",
+    cells: ["✓", "—", "—", "—", "—"],
+  },
+  {
+    feature: "Spotter Network beacon & reports",
+    cells: ["✓", "—", "—", "—", "—"],
+  },
+];
+
 export default function Home() {
   return (
     <>
@@ -325,10 +376,75 @@ export default function Home() {
             Every other option here bills you again next year. Spotter Tools Pro
             doesn&apos;t — pay $19.99 once and every feature is yours.
           </p>
-          <p className="mx-auto mt-3 max-w-2xl text-center text-xs leading-relaxed text-muted/70">
-            Competitor pricing as of June 2026, taken from each app&apos;s App
-            Store listing or official site; those prices are set by their makers
-            and may change. Comparison reflects pricing model only.
+
+          {/* Feature comparison matrix */}
+          <div className="mt-16">
+            <h3 className="mb-2 text-center text-xl font-bold sm:text-2xl">
+              The features you&apos;d subscribe for elsewhere — included here
+            </h3>
+            <p className="mx-auto mb-6 max-w-2xl text-center text-sm text-muted">
+              What each pro feature costs in the other apps, versus Spotter Tools
+              Pro&apos;s single price.
+            </p>
+            <div className="overflow-x-auto rounded-2xl border border-white/10">
+              <table className="w-full min-w-[680px] text-left text-sm">
+                <thead className="bg-surface text-muted">
+                  <tr>
+                    <th className="px-4 py-3 font-semibold">Feature</th>
+                    {comparisonApps.map((app, i) => (
+                      <th
+                        key={app}
+                        className={`px-4 py-3 text-center font-semibold ${
+                          i === 0 ? "text-brand-green" : ""
+                        }`}
+                      >
+                        {app}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {comparisonRows.map((row) => (
+                    <tr key={row.feature}>
+                      <td className="px-4 py-3 font-medium text-foreground">
+                        {row.feature}
+                      </td>
+                      {row.cells.map((cell, i) => (
+                        <td
+                          key={comparisonApps[i]}
+                          className={`px-4 py-3 text-center ${
+                            i === 0
+                              ? "bg-brand-green/10 font-bold text-brand-green"
+                              : cell === "Free"
+                                ? "font-medium text-brand-green"
+                                : cell === "—"
+                                  ? "text-muted/40"
+                                  : "text-amber-400/90"
+                          }`}
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-4 text-center text-xs text-muted">
+              <span className="text-brand-green">✓</span> included in the price ·{" "}
+              <span className="text-brand-green">Free</span> = that app&apos;s
+              free tier ·{" "}
+              <span className="text-amber-400/90">named tiers</span> = paid
+              subscription · — = not an advertised feature
+            </p>
+          </div>
+
+          <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-muted/70">
+            Based on each app&apos;s published pricing and advertised features as
+            of June 2026, from their App Store listings and official sites — those
+            are set by their makers and may change, so verify current details with
+            each app. Comparison is informational; feature names and availability
+            differ between apps.
           </p>
         </div>
       </section>
