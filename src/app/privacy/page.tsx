@@ -107,6 +107,12 @@ export default function PrivacyPage() {
               you choose, your selected map avatar, and any special-avatar
               access granted to your account.
             </li>
+            <li>
+              If you sign in with{" "}
+              <strong className="text-foreground">Google or Apple</strong>, that
+              provider shares your <strong className="text-foreground">name</strong>{" "}
+              and email address with us to create your account.
+            </li>
           </ul>
           <p className="mt-3">
             <strong className="text-foreground">Purpose:</strong> to let you
@@ -166,7 +172,7 @@ export default function PrivacyPage() {
           <ul className="list-disc space-y-2 pl-6">
             <li>
               We do <strong className="text-foreground">not</strong> collect
-              your name or phone number.
+              your phone number.
             </li>
             <li>
               We do <strong className="text-foreground">not</strong> require an
