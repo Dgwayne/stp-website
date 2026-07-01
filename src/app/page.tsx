@@ -225,7 +225,7 @@ export default function Home() {
           <SectionHeader
             eyebrow="Capabilities"
             title="Everything Severe Weather, in One App"
-            description="Pro-grade tools for weather enthusiasts, storm chasers, and certified spotters alike. No ads, no tracking, no accounts — just tools."
+            description="Pro-grade tools for weather enthusiasts, storm chasers, and certified spotters alike. No ads, no tracking, no required account — just tools."
           />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((f) => (
@@ -253,7 +253,7 @@ export default function Home() {
           <SectionHeader
             eyebrow="Pricing"
             title="Buy It Once. Keep It Forever."
-            description="Most weather apps in this class bill you every month or every year. Spotter Tools Pro is a one-time $19.99 purchase — no subscription, no ads, no account."
+            description="Most weather apps in this class bill you every month or every year. Spotter Tools Pro is a one-time $19.99 purchase — no subscription, no ads, no required account."
           />
 
           <div className="overflow-x-auto rounded-2xl border border-white/10">
@@ -359,7 +359,9 @@ export default function Home() {
             <strong className="text-foreground">
               Storm Prediction Center
             </strong>
-            . We have no servers, no accounts, and no middlemen.
+            . No ad networks, no tracking, and no middlemen in that path. The
+            only thing we store is an optional account — if you choose to
+            create one.
           </p>
         </div>
       </section>

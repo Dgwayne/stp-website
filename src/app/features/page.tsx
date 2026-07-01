@@ -470,9 +470,9 @@ const categories: Category[] = [
           "Tap any active spotter to see their callsign, vehicle, and last update without leaving the map.",
       },
       {
-        title: "No accounts, no analytics",
+        title: "Private by default",
         description:
-          "Nothing you do is sent to a server we operate. Beacon goes to Spotter Network, weather data comes from NWS / SPC / Mapbox — that's it.",
+          "No ads, no analytics, no tracking. Your beacon goes to Spotter Network and weather data comes from NWS / SPC / Mapbox. The only thing we store is an optional account, if you choose to create one.",
       },
     ],
     screenshot: {

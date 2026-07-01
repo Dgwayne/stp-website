@@ -16,7 +16,7 @@ export default function PrivacyPage() {
 
       <div className="prose-custom space-y-8 text-muted leading-relaxed">
         <p className="text-sm">
-          <strong className="text-foreground">Last updated:</strong> June 2,
+          <strong className="text-foreground">Last updated:</strong> June 30,
           2026
           <br />
           <strong className="text-foreground">Developer:</strong> DGWayne
@@ -83,6 +83,50 @@ export default function PrivacyPage() {
           </p>
 
           <h3 className="mb-2 mt-6 text-lg font-semibold text-foreground">
+            Spotter Tools Pro Account (Optional)
+          </h3>
+          <p>
+            The App offers an optional Spotter Tools Pro account, which is
+            separate from Spotter Network. Creating one is entirely optional —
+            the App&apos;s core features work without it, in guest mode or with
+            a Spotter Network sign-in. If you choose to create an account, we
+            collect and store:
+          </p>
+          <ul className="mt-3 list-disc space-y-2 pl-6">
+            <li>
+              Your <strong className="text-foreground">email address</strong>,
+              used to sign in and, if enabled, to send a confirmation email.
+            </li>
+            <li>
+              A <strong className="text-foreground">password</strong>, stored
+              only in hashed form by our authentication provider (Supabase). We
+              never see or store your raw password.
+            </li>
+            <li>
+              An optional <strong className="text-foreground">username</strong>{" "}
+              you choose, your selected map avatar, and any special-avatar
+              access granted to your account.
+            </li>
+          </ul>
+          <p className="mt-3">
+            <strong className="text-foreground">Purpose:</strong> to let you
+            sign in across devices and unlock optional features such as special
+            map avatars.
+          </p>
+          <p className="mt-3">
+            <strong className="text-foreground">Where it&apos;s stored:</strong>{" "}
+            account data is held by Supabase, a third-party backend provider, on
+            servers located in the United States. See the Third-Party Services
+            table below.
+          </p>
+          <p className="mt-3">
+            <strong className="text-foreground">You control this:</strong>{" "}
+            accounts are optional, and you can permanently delete your account
+            and its data at any time from within the App (Settings &rarr;
+            Spotter Tools Pro Account &rarr; Delete).
+          </p>
+
+          <h3 className="mb-2 mt-6 text-lg font-semibold text-foreground">
             Storm Reports
           </h3>
           <p>
@@ -122,21 +166,18 @@ export default function PrivacyPage() {
           <ul className="list-disc space-y-2 pl-6">
             <li>
               We do <strong className="text-foreground">not</strong> collect
-              your name, email address, phone number, or any personal contact
-              information.
+              your name or phone number.
             </li>
             <li>
-              We do <strong className="text-foreground">not</strong> create
-              user accounts or profiles on our servers.
+              We do <strong className="text-foreground">not</strong> require an
+              account to use the App&apos;s core features — guest mode or a
+              Spotter Network sign-in is enough. An email address is collected
+              only if you choose to create an optional Spotter Tools Pro account
+              (described above).
             </li>
             <li>
               We do <strong className="text-foreground">not</strong> use
               analytics, tracking, or advertising SDKs.
-            </li>
-            <li>
-              We do <strong className="text-foreground">not</strong> have our
-              own servers or backend. All network communication goes directly
-              to third-party public data services (listed below).
             </li>
             <li>
               We do <strong className="text-foreground">not</strong> sell,
@@ -257,6 +298,25 @@ export default function PrivacyPage() {
                     </a>
                   </td>
                 </tr>
+                <tr>
+                  <td className="py-3 pr-4 font-medium text-foreground">
+                    Supabase
+                  </td>
+                  <td className="py-3 pr-4">
+                    Hosts optional Spotter Tools Pro accounts (email, username,
+                    map-avatar access)
+                  </td>
+                  <td className="py-3">
+                    <a
+                      href="https://supabase.com/privacy"
+                      className="text-brand-teal hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      supabase.com/privacy
+                    </a>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -268,15 +328,25 @@ export default function PrivacyPage() {
           </h2>
           <ul className="list-disc space-y-2 pl-6">
             <li>
-              <strong className="text-foreground">On-device only.</strong>{" "}
-              Your Spotter Network credentials are stored in encrypted device
-              storage. Storm reports are stored in a local SQLite database. No
-              data is stored on any server we operate.
+              <strong className="text-foreground">On-device.</strong> Your
+              Spotter Network credentials are stored in encrypted device
+              storage, and storm reports in a local SQLite database.
             </li>
             <li>
-              <strong className="text-foreground">No cloud sync.</strong> If
-              you uninstall the App, all locally stored data is permanently
-              deleted.
+              <strong className="text-foreground">Account data.</strong> If you
+              create an optional Spotter Tools Pro account, your account data
+              (email, username, and map-avatar access) is stored by Supabase on
+              servers in the United States, as described above. The App itself
+              does not otherwise operate its own servers; all other network
+              communication goes directly to the third-party public data
+              services listed above.
+            </li>
+            <li>
+              <strong className="text-foreground">Uninstalling.</strong>{" "}
+              Locally stored data is permanently deleted when you uninstall the
+              App. If you created a Spotter Tools Pro account, uninstalling does
+              not delete your server-side account data — use the in-app account
+              deletion described below.
             </li>
           </ul>
         </section>
@@ -345,6 +415,22 @@ export default function PrivacyPage() {
               </tbody>
             </table>
           </div>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-2xl font-semibold text-foreground">
+            Account Deletion
+          </h2>
+          <p>
+            If you create an optional Spotter Tools Pro account, you can
+            permanently delete it — and all associated account data (email,
+            username, and map-avatar access) — at any time from within the App:{" "}
+            <strong className="text-foreground">
+              Settings &rarr; Spotter Tools Pro Account &rarr; Delete
+            </strong>
+            . This action is immediate and irreversible. Your Spotter Network
+            sign-in and any on-device data are separate and unaffected.
+          </p>
         </section>
 
         <section>

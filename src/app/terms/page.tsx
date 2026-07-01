@@ -16,10 +16,10 @@ export default function TermsPage() {
 
       <div className="prose-custom space-y-8 text-muted leading-relaxed">
         <p className="text-sm">
-          <strong className="text-foreground">Last updated:</strong> June 2,
+          <strong className="text-foreground">Last updated:</strong> June 30,
           2026
           <br />
-          <strong className="text-foreground">Effective date:</strong> June 2,
+          <strong className="text-foreground">Effective date:</strong> June 30,
           2026
           <br />
           <strong className="text-foreground">Developer:</strong> DGWayne
@@ -148,17 +148,30 @@ export default function TermsPage() {
 
         <section>
           <h2 className="mb-3 text-2xl font-semibold text-foreground">
-            4. No User Accounts
+            4. Accounts
           </h2>
           <p>
-            The App does not require account creation. The only credential
-            stored is your Spotter Network application ID, which you provide
-            voluntarily for beacon and reporting features. We do not operate
-            any servers, and we do not maintain user records. See the{" "}
+            The App does not require account creation to use its core features.
+            You may use it in guest mode, or provide your Spotter Network
+            application ID (stored on your device) for beacon and reporting
+            features.
+          </p>
+          <p className="mt-3">
+            The App also offers an{" "}
+            <strong className="text-foreground">
+              optional Spotter Tools Pro account
+            </strong>
+            , separate from Spotter Network, that lets you sign in and unlock
+            optional features such as special map avatars. Creating one is
+            voluntary. If you create an account, you are responsible for keeping
+            your credentials confidential and for activity under your account.
+            You may permanently delete your account and its data at any time
+            from within the App (Settings &rarr; Spotter Tools Pro Account
+            &rarr; Delete). See the{" "}
             <a href="/privacy" className="text-brand-teal hover:underline">
               Privacy Policy
             </a>{" "}
-            for details.
+            for details on what account data is collected and how it is stored.
           </p>
         </section>
 
