@@ -16,7 +16,7 @@ export default function PrivacyPage() {
 
       <div className="prose-custom space-y-8 text-muted leading-relaxed">
         <p className="text-sm">
-          <strong className="text-foreground">Last updated:</strong> June 30,
+          <strong className="text-foreground">Last updated:</strong> July 2,
           2026
           <br />
           <strong className="text-foreground">Developer:</strong> DGWayne
@@ -69,7 +69,10 @@ export default function PrivacyPage() {
           <p className="mt-3">
             <strong className="text-foreground">You control this:</strong> The
             beacon must be manually started. You can stop it at any time. When
-            the beacon is off, no location data is collected or transmitted.
+            the beacon is off, no location data is collected or transmitted for
+            beaconing. (Sharing your location with other Spotter Tools Pro
+            users is a separate, optional feature — see &quot;Location Sharing
+            with Other Users&quot; below.)
           </p>
 
           <h3 className="mb-2 mt-6 text-lg font-semibold text-foreground">
@@ -130,6 +133,47 @@ export default function PrivacyPage() {
             accounts are optional, and you can permanently delete your account
             and its data at any time from within the App (Settings &rarr;
             Spotter Tools Pro Account &rarr; Delete).
+          </p>
+
+          <h3 className="mb-2 mt-6 text-lg font-semibold text-foreground">
+            Location Sharing with Other Users (Presence)
+          </h3>
+          <p>
+            If you have a Spotter Tools Pro account, you can optionally turn on{" "}
+            <strong className="text-foreground">
+              &quot;Show me on the map&quot;
+            </strong>{" "}
+            in Settings. It is <strong className="text-foreground">off by
+            default</strong>. While it is on and the app is open, we share the
+            following with other Spotter Tools Pro users who have also turned it
+            on, and display it on their map:
+          </p>
+          <ul className="mt-3 list-disc space-y-2 pl-6">
+            <li>
+              your current location (latitude / longitude, and heading when
+              you&apos;re moving),
+            </li>
+            <li>your chosen map avatar,</li>
+            <li>your username, and</li>
+            <li>your optional bio, if you set one.</li>
+          </ul>
+          <p className="mt-3">
+            <strong className="text-foreground">Where it&apos;s stored:</strong>{" "}
+            presence data is held by Cloudflare, a third-party infrastructure
+            provider, on servers in the United States, and only briefly —
+            entries older than about 10 minutes are removed, so no location
+            history is retained.
+          </p>
+          <p className="mt-3">
+            <strong className="text-foreground">Purpose:</strong> to let Spotter
+            Tools Pro users see one another on the map during severe weather.
+          </p>
+          <p className="mt-3">
+            <strong className="text-foreground">You control this:</strong>{" "}
+            presence is opt-in and off by default, requires a Spotter Tools Pro
+            account, and is separate from the Spotter Network beacon. Turning
+            off &quot;Show me on the map&quot; removes you from other users&apos;
+            maps immediately.
           </p>
 
           <h3 className="mb-2 mt-6 text-lg font-semibold text-foreground">
@@ -323,6 +367,25 @@ export default function PrivacyPage() {
                     </a>
                   </td>
                 </tr>
+                <tr>
+                  <td className="py-3 pr-4 font-medium text-foreground">
+                    Cloudflare
+                  </td>
+                  <td className="py-3 pr-4">
+                    Hosts the opt-in presence service (briefly stores your
+                    shared location, avatar, username, and bio)
+                  </td>
+                  <td className="py-3">
+                    <a
+                      href="https://www.cloudflare.com/privacypolicy/"
+                      className="text-brand-teal hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      cloudflare.com/privacypolicy
+                    </a>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -342,10 +405,16 @@ export default function PrivacyPage() {
               <strong className="text-foreground">Account data.</strong> If you
               create an optional Spotter Tools Pro account, your account data
               (email, username, and map-avatar access) is stored by Supabase on
-              servers in the United States, as described above. The App itself
-              does not otherwise operate its own servers; all other network
-              communication goes directly to the third-party public data
-              services listed above.
+              servers in the United States, as described above.
+            </li>
+            <li>
+              <strong className="text-foreground">Presence data.</strong> If you
+              turn on &quot;Show me on the map,&quot; your shared location,
+              avatar, username, and bio are held briefly by Cloudflare (United
+              States) and removed after about 10 minutes — no location history
+              is kept. Aside from Supabase (accounts) and Cloudflare
+              (presence), all other network communication goes directly to the
+              third-party public data services listed above.
             </li>
             <li>
               <strong className="text-foreground">Uninstalling.</strong>{" "}
