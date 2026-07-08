@@ -9,7 +9,7 @@ import SectionHeader from "@/components/SectionHeader";
 export const metadata: Metadata = {
   title: "Features — Spotter Tools Pro",
   description:
-    "The full Spotter Tools Pro feature list — GPU radar (Level 2, III & TDWR), on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras, weather models, smart push alerts, and severe weather reporting.",
+    "The full Spotter Tools Pro feature list — GPU radar (Level 2, III & TDWR), live wind flow, on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras, weather models, opt-in presence, smart push alerts, and severe weather reporting.",
   openGraph: {
     title: "Spotter Tools Pro — Features",
     description:
@@ -320,6 +320,30 @@ const categories: Category[] = [
     ],
   },
   {
+    id: "wind",
+    eyebrow: "Wind",
+    title: "Live Wind Flow",
+    intro:
+      "Real surface wind, rendered as thousands of flowing particles — an instant read on outflow, convergence, and where it's really blowing.",
+    features: [
+      {
+        title: "Animated particle flow",
+        description:
+          "Live RTMA surface wind drawn as comet-like particles streaming across the map, colored by speed (blue → green → orange → red).",
+      },
+      {
+        title: "GPU-rendered, smooth at any zoom",
+        description:
+          "A native GPU custom layer (OpenGL on Android, Metal on iOS) keeps the flow fluid, with zoom-scaled trails and particle density.",
+      },
+      {
+        title: "Read the wind at a glance",
+        description:
+          "See boundaries, convergence, and gradients without reading a number — then drop radar or lightning on top for the full picture.",
+      },
+    ],
+  },
+  {
     id: "soundings",
     eyebrow: "Soundings",
     title: "On-Device Soundings",
@@ -441,6 +465,30 @@ const categories: Category[] = [
       alt: "Severe weather report form",
       caption: "File a Spotter Network report from the field",
     },
+  },
+  {
+    id: "presence",
+    eyebrow: "Presence",
+    title: "See Other Spotters (Opt-In)",
+    intro:
+      "An optional, privacy-first way to see other Spotter Tools Pro users on the map — and let them see you.",
+    features: [
+      {
+        title: "Opt-in only, off by default",
+        description:
+          "Nothing about your location is shared until you turn Presence on, and you can turn it off any time.",
+      },
+      {
+        title: "Avatars, usernames & bios",
+        description:
+          "Opted-in users appear with their chosen map avatar, username, and a short bio you can read from a tap sheet.",
+      },
+      {
+        title: "Built to stay free & fast",
+        description:
+          "Powered by an edge-cached backend so the map stays snappy and the feature stays free — no subscription, ever.",
+      },
+    ],
   },
   {
     id: "customization",

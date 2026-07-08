@@ -15,8 +15,15 @@ const features: Feature[] = [
     icon: "🎞️",
     title: "Composite & Animated Radar",
     description:
-      "CONUS MRMS composite mosaic plus a full transport bar — play, pause, scrub, change loop speed and frame count.",
+      "CONUS MRMS composite mosaic with a full transport bar (play, scrub, speed) — now with up to 12-hour playback, retina 2× imagery, and a quality-controlled base-reflectivity mosaic.",
     href: "/radar",
+  },
+  {
+    icon: "💨",
+    title: "Live Wind Flow",
+    description:
+      "A beautiful animated wind layer streams live surface wind across the map as flowing, speed-colored particles — see exactly where the wind is ripping at a glance.",
+    href: "/features",
   },
   {
     icon: "🪟",
@@ -29,7 +36,7 @@ const features: Feature[] = [
     icon: "🎈",
     title: "On-Device Soundings",
     description:
-      "Pull full atmospheric profiles in the app — skew-T diagrams, hodographs, and complete sounding analysis from observed balloon data and HRRR forecasts.",
+      "Tap anywhere on the map for a full atmospheric profile — skew-T, hodograph, and complete sounding analysis from observed balloon data and HRRR forecasts, with a forecast-hour scrubber.",
     href: "/features",
   },
   {
@@ -50,7 +57,7 @@ const features: Feature[] = [
     icon: "🌀",
     title: "Tropical & Hurricane Tracking",
     description:
-      "Worldwide tropical tracking — NHC outlook areas-to-watch plus named-storm forecast cones, tracks, and intensity in every basin (typhoons too). Tap any storm for details.",
+      "Worldwide tropical tracking — NHC outlook areas, named-storm cones, model spaghetti tracks, intensity, wind field, coastal watches/warnings, and tropical-storm-force wind arrival times. Tap any storm for details.",
     href: "/features",
   },
   {
@@ -65,6 +72,13 @@ const features: Feature[] = [
     title: "Live Traffic & Sky Cameras",
     description:
       "Tens of thousands of DOT traffic cameras across 37 states, plus FAA, Windy, NOAA buoy, USGS volcano, National Park, and ALERTWildfire cameras — live video where it's offered.",
+    href: "/features",
+  },
+  {
+    icon: "👥",
+    title: "Presence (opt-in)",
+    description:
+      "Turn it on to see other Spotter Tools Pro users on the map — avatars, usernames, and bios — and let them see you. Off by default; nothing is shared unless you opt in.",
     href: "/features",
   },
   {
@@ -177,10 +191,9 @@ export default function Home() {
           </h1>
           <p className="mx-auto mb-8 max-w-xl text-lg text-muted sm:text-xl">
             Severe weather, in your pocket — for enthusiasts, storm chasers, and
-            spotters. GPU-rendered NEXRAD Level 2 &amp; TDWR radar, soundings,
-            live lightning, GOES satellite, worldwide tropical, smart push
-            alerts, live storm chasers, tens of thousands of live cameras, and
-            the full NWS / SPC suite.
+            spotters. GPU-rendered radar, live wind flow, soundings, lightning,
+            satellite, worldwide tropical, smart push alerts, live storm chasers,
+            tens of thousands of live cameras, and the full NWS / SPC suite.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
@@ -232,6 +245,32 @@ export default function Home() {
               <FeatureCard key={f.title} feature={f} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ---- WIND FLOW SHOWCASE ---- */}
+      <section id="wind" className="px-6 py-24">
+        <div className="mx-auto max-w-5xl">
+          <SectionHeader
+            eyebrow="New"
+            title="Watch the Wind Move"
+            description="The live wind layer renders real surface wind as thousands of flowing particles, colored by speed — an at-a-glance read on outflow, convergence, and where it's really blowing."
+          />
+          <figure className="overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster="/videos/wind-flow-poster.jpg"
+              className="w-full"
+            >
+              <source src="/videos/wind-flow.mp4" type="video/mp4" />
+            </video>
+          </figure>
+          <figcaption className="mt-3 text-center text-xs text-muted">
+            Live surface wind (RTMA), rendered on-device and recorded in the app.
+          </figcaption>
         </div>
       </section>
 
