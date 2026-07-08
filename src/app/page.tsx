@@ -249,14 +249,14 @@ export default function Home() {
       </section>
 
       {/* ---- WIND FLOW SHOWCASE ---- */}
-      <section id="wind" className="px-6 py-24">
+      <section id="wind" className="px-6 py-16">
         <div className="mx-auto max-w-5xl">
           <SectionHeader
             eyebrow="New"
             title="Watch the Wind Move"
             description="The live wind layer renders real surface wind as thousands of flowing particles, colored by speed — an at-a-glance read on outflow, convergence, and where it's really blowing."
           />
-          <figure className="overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
+          <figure className="mx-auto max-w-xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
             <video
               autoPlay
               muted
