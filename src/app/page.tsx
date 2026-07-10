@@ -286,6 +286,32 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---- RADAR DUAL-VIEW SHOWCASE ---- */}
+      <section id="dual-view" className="px-6 py-16">
+        <div className="mx-auto max-w-5xl">
+          <SectionHeader
+            eyebrow="Compare"
+            title="Two Radar Views at Once"
+            description="Split-screen single-site radar puts two views side by side — different products or two sites — each with its own controls."
+          />
+          <figure className="mx-auto max-w-sm overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster="/videos/radar-dualview-poster.jpg"
+              className="w-full"
+            >
+              <source src="/videos/radar-dualview.mp4" type="video/mp4" />
+            </video>
+          </figure>
+          <figcaption className="mt-3 text-center text-xs text-muted">
+            Dual-view single-site radar, recorded in the app.
+          </figcaption>
+        </div>
+      </section>
+
       {/* ---- PRICING / VALUE ---- */}
       <section id="pricing" className="px-6 py-24">
         <div className="mx-auto max-w-4xl">
