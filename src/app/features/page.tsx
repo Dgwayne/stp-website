@@ -5,6 +5,7 @@ import ScreenshotStrip, {
   type Screenshot,
 } from "@/components/ScreenshotStrip";
 import SectionHeader from "@/components/SectionHeader";
+import AutoVideo from "@/components/AutoVideo";
 
 export const metadata: Metadata = {
   title: "Features | Spotter Tools Pro",
@@ -30,6 +31,7 @@ type Category = {
   title: string;
   intro: string;
   features: Feature[];
+  video?: { src: string; poster: string; caption: string };
   screenshot?: { src: string; alt: string; caption: string };
   cta?: { href: string; label: string };
 };
@@ -282,6 +284,11 @@ const categories: Category[] = [
     title: "Forecast Model Guidance",
     intro:
       "Look ahead with high-resolution model output overlaid right on the map.",
+    video: {
+      src: "/videos/models.mp4",
+      poster: "/videos/models-poster.jpg",
+      caption: "Scrub HRRR, GFS, and RRFS output across forecast hours.",
+    },
     features: [
       {
         title: "HRRR, GFS & RRFS overlays",
@@ -359,6 +366,11 @@ const categories: Category[] = [
     title: "On-Device Soundings",
     intro:
       "Full atmospheric profiles without a desktop: skew-T, hodograph, and complete sounding analysis, right on your phone.",
+    video: {
+      src: "/videos/soundings.mp4",
+      poster: "/videos/soundings-poster.jpg",
+      caption: "Tap the map for a skew-T, hodograph, and full analysis.",
+    },
     features: [
       {
         title: "Skew-T & hodograph",
@@ -629,7 +641,20 @@ export default function FeaturesPage() {
                 ) : null}
               </div>
 
-              {cat.screenshot ? (
+              {cat.video ? (
+                <figure className="lg:sticky lg:top-24">
+                  <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+                    <AutoVideo
+                      src={cat.video.src}
+                      poster={cat.video.poster}
+                      className="w-full"
+                    />
+                  </div>
+                  <figcaption className="mt-3 text-center text-xs text-muted">
+                    {cat.video.caption}
+                  </figcaption>
+                </figure>
+              ) : cat.screenshot ? (
                 <figure className="lg:sticky lg:top-24">
                   <div className="phone-frame mx-auto">
                     <Image
