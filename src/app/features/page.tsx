@@ -7,11 +7,11 @@ import ScreenshotStrip, {
 import SectionHeader from "@/components/SectionHeader";
 
 export const metadata: Metadata = {
-  title: "Features — Spotter Tools Pro",
+  title: "Features | Spotter Tools Pro",
   description:
-    "The full Spotter Tools Pro feature list — GPU radar (Level 2, III & TDWR), live wind flow, on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras, weather models, opt-in presence, smart push alerts, and severe weather reporting.",
+    "The full Spotter Tools Pro feature list: GPU radar (Level 2, III & TDWR), live wind flow, mesoanalysis, storm cell deep dive, on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras, weather models, opt-in presence, smart push alerts, and severe weather reporting.",
   openGraph: {
-    title: "Spotter Tools Pro — Features",
+    title: "Spotter Tools Pro | Features",
     description:
       "The complete feature tour: beacon, radar, alerts, reporting, and customization.",
     type: "website",
@@ -50,7 +50,7 @@ const categories: Category[] = [
       {
         title: "Configurable upload interval",
         description:
-          "Choose how often the app pushes your position to Spotter Network — balance accuracy against battery.",
+          "Choose how often the app pushes your position to Spotter Network, balancing accuracy against battery.",
       },
       {
         title: "Auto-restart on boot",
@@ -60,12 +60,12 @@ const categories: Category[] = [
       {
         title: "Encrypted credential storage",
         description:
-          "Your Spotter Network application ID lives in encrypted device storage — never on a server we operate.",
+          "Your Spotter Network application ID lives in encrypted device storage, never on a server we operate.",
       },
       {
         title: "Battery optimization wizard",
         description:
-          "Built-in, device-specific instructions for Samsung, Xiaomi, OnePlus, Pixel, and more — so the OS doesn't kill the beacon in the background.",
+          "Built-in, device-specific instructions for Samsung, Xiaomi, OnePlus, Pixel, and more, so the OS doesn't kill the beacon in the background.",
       },
     ],
     screenshot: {
@@ -79,7 +79,7 @@ const categories: Category[] = [
     eyebrow: "Map & Layers",
     title: "The Map",
     intro:
-      "A Mapbox-rendered tactical view with every layer a spotter needs — toggle exactly what's on screen.",
+      "A Mapbox-rendered tactical view with every layer a spotter needs, so you can toggle exactly what's on screen.",
     features: [
       {
         title: "Active spotter markers",
@@ -89,7 +89,7 @@ const categories: Category[] = [
       {
         title: "NWS warnings & watches",
         description:
-          "Tornado, severe thunderstorm, flash flood, and fire warnings as full polygons — plus tornado / severe watch boxes.",
+          "Tornado, severe thunderstorm, flash flood, and fire warnings as full polygons, plus tornado / severe watch boxes.",
       },
       {
         title: "SPC storm reports",
@@ -104,7 +104,7 @@ const categories: Category[] = [
       {
         title: "Convective outlooks",
         description:
-          "Day 1 and Day 2 outlooks — Categorical, Tornado, Wind, and Hail — switchable from a single sheet.",
+          "Day 1 and Day 2 outlooks (Categorical, Tornado, Wind, and Hail), switchable from a single sheet.",
       },
       {
         title: "METARs",
@@ -124,7 +124,7 @@ const categories: Category[] = [
       {
         title: "Storm track projection",
         description:
-          "Drag a heading line to draw a forecast cone with configurable speed and spread — the app auto-detects every town inside it with an ETA.",
+          "Drag a heading line to draw a forecast cone with configurable speed and spread, and the app auto-detects every town inside it with an ETA.",
       },
     ],
     screenshot: {
@@ -136,29 +136,29 @@ const categories: Category[] = [
   {
     id: "radar",
     eyebrow: "Radar",
-    title: "GPU Radar — Level 2, Level III & TDWR",
+    title: "GPU Radar: Level 2, Level III & TDWR",
     intro:
-      "Real, decoded NEXRAD in your hand — GPU-rendered and crisp at any zoom, now with WSR-88D Level III, dual-pol products, the full TDWR network, and dual-view split-screen compare.",
+      "Real, decoded NEXRAD in your hand, GPU-rendered and crisp at any zoom, now with WSR-88D Level III, dual-pol products, the full TDWR network, and dual-view split-screen compare.",
     features: [
       {
         title: "NEXRAD Level 2 decoding",
         description:
-          "Reflectivity (BR), Velocity (BV), Correlation Coefficient (CC), and Echo Tops decoded directly from raw Level 2 data — no third-party tile server.",
+          "Reflectivity (BR), Velocity (BV), Correlation Coefficient (CC), and Echo Tops decoded directly from raw Level 2 data, no third-party tile server.",
       },
       {
         title: "GPU-rendered, sharp at any zoom",
         description:
-          "A native GPU custom layer (OpenGL on Android, Metal on iOS) draws radar crisply at any zoom level — no blocky pre-baked tiles.",
+          "A native GPU custom layer (OpenGL on Android, Metal on iOS) draws radar crisply at any zoom level, no blocky pre-baked tiles.",
       },
       {
         title: "WSR-88D Level III & dual-pol",
         description:
-          "RPG-processed super-resolution Level III velocity and reflectivity, plus dual-pol Differential Reflectivity (ZDR) and Hydrometeor Classification.",
+          "RPG-processed super-resolution Level III velocity and reflectivity, plus dual-pol products: Differential Reflectivity (ZDR), Correlation Coefficient (CC), Specific Differential Phase (KDP), and Hydrometeor Classification.",
       },
       {
         title: "TDWR terminal radar",
         description:
-          "The complete 45-site Terminal Doppler Weather Radar network at high resolution — extra low-level detail near major metro areas, with looping just like the WSR-88D sites.",
+          "The complete 45-site Terminal Doppler Weather Radar network at high resolution, extra low-level detail near major metro areas, with looping just like the WSR-88D sites.",
       },
       {
         title: "Level III storm attributes",
@@ -173,12 +173,12 @@ const categories: Category[] = [
       {
         title: "Full animation transport",
         description:
-          "Play, pause, scrub, change loop speed, and pick frame count — same controls you'd expect from a desktop radar app.",
+          "Play, pause, scrub, change loop speed, and pick frame count, same controls you'd expect from a desktop radar app.",
       },
       {
         title: "Dual-view split-screen",
         description:
-          "Compare two radar views side by side — different products or two sites — each pane with its own independent controls.",
+          "Compare two radar views side by side (different products or two sites), each pane with its own independent controls.",
       },
       {
         title: "Custom GR2Analyst-style color tables",
@@ -191,9 +191,19 @@ const categories: Category[] = [
           "Tap any storm cell on the radar to see its identifier and attributes pulled from the radar product.",
       },
       {
+        title: "Storm cell deep dive",
+        description:
+          "Expand any cell into a full readout: rainfall rate, peak reflectivity, storm-top height, footprint, mass and volume, an age tracker, and at-a-glance severe indices.",
+      },
+      {
+        title: "Mesoanalysis layer",
+        description:
+          "SPC-style severe-weather parameters under the radar (CAPE, shear, storm-relative helicity) plus derived composites like Supercell and Significant Tornado, sampled anywhere with a bilinear crosshair readout.",
+      },
+      {
         title: "Per-site selection",
         description:
-          "Pick the closest WSR-88D site automatically, or choose a specific site to focus on — useful when chasing the edge of coverage.",
+          "Pick the closest WSR-88D site automatically, or choose a specific site to focus on, useful when chasing the edge of coverage.",
       },
     ],
     screenshot: {
@@ -208,12 +218,12 @@ const categories: Category[] = [
     eyebrow: "Live Cameras",
     title: "Traffic & Sky Cameras",
     intro:
-      "See conditions on the ground with tens of thousands of cameras on the map — live video where the agency streams it.",
+      "See conditions on the ground with tens of thousands of cameras on the map, with live video where the agency streams it.",
     features: [
       {
         title: "37 states of DOT traffic cameras",
         description:
-          "State transportation cameras coast to coast — live HLS video where the agency offers it, frequently-updated stills where it doesn't.",
+          "State transportation cameras coast to coast, live HLS video where the agency offers it, frequently-updated stills where it doesn't.",
       },
       {
         title: "Beyond the highways",
@@ -228,7 +238,7 @@ const categories: Category[] = [
       {
         title: "Choose your sources",
         description:
-          "Pick exactly which states and agencies appear on the map from a single Camera Sources sheet — keep it focused on your area.",
+          "Pick exactly which states and agencies appear on the map from a single Camera Sources sheet, keeping it focused on your area.",
       },
     ],
     screenshot: {
@@ -242,17 +252,17 @@ const categories: Category[] = [
     eyebrow: "Live Chasers",
     title: "Live Storm Chasers",
     intro:
-      "Watch the chase as it happens — major storm chasers streaming live from the field, without leaving the app.",
+      "Watch the chase as it happens, with major storm chasers streaming live from the field, without leaving the app.",
     features: [
       {
         title: "In-app live streams",
         description:
-          "YouTube and Facebook Live embeds play right on top of the map — no app-switching to follow the action.",
+          "YouTube and Facebook Live embeds play right on top of the map, no app-switching to follow the action.",
       },
       {
         title: "A roster of well-known chasers",
         description:
-          "Reed Timmer, Ryan Hall Y'all, Max Velocity, WXChasing, Corey Gerken, Texas Storm Chasers, and more — curated in one panel.",
+          "Reed Timmer, Ryan Hall Y'all, Max Velocity, WXChasing, Corey Gerken, Texas Storm Chasers, and more, curated in one panel.",
       },
       {
         title: "Real-time LIVE badges",
@@ -263,7 +273,7 @@ const categories: Category[] = [
     screenshot: {
       src: "/images/screenshots/live-chasers.jpg",
       alt: "Live Storm Chasers panel with named chasers",
-      caption: "The Live Chasers panel — live-first, always fresh",
+      caption: "The Live Chasers panel: live-first, always fresh",
     },
   },
   {
@@ -274,9 +284,9 @@ const categories: Category[] = [
       "Look ahead with high-resolution model output overlaid right on the map.",
     features: [
       {
-        title: "HRRR & GFS overlays",
+        title: "HRRR, GFS & RRFS overlays",
         description:
-          "Pull HRRR and GFS guidance directly onto the map — reflectivity, 2 m temperature, wind, CAPE, precipitation, and more.",
+          "Pull HRRR, GFS, and RRFS guidance directly onto the map: reflectivity, 2 m temperature, wind, CAPE, precipitation, and more.",
       },
       {
         title: "Animated time bar",
@@ -300,7 +310,7 @@ const categories: Category[] = [
     eyebrow: "Lightning, Satellite & Tropical",
     title: "Lightning, Satellite & Tropical",
     intro:
-      "Three new layers for the full atmospheric picture — strike-by-strike lightning, satellite imagery, and tropical tracking.",
+      "Three new layers for the full atmospheric picture: strike-by-strike lightning, satellite imagery, and tropical tracking.",
     features: [
       {
         title: "Live lightning (GOES GLM)",
@@ -310,12 +320,12 @@ const categories: Category[] = [
       {
         title: "GOES-East satellite",
         description:
-          "Infrared, Water Vapor, Visible, and GeoColor (true-color day / IR night) imagery with animation playback and on-map product chips — drop it under the radar with adjustable opacity.",
+          "Infrared, Water Vapor, Visible, and GeoColor (true-color day / IR night) imagery with animation playback and on-map product chips. Drop it under the radar with adjustable opacity.",
       },
       {
         title: "Worldwide tropical & hurricane tracking",
         description:
-          "Named storms in every basin — typhoons too — via a global feed, plus NHC outlook areas-to-watch, forecast cones, tracks, intensity, and the observed past track. Tap any storm for a detail card.",
+          "Named storms in every basin (typhoons too) via a global feed, plus NHC outlook areas-to-watch, forecast cones, tracks, intensity, and the observed past track. Tap any storm for a detail card.",
       },
     ],
   },
@@ -324,7 +334,7 @@ const categories: Category[] = [
     eyebrow: "Wind",
     title: "Live Wind Flow",
     intro:
-      "Real surface wind, rendered as thousands of flowing particles — an instant read on outflow, convergence, and where it's really blowing.",
+      "Real surface wind, rendered as thousands of flowing particles, an instant read on outflow, convergence, and where it's really blowing.",
     features: [
       {
         title: "Animated particle flow",
@@ -339,7 +349,7 @@ const categories: Category[] = [
       {
         title: "Read the wind at a glance",
         description:
-          "See boundaries, convergence, and gradients without reading a number — then drop radar or lightning on top for the full picture.",
+          "See boundaries, convergence, and gradients without reading a number, then drop radar or lightning on top for the full picture.",
       },
     ],
   },
@@ -348,12 +358,12 @@ const categories: Category[] = [
     eyebrow: "Soundings",
     title: "On-Device Soundings",
     intro:
-      "Full atmospheric profiles without a desktop — skew-T, hodograph, and complete sounding analysis, right on your phone.",
+      "Full atmospheric profiles without a desktop: skew-T, hodograph, and complete sounding analysis, right on your phone.",
     features: [
       {
         title: "Skew-T & hodograph",
         description:
-          "Read the vertical profile the way forecasters do — a skew-T log-P diagram and hodograph, rendered on-device.",
+          "Read the vertical profile the way forecasters do, a skew-T log-P diagram and hodograph, rendered on-device.",
       },
       {
         title: "Full sounding analysis",
@@ -363,7 +373,7 @@ const categories: Category[] = [
       {
         title: "Observed + forecast profiles",
         description:
-          "Pull observed balloon data or HRRR forecast profiles for a point — the current state or the hours ahead.",
+          "Pull observed balloon data or HRRR forecast profiles for a point, the current state or the hours ahead.",
       },
     ],
   },
@@ -372,7 +382,7 @@ const categories: Category[] = [
     eyebrow: "Alerts & Notifications",
     title: "Smart Push Alerts",
     intro:
-      "An on-device watch worker fires NWS warnings even when the app is closed — with the controls a chase op-center actually needs.",
+      "An on-device watch worker fires NWS warnings even when the app is closed, with the controls a chase op-center actually needs.",
     features: [
       {
         title: "Background watch worker",
@@ -407,7 +417,7 @@ const categories: Category[] = [
       {
         title: "Full-screen Tornado Emergency takeover",
         description:
-          "On Android 14+, opt-in alarm-style full-screen intent for Tornado Emergencies and PDS warnings — wakes the screen even when locked.",
+          "On Android 14+, opt-in alarm-style full-screen intent for Tornado Emergencies and PDS warnings, waking the screen even when locked.",
       },
       {
         title: "Custom flash colors",
@@ -432,17 +442,12 @@ const categories: Category[] = [
     eyebrow: "Reporting",
     title: "Severe Weather Reporting",
     intro:
-      "File reports straight from the field — directly to Spotter Network, with the right metadata baked in.",
+      "File reports straight from the field, directly to Spotter Network, with the right metadata baked in.",
     features: [
       {
         title: "All Spotter Network report types",
         description:
-          "Tornado, funnel cloud, wall cloud, hail, damaging wind, flooding, and damage — each with the right structured fields.",
-      },
-      {
-        title: "Photo attachments",
-        description:
-          "Attach photos from the camera or gallery so your report carries verifiable visual evidence.",
+          "Tornado, funnel cloud, wall cloud, hail, damaging wind, flooding, and damage, each with the right structured fields.",
       },
       {
         title: "Reporting guidelines",
@@ -452,7 +457,7 @@ const categories: Category[] = [
       {
         title: "Local report history",
         description:
-          "Every report is saved to a local SQLite database for your own records — even when offline.",
+          "Every report is saved to a local SQLite database for your own records, even when offline.",
       },
       {
         title: "Browse SPC reports on the map",
@@ -471,7 +476,7 @@ const categories: Category[] = [
     eyebrow: "Presence",
     title: "See Other Spotters (Opt-In)",
     intro:
-      "An optional, privacy-first way to see other Spotter Tools Pro users on the map — and let them see you.",
+      "An optional, privacy-first way to see other Spotter Tools Pro users on the map, and let them see you.",
     features: [
       {
         title: "Opt-in only, off by default",
@@ -486,7 +491,7 @@ const categories: Category[] = [
       {
         title: "Built to stay free & fast",
         description:
-          "Powered by an edge-cached backend so the map stays snappy and the feature stays free — no subscription, ever.",
+          "Powered by an edge-cached backend so the map stays snappy and the feature stays free, no subscription, ever.",
       },
     ],
   },
@@ -505,7 +510,7 @@ const categories: Category[] = [
       {
         title: "Searchable settings",
         description:
-          "A sticky search field at the top of Settings filters every control on the page — find a toggle in seconds.",
+          "A sticky search field at the top of Settings filters every control on the page, so you find a toggle in seconds.",
       },
       {
         title: "Connection status indicator",
@@ -535,16 +540,16 @@ const extras: Screenshot[] = [
   {
     src: "/images/screenshots/metars-temp.jpg",
     alt: "METARs temperature plot across the US",
-    caption: "METARs — live airport temperatures across the country",
+    caption: "METARs: live airport temperatures across the country",
   },
   {
     src: "/images/screenshots/metars-wind.jpg",
     alt: "METARs wind plot across the US",
-    caption: "Switch the METAR variable — temp, wind, dew point, and more",
+    caption: "Switch the METAR variable: temp, wind, dew point, and more",
   },
   {
     src: "/images/screenshots/layer-selector-radar.jpg",
-    alt: "Map layers — radar and METARs",
+    alt: "Map layers: radar and METARs",
     caption: "Single-site radar, composite, and METARs in one sheet",
   },
   {
@@ -566,7 +571,7 @@ export default function FeaturesPage() {
         <SectionHeader
           eyebrow="Full feature list"
           title="Everything in Spotter Tools Pro"
-          description="One app, every tool. Everything below ships in the current build — tap a deep-dive link for more on radar and alerts."
+          description="One app, every tool. Everything below ships in the current build. Tap a deep-dive link for more on radar and alerts."
         />
 
         {/* Quick jump */}

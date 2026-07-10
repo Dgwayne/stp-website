@@ -4,11 +4,11 @@ import Link from "next/link";
 import SectionHeader from "@/components/SectionHeader";
 
 export const metadata: Metadata = {
-  title: "Alerts — Spotter Tools Pro",
+  title: "Alerts | Spotter Tools Pro",
   description:
     "Smart on-device NWS alert watcher with custom watch zones, outbreak mode, full-screen tornado-emergency takeover, custom sounds and flash colors, mesoscale discussions, and convective outlooks.",
   openGraph: {
-    title: "Spotter Tools Pro — Alerts",
+    title: "Spotter Tools Pro | Alerts",
     description:
       "Smart push alerts, NWS warnings & watches, SPC mesoscale discussions, and convective outlooks.",
     type: "website",
@@ -32,12 +32,12 @@ const blocks: Block[] = [
     eyebrow: "Background Watcher",
     title: "Alerts that fire even when the app is closed",
     body: [
-      "A foreground service runs an on-device NWS alert watcher — independent of the beacon — so warnings still post to your notification tray and lock screen even when Spotter Tools Pro isn't on screen.",
+      "A foreground service runs an on-device NWS alert watcher, independent of the beacon, so warnings still post to your notification tray and lock screen even when Spotter Tools Pro isn't on screen.",
       "There's no cloud account, no backend pushing alerts to your phone. The app polls the NWS feed directly and matches alerts against your zones locally.",
     ],
     bullets: [
-      "On-device polling — no server account, no middleman",
-      "Independent of the GPS beacon — run either or both",
+      "On-device polling, no server account, no middleman",
+      "Independent of the GPS beacon, run either or both",
       "Diagnostics card so you can confirm it's actually running",
     ],
   },
@@ -46,14 +46,14 @@ const blocks: Block[] = [
     eyebrow: "Watch Zones",
     title: "Watch the places that matter",
     body: [
-      "Configure as many watch zones as you need — your moving GPS location, a fixed home zone, or any number of NWS counties / forecast zones.",
+      "Configure as many watch zones as you need, your moving GPS location, a fixed home zone, or any number of NWS counties / forecast zones.",
       "When you toggle alerts on for the first time, the app seeds your zones with your current location so the feature is useful immediately.",
     ],
     bullets: [
-      "Current Location — moves with you while the beacon is active",
-      "Fixed point or radius — perfect for home, family, or chase op-center",
-      "County / forecast zone picker — pull-to-refresh list of NWS zones",
-      "Combine zones — alerts fire when any of them is hit",
+      "Current Location, moves with you while the beacon is active",
+      "Fixed point or radius, perfect for home, family, or chase op-center",
+      "County / forecast zone picker, pull-to-refresh list of NWS zones",
+      "Combine zones, alerts fire when any of them is hit",
     ],
     flip: true,
   },
@@ -65,15 +65,15 @@ const blocks: Block[] = [
       "Three filter modes, switchable from a single card:",
     ],
     bullets: [
-      "Standard mode — fires for every event type you've enabled, scoped to your zones",
-      "Outbreak mode — active-event focus on Tornado and Severe Thunderstorm warnings with graded confidence and damage thresholds",
-      "PDS / Emergency only — quietest mode, fires only for Particularly Dangerous Situation warnings and Tornado Emergencies",
+      "Standard mode, fires for every event type you've enabled, scoped to your zones",
+      "Outbreak mode, active-event focus on Tornado and Severe Thunderstorm warnings with graded confidence and damage thresholds",
+      "PDS / Emergency only, quietest mode, fires only for Particularly Dangerous Situation warnings and Tornado Emergencies",
       "Per-event toggles for watches, mesoscale discussions, and more",
     ],
     screenshot: {
       src: "/images/screenshots/alert-filter-modes.jpg",
-      alt: "Filter mode picker — Standard, Outbreak, PDS / Emergency only",
-      caption: "Three filter modes — pick the noise level you can live with",
+      alt: "Filter mode picker, Standard, Outbreak, PDS / Emergency only",
+      caption: "Three filter modes: pick the noise level you can live with",
     },
   },
   {
@@ -99,7 +99,7 @@ const blocks: Block[] = [
     eyebrow: "Tornado Emergency",
     title: "Alarm-style takeover for life-threatening alerts",
     body: [
-      "On Android 14+, opt in to a full-screen intent for Tornado Emergencies and PDS warnings. The notification wakes the screen and opens an alarm-style takeover even on a locked device — built specifically for the events most likely to kill someone.",
+      "On Android 14+, opt in to a full-screen intent for Tornado Emergencies and PDS warnings. The notification wakes the screen and opens an alarm-style takeover even on a locked device, built specifically for the events most likely to kill someone.",
       "It is opt-in, prompted once when you enable alerts, and only ever fires for the very top alert tiers.",
     ],
   },
@@ -126,8 +126,8 @@ const blocks: Block[] = [
       "Spotter Tools Pro pulls the SPC products you actually use during severe weather and renders them as toggleable map layers with full detail sheets.",
     ],
     bullets: [
-      "Mesoscale Discussions — short-fuse SPC forecast areas with full text",
-      "Day 1 / Day 2 Convective Outlooks — Categorical, Tornado, Wind, and Hail",
+      "Mesoscale Discussions, short-fuse SPC forecast areas with full text",
+      "Day 1 / Day 2 Convective Outlooks, Categorical, Tornado, Wind, and Hail",
       "Today's SPC tornado, hail, and damaging-wind reports as map markers",
       "Optional notification when a new MCD is posted that overlaps your zones",
     ],
@@ -142,11 +142,11 @@ const blocks: Block[] = [
     eyebrow: "SPC Detail",
     title: "Tap a risk area for the full SPC text",
     body: [
-      "Outlook polygons are interactive — tap any one to read the full SPC discussion, issue/valid/expires times, the forecaster on duty, and the risk-level legend without leaving the map.",
+      "Outlook polygons are interactive. Tap any one to read the full SPC discussion, issue/valid/expires times, the forecaster on duty, and the risk-level legend without leaving the map.",
     ],
     screenshot: {
       src: "/images/screenshots/alert-outlook-detail.jpg",
-      alt: "Convective Outlook detail sheet — Enhanced Risk",
+      alt: "Convective Outlook detail sheet, Enhanced Risk",
       caption: "Per-risk detail with discussion text, times, and forecaster",
     },
     flip: true,
@@ -159,8 +159,8 @@ const blocks: Block[] = [
       "When you want the full picture instead of just what's overhead, the Alerts dashboard lists every active NWS alert nationwide with type / severity filters and one-tap detail.",
     ],
     bullets: [
-      "Severity chips — Extreme, Severe, Moderate, Minor",
-      "Per-event-type chips — Tornado, Severe T-Storm, Flood, and more",
+      "Severity chips, Extreme, Severe, Moderate, Minor",
+      "Per-event-type chips, Tornado, Severe T-Storm, Flood, and more",
       "Time-remaining countdowns on every alert",
       "One-tap zoom-to-polygon for any alert in the list",
     ],
@@ -179,7 +179,7 @@ export default function AlertsPage() {
         <SectionHeader
           eyebrow="Smart Alerts"
           title="The alerts page chasers actually want"
-          description="A real on-device watcher with watch zones, outbreak mode, custom sounds and colors, and full-screen tornado-emergency takeover — plus every NWS and SPC product on the map."
+          description="A real on-device watcher with watch zones, outbreak mode, custom sounds and colors, and full-screen tornado-emergency takeover, plus every NWS and SPC product on the map."
         />
 
         <div className="space-y-24">

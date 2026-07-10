@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://spottertoolspro.vercel.app",
   ),
-  title: "Spotter Tools Pro — Severe Weather Radar, Alerts & Cameras",
+  title: "Spotter Tools Pro: Severe Weather Radar, Alerts & Cameras",
   description:
     "A severe weather app for enthusiasts, storm chasers, and spotters. GPU-rendered NEXRAD radar, live wind flow, on-device soundings, live lightning, GOES satellite, worldwide tropical, smart push alerts, live storm chasers, tens of thousands of live cameras, and the full NWS / SPC suite. On iOS and Android.",
   keywords: [
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Spotter Tools Pro",
     description:
-      "Severe weather radar, lightning, satellite, tropical tracking, alerts, live cameras, and storm chasers — for enthusiasts, chasers, and spotters. iOS and Android.",
+      "Severe weather radar, lightning, satellite, tropical tracking, alerts, live cameras, and storm chasers, for enthusiasts, chasers, and spotters. iOS and Android.",
     type: "website",
     images: [{ url: "/images/stp-logo.png", width: 1024, height: 1024 }],
   },

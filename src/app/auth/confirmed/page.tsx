@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Email Confirmed — Spotter Tools Pro",
+  title: "Email Confirmed | Spotter Tools Pro",
   description: "Your Spotter Tools Pro account email has been confirmed.",
-  // This is a transactional landing page for the confirmation email link —
+  // This is a transactional landing page for the confirmation email link,
   // keep it out of search results.
   robots: { index: false, follow: false },
 };
@@ -32,7 +32,7 @@ export default function EmailConfirmedPage() {
       <p className="mb-8 max-w-md text-muted leading-relaxed">
         Your <strong className="text-foreground">Spotter Tools Pro</strong>{" "}
         account is verified. Head back to the app and sign in with your email
-        and password — you&apos;re all set. You can close this tab.
+        and password, you&apos;re all set. You can close this tab.
       </p>
 
       <a

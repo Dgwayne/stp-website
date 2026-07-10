@@ -2,41 +2,49 @@ import Image from "next/image";
 import FeatureCard, { type Feature } from "@/components/FeatureCard";
 import ScreenshotStrip, { type Screenshot } from "@/components/ScreenshotStrip";
 import SectionHeader from "@/components/SectionHeader";
+import AutoVideo from "@/components/AutoVideo";
 
 const features: Feature[] = [
   {
     icon: "📡",
-    title: "GPU Radar — Level 2, III & TDWR",
+    title: "GPU Radar: Level 2, III & TDWR",
     description:
-      "GPU-rendered and crisp at any zoom. NEXRAD Level 2 decoded on-device — Reflectivity, Velocity, Correlation Coefficient, Echo Tops — plus WSR-88D Level III velocity/reflectivity, dual-pol products (ZDR, Hydrometeor Classification), storm tracks, mesocyclone rotation, and the 45-site TDWR network.",
+      "GPU-rendered and crisp at any zoom. NEXRAD Level 2 decoded on-device (Reflectivity, Velocity, Correlation Coefficient, Echo Tops), plus WSR-88D Level III velocity/reflectivity, dual-pol products (ZDR, Correlation Coefficient, KDP, Hydrometeor Classification), storm tracks, mesocyclone rotation, and the 45-site TDWR network.",
     href: "/radar",
   },
   {
     icon: "🎞️",
     title: "Composite & Animated Radar",
     description:
-      "CONUS MRMS composite mosaic with a full transport bar (play, scrub, speed) — now with up to 12-hour playback, retina 2× imagery, and a quality-controlled base-reflectivity mosaic.",
+      "CONUS MRMS composite mosaic with a full transport bar (play, scrub, speed), now with up to 12-hour playback, retina 2× imagery, and a quality-controlled base-reflectivity mosaic.",
     href: "/radar",
   },
   {
     icon: "💨",
     title: "Live Wind Flow",
     description:
-      "A beautiful animated wind layer streams live surface wind across the map as flowing, speed-colored particles — see exactly where the wind is ripping at a glance.",
+      "A beautiful animated wind layer streams live surface wind across the map as flowing, speed-colored particles. See exactly where the wind is ripping at a glance.",
     href: "/features",
   },
   {
     icon: "🪟",
     title: "Dual-View Radar Compare",
     description:
-      "Split the screen to compare two radar views side by side — different products or two sites — each with its own controls.",
+      "Split the screen to compare two radar views side by side (different products or two sites), each with its own controls.",
     href: "/radar",
   },
   {
     icon: "🎈",
     title: "On-Device Soundings",
     description:
-      "Tap anywhere on the map for a full atmospheric profile — skew-T, hodograph, and complete sounding analysis from observed balloon data and HRRR forecasts, with a forecast-hour scrubber.",
+      "Tap anywhere on the map for a full atmospheric profile: skew-T, hodograph, and complete sounding analysis from observed balloon data and HRRR forecasts, with a forecast-hour scrubber.",
+    href: "/features",
+  },
+  {
+    icon: "🌪️",
+    title: "Mesoanalysis",
+    description:
+      "SPC-style severe-weather parameters layered right under the radar: CAPE, shear, storm-relative helicity, and derived composites like Supercell and Significant Tornado, sampled anywhere with a bilinear crosshair readout.",
     href: "/features",
   },
   {
@@ -50,14 +58,14 @@ const features: Feature[] = [
     icon: "🛰️",
     title: "GOES Satellite",
     description:
-      "GOES-East satellite imagery — Infrared, Water Vapor, Visible, and GeoColor — with animation playback and on-map product chips.",
+      "GOES-East satellite imagery (Infrared, Water Vapor, Visible, and GeoColor) with animation playback and on-map product chips.",
     href: "/features",
   },
   {
     icon: "🌀",
     title: "Tropical & Hurricane Tracking",
     description:
-      "Worldwide tropical tracking — NHC outlook areas, named-storm cones, model spaghetti tracks, intensity, wind field, coastal watches/warnings, and tropical-storm-force wind arrival times. Tap any storm for details.",
+      "Worldwide tropical tracking: NHC outlook areas, named-storm cones, model spaghetti tracks, intensity, wind field, coastal watches/warnings, and tropical-storm-force wind arrival times. Tap any storm for details.",
     href: "/features",
   },
   {
@@ -71,35 +79,35 @@ const features: Feature[] = [
     icon: "📷",
     title: "Live Traffic & Sky Cameras",
     description:
-      "Tens of thousands of DOT traffic cameras across 37 states, plus FAA, Windy, NOAA buoy, USGS volcano, National Park, and ALERTWildfire cameras — live video where it's offered.",
+      "Tens of thousands of DOT traffic cameras across 37 states, plus FAA, Windy, NOAA buoy, USGS volcano, National Park, and ALERTWildfire cameras, with live video where it's offered.",
     href: "/features",
   },
   {
     icon: "👥",
     title: "Presence (opt-in)",
     description:
-      "Turn it on to see other Spotter Tools Pro users on the map — avatars, usernames, and bios — and let them see you. Off by default; nothing is shared unless you opt in.",
+      "Turn it on to see other Spotter Tools Pro users on the map (avatars, usernames, and bios) and let them see you. Off by default; nothing is shared unless you opt in.",
     href: "/features",
   },
   {
     icon: "🚨",
     title: "Smart Push Alerts",
     description:
-      "Background watcher fires NWS warning notifications even when the app is closed — with watch zones, filter modes, custom sounds, full-screen tornado-emergency takeover, and an estimated population count inside each warning polygon.",
+      "Background watcher fires NWS warning notifications even when the app is closed, with watch zones, filter modes, custom sounds, full-screen tornado-emergency takeover, and an estimated population count inside each warning polygon.",
     href: "/alerts",
   },
   {
     icon: "⚠️",
     title: "NWS, SPC & Convective Outlooks",
     description:
-      "Warnings, watches, mesoscale discussions, and Day 1 / Day 2 categorical, tornado, wind, and hail outlooks — all overlaid on the map.",
+      "Warnings, watches, mesoscale discussions, and Day 1 / Day 2 categorical, tornado, wind, and hail outlooks, all overlaid on the map.",
     href: "/alerts",
   },
   {
     icon: "📈",
     title: "Weather Models",
     description:
-      "Overlay HRRR and GFS forecast guidance — reflectivity, temperature, wind, CAPE, and precipitation — with an animated time bar and color legend.",
+      "Overlay HRRR, GFS, and RRFS forecast guidance (reflectivity, temperature, wind, CAPE, and precipitation) with an animated time bar and color legend.",
     href: "/features",
   },
   {
@@ -120,7 +128,7 @@ const features: Feature[] = [
     icon: "📋",
     title: "Severe Weather Reporting",
     description:
-      "Submit tornado, hail, wind, flood, funnel, wall-cloud, and damage reports straight to Spotter Network — with the exact fields the form expects and offline queueing.",
+      "Submit tornado, hail, wind, flood, funnel, wall-cloud, and damage reports straight to Spotter Network, with the exact fields the form expects and offline queueing.",
     href: "/features",
   },
   {
@@ -135,6 +143,13 @@ const features: Feature[] = [
     title: "METARs & Storm Cell Picker",
     description:
       "Live airport observations on the map, plus tap any storm cell to sample its radar attributes and identifier.",
+    href: "/features",
+  },
+  {
+    icon: "🔬",
+    title: "Storm Cell Deep Dive",
+    description:
+      "Tap a cell for an expanded readout: rainfall rate, peak reflectivity, storm-top height, footprint, mass and volume, an age tracker, and at-a-glance severe indices.",
     href: "/features",
   },
 ];
@@ -153,12 +168,12 @@ const marqueeScreenshots: Screenshot[] = [
   {
     src: "/images/screenshots/live-chasers.jpg",
     alt: "Live Storm Chasers panel with named chasers",
-    caption: "Live Storm Chasers — watch the field via YouTube & Facebook Live",
+    caption: "Live Storm Chasers: watch the field via YouTube & Facebook Live",
   },
   {
     src: "/images/screenshots/camera-sources.jpg",
     alt: "Camera source picker listing state DOT and agency feeds",
-    caption: "45 camera sources across 37 states — pick what you see",
+    caption: "45 camera sources across 37 states, pick what you see",
   },
   {
     src: "/images/screenshots/layers-models-cameras.jpg",
@@ -168,8 +183,16 @@ const marqueeScreenshots: Screenshot[] = [
   {
     src: "/images/screenshots/field-tools-menu.jpg",
     alt: "On-map quick action menu with field tools",
-    caption: "One-tap field tools — storm track, report, beacon, Live Chasers",
+    caption: "One-tap field tools: storm track, report, beacon, Live Chasers",
   },
+];
+
+const demoClips = [
+  { src: "mesoanalysis", label: "Mesoanalysis: severe-weather parameters" },
+  { src: "storm-characteristics", label: "Storm cell details" },
+  { src: "cell-picker", label: "Cell picker readout" },
+  { src: "radar-dualview", label: "Dual-view single-site radar" },
+  { src: "live-cams", label: "Live traffic & sky cameras" },
 ];
 
 export default function Home() {
@@ -190,8 +213,8 @@ export default function Home() {
             <span className="gradient-text">Spotter Tools Pro</span>
           </h1>
           <p className="mx-auto mb-8 max-w-xl text-lg text-muted sm:text-xl">
-            Severe weather, in your pocket — for enthusiasts, storm chasers, and
-            spotters. GPU-rendered radar, live wind flow, soundings, lightning,
+            Severe weather, in your pocket. Built for enthusiasts, storm chasers,
+            and spotters. GPU-rendered radar, live wind flow, soundings, lightning,
             satellite, worldwide tropical, smart push alerts, live storm chasers,
             tens of thousands of live cameras, and the full NWS / SPC suite.
           </p>
@@ -238,7 +261,7 @@ export default function Home() {
           <SectionHeader
             eyebrow="Capabilities"
             title="Everything Severe Weather, in One App"
-            description="Pro-grade tools for weather enthusiasts, storm chasers, and certified spotters alike. No ads, no tracking, no required account — just tools."
+            description="Pro-grade tools for weather enthusiasts, storm chasers, and certified spotters alike. No ads, no tracking, no required account. Just tools."
           />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((f) => (
@@ -254,19 +277,14 @@ export default function Home() {
           <SectionHeader
             eyebrow="New"
             title="Watch the Wind Move"
-            description="The live wind layer renders real surface wind as thousands of flowing particles, colored by speed — an at-a-glance read on outflow, convergence, and where it's really blowing."
+            description="The live wind layer renders real surface wind as thousands of flowing particles, colored by speed, an at-a-glance read on outflow, convergence, and where it's really blowing."
           />
           <figure className="mx-auto max-w-xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
+            <AutoVideo
+              src="/videos/wind-flow.mp4"
               poster="/videos/wind-flow-poster.jpg"
               className="w-full"
-            >
-              <source src="/videos/wind-flow.mp4" type="video/mp4" />
-            </video>
+            />
           </figure>
           <figcaption className="mt-3 text-center text-xs text-muted">
             Live surface wind (RTMA), rendered on-device and recorded in the app.
@@ -280,7 +298,7 @@ export default function Home() {
           <SectionHeader
             eyebrow="In the field"
             title="See It in Action"
-            description="A few highlights from the app — explore the deep-dive pages for the full tour."
+            description="A few highlights from the app. Explore the deep-dive pages for the full tour."
           />
           <ScreenshotStrip screenshots={marqueeScreenshots} />
         </div>
@@ -288,47 +306,27 @@ export default function Home() {
 
       {/* ---- APP DEMOS SHOWCASE ---- */}
       <section id="in-app" className="px-6 py-16">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-5xl">
           <SectionHeader
             eyebrow="See it move"
             title="See It in the App"
-            description="Split-screen single-site radar for comparing two views at once — and tens of thousands of live cameras, right on the map."
+            description="A few features in motion: mesoanalysis, storm-cell detail, the cell picker, split-screen radar, and live cameras, all recorded right in the app."
           />
-          <div className="grid gap-8 sm:grid-cols-2 sm:items-start">
-            <figure>
-              <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster="/videos/radar-dualview-poster.jpg"
-                  className="w-full"
-                >
-                  <source src="/videos/radar-dualview.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <figcaption className="mt-3 text-center text-xs text-muted">
-                Dual-view single-site radar
-              </figcaption>
-            </figure>
-            <figure>
-              <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster="/videos/live-cams-poster.jpg"
-                  className="w-full"
-                >
-                  <source src="/videos/live-cams.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <figcaption className="mt-3 text-center text-xs text-muted">
-                Live traffic & sky cameras
-              </figcaption>
-            </figure>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {demoClips.map((c) => (
+              <figure key={c.src}>
+                <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+                  <AutoVideo
+                    src={`/videos/${c.src}.mp4`}
+                    poster={`/videos/${c.src}-poster.jpg`}
+                    className="w-full"
+                  />
+                </div>
+                <figcaption className="mt-2 text-center text-xs text-muted">
+                  {c.label}
+                </figcaption>
+              </figure>
+            ))}
           </div>
         </div>
       </section>
@@ -339,7 +337,7 @@ export default function Home() {
           <SectionHeader
             eyebrow="Pricing"
             title="Buy It Once. Keep It Forever."
-            description="Most weather apps in this class bill you every month or every year. Spotter Tools Pro is a one-time $19.99 purchase — no subscription, no ads, no required account."
+            description="Most weather apps in this class bill you every month or every year. Spotter Tools Pro is a one-time $19.99 purchase: no subscription, no ads, no required account."
           />
 
           <div className="overflow-x-auto rounded-2xl border border-white/10">
@@ -360,7 +358,7 @@ export default function Home() {
                     One-time purchase
                   </td>
                   <td className="px-5 py-4 font-bold text-foreground">
-                    $19.99 once — no subscription
+                    $19.99 once, no subscription
                   </td>
                 </tr>
                 <tr>
@@ -371,7 +369,7 @@ export default function Home() {
                     Paid app + Pro subscription
                   </td>
                   <td className="px-5 py-4 text-muted">
-                    $9.99 app + $9.99–$99.99 / year
+                    $9.99 app + $9.99 to $99.99 / year
                   </td>
                 </tr>
                 <tr>
@@ -382,7 +380,7 @@ export default function Home() {
                     Paid app + subscription
                   </td>
                   <td className="px-5 py-4 text-muted">
-                    $8.99 app + $49–$119 / year
+                    $8.99 app + $49 to $119 / year
                   </td>
                 </tr>
                 <tr>
@@ -392,7 +390,7 @@ export default function Home() {
                   <td className="px-5 py-4 text-muted">
                     Free app + subscription
                   </td>
-                  <td className="px-5 py-4 text-muted">$69.99–$159.99 / year</td>
+                  <td className="px-5 py-4 text-muted">$69.99 to $159.99 / year</td>
                 </tr>
                 <tr>
                   <td className="px-5 py-4 font-medium text-foreground">
@@ -409,7 +407,7 @@ export default function Home() {
 
           <p className="mt-6 text-center text-base text-muted">
             Every other option here bills you again next year. Spotter Tools Pro
-            doesn&apos;t — pay $19.99 once and every feature is yours.
+            doesn&apos;t. Pay $19.99 once and every feature is yours.
           </p>
 
           <p className="mx-auto mt-3 max-w-2xl text-center text-xs leading-relaxed text-muted/70">
@@ -431,10 +429,10 @@ export default function Home() {
             <strong className="text-foreground">
               certified SKYWARN storm spotters
             </strong>{" "}
-            and Spotter Network members — and it still is. But the same
+            and Spotter Network members, and it still is. But the same
             pro-grade radar, alerts, and live cameras now serve storm chasers
             and weather enthusiasts too. No bloated features, no ads, no data
-            harvesting — just the tools to keep you informed during severe
+            harvesting. Just the tools to keep you informed during severe
             weather.
           </p>
           <p className="text-lg leading-relaxed text-muted">
@@ -446,7 +444,7 @@ export default function Home() {
               Storm Prediction Center
             </strong>
             . No ad networks, no tracking, and no middlemen in that path. The
-            only thing we store is an optional account — if you choose to
+            only thing we store is an optional account, if you choose to
             create one.
           </p>
         </div>
