@@ -286,29 +286,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---- RADAR DUAL-VIEW SHOWCASE ---- */}
-      <section id="dual-view" className="px-6 py-16">
-        <div className="mx-auto max-w-5xl">
+      {/* ---- APP DEMOS SHOWCASE ---- */}
+      <section id="in-app" className="px-6 py-16">
+        <div className="mx-auto max-w-3xl">
           <SectionHeader
-            eyebrow="Compare"
-            title="Two Radar Views at Once"
-            description="Split-screen single-site radar puts two views side by side — different products or two sites — each with its own controls."
+            eyebrow="See it move"
+            title="See It in the App"
+            description="Split-screen single-site radar for comparing two views at once — and tens of thousands of live cameras, right on the map."
           />
-          <figure className="mx-auto max-w-sm overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              poster="/videos/radar-dualview-poster.jpg"
-              className="w-full"
-            >
-              <source src="/videos/radar-dualview.mp4" type="video/mp4" />
-            </video>
-          </figure>
-          <figcaption className="mt-3 text-center text-xs text-muted">
-            Dual-view single-site radar, recorded in the app.
-          </figcaption>
+          <div className="grid gap-8 sm:grid-cols-2 sm:items-start">
+            <figure>
+              <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster="/videos/radar-dualview-poster.jpg"
+                  className="w-full"
+                >
+                  <source src="/videos/radar-dualview.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <figcaption className="mt-3 text-center text-xs text-muted">
+                Dual-view single-site radar
+              </figcaption>
+            </figure>
+            <figure>
+              <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster="/videos/live-cams-poster.jpg"
+                  className="w-full"
+                >
+                  <source src="/videos/live-cams.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <figcaption className="mt-3 text-center text-xs text-muted">
+                Live traffic & sky cameras
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 
