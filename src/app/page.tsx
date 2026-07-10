@@ -2,7 +2,7 @@ import Image from "next/image";
 import FeatureCard, { type Feature } from "@/components/FeatureCard";
 import ScreenshotStrip, { type Screenshot } from "@/components/ScreenshotStrip";
 import SectionHeader from "@/components/SectionHeader";
-import AutoVideo from "@/components/AutoVideo";
+import FeatureSpotlight from "@/components/FeatureSpotlight";
 
 const features: Feature[] = [
   {
@@ -187,12 +187,55 @@ const marqueeScreenshots: Screenshot[] = [
   },
 ];
 
-const demoClips = [
-  { src: "mesoanalysis", label: "Mesoanalysis: severe-weather parameters" },
-  { src: "storm-characteristics", label: "Storm cell details" },
-  { src: "cell-picker", label: "Cell picker readout" },
-  { src: "radar-dualview", label: "Dual-view single-site radar" },
-  { src: "live-cams", label: "Live traffic & sky cameras" },
+const spotlights = [
+  {
+    eyebrow: "Live wind",
+    title: "Watch the Wind Move",
+    description:
+      "The live wind layer renders real surface wind as thousands of flowing, speed-colored particles, an at-a-glance read on outflow, convergence, and where it's really blowing.",
+    src: "/videos/wind-flow.mp4",
+    poster: "/videos/wind-flow-poster.jpg",
+  },
+  {
+    eyebrow: "Severe parameters",
+    title: "Mesoanalysis",
+    description:
+      "SPC-style severe-weather parameters layered right under the radar: CAPE, shear, storm-relative helicity, and derived composites like Supercell and Significant Tornado, sampled anywhere with a bilinear crosshair readout.",
+    src: "/videos/mesoanalysis.mp4",
+    poster: "/videos/mesoanalysis-poster.jpg",
+  },
+  {
+    eyebrow: "Cell interrogation",
+    title: "Storm Cell Deep Dive",
+    description:
+      "Tap a cell for an expanded readout: rainfall rate, peak reflectivity, storm-top height, footprint, mass and volume, an age tracker, and at-a-glance severe indices.",
+    src: "/videos/cell-picker.mp4",
+    poster: "/videos/cell-picker-poster.jpg",
+  },
+  {
+    eyebrow: "Storm tracking",
+    title: "Storm Tracks & Cell Characteristics",
+    description:
+      "Level III storm tracks and cell attributes show where each cell is headed and how it's evolving, so you can size up the strongest storms at a glance.",
+    src: "/videos/storm-characteristics.mp4",
+    poster: "/videos/storm-characteristics-poster.jpg",
+  },
+  {
+    eyebrow: "Compare",
+    title: "Dual-View Radar",
+    description:
+      "Split the screen to compare two radar views side by side (different products or two sites), each pane with its own independent controls.",
+    src: "/videos/radar-dualview.mp4",
+    poster: "/videos/radar-dualview-poster.jpg",
+  },
+  {
+    eyebrow: "On the ground",
+    title: "Live Traffic & Sky Cameras",
+    description:
+      "Tens of thousands of cameras right on the map, with live video where the agency streams it, so you can see conditions on the ground in real time.",
+    src: "/videos/live-cams.mp4",
+    poster: "/videos/live-cams-poster.jpg",
+  },
 ];
 
 export default function Home() {
@@ -271,24 +314,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---- WIND FLOW SHOWCASE ---- */}
-      <section id="wind" className="px-6 py-16">
-        <div className="mx-auto max-w-5xl">
+      {/* ---- FEATURE SPOTLIGHTS (a clip per feature) ---- */}
+      <section id="in-app" className="px-6 py-20">
+        <div className="mx-auto max-w-6xl">
           <SectionHeader
-            eyebrow="New"
-            title="Watch the Wind Move"
-            description="The live wind layer renders real surface wind as thousands of flowing particles, colored by speed, an at-a-glance read on outflow, convergence, and where it's really blowing."
+            eyebrow="See it move"
+            title="See It in the App"
+            description="Every one of these was recorded right in the app. Here's what the headline features actually look like in the field."
           />
-          <figure className="mx-auto max-w-xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-            <AutoVideo
-              src="/videos/wind-flow.mp4"
-              poster="/videos/wind-flow-poster.jpg"
-              className="w-full"
-            />
-          </figure>
-          <figcaption className="mt-3 text-center text-xs text-muted">
-            Live surface wind (RTMA), rendered on-device and recorded in the app.
-          </figcaption>
+          <div className="space-y-16 sm:space-y-24">
+            {spotlights.map((s, i) => (
+              <FeatureSpotlight key={s.src} {...s} flip={i % 2 === 1} />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -301,33 +339,6 @@ export default function Home() {
             description="A few highlights from the app. Explore the deep-dive pages for the full tour."
           />
           <ScreenshotStrip screenshots={marqueeScreenshots} />
-        </div>
-      </section>
-
-      {/* ---- APP DEMOS SHOWCASE ---- */}
-      <section id="in-app" className="px-6 py-16">
-        <div className="mx-auto max-w-5xl">
-          <SectionHeader
-            eyebrow="See it move"
-            title="See It in the App"
-            description="A few features in motion: mesoanalysis, storm-cell detail, the cell picker, split-screen radar, and live cameras, all recorded right in the app."
-          />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {demoClips.map((c) => (
-              <figure key={c.src}>
-                <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-                  <AutoVideo
-                    src={`/videos/${c.src}.mp4`}
-                    poster={`/videos/${c.src}-poster.jpg`}
-                    className="w-full"
-                  />
-                </div>
-                <figcaption className="mt-2 text-center text-xs text-muted">
-                  {c.label}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
         </div>
       </section>
 
