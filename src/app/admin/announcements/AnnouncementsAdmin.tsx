@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import MarkdownField from "./MarkdownField";
 
 type Severity = "info" | "warning" | "success" | "whatsNew";
 
@@ -305,12 +306,10 @@ export default function AnnouncementsAdmin() {
 
             <div className="mb-3">
               <label className={labelCls}>Body</label>
-              <textarea
+              <MarkdownField
                 value={it.body}
-                onChange={(e) => update(i, { body: e.target.value })}
-                rows={3}
-                placeholder="What you want to tell people."
-                className={inputCls}
+                onChange={(md) => update(i, { body: md })}
+                password={password}
               />
             </div>
 
