@@ -10,6 +10,9 @@ const ALLOWED: Record<string, string> = {
   "image/webp": "webp",
   "image/png": "png",
   "image/jpeg": "jpg",
+  "video/mp4": "mp4",
+  "video/webm": "webm",
+  "video/quicktime": "mov",
 };
 // Vercel serverless request bodies cap around 4.5 MB, so keep uploads under
 // that. Announcement GIFs should be small anyway (they load on app launch).
