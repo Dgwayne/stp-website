@@ -99,19 +99,34 @@ const categories: Category[] = [
           "Today's SPC tornado, hail, and damaging-wind reports plotted in real time.",
       },
       {
-        title: "SPC mesoscale discussions",
+        title: "Mesoscale discussions",
         description:
-          "Short-fuse SPC forecast areas (MCDs) overlaid as polygons with full discussion text on tap.",
+          "Short-fuse SPC forecast areas (MCDs) and WPC Mesoscale Precipitation Discussions (flooding MPDs) overlaid as polygons, with full discussion text on tap.",
       },
       {
-        title: "Convective outlooks",
+        title: "Outlooks suite",
         description:
-          "Day 1 and Day 2 outlooks (Categorical, Tornado, Wind, and Hail), switchable from a single sheet.",
+          "SPC convective outlooks Day 1 through Day 8 (Categorical, Tornado, Wind, Hail), plus general thunderstorm, WPC Excessive Rainfall and QPF, Fire Weather, Winter Storm Severity (WSSI), CPC 6 to 10 day temperature and precipitation, and the Drought Monitor, switchable from a single sheet.",
       },
       {
         title: "METARs",
         description:
           "Live airport observations with selectable variables (temperature, dew point, wind, pressure, visibility) and unit pickers.",
+      },
+      {
+        title: "Surface observations (RTMA)",
+        description:
+          "RTMA analyzed surface fields (temperature, dew point, theta-e, wind, and gusts) plus MRMS observed precipitation totals, all as true observations rather than forecast output.",
+      },
+      {
+        title: "Air quality (AirNow AQI)",
+        description:
+          "EPA AirNow air quality on the map: Combined AQI, PM2.5, and Ozone, with a 24-hour loop animation, a smooth contour surface, and per-station readings on tap.",
+      },
+      {
+        title: "Surface fronts & pressure",
+        description:
+          "The WPC Coded Surface Bulletin drawn on the map with cold, warm, stationary, and occluded fronts plus high and low pressure centers.",
       },
       {
         title: "Map style picker",
@@ -145,7 +160,7 @@ const categories: Category[] = [
       {
         title: "NEXRAD Level 2 decoding",
         description:
-          "Reflectivity (BR), Velocity (BV), Correlation Coefficient (CC), and Echo Tops decoded directly from raw Level 2 data, no third-party tile server.",
+          "Reflectivity (BR), Velocity (BV), Correlation Coefficient (CC), Spectrum Width, and Storm-Relative Velocity decoded directly from raw Level 2 data, no third-party tile server.",
       },
       {
         title: "GPU-rendered, sharp at any zoom",
@@ -168,9 +183,19 @@ const categories: Category[] = [
           "Overlay NWS Level III storm tracks and mesocyclone rotation markers on single-site radar to see where cells are headed and where rotation is tightening.",
       },
       {
+        title: "More single-site products",
+        description:
+          "Vertically Integrated Liquid (VIL), Digital Precipitation Rate, Normalized Rotation, Max Reflectivity, Min Correlation Coefficient, and 1-hour and storm-total precipitation, alongside the base moments.",
+      },
+      {
+        title: "VAD Wind Profile",
+        description:
+          "Open a VAD Wind Profile (VWP) panel from any radar-site pin to read the wind profile derived from the radar's velocity data.",
+      },
+      {
         title: "Composite radar mosaic",
         description:
-          "CONUS-wide WMS composite for at-a-glance precipitation context, with selectable sources.",
+          "A GPU-rendered CONUS composite, crisp at every zoom, drawn in data space from the full MRMS product catalog, with a transport bar, hourly playback, and tap-to-read values.",
       },
       {
         title: "Full animation transport",
@@ -325,9 +350,9 @@ const categories: Category[] = [
           "Real-time GOES Global Lightning Mapper strikes on the map, with an adjustable display window, bolt size, radar-loop sync, and a flash glow as new strikes land.",
       },
       {
-        title: "GOES-East satellite",
+        title: "GOES East & West satellite",
         description:
-          "Infrared, Water Vapor, Visible, and GeoColor (true-color day / IR night) imagery with animation playback and on-map product chips. Drop it under the radar with adjustable opacity.",
+          "GOES-East and GOES-West imagery (Infrared, Water Vapor, Visible, and GeoColor) with a radar-synced cloud loop, GPU cross-fade animation, on-map product chips, and a freshness readout that names the lagging satellite. Drop it under the radar with adjustable opacity.",
       },
       {
         title: "Worldwide tropical & hurricane tracking",

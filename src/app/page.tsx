@@ -9,14 +9,14 @@ const features: Feature[] = [
     icon: "📡",
     title: "GPU Radar: Level 2, III & TDWR",
     description:
-      "GPU-rendered and crisp at any zoom. NEXRAD Level 2 decoded on-device (Reflectivity, Velocity, Correlation Coefficient, Echo Tops), plus WSR-88D Level III velocity/reflectivity, dual-pol products (ZDR, Correlation Coefficient, KDP, Hydrometeor Classification), storm tracks, mesocyclone rotation, and the 45-site TDWR network.",
+      "GPU-rendered and crisp at any zoom. NEXRAD Level 2 decoded on-device (reflectivity, velocity, correlation coefficient, spectrum width), plus WSR-88D Level III, dual-pol products (ZDR, CC, KDP, hydrometeor classification), derived products (VIL, Digital Precip Rate, storm-relative velocity, rotation), a VAD Wind Profile panel, storm tracks, and the 45-site TDWR network.",
     href: "/radar",
   },
   {
     icon: "🎞️",
     title: "Composite & Animated Radar",
     description:
-      "CONUS MRMS composite mosaic with a full transport bar (play, scrub, speed), now with up to 12-hour playback, retina 2× imagery, and a quality-controlled base-reflectivity mosaic.",
+      "CONUS MRMS composite mosaic, now GPU-rendered and crisp at every zoom, with a full transport bar (play, scrub, speed), up to 12-hour playback, and a quality-controlled base-reflectivity mosaic.",
     href: "/radar",
   },
   {
@@ -58,7 +58,7 @@ const features: Feature[] = [
     icon: "🛰️",
     title: "GOES Satellite",
     description:
-      "GOES-East satellite imagery (Infrared, Water Vapor, Visible, and GeoColor) with animation playback and on-map product chips.",
+      "GOES-East and GOES-West imagery (Infrared, Water Vapor, Visible, and GeoColor) with a radar-synced cloud loop, GPU cross-fade animation, and on-map product chips.",
     href: "/features",
   },
   {
@@ -100,8 +100,22 @@ const features: Feature[] = [
     icon: "⚠️",
     title: "NWS, SPC & Convective Outlooks",
     description:
-      "Warnings, watches, mesoscale discussions, and Day 1 / Day 2 categorical, tornado, wind, and hail outlooks, all overlaid on the map.",
+      "Warnings, watches, mesoscale discussions, and a full outlooks suite: SPC convective Day 1 to 8, thunderstorm, excessive rainfall, fire weather, winter storm severity, CPC 6 to 10 day, and drought, all overlaid on the map.",
     href: "/alerts",
+  },
+  {
+    icon: "🌫️",
+    title: "Air Quality (AQI)",
+    description:
+      "EPA AirNow air quality on the map: Combined AQI, PM2.5, and Ozone, with a 24-hour loop animation and a smooth contour surface. Tap any station for its reading.",
+    href: "/features",
+  },
+  {
+    icon: "🗺️",
+    title: "Surface Fronts & Pressure",
+    description:
+      "WPC surface analysis on the map: cold, warm, stationary, and occluded fronts plus high and low pressure centers, from the Coded Surface Bulletin.",
+    href: "/features",
   },
   {
     icon: "📈",
@@ -140,9 +154,9 @@ const features: Feature[] = [
   },
   {
     icon: "🌡️",
-    title: "METARs & Storm Cell Picker",
+    title: "Surface Observations & METARs",
     description:
-      "Live airport observations on the map, plus tap any storm cell to sample its radar attributes and identifier.",
+      "Live METAR station data plus RTMA analyzed surface fields (temperature, dew point, theta-e, wind, and gusts) and MRMS observed precipitation totals, all as true observations rather than forecast output.",
     href: "/features",
   },
   {
