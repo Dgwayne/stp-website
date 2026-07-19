@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import "@mdxeditor/editor/style.css";
 import {
   MDXEditor,
@@ -12,6 +12,7 @@ import {
   linkDialogPlugin,
   imagePlugin,
   markdownShortcutPlugin,
+  directivesPlugin,
   toolbarPlugin,
   UndoRedo,
   BoldItalicUnderlineToggles,
@@ -22,33 +23,80 @@ import {
   InsertThematicBreak,
   Separator,
   usePublisher,
-  insertImage$,
+  insertDirective$,
+  type DirectiveDescriptor,
 } from "@mdxeditor/editor";
 
-/// Custom toolbar button: pick an MP4/WebM, upload it through the same handler
-/// the image plugin uses (the route accepts video), and insert it as an image
-/// node — which serializes to `![video](url.mp4)`. The editor shows a
-/// placeholder; the app renders it as a looping muted video.
-function InsertVideoButton() {
-  const insertImage = usePublisher(insertImage$);
+export type VideoUpload = (
+  file: File,
+  onProgress: (pct: number) => void,
+) => Promise<string>;
+
+// Renders a real, playing <video> for the `::video{src="..."}` leaf directive
+// inside the WYSIWYG editor, so an inline video previews as an actual video
+// instead of a broken-image icon.
+const videoDirectiveDescriptor: DirectiveDescriptor = {
+  name: "video",
+  type: "leafDirective",
+  attributes: ["src"],
+  hasChildren: false,
+  testNode: (node) => node.name === "video",
+  Editor: ({ mdastNode }) => {
+    const attrs = (mdastNode.attributes ?? {}) as Record<string, string>;
+    const src = attrs.src ?? "";
+    return (
+      <div style={{ margin: "8px 0" }} contentEditable={false}>
+        {src ? (
+          <video
+            src={src}
+            muted
+            loop
+            autoPlay
+            playsInline
+            controls
+            style={{
+              maxWidth: "100%",
+              maxHeight: 320,
+              borderRadius: 10,
+              display: "block",
+              background: "#000",
+            }}
+          />
+        ) : (
+          <div style={{ color: "#999" }}>video</div>
+        )}
+      </div>
+    );
+  },
+};
+
+// Custom toolbar button: upload an MP4/WebM (with a live progress %), then
+// insert it inline as a `::video{src}` directive that both the editor and the
+// app render as a real video.
+function InsertVideoButton({ videoUpload }: { videoUpload: VideoUpload }) {
+  const insertDirective = usePublisher(insertDirective$);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [pct, setPct] = useState<number | null>(null);
+
   return (
     <>
       <button
         type="button"
         title="Insert video (MP4)"
         aria-label="Insert video"
+        disabled={pct !== null}
         onClick={() => inputRef.current?.click()}
         style={{
           display: "inline-flex",
           alignItems: "center",
-          justifyContent: "center",
-          width: 36,
+          gap: 5,
           height: 36,
+          padding: "0 8px",
           border: "none",
           background: "transparent",
-          cursor: "pointer",
+          cursor: pct !== null ? "default" : "pointer",
           color: "currentColor",
+          font: "inherit",
         }}
       >
         <svg
@@ -64,38 +112,51 @@ function InsertVideoButton() {
           <rect x="2" y="5" width="14" height="14" rx="2" />
           <path d="m16 9 6-3v12l-6-3" />
         </svg>
+        <span style={{ fontSize: 13 }}>
+          {pct === null ? "Video" : `${pct}%`}
+        </span>
       </button>
       <input
         ref={inputRef}
         type="file"
         accept="video/mp4,video/webm,video/quicktime"
         style={{ display: "none" }}
-        onChange={(e) => {
+        onChange={async (e) => {
           const file = e.target.files?.[0];
           e.target.value = "";
-          if (file) insertImage({ file });
+          if (!file) return;
+          try {
+            setPct(0);
+            const url = await videoUpload(file, setPct);
+            insertDirective({
+              type: "leafDirective",
+              name: "video",
+              attributes: { src: url },
+            });
+          } catch (err) {
+            alert(
+              "Video upload failed: " +
+                (err instanceof Error ? err.message : String(err)),
+            );
+          } finally {
+            setPct(null);
+          }
         }}
       />
     </>
   );
 }
 
-/**
- * The actual WYSIWYG editor. Loaded only on the client (MDXEditor touches
- * `document` at import time), via the dynamic wrapper in MarkdownField.tsx.
- *
- * Renders light-on-white inside the dark admin page — a clean "paper" to
- * type on — and stores/produces plain Markdown, which is exactly what the
- * app renders with flutter_markdown_plus.
- */
 export default function MdxEditorImpl({
   value,
   onChange,
   imageUploadHandler,
+  videoUpload,
 }: {
   value: string;
   onChange: (markdown: string) => void;
   imageUploadHandler: (file: File) => Promise<string>;
+  videoUpload: VideoUpload;
 }) {
   return (
     <MDXEditor
@@ -111,6 +172,7 @@ export default function MdxEditorImpl({
         linkDialogPlugin(),
         markdownShortcutPlugin(),
         imagePlugin({ imageUploadHandler }),
+        directivesPlugin({ directiveDescriptors: [videoDirectiveDescriptor] }),
         toolbarPlugin({
           toolbarContents: () => (
             <>
@@ -123,7 +185,7 @@ export default function MdxEditorImpl({
               <Separator />
               <CreateLink />
               <InsertImage />
-              <InsertVideoButton />
+              <InsertVideoButton videoUpload={videoUpload} />
               <InsertThematicBreak />
             </>
           ),
