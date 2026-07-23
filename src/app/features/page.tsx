@@ -143,6 +143,11 @@ const categories: Category[] = [
         description:
           "Drag a heading line to draw a forecast cone with configurable speed and spread, and the app auto-detects every town inside it with an ETA.",
       },
+      {
+        title: "Long-press context menu",
+        description:
+          "Press and hold anywhere on the map for a quick menu: pull a point sounding, list the nearest radars, inspect that spot, or find the nearest cameras.",
+      },
     ],
     screenshot: {
       src: "/images/screenshots/layer-selector.jpg",
@@ -180,7 +185,7 @@ const categories: Category[] = [
       {
         title: "Level III storm attributes",
         description:
-          "Overlay NWS Level III storm tracks and mesocyclone rotation markers on single-site radar to see where cells are headed and where rotation is tightening.",
+          "Overlay NWS Level III storm tracks, mesocyclone rotation, and Tornado Vortex Signature (TVS) markers on single-site radar to see where cells are headed and where rotation is tightening.",
       },
       {
         title: "More single-site products",
@@ -201,6 +206,11 @@ const categories: Category[] = [
         title: "Full animation transport",
         description:
           "Play, pause, scrub, change loop speed, and pick frame count, same controls you'd expect from a desktop radar app.",
+      },
+      {
+        title: "FastScan sweep (optional)",
+        description:
+          "An optional beam-reveal sweep animation with range rings and live pipeline status chips, off by default and switchable in settings.",
       },
       {
         title: "Dual-view split-screen",
@@ -558,6 +568,11 @@ const categories: Category[] = [
         title: "Active spotter info sheets",
         description:
           "Tap any active spotter to see their callsign, vehicle, and last update without leaving the map.",
+      },
+      {
+        title: "In-app Contact & Feedback",
+        description:
+          "Send feedback or reach out to support right from Settings, without leaving the app.",
       },
       {
         title: "Private by default",

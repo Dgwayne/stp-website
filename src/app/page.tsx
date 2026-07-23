@@ -132,6 +132,13 @@ const features: Feature[] = [
     href: "/features",
   },
   {
+    icon: "👆",
+    title: "Long-Press Map Menu",
+    description:
+      "Press and hold anywhere on the map for a quick context menu: pull a point sounding, list the nearest radars, inspect that spot, or find the nearest cameras.",
+    href: "/features",
+  },
+  {
     icon: "📍",
     title: "GPS Beacon to Spotter Network",
     description:

@@ -73,6 +73,7 @@ const blocks: Block[] = [
       "Pick playback speed, slow walk-throughs or full-pace loops",
       "Pick frame count, short loop or long history",
       "Background frame loading with progress so you know when it's ready",
+      "Optional FastScan sweep: a beam-reveal animation with range rings and live pipeline chips",
     ],
   },
   {
