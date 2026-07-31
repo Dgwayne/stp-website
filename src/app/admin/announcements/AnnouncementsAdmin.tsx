@@ -6,6 +6,9 @@ import MarkdownField from "./MarkdownField";
 type Severity = "info" | "warning" | "success" | "whatsNew";
 
 type Item = {
+  // Stable React key, internal only — never published. The user-facing `id` is
+  // editable (and briefly duplicate/empty while typing), so it can't be the key.
+  _uid: string;
   id: string;
   severity: Severity;
   title: string;
@@ -20,7 +23,13 @@ type Item = {
   actionUrl?: string | null;
 };
 
+// What actually gets sent to the Worker — the internal key is stripped.
+type PublishItem = Omit<Item, "_uid">;
+
 type Status = { kind: "info" | "error" | "success"; msg: string } | null;
+
+let uidSeq = 0;
+const nextUid = () => `u${++uidSeq}`;
 
 const SEVERITIES: Severity[] = ["info", "warning", "success", "whatsNew"];
 const PLATFORMS = ["android", "ios"];
@@ -47,6 +56,7 @@ function localToIso(local: string): string | null {
 
 function blankItem(): Item {
   return {
+    _uid: nextUid(),
     id: `msg-${Date.now()}`,
     severity: "info",
     title: "",
@@ -56,9 +66,9 @@ function blankItem(): Item {
 
 // Strip empty optionals so the published JSON stays clean (the Worker also
 // sanitises, but this keeps the preview honest).
-function cleanForPublish(items: Item[]): Item[] {
+function cleanForPublish(items: Item[]): PublishItem[] {
   return items.map((it) => {
-    const o: Item = {
+    const o: PublishItem = {
       id: it.id.trim(),
       severity: it.severity,
       title: it.title.trim(),
@@ -85,7 +95,10 @@ export default function AnnouncementsAdmin() {
   const [status, setStatus] = useState<Status>(null);
   const [busy, setBusy] = useState(false);
 
-  async function call(action: "load" | "publish", announcements?: Item[]) {
+  async function call(
+    action: "load" | "publish",
+    announcements?: PublishItem[],
+  ) {
     const res = await fetch("/api/announcements", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -112,9 +125,15 @@ export default function AnnouncementsAdmin() {
         return;
       }
       const list = Array.isArray(data?.announcements)
-        ? (data.announcements as Item[])
+        ? (data.announcements as PublishItem[])
         : [];
-      setItems(list.map((it) => ({ ...it, severity: it.severity ?? "info" })));
+      setItems(
+        list.map((it) => ({
+          ...it,
+          _uid: nextUid(),
+          severity: it.severity ?? "info",
+        })),
+      );
       setUnlocked(true);
       setStatus({
         kind: "info",
@@ -261,7 +280,7 @@ export default function AnnouncementsAdmin() {
       <div className="space-y-5">
         {items.map((it, i) => (
           <div
-            key={i}
+            key={it._uid}
             className="rounded-lg border border-white/10 bg-surface p-4"
           >
             <div className="mb-3 flex items-center gap-3">
@@ -286,7 +305,7 @@ export default function AnnouncementsAdmin() {
               </select>
               <button
                 onClick={() =>
-                  setItems((p) => p.filter((_, idx) => idx !== i))
+                  setItems((p) => p.filter((x) => x._uid !== it._uid))
                 }
                 className="shrink-0 rounded-md border border-red-500/40 px-3 py-2 text-sm text-red-300 hover:bg-red-500/10"
               >
