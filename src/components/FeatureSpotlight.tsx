@@ -7,6 +7,12 @@ type Props = {
   src: string;
   poster: string;
   flip?: boolean;
+  /**
+   * Tall phone-shaped capture (roughly 9:20). Left unconstrained it would run
+   * ~1300px tall in a half-width column and dwarf its own copy, so cap it to
+   * phone width and let it sit centered in the column.
+   */
+  portrait?: boolean;
 };
 
 /**
@@ -21,11 +27,16 @@ export default function FeatureSpotlight({
   src,
   poster,
   flip = false,
+  portrait = false,
 }: Props) {
   return (
     <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
       <figure className={flip ? "lg:order-2" : ""}>
-        <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+        <div
+          className={`overflow-hidden rounded-2xl border border-white/10 shadow-2xl ${
+            portrait ? "mx-auto w-full max-w-[280px]" : ""
+          }`}
+        >
           <AutoVideo src={src} poster={poster} className="w-full" />
         </div>
       </figure>

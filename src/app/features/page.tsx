@@ -60,6 +60,11 @@ const categories: Category[] = [
           "Optional boot receiver brings the beacon back automatically after a device reboot so you never forget to turn it back on.",
       },
       {
+        title: "Sign in with your Spotter Network account",
+        description:
+          "Use your Spotter Network username and password. No digging your App ID out of the SN dashboard to paste in, though that path is still there if you prefer it. Your own dot on the map is then matched exactly, so you always know which spotter is you.",
+      },
+      {
         title: "Encrypted credential storage",
         description:
           "Your Spotter Network application ID lives in encrypted device storage, never on a server we operate.",
@@ -124,6 +129,21 @@ const categories: Category[] = [
           "EPA AirNow air quality on the map: Combined AQI, PM2.5, and Ozone, with a 24-hour loop animation, a smooth contour surface, and per-station readings on tap.",
       },
       {
+        title: "City & place search",
+        description:
+          "Type any city, town, or landmark in the map menu and fly straight to it, no panning and pinching across the country.",
+      },
+      {
+        title: "One rail, not a wall of buttons",
+        description:
+          "Every layer used to pin its own row of controls under the app bar and they stacked, eating a quarter of the screen. They now share one compact rail whose height stays fixed no matter how many layers you run.",
+      },
+      {
+        title: "One-tap base layer switching",
+        description:
+          "A button in the bottom corner switches between the four layers that paint the map, single-site radar, composite, weather models, and satellite. It wears the icon of whatever is on screen, so it doubles as a status light.",
+      },
+      {
         title: "Surface fronts & pressure",
         description:
           "The WPC Coded Surface Bulletin drawn on the map with cold, warm, stationary, and occluded fronts plus high and low pressure centers.",
@@ -153,6 +173,11 @@ const categories: Category[] = [
       src: "/images/screenshots/layer-selector.jpg",
       alt: "Map layers selector sheet",
       caption: "Granular per-layer toggles with live status subtitles",
+    },
+    video: {
+      src: "/videos/air-quality.mp4",
+      poster: "/videos/air-quality-poster.jpg",
+      caption: "EPA AirNow air quality, with the 24-hour loop running.",
     },
   },
   {
@@ -191,6 +216,21 @@ const categories: Category[] = [
         title: "More single-site products",
         description:
           "Vertically Integrated Liquid (VIL), Digital Precipitation Rate, Normalized Rotation, Max Reflectivity, Min Correlation Coefficient, and 1-hour and storm-total precipitation, alongside the base moments.",
+      },
+      {
+        title: "Vertical cross sections",
+        description:
+          "Draw a line across a storm and read a vertical slice through it, so you can see the structure from the ground up instead of only the view from above. Backed by full-volume Level 2 decoding, so every tilt of the scan is available.",
+      },
+      {
+        title: "3D beam-height tilt",
+        description:
+          "Pitch the map and the radar beam climbs with distance, the way the real beam does, so you can see how a storm stacks up in the sky. On Android today, with iOS to follow.",
+      },
+      {
+        title: "FastScan sweep & range rings",
+        description:
+          "A live sweep beam with your choice of colors, plus range rings labeled in miles with adaptive coloring so they stay readable over any product.",
       },
       {
         title: "VAD Wind Profile",
@@ -365,6 +405,16 @@ const categories: Category[] = [
           "GOES-East and GOES-West imagery (Infrared, Water Vapor, Visible, and GeoColor) with a radar-synced cloud loop, GPU cross-fade animation, on-map product chips, and a freshness readout that names the lagging satellite. Drop it under the radar with adjustable opacity.",
       },
       {
+        title: "Full NESDIS sector list",
+        description:
+          "The region picker carries NESDIS STAR's own sector layout, 22 GOES-East regions and 12 GOES-West, in a two-level picker grouped by spacecraft.",
+      },
+      {
+        title: "West Pacific typhoon view",
+        description:
+          "A Himawari GeoColor region covering the typhoon basin from Japan out into the open Pacific, imagery courtesy of CIRA.",
+      },
+      {
         title: "Worldwide tropical & hurricane tracking",
         description:
           "Named storms in every basin (typhoons too) via a global feed, plus NHC outlook areas-to-watch, forecast cones, tracks, intensity, and the observed past track. Tap any storm for a detail card.",
@@ -420,7 +470,12 @@ const categories: Category[] = [
       {
         title: "Observed + forecast profiles",
         description:
-          "Pull observed balloon data or HRRR forecast profiles for a point, the current state or the hours ahead.",
+          "Pull observed balloon data or HRRR forecast profiles for a point, the current state or the hours ahead, and scrub through hourly frames.",
+      },
+      {
+        title: "Plain-language read",
+        description:
+          "A written interpretation of the profile, including what happens to storms moving into the area rather than only whether new storms can fire. A capped sounding no longer makes an inbound mature storm look doomed, since inhibition guards initiation, not an established updraft. Adds a dry-microburst callout and handles high-shear low-CAPE setups.",
       },
     ],
   },
@@ -589,6 +644,31 @@ const categories: Category[] = [
 ];
 
 const extras: Screenshot[] = [
+  {
+    src: "/images/screenshots/outlooks-suite.jpg",
+    alt: "Outlook product picker showing the full convective and hazard list",
+    caption: "The full outlooks suite: convective Day 1 to 8, fire, WSSI, CPC, drought",
+  },
+  {
+    src: "/images/screenshots/surface-fronts.jpg",
+    alt: "WPC surface fronts and pressure centers drawn on the map",
+    caption: "WPC surface analysis: fronts plus high and low pressure centers",
+  },
+  {
+    src: "/images/screenshots/satellite-regions.jpg",
+    alt: "Two-level satellite region picker grouped by spacecraft",
+    caption: "22 GOES-East and 12 GOES-West sectors, grouped by spacecraft",
+  },
+  {
+    src: "/images/screenshots/typhoon-wpac.jpg",
+    alt: "Himawari GeoColor imagery of a West Pacific typhoon",
+    caption: "West Pacific typhoon basin, Himawari GeoColor via CIRA",
+  },
+  {
+    src: "/images/screenshots/sounding-read.jpg",
+    alt: "Sounding panel with the plain-language interpretation",
+    caption: "Soundings explained in plain language, including inbound storms",
+  },
   {
     src: "/images/screenshots/metars-temp.jpg",
     alt: "METARs temperature plot across the US",

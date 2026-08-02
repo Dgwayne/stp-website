@@ -9,7 +9,7 @@ const features: Feature[] = [
     icon: "📡",
     title: "GPU Radar: Level 2, III & TDWR",
     description:
-      "GPU-rendered and crisp at any zoom. NEXRAD Level 2 decoded on-device (reflectivity, velocity, correlation coefficient, spectrum width), plus WSR-88D Level III, dual-pol products (ZDR, CC, KDP, hydrometeor classification), derived products (VIL, Digital Precip Rate, storm-relative velocity, rotation), a VAD Wind Profile panel, storm tracks, and the 45-site TDWR network.",
+      "GPU-rendered and crisp at any zoom. NEXRAD Level 2 decoded on-device (reflectivity, velocity, correlation coefficient, spectrum width), plus WSR-88D Level III, dual-pol products (ZDR, CC, KDP, hydrometeor classification), derived products (VIL, Digital Precip Rate, storm-relative velocity, rotation), vertical cross sections, a VAD Wind Profile panel, storm tracks with mesocyclone and TVS markers, and the 45-site TDWR network.",
     href: "/radar",
   },
   {
@@ -58,7 +58,7 @@ const features: Feature[] = [
     icon: "🛰️",
     title: "GOES Satellite",
     description:
-      "GOES-East and GOES-West imagery (Infrared, Water Vapor, Visible, and GeoColor) with a radar-synced cloud loop, GPU cross-fade animation, and on-map product chips.",
+      "GOES-East and GOES-West imagery (Infrared, Water Vapor, Visible, and GeoColor) with the full NESDIS sector list, 22 East and 12 West regions, plus a West Pacific typhoon view from Himawari. Radar-synced cloud loop, GPU cross-fade, and on-map product chips.",
     href: "/features",
   },
   {
@@ -93,7 +93,7 @@ const features: Feature[] = [
     icon: "🚨",
     title: "Smart Push Alerts",
     description:
-      "Background watcher fires NWS warning notifications even when the app is closed, with watch zones, filter modes, custom sounds, full-screen tornado-emergency takeover, and an estimated population count inside each warning polygon.",
+      "Background watcher fires NWS warning notifications whether the app is open or closed, with watch zones, filter modes, custom sounds, full-screen tornado-emergency takeover, and an estimated population count inside each warning polygon.",
     href: "/alerts",
   },
   {
@@ -101,6 +101,13 @@ const features: Feature[] = [
     title: "NWS, SPC & Convective Outlooks",
     description:
       "Warnings, watches, mesoscale discussions, and a full outlooks suite: SPC convective Day 1 to 8, thunderstorm, excessive rainfall, fire weather, winter storm severity, CPC 6 to 10 day, and drought, all overlaid on the map.",
+    href: "/alerts",
+  },
+  {
+    icon: "🔔",
+    title: "Critical Alerts on iOS",
+    description:
+      "Apple approved Critical Alerts for Spotter Tools Pro. Tornado Emergencies, Particularly Dangerous Situation warnings, and Flash Flood Emergencies can break through Do Not Disturb and the silent switch when you opt in.",
     href: "/alerts",
   },
   {
@@ -209,6 +216,24 @@ const marqueeScreenshots: Screenshot[] = [
 ];
 
 const spotlights = [
+  {
+    eyebrow: "Storm structure",
+    title: "Radar Cross Sections",
+    description:
+      "Draw a line across a storm and get a vertical slice through it, so you can read the structure from the ground up instead of only the view from above. Full-volume decoding means every tilt of the scan is there.",
+    src: "/videos/cross-section.mp4",
+    poster: "/videos/cross-section-poster.jpg",
+    portrait: true,
+  },
+  {
+    eyebrow: "3D radar",
+    title: "Tilt the Map, See the Beam Rise",
+    description:
+      "Pitch the map and the radar beam climbs with distance, the way the real beam does. Watch how a storm stacks up in the sky instead of guessing from a flat picture. On Android today, coming to iOS.",
+    src: "/videos/radar-3d-tilt.mp4",
+    poster: "/videos/radar-3d-tilt-poster.jpg",
+    portrait: true,
+  },
   {
     eyebrow: "Live wind",
     title: "Watch the Wind Move",

@@ -104,6 +104,15 @@ const blocks: Block[] = [
     ],
   },
   {
+    id: "critical-alerts",
+    eyebrow: "Critical Alerts (iOS)",
+    title: "Breaks through Do Not Disturb",
+    body: [
+      "Apple approved the Critical Alerts entitlement for Spotter Tools Pro. Tornado Emergencies, Particularly Dangerous Situation warnings, and Flash Flood Emergencies can sound through Do Not Disturb, a Focus mode, and the silent switch.",
+      "Apple grants this only to apps with a genuine public-safety case, and it stays under your control: it is opt-in, and it is reserved for the handful of alert tiers that mean act now.",
+    ],
+  },
+  {
     id: "warnings-overlay",
     eyebrow: "Map Overlay",
     title: "Warnings, watches, and detail sheets",
