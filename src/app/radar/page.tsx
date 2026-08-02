@@ -132,7 +132,7 @@ const blocks: Block[] = [
     title: "Pitch the map and watch the beam rise",
     body: [
       "Radar does not look straight ahead. The beam climbs as it travels, so a distant echo is sampled thousands of feet up while a nearby one is near the surface. Pitch the map and Spotter Tools Pro draws that geometry, lifting each sweep to its true height.",
-      "It makes beam overshoot obvious and shows how a storm stacks up in the sky. Available on Android today, with iOS to follow.",
+      "It makes beam overshoot obvious and shows how a storm stacks up in the sky, on both iOS and Android.",
     ],
     flip: true,
   },

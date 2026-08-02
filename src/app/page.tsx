@@ -229,7 +229,7 @@ const spotlights = [
     eyebrow: "3D radar",
     title: "Tilt the Map, See the Beam Rise",
     description:
-      "Pitch the map and the radar beam climbs with distance, the way the real beam does. Watch how a storm stacks up in the sky instead of guessing from a flat picture. On Android today, coming to iOS.",
+      "Pitch the map and the radar beam climbs with distance, the way the real beam does. Watch how a storm stacks up in the sky instead of guessing from a flat picture.",
     src: "/videos/radar-3d-tilt.mp4",
     poster: "/videos/radar-3d-tilt-poster.jpg",
     portrait: true,

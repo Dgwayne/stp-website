@@ -225,7 +225,7 @@ const categories: Category[] = [
       {
         title: "3D beam-height tilt",
         description:
-          "Pitch the map and the radar beam climbs with distance, the way the real beam does, so you can see how a storm stacks up in the sky. On Android today, with iOS to follow.",
+          "Pitch the map and the radar beam climbs with distance, the way the real beam does, so you can see how a storm stacks up in the sky.",
       },
       {
         title: "FastScan sweep & range rings",
