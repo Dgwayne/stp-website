@@ -388,6 +388,55 @@ const categories: Category[] = [
     },
   },
   {
+    id: "forecast",
+    eyebrow: "Point Forecast & Widget",
+    title: "The Forecast for Any Spot",
+    intro:
+      "Tap anywhere for the full National Weather Service forecast for that exact point, then put it on your home screen.",
+    features: [
+      {
+        title: "Tap, long-press, or search",
+        description:
+          "Open a forecast from a long-press on the map, the map menu, or the city search. It works for any coordinate, not just named places.",
+      },
+      {
+        title: "Conditions, periods, and the forecaster's words",
+        description:
+          "Live conditions from the nearest airport station, an alert banner when something is active, and the day and night periods with the written forecast exactly as the office issued it.",
+      },
+      {
+        title: "48 hour trend chart",
+        description:
+          "A temperature trend over a tappable hour-by-hour strip, so you can read the shape of the next two days at a glance.",
+      },
+      {
+        title: "The Area Forecast Discussion",
+        description:
+          "The local office's own reasoning, in their words, right in the sheet. No hunting for it on a separate site.",
+      },
+      {
+        title: "Every grid layer, explained",
+        description:
+          "A detail grid exposing everything the office publishes for that cell, including thunder probability, mixing height, transport wind, wet bulb globe temperature and the Haines index. Tap any value for a plain English explanation of what it means and why it matters.",
+      },
+      {
+        title: "Readable offline",
+        description:
+          "The last forecast is kept on device, so you can still read it when you lose signal in the field.",
+      },
+      {
+        title: "Home screen widget",
+        description:
+          "Put the forecast for any place on your home screen. Choose the location, whether to show the next few hours, the next few days, or both, and match it to the app's theme or pick your own. An optional strip appears when a warning or watch covers that spot.",
+      },
+    ],
+    video: {
+      src: "/videos/forecast-widget.mp4",
+      poster: "/videos/forecast-widget-poster.jpg",
+      caption: "Adding and configuring the home screen forecast widget.",
+    },
+  },
+  {
     id: "imagery",
     eyebrow: "Lightning, Satellite & Tropical",
     title: "Lightning, Satellite & Tropical",

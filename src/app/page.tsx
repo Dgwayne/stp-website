@@ -104,6 +104,20 @@ const features: Feature[] = [
     href: "/alerts",
   },
   {
+    icon: "🌤️",
+    title: "NWS Point Forecast",
+    description:
+      "Tap anywhere for the full National Weather Service forecast: current conditions, day and night periods, a 48 hour trend chart, the Area Forecast Discussion, and every grid layer the local office publishes, each one explained in plain English. Cached for when you lose signal.",
+    href: "/features",
+  },
+  {
+    icon: "📱",
+    title: "Home Screen Widget",
+    description:
+      "Put the forecast for any place on your home screen. Pick the location, choose hours or days, and match it to your theme. Optional strip when a warning or watch covers the spot.",
+    href: "/features",
+  },
+  {
     icon: "🔔",
     title: "Critical Alerts on iOS",
     description:
@@ -216,6 +230,14 @@ const marqueeScreenshots: Screenshot[] = [
 ];
 
 const spotlights = [
+  {
+    eyebrow: "Point forecast",
+    title: "The Full NWS Forecast, Anywhere You Tap",
+    description:
+      "Long-press the map, or search a city, for the complete National Weather Service forecast at that exact spot. Current conditions, the day and night periods in the forecaster's own words, a 48 hour trend chart, the Area Forecast Discussion, and every detail the local office publishes for that cell. It keeps the last forecast so you can still read it without signal.",
+    src: "/videos/point-forecast.mp4",
+    poster: "/videos/point-forecast-poster.jpg",
+  },
   {
     eyebrow: "Storm structure",
     title: "Radar Cross Sections",
