@@ -147,12 +147,17 @@ export default function ModulePage() {
           <div className="stp__actions">
             <Link className="stp__btn" href="/training">Back to training</Link>
             {!passed && (
-              <button
-                className="stp__btn stp__btn--ghost"
-                onClick={() => { setResult(null); setResponses({}); setIndex(0); }}
-              >
-                Retake
-              </button>
+              <>
+                <Link className="stp__btn stp__btn--ghost" href={`/training/${slug}/study`}>
+                  Review material
+                </Link>
+                <button
+                  className="stp__btn stp__btn--ghost"
+                  onClick={() => { setResult(null); setResponses({}); setIndex(0); }}
+                >
+                  Retake
+                </button>
+              </>
             )}
           </div>
         </div>

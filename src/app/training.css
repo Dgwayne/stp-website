@@ -253,3 +253,102 @@
   margin-top: 2.5rem;
   padding-top: 0.9rem;
 }
+
+/* ---- study material ----
+   Reference reading, not a test screen. Longer measure, quieter rules,
+   and tables that scroll on their own rather than widening the page. */
+.stp__h2 {
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin: 0 0 0.7rem;
+}
+
+.stp__body {
+  margin: 0 0 0.75rem;
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+.stp__body:last-child { margin-bottom: 0; }
+
+.stp__list {
+  margin: 0 0 0.75rem;
+  padding-left: 1.1rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+.stp__list li { margin-bottom: 0.4rem; }
+.stp__list li:last-child { margin-bottom: 0; }
+
+/* Wide criteria tables must scroll inside the card, never push the page. */
+.stp__tableWrap {
+  overflow-x: auto;
+  margin: 0 0 0.85rem;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+}
+
+.stp__table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+.stp__table th {
+  text-align: left;
+  font-weight: 700;
+  color: var(--signal);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid var(--rule);
+  background: rgba(255, 182, 39, 0.04);
+}
+.stp__table td {
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.stp__table tr:last-child td { border-bottom: none; }
+
+/* The thing most likely to be misremembered later. */
+.stp__callout {
+  margin: 0;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--paper);
+  border-left: 2px solid var(--signal);
+  background: rgba(255, 182, 39, 0.06);
+}
+
+.stp__card--warn { border-color: var(--signal); }
+
+.stp__change { margin-bottom: 1rem; }
+.stp__change:last-child { margin-bottom: 0; }
+
+/* ---- two actions per module card ---- */
+.stp__cardActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+}
+
+.stp__cardLink {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--signal);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.35rem 0.7rem;
+  transition: border-color 120ms ease;
+}
+.stp__cardLink:hover { border-color: var(--signal); }
+.stp__cardLink--quiet { color: var(--dim); }

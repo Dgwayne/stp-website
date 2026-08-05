@@ -96,11 +96,11 @@ export default function TrainingHome() {
             r.due_on && !r.best?.passed && new Date(r.due_on) < new Date();
 
           return (
-            <Link key={r.id} href={`/training/${r.module_slug}`} className="stp__card stp__card--link">
+            <div key={r.id} className="stp__card">
               {r.best?.passed ? (
                 <span className="stp__chip stp__chip--pass">Passed {Math.round(r.best.score_pct)}%</span>
               ) : r.best ? (
-                <span className="stp__chip stp__chip--fail">Retake — {Math.round(r.best.score_pct)}%</span>
+                <span className="stp__chip stp__chip--fail">Retake, best {Math.round(r.best.score_pct)}%</span>
               ) : overdue ? (
                 <span className="stp__chip stp__chip--overdue">Overdue</span>
               ) : (
@@ -110,10 +110,19 @@ export default function TrainingHome() {
               <p className="stp__cardTitle">{r.module.title}</p>
               <p className="stp__cardMeta">
                 {r.module.blurb}
-                {r.due_on && ` — due ${new Date(r.due_on).toLocaleDateString()}`}
-                {` — pass at ${r.module.pass_pct}%`}
+                {r.due_on && `, due ${new Date(r.due_on).toLocaleDateString()}`}
+                {`, pass at ${r.module.pass_pct}%`}
               </p>
-            </Link>
+
+              <div className="stp__cardActions">
+                <Link className="stp__cardLink" href={`/training/${r.module_slug}/study`}>
+                  Review material
+                </Link>
+                <Link className="stp__cardLink stp__cardLink--quiet" href={`/training/${r.module_slug}`}>
+                  {r.best ? 'Retake test' : 'Take test'}
+                </Link>
+              </div>
+            </div>
           );
         })}
 
