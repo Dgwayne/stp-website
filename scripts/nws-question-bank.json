@@ -644,7 +644,7 @@
     {
       "slug": "non-precip",
       "title": "Wind, Dust, Fog, Heat and Cold",
-      "blurb": "Wind, dust, fog, heat and cold. Mostly local thresholds.",
+      "blurb": "Mostly local thresholds, plus one big rename in 2025.",
       "pass_pct": 80,
       "questions": [
         {
