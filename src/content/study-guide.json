@@ -16,12 +16,32 @@
         {
           "heading": "The four tiers",
           "table": {
-            "columns": ["Tier", "What it means", "What you do"],
+            "columns": [
+              "Tier",
+              "What it means",
+              "What you do"
+            ],
             "rows": [
-              ["Watch", "Conditions are favorable. The event is not certain.", "Be prepared"],
-              ["Warning", "The hazard is imminent or occurring.", "Take action"],
-              ["Advisory", "Hazardous or inconvenient, but below warning criteria.", "Be aware, use caution"],
-              ["Statement", "Updates an active warning, or covers sub-severe conditions.", "Stay informed"]
+              [
+                "Watch",
+                "Conditions are favorable. The event is not certain.",
+                "Be prepared"
+              ],
+              [
+                "Warning",
+                "The hazard is imminent or occurring.",
+                "Take action"
+              ],
+              [
+                "Advisory",
+                "Hazardous or inconvenient, but below warning criteria.",
+                "Be aware, use caution"
+              ],
+              [
+                "Statement",
+                "Updates an active warning, or covers sub-severe conditions.",
+                "Stay informed"
+              ]
             ]
           },
           "note": "An advisory is not an all-clear, and it does not promise an upgrade. Advisories exist across the winter, wind, dust, fog, heat, flood and marine programs."
@@ -38,8 +58,28 @@
           "heading": "Reading a VTEC string",
           "body": "In a string such as /O.NEW.KMAF.SV.W.0043.../ the two letters before the significance code are the phenomenon, and the single letter after is the significance.",
           "table": {
-            "columns": ["Code", "Significance"],
-            "rows": [["W", "Warning"], ["A", "Watch"], ["Y", "Advisory"], ["S", "Statement"]]
+            "columns": [
+              "Code",
+              "Significance"
+            ],
+            "rows": [
+              [
+                "W",
+                "Warning"
+              ],
+              [
+                "A",
+                "Watch"
+              ],
+              [
+                "Y",
+                "Advisory"
+              ],
+              [
+                "S",
+                "Statement"
+              ]
+            ]
           },
           "points": [
             "Common phenomenon codes: SV = severe thunderstorm, TO = tornado, FF = flash flood."
@@ -61,9 +101,14 @@
           "what": "NWS plans to retire the terms Advisory and Special Weather Statement in favor of plain-language headlines. Watch and Warning are staying.",
           "when": "Announced, repeatedly delayed, NOT yet implemented. Advisories are still live products."
         }
+      ],
+      "essentials": [
+        "Watch means be prepared. Warning means take action. Advisory means be aware.",
+        "Your local NWS office issues the warnings. The Storm Prediction Center issues the convective watches.",
+        "Not every warning sends an alert to phones.",
+        "Convective criteria are national. Most other thresholds are set by your local office."
       ]
     },
-
     "convective-warnings": {
       "intro": "This is the module where a wrong answer has real operational consequences, which is why it needs 85 percent to pass. The criteria here are national, so these numbers are the same wherever you spot.",
       "sections": [
@@ -78,23 +123,59 @@
         {
           "heading": "Hail size reference",
           "table": {
-            "columns": ["Common object", "Diameter", "Severe?"],
+            "columns": [
+              "Common object",
+              "Diameter",
+              "Severe?"
+            ],
             "rows": [
-              ["Penny", "0.75 inch", "No, not since 2010"],
-              ["Quarter", "1.00 inch", "Yes, this is the threshold"],
-              ["Golf ball", "1.75 inch", "Yes, Considerable tag"],
-              ["Baseball", "2.75 inch", "Yes, Destructive tag"]
+              [
+                "Penny",
+                "0.75 inch",
+                "No, not since 2010"
+              ],
+              [
+                "Quarter",
+                "1.00 inch",
+                "Yes, this is the threshold"
+              ],
+              [
+                "Golf ball",
+                "1.75 inch",
+                "Yes, Considerable tag"
+              ],
+              [
+                "Baseball",
+                "2.75 inch",
+                "Yes, Destructive tag"
+              ]
             ]
           }
         },
         {
           "heading": "Severe Thunderstorm Warning damage threat tags",
           "table": {
-            "columns": ["Tag", "Requires at least", "Triggers WEA?"],
+            "columns": [
+              "Tag",
+              "Requires at least",
+              "Triggers WEA?"
+            ],
             "rows": [
-              ["Base", "Meets 58 mph / 1.00 inch", "No"],
-              ["Considerable", "70 mph and/or 1.75 inch", "No"],
-              ["Destructive", "80 mph and/or 2.75 inch", "Yes"]
+              [
+                "Base",
+                "Meets 58 mph / 1.00 inch",
+                "No"
+              ],
+              [
+                "Considerable",
+                "70 mph and/or 1.75 inch",
+                "No"
+              ],
+              [
+                "Destructive",
+                "80 mph and/or 2.75 inch",
+                "Yes"
+              ]
             ]
           },
           "note": "The highest qualifying value of either wind or hail sets the tag. If your phone buzzes for a severe thunderstorm warning, it is the top tier."
@@ -102,11 +183,27 @@
         {
           "heading": "Tornado Warning tags",
           "table": {
-            "columns": ["Tag", "Meaning", "Triggers WEA?"],
+            "columns": [
+              "Tag",
+              "Meaning",
+              "Triggers WEA?"
+            ],
             "rows": [
-              ["Base", "No tag", "Yes"],
-              ["Considerable", "Elevated threat", "Yes"],
-              ["Catastrophic", "Tornado Emergency wording", "Yes"]
+              [
+                "Base",
+                "No tag",
+                "Yes"
+              ],
+              [
+                "Considerable",
+                "Elevated threat",
+                "Yes"
+              ],
+              [
+                "Catastrophic",
+                "Tornado Emergency wording",
+                "Yes"
+              ]
             ]
           },
           "points": [
@@ -119,20 +216,41 @@
           "heading": "The tag mix-up to avoid",
           "body": "Severe Thunderstorm Warnings top out at Destructive. Tornado and Flash Flood Warnings top out at Catastrophic. Mixing these up is a common error."
         }
+      ],
+      "essentials": [
+        "Severe Thunderstorm Warning: 58 mph winds or 1.00 inch hail. Either one alone is enough.",
+        "A quarter is 1.00 inch. That is the size that matters.",
+        "Only a Destructive tag sends a severe thunderstorm warning to phones.",
+        "Every tornado warning goes to phones, whatever the tag."
       ]
     },
-
     "watches-outlooks": {
       "intro": "The products that arrive before the warning. These are what let you position and prepare rather than react.",
       "sections": [
         {
           "heading": "Watch versus warning",
           "table": {
-            "columns": ["", "Watch", "Warning"],
+            "columns": [
+              "",
+              "Watch",
+              "Warning"
+            ],
             "rows": [
-              ["Issued by", "Storm Prediction Center", "Local WFO"],
-              ["Area", "Large, multi-county", "Storm-specific polygon"],
-              ["Duration", "Several hours", "Short-fused"]
+              [
+                "Issued by",
+                "Storm Prediction Center",
+                "Local WFO"
+              ],
+              [
+                "Area",
+                "Large, multi-county",
+                "Storm-specific polygon"
+              ],
+              [
+                "Duration",
+                "Several hours",
+                "Short-fused"
+              ]
             ]
           }
         },
@@ -160,9 +278,14 @@
             "Do not wait for a watch to begin operations. Outlooks, the Hazardous Weather Outlook and Mesoscale Discussions all come first, and warnings are sometimes issued with no watch in effect at all."
           ]
         }
+      ],
+      "essentials": [
+        "SPC issues the watches. Your local office issues the warnings.",
+        "Risk levels run Marginal, Slight, Enhanced, Moderate, High. Marginal is first, not Slight.",
+        "Tornadoes still happen inside a Severe Thunderstorm Watch.",
+        "Do not wait for a watch to start operations."
       ]
     },
-
     "flooding": {
       "intro": "The flood program was significantly restructured in November 2021. Most older spotter training is wrong here, so pay attention to what no longer exists.",
       "sections": [
@@ -170,11 +293,27 @@
           "heading": "Flash Flood Warning",
           "body": "Issued when life- or property-threatening short-term flooding is imminent or occurring, whether from heavy rainfall or from a dam or levee failure.",
           "table": {
-            "columns": ["Tag", "Meaning", "Triggers WEA?"],
+            "columns": [
+              "Tag",
+              "Meaning",
+              "Triggers WEA?"
+            ],
             "rows": [
-              ["Base", "Flash flooding imminent or occurring", "No"],
-              ["Considerable", "Elevated threat", "Yes"],
-              ["Catastrophic", "Flash Flood Emergency", "Yes"]
+              [
+                "Base",
+                "Flash flooding imminent or occurring",
+                "No"
+              ],
+              [
+                "Considerable",
+                "Elevated threat",
+                "Yes"
+              ],
+              [
+                "Catastrophic",
+                "Flash Flood Emergency",
+                "Yes"
+              ]
             ]
           },
           "note": "Base-tagged flash flood warnings deliberately do not fire a WEA. Previously every one did, which diluted the alert."
@@ -203,21 +342,41 @@
             "Flood Watches give hours of preparation lead time. Flash Flood Warnings are short-fused."
           ]
         }
+      ],
+      "essentials": [
+        "Flash flooding is rapid. A Flood Warning is slower or longer lasting.",
+        "Base flash flood warnings do not go to phones. Considerable and Catastrophic do.",
+        "Since 2021 the Flash Flood Watch only covers dam and levee failure, ice jams and burn scars.",
+        "Flash flooding happens in places where it is not raining."
       ]
     },
-
     "winter": {
       "intro": "The cold-weather headlines were rebuilt on October 1, 2024. Several products you may have trained on no longer exist under those names.",
       "sections": [
         {
           "heading": "What changed on October 1, 2024",
           "table": {
-            "columns": ["Old product", "New product"],
+            "columns": [
+              "Old product",
+              "New product"
+            ],
             "rows": [
-              ["Wind Chill Warning", "Extreme Cold Warning"],
-              ["Wind Chill Watch", "Extreme Cold Watch"],
-              ["Wind Chill Advisory", "Cold Weather Advisory (VTEC CW.Y)"],
-              ["Hard Freeze Watch / Warning", "Consolidated into Freeze Watch / Warning"]
+              [
+                "Wind Chill Warning",
+                "Extreme Cold Warning"
+              ],
+              [
+                "Wind Chill Watch",
+                "Extreme Cold Watch"
+              ],
+              [
+                "Wind Chill Advisory",
+                "Cold Weather Advisory (VTEC CW.Y)"
+              ],
+              [
+                "Hard Freeze Watch / Warning",
+                "Consolidated into Freeze Watch / Warning"
+              ]
             ]
           },
           "note": "The VTEC phenomenon code WC was retired outright. The rename reflects that dangerous cold does not require wind. Freeze products now carry hard freeze messaging in the body text when appropriate."
@@ -241,31 +400,63 @@
         {
           "heading": "The rest of the winter suite",
           "table": {
-            "columns": ["Product", "Issued for"],
+            "columns": [
+              "Product",
+              "Issued for"
+            ],
             "rows": [
-              ["Ice Storm Warning", "Roughly 1/4 inch or more of ice accretion, enough to bring down limbs and power lines"],
-              ["Winter Storm Warning", "A significant winter event that may combine snow, sleet, ice or blowing snow"],
-              ["Winter Weather Advisory", "Wintry precipitation below warning criteria but enough to cause travel difficulty"],
-              ["Lake Effect Snow Warning", "Available at regional discretion"]
+              [
+                "Ice Storm Warning",
+                "Roughly 1/4 inch or more of ice accretion, enough to bring down limbs and power lines"
+              ],
+              [
+                "Winter Storm Warning",
+                "A significant winter event that may combine snow, sleet, ice or blowing snow"
+              ],
+              [
+                "Winter Weather Advisory",
+                "Wintry precipitation below warning criteria but enough to cause travel difficulty"
+              ],
+              [
+                "Lake Effect Snow Warning",
+                "Available at regional discretion"
+              ]
             ]
           },
           "note": "The Lake Effect Snow Warning was folded into the Winter Storm Warning for the 2017-18 season, then reinstated effective October 2019 after partner pushback. Offices may use either product."
         }
       ],
-      "local": "Winter Storm Warning accumulation thresholds, Winter Weather Advisory thresholds, and exact Ice Storm Warning accretion amounts are all set locally and vary widely by region. Blizzard criteria are the reliable national numbers in this module."
+      "local": "Winter Storm Warning accumulation thresholds, Winter Weather Advisory thresholds, and exact Ice Storm Warning accretion amounts are all set locally and vary widely by region. Blizzard criteria are the reliable national numbers in this module.",
+      "essentials": [
+        "Wind Chill products are gone. They are Extreme Cold Warning and Cold Weather Advisory now.",
+        "Blizzard is about wind and visibility for 3 hours, not snow totals.",
+        "A ground blizzard needs no falling snow at all.",
+        "Snow amounts for a Winter Storm Warning are set by your local office."
+      ]
     },
-
     "non-precip": {
       "intro": "The Non-Precipitation Weather program. This is the most heavily local module in the bank, so treat most numbers here as typical rather than universal.",
       "sections": [
         {
           "heading": "The March 2025 heat rename",
           "table": {
-            "columns": ["Old product", "New product"],
+            "columns": [
+              "Old product",
+              "New product"
+            ],
             "rows": [
-              ["Excessive Heat Warning", "Extreme Heat Warning"],
-              ["Excessive Heat Watch", "Extreme Heat Watch"],
-              ["Heat Advisory", "Unchanged"]
+              [
+                "Excessive Heat Warning",
+                "Extreme Heat Warning"
+              ],
+              [
+                "Excessive Heat Watch",
+                "Extreme Heat Watch"
+              ],
+              [
+                "Heat Advisory",
+                "Unchanged"
+              ]
             ]
           },
           "note": "Only the watch and warning were renamed, aligning the language with the Extreme Cold products. The Heat Advisory kept its name."
@@ -282,12 +473,27 @@
         {
           "heading": "Fog, wind, and cold",
           "table": {
-            "columns": ["Product", "Typical trigger"],
+            "columns": [
+              "Product",
+              "Typical trigger"
+            ],
             "rows": [
-              ["Dense Fog Advisory", "Widespread visibility below 1/4 mile for an extended period"],
-              ["High Wind Warning", "Non-convective sustained winds around 40 mph, or gusts to 58 mph"],
-              ["Freeze Warning", "At or below 32 degrees during the growing season, generally sustained"],
-              ["Frost Advisory", "Near but above freezing, with light winds and clear skies favoring frost"]
+              [
+                "Dense Fog Advisory",
+                "Widespread visibility below 1/4 mile for an extended period"
+              ],
+              [
+                "High Wind Warning",
+                "Non-convective sustained winds around 40 mph, or gusts to 58 mph"
+              ],
+              [
+                "Freeze Warning",
+                "At or below 32 degrees during the growing season, generally sustained"
+              ],
+              [
+                "Frost Advisory",
+                "Near but above freezing, with light winds and clear skies favoring frost"
+              ]
             ]
           },
           "note": "Outside the growing season a Freeze Warning is usually not issued."
@@ -297,9 +503,14 @@
           "body": "Gusts of 58 mph from a thunderstorm produce a Severe Thunderstorm Warning. The same 58 mph from a non-convective gradient wind event produces a High Wind Warning. The distinction is the source: convective winds fall under the severe program, synoptic or gradient winds under the non-precipitation program."
         }
       ],
-      "local": "Heat criteria vary substantially by office and climate zone. What triggers a warning in the desert Southwest differs from the upper Midwest. High Wind Warning thresholds are likewise locally set. Dense Fog Advisory visibility varies by office."
+      "local": "Heat criteria vary substantially by office and climate zone. What triggers a warning in the desert Southwest differs from the upper Midwest. High Wind Warning thresholds are likewise locally set. Dense Fog Advisory visibility varies by office.",
+      "essentials": [
+        "Excessive Heat became Extreme Heat in 2025. The Heat Advisory did not change.",
+        "58 mph from a storm is a Severe Thunderstorm Warning. The same wind with no storm is a High Wind Warning.",
+        "Dust Storm Warning means visibility of 1/4 mile or less.",
+        "Most thresholds in this module are local, not national."
+      ]
     },
-
     "fire-weather": {
       "intro": "Red Flag Warnings depend on fuels as well as weather, and the numeric criteria are entirely local. What matters here is the structure, not the numbers.",
       "sections": [
@@ -325,22 +536,50 @@
           "body": "PDS wording is not limited to convective products. Some offices have applied it to Red Flag Warnings in rare, extreme fire weather situations."
         }
       ],
-      "local": "Red Flag Warning numeric criteria are NOT national. They are defined locally in coordination with land management agencies and vary considerably by region and fuel type. Do not memorize a humidity or wind number from another office."
+      "local": "Red Flag Warning numeric criteria are NOT national. They are defined locally in coordination with land management agencies and vary considerably by region and fuel type. Do not memorize a humidity or wind number from another office.",
+      "essentials": [
+        "Red Flag needs dangerous weather and dry fuels together, not just wind.",
+        "Fire Weather Watch is 24 to 96 hours out. Red Flag Warning is within about 24 hours.",
+        "The actual numbers are set locally with land management agencies."
+      ]
     },
-
     "tropical-marine": {
       "intro": "Timing windows define these products. Unlike most of the suite, the number that matters is usually hours of lead time rather than a wind speed.",
       "sections": [
         {
           "heading": "Tropical timing and wind criteria",
           "table": {
-            "columns": ["Product", "Condition", "Within"],
+            "columns": [
+              "Product",
+              "Condition",
+              "Within"
+            ],
             "rows": [
-              ["Hurricane Warning", "Sustained winds 74 mph or greater expected", "36 hours"],
-              ["Hurricane Watch", "Same conditions possible", "48 hours"],
-              ["Tropical Storm Warning", "Sustained winds 39 to 73 mph expected", "36 hours"],
-              ["Storm Surge Warning", "Life-threatening inundation danger", "36 hours"],
-              ["Storm Surge Watch", "Life-threatening inundation possible", "48 hours"]
+              [
+                "Hurricane Warning",
+                "Sustained winds 74 mph or greater expected",
+                "36 hours"
+              ],
+              [
+                "Hurricane Watch",
+                "Same conditions possible",
+                "48 hours"
+              ],
+              [
+                "Tropical Storm Warning",
+                "Sustained winds 39 to 73 mph expected",
+                "36 hours"
+              ],
+              [
+                "Storm Surge Warning",
+                "Life-threatening inundation danger",
+                "36 hours"
+              ],
+              [
+                "Storm Surge Watch",
+                "Life-threatening inundation possible",
+                "48 hours"
+              ]
             ]
           },
           "points": [
@@ -355,11 +594,23 @@
         {
           "heading": "Marine wind products",
           "table": {
-            "columns": ["Product", "Sustained winds or frequent gusts"],
+            "columns": [
+              "Product",
+              "Sustained winds or frequent gusts"
+            ],
             "rows": [
-              ["Gale Warning", "34 to 47 knots"],
-              ["Storm Warning", "48 to 63 knots"],
-              ["Hurricane Force Wind Warning", "64 knots or more, not associated with a tropical cyclone"]
+              [
+                "Gale Warning",
+                "34 to 47 knots"
+              ],
+              [
+                "Storm Warning",
+                "48 to 63 knots"
+              ],
+              [
+                "Hurricane Force Wind Warning",
+                "64 knots or more, not associated with a tropical cyclone"
+              ]
             ]
           }
         },
@@ -374,9 +625,14 @@
           "what": "The Small Craft Advisory is slated to become a Small Craft Warning, the notable exception to the plain-language transition, because of the direct threat to life and property.",
           "when": "Planned, not yet implemented."
         }
+      ],
+      "essentials": [
+        "Warnings are 36 hours out. Watches are 48 hours out.",
+        "Hurricane is 74 mph sustained. Tropical Storm is 39 to 73 mph.",
+        "Marine thresholds are lower than land: 34 knots, or 3/4 inch hail.",
+        "Storm surge is a separate product from wind and can cover a different area."
       ]
     },
-
     "statements": {
       "intro": "The non-warning products that carry most of the day-to-day information flow, including the one your own reports feed.",
       "sections": [
@@ -407,6 +663,12 @@
           "what": "The Special Weather Statement is scheduled to be discontinued as a headline term, with the information continuing in a bulleted plain-language format and gaining VTEC coding with an .S significance code. The content survives, the headline term goes away.",
           "when": "Planned, not yet implemented."
         }
+      ],
+      "essentials": [
+        "A Severe Weather Statement updates or cancels a warning already running.",
+        "A Special Weather Statement covers storms just under severe.",
+        "Local Storm Reports are where your spotter reports land.",
+        "Report as it happens. Late reports mostly have archival value."
       ]
     }
   }

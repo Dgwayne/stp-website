@@ -69,16 +69,26 @@ export default function TrainingHome() {
 
   const done = rows?.filter((r) => r.best?.passed).length ?? 0;
   const total = rows?.length ?? 0;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  const next = rows?.find((r) => !r.best?.passed) ?? null;
 
   return (
     <main className="stp">
       <div className="stp__shell">
         <p className="stp__eyebrow">Spotter Tools Pro</p>
-        <h1 className="stp__title">{name ? `Training — ${name}` : 'Training'}</h1>
+        <h1 className="stp__title">{name ? `Training for ${name}` : 'Training'}</h1>
 
-        <code className="stp__vtec">
-          /TRAINING.{String(done).padStart(4, '0')}.OF.{String(total).padStart(4, '0')}.MODULES.PASSED/
-        </code>
+        {total > 0 && (
+          <div className="stp__progress">
+            <div className="stp__progressHead">
+              <span>{done} of {total} modules passed</span>
+              <span className="stp__progressPct">{pct}%</span>
+            </div>
+            <div className="stp__progressBar">
+              <div className="stp__progressFill" style={{ width: `${pct}%` }} />
+            </div>
+          </div>
+        )}
 
         {rows === null && <p className="stp__lede">Loading your assignments.</p>}
 
@@ -91,35 +101,43 @@ export default function TrainingHome() {
           </div>
         )}
 
-        {rows?.map((r) => {
-          const overdue =
-            r.due_on && !r.best?.passed && new Date(r.due_on) < new Date();
+        {next && (
+          <p className="stp__lede">
+            Work through them in order. Start with <strong>{next.module.title}</strong>, and read the
+            training before taking the test.
+          </p>
+        )}
+
+        {rows?.map((r, i) => {
+          const overdue = r.due_on && !r.best?.passed && new Date(r.due_on) < new Date();
+          const blurb = (r.module.blurb ?? '').replace(/\.\s*$/, '');
 
           return (
-            <div key={r.id} className="stp__card">
-              {r.best?.passed ? (
-                <span className="stp__chip stp__chip--pass">Passed {Math.round(r.best.score_pct)}%</span>
-              ) : r.best ? (
-                <span className="stp__chip stp__chip--fail">Retake, best {Math.round(r.best.score_pct)}%</span>
-              ) : overdue ? (
-                <span className="stp__chip stp__chip--overdue">Overdue</span>
-              ) : (
-                <span className="stp__chip stp__chip--pending">Not started</span>
-              )}
+            <div key={r.id} className={`stp__card${r.best?.passed ? ' stp__card--done' : ''}`}>
+              <div className="stp__cardHead">
+                <span className="stp__num">{String(i + 1).padStart(2, '0')}</span>
+                <p className="stp__cardTitle">{r.module.title}</p>
+              </div>
 
-              <p className="stp__cardTitle">{r.module.title}</p>
-              <p className="stp__cardMeta">
-                {r.module.blurb}
-                {r.due_on && `, due ${new Date(r.due_on).toLocaleDateString()}`}
-                {`, pass at ${r.module.pass_pct}%`}
+              <p className="stp__cardMeta">{blurb}.</p>
+
+              <p className="stp__cardFacts">
+                {r.best?.passed
+                  ? `Passed with ${Math.round(r.best.score_pct)}%`
+                  : r.best
+                    ? `Best so far ${Math.round(r.best.score_pct)}%, needs ${r.module.pass_pct}%`
+                    : `Pass at ${r.module.pass_pct}%`}
+                {r.due_on && (overdue
+                  ? `. Overdue, was due ${new Date(r.due_on).toLocaleDateString()}`
+                  : `. Due ${new Date(r.due_on).toLocaleDateString()}`)}
               </p>
 
               <div className="stp__cardActions">
-                <Link className="stp__cardLink" href={`/training/${r.module_slug}/study`}>
-                  Review material
+                <Link className="stp__cardBtn" href={`/training/${r.module_slug}/study`}>
+                  Training
                 </Link>
-                <Link className="stp__cardLink stp__cardLink--quiet" href={`/training/${r.module_slug}`}>
-                  {r.best ? 'Retake test' : 'Take test'}
+                <Link className="stp__cardBtn stp__cardBtn--test" href={`/training/${r.module_slug}`}>
+                  {r.best ? 'Retake test' : 'Test'}
                 </Link>
               </div>
             </div>
@@ -131,8 +149,8 @@ export default function TrainingHome() {
         </div>
 
         <p className="stp__note">
-          Criteria in these modules reflect national NWS standards. Locally variable thresholds are
-          flagged where they appear. Always defer to your local forecast office.
+          These modules cover national NWS criteria. Thresholds that your local forecast office sets
+          for itself are flagged where they come up. Always defer to your local office.
         </p>
       </div>
     </main>

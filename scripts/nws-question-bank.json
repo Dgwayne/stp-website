@@ -14,7 +14,7 @@
     {
       "slug": "fundamentals",
       "title": "The Alert System",
-      "blurb": "Watch, warning, advisory, statement — what each one obligates you to do, and who issues it.",
+      "blurb": "What watch, warning and advisory each mean, and who issues them.",
       "pass_pct": 80,
       "questions": [
         {
@@ -116,7 +116,7 @@
     {
       "slug": "convective-warnings",
       "title": "Severe and Tornado Warnings",
-      "blurb": "Issuance criteria, Impact-Based Warning tags, and which tags push an alert to phones.",
+      "blurb": "The numbers behind severe and tornado warnings, and which ones alert phones.",
       "pass_pct": 85,
       "questions": [
         {
@@ -270,7 +270,7 @@
     {
       "slug": "watches-outlooks",
       "title": "Watches and SPC Outlooks",
-      "blurb": "The products that come before the warning, and the enhanced wording that signals a bad day.",
+      "blurb": "The products that arrive before the warning does.",
       "pass_pct": 80,
       "questions": [
         {
@@ -372,7 +372,7 @@
     {
       "slug": "flooding",
       "title": "Flood and Flash Flood Products",
-      "blurb": "The 2021 consolidation changed this program significantly. Most old training is wrong here.",
+      "blurb": "Rewritten in 2021. Most older training is wrong here.",
       "pass_pct": 80,
       "questions": [
         {
@@ -495,7 +495,7 @@
     {
       "slug": "winter",
       "title": "Winter Weather Products",
-      "blurb": "The cold-weather headlines were rebuilt in October 2024. Several products no longer exist.",
+      "blurb": "Rebuilt in October 2024. Several products no longer exist.",
       "pass_pct": 80,
       "questions": [
         {
@@ -644,7 +644,7 @@
     {
       "slug": "non-precip",
       "title": "Wind, Dust, Fog, Heat and Cold",
-      "blurb": "The Non-Precipitation Weather program — heavily local, with one major 2025 rename.",
+      "blurb": "Wind, dust, fog, heat and cold. Mostly local thresholds.",
       "pass_pct": 80,
       "questions": [
         {
@@ -767,7 +767,7 @@
     {
       "slug": "fire-weather",
       "title": "Fire Weather Products",
-      "blurb": "Red Flag Warnings depend on fuels as well as weather — and the criteria are entirely local.",
+      "blurb": "Red Flag Warnings, and why the numbers are set locally.",
       "pass_pct": 80,
       "questions": [
         {
@@ -830,7 +830,7 @@
     {
       "slug": "tropical-marine",
       "title": "Tropical and Marine Products",
-      "blurb": "Timing windows matter here — watches and warnings are defined by hours of lead time.",
+      "blurb": "Hurricane, surge and marine products, defined by lead time.",
       "pass_pct": 75,
       "questions": [
         {
@@ -922,7 +922,7 @@
     {
       "slug": "statements",
       "title": "Statements, Outlooks and Spotter Reports",
-      "blurb": "The non-warning products that carry most of the day-to-day information flow.",
+      "blurb": "The everyday products, including the one your reports feed.",
       "pass_pct": 80,
       "questions": [
         {

@@ -39,7 +39,7 @@ export default function StudyPage() {
 
   if (!checked) {
     return (
-      <main className="stp"><div className="stp__shell"><p className="stp__lede">Loading material.</p></div></main>
+      <main className="stp"><div className="stp__shell"><p className="stp__lede">Loading.</p></div></main>
     );
   }
 
@@ -58,9 +58,18 @@ export default function StudyPage() {
   return (
     <main className="stp">
       <div className="stp__shell">
-        <p className="stp__eyebrow">{module?.title ?? 'Study material'}</p>
-        <h1 className="stp__title">Review material</h1>
+        <p className="stp__eyebrow">Training</p>
+        <h1 className="stp__title">{module?.title ?? 'Study material'}</h1>
         <p className="stp__lede">{content.intro}</p>
+
+        {content.essentials && (
+          <section className="stp__card stp__card--key">
+            <h2 className="stp__h2">If you remember nothing else</h2>
+            <ul className="stp__list stp__list--key">
+              {content.essentials.map((e, i) => <li key={i}>{e}</li>)}
+            </ul>
+          </section>
+        )}
 
         {content.sections.map((s, i) => (
           <section className="stp__card" key={i}>
@@ -112,13 +121,14 @@ export default function StudyPage() {
         )}
 
         <div className="stp__actions">
-          <Link className="stp__btn" href={`/training/${slug}`}>Start the test</Link>
+          <Link className="stp__btn" href={`/training/${slug}`}>Take the test</Link>
           <Link className="stp__btn stp__btn--ghost" href="/training">Back to training</Link>
         </div>
 
         <p className="stp__note">
-          {module?.pass_pct ? `Passing is ${module.pass_pct}%. ` : ''}
-          Material derived from the question bank, version {guide.derived_from_bank_version}. Review by {guide.review_by}.
+          {module?.pass_pct
+            ? `You need ${module.pass_pct}% to pass, and you can retake it as many times as you like.`
+            : 'You can retake the test as many times as you like.'}
         </p>
       </div>
     </main>
