@@ -5,21 +5,23 @@ import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabaseClient';
 import '../training.css';
 
-// Sign-in only. There is deliberately no self-registration: accounts are
-// created by a team lead (scripts/create-trainee.mjs), so the question
-// bank is never reachable by someone who simply found this page.
+// Anyone may create an account. That is safe because an account on its own
+// grants nothing: questions_public is scoped to the caller's assignments,
+// so someone who signs up without being assigned a module sees no questions
+// at all. The gate is the assignment, not the account.
 //
-// Password reset is the one self-serve path, and it only ever emails an
-// address that already has an account.
+// auth.users is shared with the Spotter Tools Pro mobile app, so an app
+// login already works here and does not need a second account.
 export default function LoginPage() {
   const router = useRouter();
   const supabase = createClient();
 
-  const [mode, setMode] = useState('signin'); // 'signin' | 'forgot'
+  const [mode, setMode] = useState('signin'); // 'signin' | 'signup' | 'forgot'
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [sent, setSent] = useState(false);
+  const [sent, setSent] = useState(null); // 'reset' | 'confirm'
   const [busy, setBusy] = useState(false);
 
   async function submit(e) {
@@ -31,28 +33,32 @@ export default function LoginPage() {
       const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/reset-password`,
       });
-
       setBusy(false);
-
-      if (resetError) {
-        setError(resetError.message);
-        return;
-      }
-
+      if (resetError) { setError(resetError.message); return; }
       // Deliberately not "we sent it" — that would confirm whether an
       // address has an account here.
-      setSent(true);
+      setSent('reset');
+      return;
+    }
+
+    if (mode === 'signup') {
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { full_name: fullName } },
+      });
+      setBusy(false);
+      if (signUpError) { setError(signUpError.message); return; }
+
+      // With email confirmation on, signUp returns no session.
+      if (data.session) { router.push('/training'); router.refresh(); return; }
+      setSent('confirm');
       return;
     }
 
     const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
-
     setBusy(false);
-
-    if (authError) {
-      setError(authError.message);
-      return;
-    }
+    if (authError) { setError(authError.message); return; }
 
     router.push('/training');
     router.refresh();
@@ -61,27 +67,40 @@ export default function LoginPage() {
   function switchTo(next) {
     setMode(next);
     setError('');
-    setSent(false);
+    setSent(null);
     setPassword('');
   }
+
+  const lede = {
+    signin: 'NWS warning products and issuance criteria. Sign in to see what you have been assigned.',
+    signup: 'Already use the Spotter Tools Pro app? Sign in with that account instead, you do not need a second one.',
+    forgot: 'Enter the email your account uses and we will send a link to set a new password.',
+  }[mode];
 
   return (
     <main className="stp">
       <div className="stp__shell">
         <p className="stp__eyebrow">Spotter Tools Pro</p>
         <h1 className="stp__title">Storm Team Training</h1>
-        <p className="stp__lede">
-          {mode === 'signin'
-            ? 'NWS warning products and issuance criteria. Sign in to see what you have been assigned.'
-            : 'Enter the email your account uses and we will send a link to set a new password.'}
-        </p>
+        <p className="stp__lede">{lede}</p>
 
         <div className="stp__card">
-          {sent ? (
+          {sent === 'reset' ? (
             <>
-              <p className="stp__lede">
-                If an account exists for {email}, a reset link is on its way. The link is good
-                for one hour.
+              <p className="stp__body">
+                If an account exists for {email}, a reset link is on its way. The link is good for
+                one hour.
+              </p>
+              <div className="stp__actions">
+                <button className="stp__btn" type="button" onClick={() => switchTo('signin')}>
+                  Back to sign in
+                </button>
+              </div>
+            </>
+          ) : sent === 'confirm' ? (
+            <>
+              <p className="stp__body">
+                Account created. Check {email} for a confirmation link, then come back and sign in.
               </p>
               <div className="stp__actions">
                 <button className="stp__btn" type="button" onClick={() => switchTo('signin')}>
@@ -91,6 +110,19 @@ export default function LoginPage() {
             </>
           ) : (
             <form onSubmit={submit}>
+              {mode === 'signup' && (
+                <label className="stp__field">
+                  <span className="stp__label">Your name</span>
+                  <input
+                    className="stp__input"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    autoComplete="name"
+                    required
+                  />
+                </label>
+              )}
+
               <label className="stp__field">
                 <span className="stp__label">Email</span>
                 <input
@@ -103,7 +135,7 @@ export default function LoginPage() {
                 />
               </label>
 
-              {mode === 'signin' && (
+              {mode !== 'forgot' && (
                 <label className="stp__field">
                   <span className="stp__label">Password</span>
                   <input
@@ -111,22 +143,23 @@ export default function LoginPage() {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    autoComplete="current-password"
+                    autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
+                    minLength={8}
                     required
                   />
+                  {mode === 'signup' && <span className="stp__hint">At least 8 characters.</span>}
                 </label>
               )}
 
               <div className="stp__actions">
                 <button className="stp__btn" type="submit" disabled={busy}>
-                  {busy ? 'Working' : mode === 'signin' ? 'Sign in' : 'Send reset link'}
-                </button>
-                <button
-                  className="stp__btn stp__btn--ghost"
-                  type="button"
-                  onClick={() => switchTo(mode === 'signin' ? 'forgot' : 'signin')}
-                >
-                  {mode === 'signin' ? 'Forgot password' : 'Back to sign in'}
+                  {busy
+                    ? 'Working'
+                    : mode === 'signin'
+                      ? 'Sign in'
+                      : mode === 'signup'
+                        ? 'Create account'
+                        : 'Send reset link'}
                 </button>
               </div>
 
@@ -135,8 +168,29 @@ export default function LoginPage() {
           )}
         </div>
 
+        {!sent && (
+          <div className="stp__cardActions">
+            {mode !== 'signin' && (
+              <button className="stp__cardBtn stp__cardBtn--test" type="button" onClick={() => switchTo('signin')}>
+                Sign in
+              </button>
+            )}
+            {mode !== 'signup' && (
+              <button className="stp__cardBtn stp__cardBtn--test" type="button" onClick={() => switchTo('signup')}>
+                Create account
+              </button>
+            )}
+            {mode !== 'forgot' && (
+              <button className="stp__cardBtn stp__cardBtn--test" type="button" onClick={() => switchTo('forgot')}>
+                Forgot password
+              </button>
+            )}
+          </div>
+        )}
+
         <p className="stp__note">
-          Accounts are issued by your team lead. If you do not have one, ask them to set you up.
+          Creating an account does not assign you any training. Your team lead assigns modules, so
+          if you sign up and see nothing yet, that is why.
         </p>
       </div>
     </main>
