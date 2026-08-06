@@ -137,11 +137,13 @@ type Stats = {
   seed_rows: number;
   totals: Totals;
   w7: Window_;
+  w7_prev: Window_ | null;
   w30: Window_;
   daily: DailyRow[];
   versions: VersionRow[];
   current_versions: VersionRow[];
   features: FeatureRow[];
+  features_w7: FeatureRow[];
   layers: LayerRow[];
   devices: DeviceRow[];
   perf_by_version: PerfRow[];
@@ -225,6 +227,92 @@ function groupFeatures(rows: FeatureRow[]) {
     .filter((l) => grouped.has(l))
     .map((l) => grouped.get(l)!)
     .map((g) => ({ ...g, rows: g.rows.slice(0, 15) }));
+}
+
+function delta(now: number, prev: number | null | undefined): string {
+  if (!prev) return now > 0 ? "new" : "flat";
+  const d = ((now - prev) / prev) * 100;
+  if (Math.abs(d) < 1) return "flat";
+  return `${d > 0 ? "up" : "down"} ${Math.abs(d).toFixed(0)}% vs last week`;
+}
+
+function prettyKey(k: string): string {
+  const hit = GROUPS.find(([p2]) => k.startsWith(p2));
+  return (hit ? k.slice(hit[0].length) : k).replace(/_/g, " ");
+}
+
+/** Plain-English week-over-week summary computed from the payload. */
+function SummaryCard({ s }: { s: Stats }) {
+  const prev = s.w7_prev;
+  const last7 = s.daily.slice(-8, -1);
+  const newInstalls = last7.reduce((a, d) => a + d.new_installs, 0);
+  const died = s.w7.died_sessions ?? 0;
+  const startA = s.startup_percentiles?.["android"];
+  const week = new Set(s.features_w7.map((f) => f.key));
+  const top = s.features_w7.slice(0, 3).map((f) => prettyKey(f.key));
+  const quiet = s.features
+    .filter((f) => f.installs >= 2 && !week.has(f.key))
+    .slice(0, 4)
+    .map((f) => prettyKey(f.key));
+  const line = "flex items-baseline gap-2 text-sm";
+  const num = "font-bold text-foreground";
+  return (
+    <section className="mb-6 rounded-xl border border-brand-teal/30 bg-surface-light/50 p-5 md:col-span-2">
+      <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-brand-teal">
+        This week at a glance
+      </h2>
+      <div className="grid gap-x-8 gap-y-2 md:grid-cols-2">
+        <div className={line}>
+          <span className={num}>{fmtInt(s.w7.sessions)}</span>
+          <span className="text-muted">
+            sessions ({delta(s.w7.sessions, prev?.sessions)})
+          </span>
+        </div>
+        <div className={line}>
+          <span className={num}>{fmtInt(s.w7.installs)}</span>
+          <span className="text-muted">
+            active users ({delta(s.w7.installs, prev?.installs)})
+          </span>
+        </div>
+        <div className={line}>
+          <span className={num}>{fmtInt(newInstalls)}</span>
+          <span className="text-muted">new installs this week</span>
+        </div>
+        <div className={line}>
+          <span className={died > 0 ? "font-bold text-red-300" : num}>
+            {fmtInt(died)}
+          </span>
+          <span className="text-muted">
+            died sessions ({delta(died, prev?.died_sessions ?? 0)})
+          </span>
+        </div>
+        <div className={line}>
+          <span className={num}>{fmtSecs(s.w7.avg_secs)}</span>
+          <span className="text-muted">
+            avg session ({delta(s.w7.avg_secs ?? 0, prev?.avg_secs)})
+          </span>
+        </div>
+        <div className={line}>
+          <span className={num}>
+            {startA ? `${(startA.p50 / 1000).toFixed(1)}s` : "—"}
+          </span>
+          <span className="text-muted">median cold start (Android)</span>
+        </div>
+      </div>
+      <div className="mt-3 space-y-1 text-xs text-muted">
+        <p>
+          <span className="font-semibold text-foreground">Top this week:</span>{" "}
+          {top.length ? top.join(", ") : "no feature use recorded yet"}
+        </p>
+        {quiet.length ? (
+          <p>
+            <span className="font-semibold text-foreground">Went quiet</span>{" "}
+            (used in the last 30d, not this week): {quiet.join(", ")}
+          </p>
+        ) : null}
+      </div>
+    </section>
+  );
 }
 
 // ── Tiny presentational pieces ─────────────────────────────────────────
@@ -489,6 +577,8 @@ export default function TelemetryDashboard() {
           </button>
         </div>
       </div>
+
+      <SummaryCard s={s} />
 
       {/* Stat tiles */}
       <div className="mb-6 grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-6">
