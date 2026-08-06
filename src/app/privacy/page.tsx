@@ -221,8 +221,10 @@ export default function PrivacyPage() {
             App at first launch — it is not your name, email, advertising ID,
             or any device serial, and it is stored separately from account
             data so it cannot be joined to your identity. Usage statistics
-            never include your GPS location; an approximate country is derived
-            from the network connection on our servers. The data is processed
+            never include your GPS location; an approximate location (country,
+            state, and metro area — never city, street, or coordinates) is
+            derived from the network connection on our servers, the same way
+            most websites see it. The data is processed
             on our Cloudflare-hosted service in the United States and is never
             sold or shared.
           </p>

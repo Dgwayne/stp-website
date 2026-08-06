@@ -14,6 +14,7 @@ type Window_ = {
   sessions: number;
   avg_secs: number | null;
   max_rss: number | null;
+  died_sessions?: number | null;
 };
 type DailyRow = {
   day: string;
@@ -75,6 +76,24 @@ type RetentionRow = {
   d30: number;
 };
 type CountryRow = { country: string | null; installs: number; sessions: number };
+type RegionRow = {
+  country: string | null;
+  region: string | null;
+  installs: number;
+  sessions: number;
+};
+type DiedRow = {
+  received_at: number;
+  platform: string | null;
+  app_version: string | null;
+  device_model: string | null;
+  device_marketing: string | null;
+  peak_rss_mb: number | null;
+  session_seconds: number | null;
+  layers_at_peak: string | null;
+  rss_curve: string | null;
+  memory_pressure_events: number | null;
+};
 type HourRow = { hour: number; sessions: number };
 type GoDarkRow = {
   install_id: string;
@@ -106,6 +125,9 @@ type RecentRow = {
   layers_used: string | null;
   rss_curve: string | null;
   connectivity: string | null;
+  end_reason: string | null;
+  startup_ms: number | null;
+  region: string | null;
   beacon_on: number | null;
   alertwatch_on: number | null;
   signed_in: number | null;
@@ -130,6 +152,9 @@ type Stats = {
   >;
   retention: RetentionRow[];
   countries: CountryRow[];
+  regions: RegionRow[];
+  startup_percentiles: Record<string, { n: number; p50: number; p95: number; max: number }>;
+  died_sessions: DiedRow[];
   hours: HourRow[];
   go_dark: GoDarkRow[];
   recent: RecentRow[];
@@ -433,6 +458,8 @@ export default function TelemetryDashboard() {
     s.w7.installs > 0 ? (s.w7.sessions / s.w7.installs).toFixed(1) : "—";
   const rssA = s.rss_percentiles["android"];
   const rssI = s.rss_percentiles["ios"];
+  const startA = s.startup_percentiles?.["android"];
+  const startI = s.startup_percentiles?.["ios"];
 
   return (
     <main className="mx-auto max-w-6xl px-6 pt-28 pb-20">
@@ -478,6 +505,16 @@ export default function TelemetryDashboard() {
           label="p95 RSS · 30d"
           value={rssA ? `${fmtInt(rssA.p95)} MB` : "—"}
           sub={rssI ? `iOS ${fmtInt(rssI.p95)} MB` : undefined}
+        />
+        <Tile
+          label="Died sessions · 30d"
+          value={fmtInt(s.w30.died_sessions ?? 0)}
+          sub="crash/OOM-killed"
+        />
+        <Tile
+          label="Startup p50 · 30d"
+          value={startA ? `${(startA.p50 / 1000).toFixed(1)}s` : "—"}
+          sub={startI ? `iOS ${(startI.p50 / 1000).toFixed(1)}s` : undefined}
         />
       </div>
 
@@ -663,6 +700,76 @@ export default function TelemetryDashboard() {
           />
         </Card>
 
+        <Card title="US states (30d, edge geo)">
+          <BarList
+            rows={s.regions
+              .filter((r) => r.country === "US")
+              .map((r) => ({
+                label: r.region ?? "?",
+                value: r.installs,
+                sub: `${fmtInt(r.sessions)} sess`,
+              }))}
+          />
+          <p className="mt-2 text-[11px] text-muted">
+            Derived from the network connection at the CDN edge — the app
+            never sends location. Mobile-carrier geolocation can be off by
+            a metro or two.
+          </p>
+        </Card>
+
+        <Card title="Died sessions (30d)" wide>
+          {s.died_sessions.length === 0 ? (
+            <p className="text-sm text-muted">
+              None — no session has ended in a crash or OOM kill.
+            </p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[640px]">
+                <thead>
+                  <tr>
+                    <th className={th}>When</th>
+                    <th className={th}>Device</th>
+                    <th className={th}>Version</th>
+                    <th className={th}>Peak RSS</th>
+                    <th className={th}>Lasted</th>
+                    <th className={th}>Layers at peak</th>
+                    <th className={th}>RSS curve</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {s.died_sessions.map((d2) => (
+                    <tr
+                      key={`${d2.received_at}-${d2.device_model}`}
+                      className="border-t border-white/5"
+                    >
+                      <td className={td}>{fmtWhen(d2.received_at)}</td>
+                      <td className={td}>
+                        {d2.device_marketing ?? d2.device_model ?? "—"}
+                      </td>
+                      <td className={td}>
+                        {d2.platform} {d2.app_version}
+                      </td>
+                      <td className={td}>{fmtInt(d2.peak_rss_mb)} MB</td>
+                      <td className={td}>{fmtSecs(d2.session_seconds)}</td>
+                      <td className={td}>
+                        {safeJson<string[]>(d2.layers_at_peak, []).join(" + ") || "—"}
+                      </td>
+                      <td className={td}>
+                        <Spark values={safeJson<number[]>(d2.rss_curve, [])} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+          <p className="mt-2 text-[11px] text-muted">
+            Sessions whose process was killed before a clean exit —
+            recovered from the on-device checkpoint at next launch. These
+            are the rows crash-survivorship used to hide.
+          </p>
+        </Card>
+
         <Card title="Countries (30d)">
           <BarList
             rows={s.countries.map((c) => ({
@@ -739,6 +846,16 @@ export default function TelemetryDashboard() {
                     {r.cold_start ? (
                       <span className="rounded bg-white/10 px-1.5 text-[10px] text-muted">
                         cold
+                      </span>
+                    ) : null}
+                    {r.end_reason === "died" ? (
+                      <span className="rounded bg-red-400/20 px-1.5 text-[10px] text-red-300">
+                        died
+                      </span>
+                    ) : null}
+                    {r.startup_ms ? (
+                      <span className="text-muted">
+                        boot {(r.startup_ms / 1000).toFixed(1)}s
                       </span>
                     ) : null}
                   </summary>
