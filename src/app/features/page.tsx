@@ -681,7 +681,7 @@ const categories: Category[] = [
       {
         title: "Private by default",
         description:
-          "No ads, no analytics, no tracking. Your beacon goes to Spotter Network and weather data comes from NWS / SPC / Mapbox. The only thing we store is an optional account, if you choose to create one.",
+          "No ads, no third-party trackers, and nothing sold to anyone. Your beacon goes to Spotter Network and weather data comes from NWS / SPC / Mapbox. The app collects anonymous usage statistics to guide what gets built next, with no account or identity attached, and you can turn it off in Settings under Privacy. The only thing we store is an optional account, if you choose to create one.",
       },
     ],
     screenshot: {
