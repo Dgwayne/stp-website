@@ -23,6 +23,9 @@ type DailyRow = {
   new_installs: number;
   android_sessions: number;
   ios_sessions: number;
+  // Added when the desktop build shipped. Optional so a dashboard build
+  // that lands before the Worker deploy renders 0 rather than NaN.
+  windows_sessions?: number;
 };
 type VersionRow = {
   platform: string;
@@ -546,8 +549,24 @@ export default function TelemetryDashboard() {
     s.w7.installs > 0 ? (s.w7.sessions / s.w7.installs).toFixed(1) : "—";
   const rssA = s.rss_percentiles["android"];
   const rssI = s.rss_percentiles["ios"];
+  const rssW = s.rss_percentiles["windows"];
   const startA = s.startup_percentiles?.["android"];
   const startI = s.startup_percentiles?.["ios"];
+  const startW = s.startup_percentiles?.["windows"];
+  // Platform split over the charted window. Summed from the daily rows
+  // rather than a new endpoint field, so this needed no Worker change
+  // beyond the windows_sessions column that already ships.
+  const plat = s.daily.reduce(
+    (a, d) => ({
+      android: a.android + (d.android_sessions ?? 0),
+      ios: a.ios + (d.ios_sessions ?? 0),
+      windows: a.windows + (d.windows_sessions ?? 0),
+    }),
+    { android: 0, ios: 0, windows: 0 },
+  );
+  const platTotal = plat.android + plat.ios + plat.windows;
+  const platPct = (n: number) =>
+    platTotal > 0 ? `${Math.round((n / platTotal) * 100)}%` : "—";
 
   return (
     <main className="mx-auto max-w-6xl px-6 pt-28 pb-20">
@@ -594,7 +613,14 @@ export default function TelemetryDashboard() {
         <Tile
           label="p95 RSS · 30d"
           value={rssA ? `${fmtInt(rssA.p95)} MB` : "—"}
-          sub={rssI ? `iOS ${fmtInt(rssI.p95)} MB` : undefined}
+          sub={
+            [
+              rssI ? `iOS ${fmtInt(rssI.p95)}` : null,
+              rssW ? `Win ${fmtInt(rssW.p95)}` : null,
+            ]
+              .filter(Boolean)
+              .join(" · ") || undefined
+          }
         />
         <Tile
           label="Died sessions · 30d"
@@ -604,8 +630,34 @@ export default function TelemetryDashboard() {
         <Tile
           label="Startup p50 · 30d"
           value={startA ? `${(startA.p50 / 1000).toFixed(1)}s` : "—"}
-          sub={startI ? `iOS ${(startI.p50 / 1000).toFixed(1)}s` : undefined}
+          sub={
+            [
+              startI ? `iOS ${(startI.p50 / 1000).toFixed(1)}s` : null,
+              startW ? `Win ${(startW.p50 / 1000).toFixed(1)}s` : null,
+            ]
+              .filter(Boolean)
+              .join(" · ") || undefined
+          }
         />
+      </div>
+
+      {/* Platform split. The daily rows always carried the per-platform
+          counts but nothing rendered them, so until now there was no way
+          to see how the desktop build was doing at all. */}
+      <div className="mb-4">
+        <Card title="Sessions by platform (30d)">
+          <BarList
+            rows={[
+              { label: "Android", value: plat.android, sub: platPct(plat.android) },
+              { label: "iOS", value: plat.ios, sub: platPct(plat.ios) },
+              {
+                label: "Windows",
+                value: plat.windows,
+                sub: platPct(plat.windows),
+              },
+            ]}
+          />
+        </Card>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
