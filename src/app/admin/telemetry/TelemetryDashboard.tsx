@@ -29,7 +29,7 @@ type DailyRow = {
 };
 type VersionRow = {
   platform: string;
-  app_version: string;
+  app_version: string | null;
   sessions: number;
   installs: number;
   last_seen?: number;
@@ -42,7 +42,7 @@ type FeatureRow = {
 };
 type LayerRow = { layer: string; installs: number; sessions: number };
 type DeviceRow = {
-  device_model: string;
+  device_model: string | null;
   device_marketing: string | null;
   manufacturer: string | null;
   platform: string;
@@ -55,7 +55,7 @@ type DeviceRow = {
 };
 type PerfRow = {
   platform: string;
-  app_version: string;
+  app_version: string | null;
   sessions: number;
   avg_rss: number | null;
   max_rss: number | null;
@@ -194,6 +194,18 @@ const fmtAgo = (ms: number) => {
   if (d === 1) return "1 day ago";
   return `${d} days ago`;
 };
+// Model, RAM, is_physical and app_version all arrive from a platform
+// channel read deliberately deferred to 10 s after first frame, so a
+// session that ends before then carries none of them. Those rows are
+// real short sessions, not broken ones (the Worker dropped them
+// outright until 1.0.57 stamped platform synchronously) — so name them
+// rather than let them render as "()" or "android null".
+const SHORT_SESSION = "under 10s";
+const fmtDevice = (marketing: string | null, model: string | null) =>
+  marketing ?? model ?? `Unknown device (${SHORT_SESSION})`;
+const fmtVersion = (platform: string | null, version: string | null) =>
+  `${platform ?? "—"} ${version ?? `(${SHORT_SESSION})`}`;
+
 const safeJson = <T,>(s: string | null | undefined, fallback: T): T => {
   if (!s) return fallback;
   try {
@@ -697,7 +709,7 @@ export default function TelemetryDashboard() {
         <Card title="Version adoption (sessions, 14d)">
           <BarList
             rows={s.versions.map((v) => ({
-              label: `${v.platform} ${v.app_version}`,
+              label: fmtVersion(v.platform, v.app_version),
               value: v.sessions,
               sub: `${fmtInt(v.installs)} users`,
             }))}
@@ -707,7 +719,7 @@ export default function TelemetryDashboard() {
           </h3>
           <BarList
             rows={s.current_versions.map((v) => ({
-              label: `${v.platform} ${v.app_version}`,
+              label: fmtVersion(v.platform, v.app_version),
               value: v.installs,
             }))}
           />
@@ -751,10 +763,17 @@ export default function TelemetryDashboard() {
               </thead>
               <tbody>
                 {s.devices.map((d) => (
-                  <tr key={d.device_model} className="border-t border-white/5">
+                  <tr
+                    key={d.device_model ?? "no-device-info"}
+                    className="border-t border-white/5"
+                  >
                     <td className={td}>
-                      {d.device_marketing ?? d.device_model}
-                      <span className="ml-1 text-muted">({d.device_model})</span>
+                      {fmtDevice(d.device_marketing, d.device_model)}
+                      {d.device_model && (
+                        <span className="ml-1 text-muted">
+                          ({d.device_model})
+                        </span>
+                      )}
                     </td>
                     <td className={td}>{fmtInt(d.installs)}</td>
                     <td className={td}>{fmtInt(d.sessions)}</td>
@@ -769,6 +788,12 @@ export default function TelemetryDashboard() {
               </tbody>
             </table>
           </div>
+          <p className="mt-2 text-[11px] text-muted">
+            &ldquo;Unknown device&rdquo; rows are sessions that ended before the
+            device-info read, which is deferred 10 s past first frame to keep
+            it off the startup path. Real short sessions, just no model, RAM or
+            version attached.
+          </p>
         </Card>
 
         <Card title="Performance by version (30d)" wide>
@@ -793,9 +818,7 @@ export default function TelemetryDashboard() {
                     key={`${p.platform}-${p.app_version}`}
                     className="border-t border-white/5"
                   >
-                    <td className={td}>
-                      {p.platform} {p.app_version}
-                    </td>
+                    <td className={td}>{fmtVersion(p.platform, p.app_version)}</td>
                     <td className={td}>{fmtInt(p.sessions)}</td>
                     <td className={td}>{fmtInt(p.avg_rss)} MB</td>
                     <td className={td}>{fmtInt(p.max_rss)} MB</td>
@@ -973,10 +996,11 @@ export default function TelemetryDashboard() {
                   <summary className="flex cursor-pointer list-none flex-wrap items-center gap-x-3 gap-y-1 text-xs">
                     <span className="text-muted">{fmtWhen(r.received_at)}</span>
                     <span className="font-medium text-foreground">
-                      {r.device_marketing ?? r.device_model ?? "unknown"}
+                      {fmtDevice(r.device_marketing, r.device_model)}
                     </span>
                     <span className="text-muted">
-                      {r.platform} {r.app_version} · {r.country ?? "—"} ·{" "}
+                      {fmtVersion(r.platform, r.app_version)} ·{" "}
+                      {r.country ?? "—"} ·{" "}
                       {fmtSecs(r.session_seconds)} · {fmtInt(r.peak_rss_mb)} MB ·
                       jank {fmtPct(jank)}
                     </span>
