@@ -329,43 +329,65 @@ export default function Home() {
             satellite, worldwide tropical, smart push alerts, live storm chasers,
             tens of thousands of live cameras, and the full NWS / SPC suite.
           </p>
+          {/*
+            Official store badges, used unmodified as each vendor's brand
+            guidelines require (they forbid recolouring, cropping or redrawing).
+
+            The rendered heights are deliberately NOT equal. Google bakes its
+            required clear space into the artwork: the PNG canvas is 646x250 but
+            the visible badge inside it is only 564x168, i.e. 67.2% of the
+            canvas height, with 41px of transparency on every side. Apple's and
+            Microsoft's SVGs are full-bleed. Setting all three to the same CSS
+            height therefore renders Google's visibly SMALLER than the other
+            two. h-[65px] on Google puts its ink at 65 * 0.672 = 44px, matching
+            the h-11 on the other two. Measured, not guessed - if you swap in a
+            new badge asset, re-measure its ink bbox before changing these.
+          */}
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
               href="https://play.google.com/store/apps/details?id=com.dustin.spottertools"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-brand-green px-6 py-3 font-semibold text-white shadow-lg transition-all hover:bg-brand-green-dim hover:shadow-brand-green/25"
+              className="transition-opacity hover:opacity-80"
             >
-              <svg
-                className="h-5 w-5"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-1.4l2.575 1.49c.478.277.478.972 0 1.249l-2.575 1.49-2.556-2.556 2.556-2.673zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z" />
-              </svg>
-              Get it on Google Play
+              <Image
+                src="/images/badges/google-play.png"
+                alt="Get it on Google Play"
+                width={646}
+                height={250}
+                unoptimized
+                className="h-[65px] w-auto"
+              />
             </a>
             <a
               href="https://apps.apple.com/us/app/spotter-tools-pro/id6775985245"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-black shadow-lg transition-all hover:bg-white/90"
+              className="transition-opacity hover:opacity-80"
             >
-              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09z" />
-              </svg>
-              Download on the App Store
+              <Image
+                src="/images/badges/app-store.svg"
+                alt="Download on the App Store"
+                width={120}
+                height={40}
+                unoptimized
+                className="h-11 w-auto"
+              />
             </a>
             <a
               href="https://apps.microsoft.com/detail/9NFQK1X16KZS"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#0067b8] px-6 py-3 font-semibold text-white shadow-lg transition-all hover:bg-[#005494] hover:shadow-[#0067b8]/25"
+              className="transition-opacity hover:opacity-80"
             >
-              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699m10.949-8.099H24V24l-12.9-1.801" />
-              </svg>
-              Get it from Microsoft
+              <Image
+                src="/images/badges/microsoft-store.svg"
+                alt="Get it from Microsoft"
+                width={161}
+                height={44}
+                unoptimized
+                className="h-11 w-auto"
+              />
             </a>
             <a
               href="#features"
