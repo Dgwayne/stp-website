@@ -32,7 +32,7 @@ let uidSeq = 0;
 const nextUid = () => `u${++uidSeq}`;
 
 const SEVERITIES: Severity[] = ["info", "warning", "success", "whatsNew"];
-const PLATFORMS = ["android", "ios"];
+const PLATFORMS = ["android", "ios", "windows"];
 
 const inputCls =
   "w-full rounded-md bg-surface-light border border-white/10 px-3 py-2 text-sm text-foreground placeholder:text-muted/60 focus:outline-none focus:ring-1 focus:ring-brand-teal";
