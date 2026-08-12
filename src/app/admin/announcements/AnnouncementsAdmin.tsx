@@ -3,7 +3,15 @@
 import { useState, type FormEvent } from "react";
 import MarkdownField from "./MarkdownField";
 
-type Severity = "info" | "warning" | "success" | "whatsNew";
+type Severity =
+  | "info"
+  | "warning"
+  | "success"
+  | "whatsNew"
+  // Preset rather than a look: the app has no case for it and renders it as
+  // info (exactly what update messages used before), but picking it here fills
+  // in the "Update!" button and the right store link. Safe on every install.
+  | "updateAvailable";
 
 type Item = {
   // Stable React key, internal only — never published. The user-facing `id` is
@@ -31,8 +39,43 @@ type Status = { kind: "info" | "error" | "success"; msg: string } | null;
 let uidSeq = 0;
 const nextUid = () => `u${++uidSeq}`;
 
-const SEVERITIES: Severity[] = ["info", "warning", "success", "whatsNew"];
+const SEVERITIES: Severity[] = [
+  "info",
+  "warning",
+  "success",
+  "whatsNew",
+  "updateAvailable",
+];
 const PLATFORMS = ["android", "ios", "windows"];
+
+// Where an "Update!" button sends people, per platform. Hardcoded so an update
+// prompt can never ship pointing at the wrong store — a dead end for whoever
+// taps it, and unfixable without a re-publish.
+const STORE_URLS: Record<string, string> = {
+  android:
+    "https://play.google.com/store/apps/details?id=com.dustin.spottertools",
+  ios: "https://apps.apple.com/us/app/spotter-tools-pro/id6775985245",
+  windows: "https://apps.microsoft.com/detail/9NFQK1X16KZS",
+};
+const UPDATE_ACTION_LABEL = "Update!";
+
+// Apply the updateAvailable preset: pin the button label and point it at the
+// store for the targeted platform. Only fires for a SINGLE platform, because
+// one actionUrl cannot serve two stores — with none or several ticked the URL
+// is left alone and the editor shows a warning instead of guessing.
+//
+// Called from the severity dropdown and the platform checkboxes only, not on
+// every edit, so both fields stay hand-editable afterwards.
+function withUpdatePreset(it: Item): Item {
+  if (it.severity !== "updateAvailable") return it;
+  const only = it.platforms?.length === 1 ? it.platforms[0] : null;
+  const url = only ? STORE_URLS[only] : null;
+  return {
+    ...it,
+    actionLabel: UPDATE_ACTION_LABEL,
+    actionUrl: url ?? it.actionUrl ?? null,
+  };
+}
 
 const inputCls =
   "w-full rounded-md bg-surface-light border border-white/10 px-3 py-2 text-sm text-foreground placeholder:text-muted/60 focus:outline-none focus:ring-1 focus:ring-brand-teal";
@@ -193,6 +236,14 @@ export default function AnnouncementsAdmin() {
       prev.map((it, i) => (i === index ? { ...it, ...patch } : it)),
     );
   }
+  function setSeverity(index: number, severity: Severity) {
+    setItems((prev) =>
+      prev.map((it, i) =>
+        i === index ? withUpdatePreset({ ...it, severity }) : it,
+      ),
+    );
+  }
+
   function togglePlatform(index: number, p: string) {
     setItems((prev) =>
       prev.map((it, i) => {
@@ -201,7 +252,10 @@ export default function AnnouncementsAdmin() {
         if (set.has(p)) set.delete(p);
         else set.add(p);
         const arr = Array.from(set);
-        return { ...it, platforms: arr.length ? arr : undefined };
+        return withUpdatePreset({
+          ...it,
+          platforms: arr.length ? arr : undefined,
+        });
       }),
     );
   }
@@ -292,10 +346,8 @@ export default function AnnouncementsAdmin() {
               />
               <select
                 value={it.severity}
-                onChange={(e) =>
-                  update(i, { severity: e.target.value as Severity })
-                }
-                className={`${inputCls} max-w-[140px]`}
+                onChange={(e) => setSeverity(i, e.target.value as Severity)}
+                className={`${inputCls} max-w-[170px]`}
               >
                 {SEVERITIES.map((s) => (
                   <option key={s} value={s}>
@@ -435,6 +487,21 @@ export default function AnnouncementsAdmin() {
                 />
               </div>
             </div>
+
+            {it.severity === "updateAvailable" &&
+              (it.platforms?.length === 1 ? (
+                <p className="mt-2 text-xs text-muted">
+                  Button and store link filled in for{" "}
+                  <span className="font-mono">{it.platforms[0]}</span>. Both
+                  fields are still editable.
+                </p>
+              ) : (
+                <p className="mt-2 text-xs text-amber-300">
+                  Tick exactly one platform to fill the store link in — a single
+                  action URL can only point at one store, so an update prompt
+                  needs one message per platform.
+                </p>
+              ))}
           </div>
         ))}
       </div>
