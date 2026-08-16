@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AutoVideo from "@/components/AutoVideo";
 import SectionHeader from "@/components/SectionHeader";
 
 export const metadata: Metadata = {
@@ -143,7 +144,23 @@ export default function StormTrackPage() {
           description="Draw the leading edge of a storm and the app tells you where it is heading, when it arrives, and which towns are in the way. It reads the motion off the radar for you."
         />
 
-        {/* The mental model, before any words about it */}
+        {/* Watch it happen first. The clip runs the whole job start to
+            finish, so it answers "what is this" before any prose does. */}
+        <figure className="mb-16">
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-surface">
+            <AutoVideo
+              src="/videos/storm-track.mp4"
+              poster="/videos/storm-track-poster.jpg"
+              className="block h-auto w-full"
+            />
+          </div>
+          <figcaption className="mt-3 text-center text-xs text-muted">
+            Drawing a line across an approaching storm, then reading the
+            arrival times off it. Recorded on the Windows app.
+          </figcaption>
+        </figure>
+
+        {/* The same idea annotated, for the vocabulary the page then uses */}
         <figure className="mb-24">
           <div className="overflow-x-auto rounded-2xl border border-white/10 bg-surface p-5">
             <svg
