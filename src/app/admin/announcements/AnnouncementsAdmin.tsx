@@ -55,9 +55,16 @@ const STORE_URLS: Record<string, string> = {
   android:
     "https://play.google.com/store/apps/details?id=com.dustin.spottertools",
   ios: "https://apps.apple.com/us/app/spotter-tools-pro/id6775985245",
-  windows: "https://apps.microsoft.com/detail/9NFQK1X16KZS",
+  windows:
+    "https://apps.microsoft.com/detail/9NFQK1X16KZS?hl=en-us&gl=US&ocid=pdpshare",
 };
 const UPDATE_ACTION_LABEL = "Update!";
+// Default title + body the updateAvailable preset drops in when those fields
+// are still empty, so a whole update prompt is one dropdown + one platform tick.
+const UPDATE_TITLE = "A new version is available";
+const UPDATE_BODY =
+  "There's a new version available. Tap Update! below to go to the store and " +
+  "update to the latest version.";
 
 // Apply the updateAvailable preset: pin the button label and point it at the
 // store for the targeted platform. Only fires for a SINGLE platform, because
@@ -238,9 +245,23 @@ export default function AnnouncementsAdmin() {
   }
   function setSeverity(index: number, severity: Severity) {
     setItems((prev) =>
-      prev.map((it, i) =>
-        i === index ? withUpdatePreset({ ...it, severity }) : it,
-      ),
+      prev.map((it, i) => {
+        if (i !== index) return it;
+        const next = withUpdatePreset({ ...it, severity });
+        if (severity !== "updateAvailable") return next;
+        // Fill an empty title/body with the update defaults. The body editor
+        // (MDXEditor) ignores value changes after mount, so when we actually
+        // change the body we re-key the row (`_uid`) to remount it and show
+        // the prefilled text. A body the user already typed is left alone.
+        const title = next.title.trim() ? next.title : UPDATE_TITLE;
+        const body = next.body.trim() ? next.body : UPDATE_BODY;
+        return {
+          ...next,
+          title,
+          body,
+          _uid: body !== next.body ? nextUid() : next._uid,
+        };
+      }),
     );
   }
 
