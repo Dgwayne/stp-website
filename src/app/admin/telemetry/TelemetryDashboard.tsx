@@ -498,6 +498,9 @@ export default function TelemetryDashboard() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // The Worker returns up to 100 recent sessions; render 20 and let the
+  // reader pull more so the page does not open onto a wall of rows.
+  const [recentShown, setRecentShown] = useState(20);
 
   async function load(e?: FormEvent) {
     e?.preventDefault();
@@ -980,7 +983,7 @@ export default function TelemetryDashboard() {
 
         <Card title="Recent sessions" wide>
           <div className="space-y-1">
-            {s.recent.map((r) => {
+            {s.recent.slice(0, recentShown).map((r) => {
               const feats = safeJson<Record<string, number>>(r.features, {});
               const layers = safeJson<string[]>(r.layers_used, []);
               const curve = safeJson<number[]>(r.rss_curve, []);
@@ -1058,6 +1061,20 @@ export default function TelemetryDashboard() {
               );
             })}
           </div>
+          {s.recent.length > recentShown ? (
+            <button
+              onClick={() => setRecentShown((n) => n + 40)}
+              className="mt-3 w-full rounded-md border border-white/10 px-3 py-1.5 text-xs text-muted hover:text-foreground"
+            >
+              Show 40 more · {Math.min(recentShown, s.recent.length)} of{" "}
+              {s.recent.length} shown
+            </button>
+          ) : (
+            <p className="mt-2 text-[11px] text-muted">
+              Showing all {s.recent.length} sessions the server returned
+              (newest first, raw feed — pre-launch bots included).
+            </p>
+          )}
         </Card>
       </div>
     </main>
