@@ -55,8 +55,10 @@ const STORE_URLS: Record<string, string> = {
   android:
     "https://play.google.com/store/apps/details?id=com.dustin.spottertools",
   ios: "https://apps.apple.com/us/app/spotter-tools-pro/id6775985245",
-  windows:
-    "https://apps.microsoft.com/detail/9NFQK1X16KZS?hl=en-us&gl=US&ocid=pdpshare",
+  // Deep link that opens the Microsoft Store APP (not a browser, where users
+  // can't update) straight to the product page. https://apps.microsoft.com
+  // links only open the browser on Windows.
+  windows: "ms-windows-store://pdp/?ProductId=9NFQK1X16KZS",
 };
 const UPDATE_ACTION_LABEL = "Update!";
 // Default title + body the updateAvailable preset drops in when those fields
