@@ -36,11 +36,17 @@ export default function TrainingHome() {
           // username comes from the mobile app's signup; full_name is only
           // set for people added straight to training. Either will do.
           supabase.from('profiles').select('full_name, username, role').eq('id', user.id).single(),
-          supabase.from('assignments').select('id, module_slug, due_on'),
+          // Filter by user_id explicitly. RLS is not enough here: admins
+          // have policies letting them read everyone's assignments and
+          // attempts, so an unfiltered query put the whole team's rows on
+          // one person's dashboard and credited them with other people's
+          // passes.
+          supabase.from('assignments').select('id, module_slug, due_on').eq('user_id', user.id),
           supabase.from('modules').select('slug, title, blurb, pass_pct, sort_order'),
           supabase
             .from('attempts')
             .select('module_slug, score_pct, passed, submitted_at')
+            .eq('user_id', user.id)
             .not('submitted_at', 'is', null),
         ]);
 

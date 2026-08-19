@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabaseClient';
+import TrainingSignIn from '@/components/TrainingSignIn';
 import '../../training.css';
 
 // Coordinator view: everyone who has an account, what they are assigned,
@@ -14,7 +15,8 @@ export default function AdminTrainingPage() {
   const router = useRouter();
   const supabase = createClient();
 
-  const [state, setState] = useState('loading'); // loading | ok | denied
+  const [state, setState] = useState('loading'); // loading | ok | denied | signedout
+  const [reload, setReload] = useState(0);
   const [modules, setModules] = useState([]);
   const [people, setPeople] = useState([]);
   const [query, setQuery] = useState('');
@@ -33,7 +35,12 @@ export default function AdminTrainingPage() {
 
     (async () => {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { router.replace('/training'); return; }
+      if (!user) {
+        // Show the form here rather than bouncing to /training, which
+        // looked like the page had rejected them.
+        if (!cancelled) setState('signedout');
+        return;
+      }
 
       const res = await fetch('/api/admin/roster', {
         headers: { Authorization: `Bearer ${await token()}` },
@@ -51,7 +58,7 @@ export default function AdminTrainingPage() {
     })();
 
     return () => { cancelled = true; };
-  }, [router, supabase, token]);
+  }, [router, supabase, token, reload]);
 
   async function save(person, slugs) {
     setSaving(person.id);
@@ -91,6 +98,16 @@ export default function AdminTrainingPage() {
 
   if (state === 'loading') {
     return <main className="stp"><div className="stp__shell"><p className="stp__lede">Loading the roster.</p></div></main>;
+  }
+
+  if (state === 'signedout') {
+    return (
+      <main className="stp">
+        <div className="stp__shell">
+          <TrainingSignIn onSignedIn={() => { setState('loading'); setReload((r) => r + 1); }} />
+        </div>
+      </main>
+    );
   }
 
   if (state === 'denied') {
