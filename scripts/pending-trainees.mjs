@@ -49,38 +49,30 @@ const waiting = users
   .filter((u) => !assigned.has(u.id))
   .sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
 
-// auth.users is shared with the mobile app, so most unassigned accounts are
-// app customers who never asked for training. The training signup form is
-// the only thing that sets full_name, so that is what separates the two.
+// There is NO reliable way to tell a teammate from a paying app customer.
+// auth.users is shared with the mobile app, and an earlier version of this
+// script guessed using full_name, which was wrong: Google and Apple sign-in
+// supply full_name too, so app customers looked like training sign-ups. The
+// provider does not separate them either, since anyone can use email/password
+// in the app. Assume you have to recognise your own people by name.
 const line = (u) => {
   const p = byId.get(u.id);
   const name = p?.full_name ?? p?.username ?? '(no name)';
   const when = u.created_at?.slice(0, 10) ?? '';
+  const via = u.app_metadata?.provider ?? '?';
   const flag = u.email_confirmed_at ? '' : '  [email not confirmed]';
-  return `  ${when}  ${(u.email ?? '(no email)').padEnd(36)} ${name}${flag}`;
+  return `  ${when}  ${(u.email ?? '(no email)').padEnd(36)} ${name.padEnd(20)} ${via}${flag}`;
 };
 
-const askedForTraining = waiting.filter((u) => byId.get(u.id)?.full_name);
-const appOnly = waiting.filter((u) => !byId.get(u.id)?.full_name);
+console.log(`${assigned.size} account(s) have training assigned.`);
+console.log(`${waiting.length} account(s) do not. Most of these are app customers.\n`);
 
-console.log(`${assigned.size} account(s) have training assigned.\n`);
-
-console.log(`SIGNED UP FOR TRAINING, NOT YET ASSIGNED  (${askedForTraining.length})`);
-if (askedForTraining.length) {
-  askedForTraining.slice(0, limit).forEach((u) => console.log(line(u)));
-  if (askedForTraining.length > limit) {
-    console.log(`  ... and ${askedForTraining.length - limit} more.`);
-  }
-  console.log('\nGrant access with:');
-  console.log('  node --env-file=.env.local scripts/create-trainee.mjs <email> --assign-all');
-} else {
-  console.log('  Nobody is waiting.');
+console.log('NO TRAINING ASSIGNED, NEWEST FIRST');
+waiting.slice(0, limit).forEach((u) => console.log(line(u)));
+if (waiting.length > limit) {
+  console.log(`  ... and ${waiting.length - limit} more. Pass --limit=${waiting.length} to see all.`);
 }
 
-console.log(`\nAPP ACCOUNTS WITH NO TRAINING  (${appOnly.length})`);
-console.log('  These are Spotter Tools Pro app users who never signed up for training.');
-console.log('  Listed for reference only. Assigning them modules is almost certainly not what you want.');
-if (appOnly.length) {
-  appOnly.slice(0, 5).forEach((u) => console.log(line(u)));
-  if (appOnly.length > 5) console.log(`  ... and ${appOnly.length - 5} more. Pass --limit to see them.`);
-}
+console.log('\nAssign someone with:');
+console.log('  node --env-file=.env.local scripts/create-trainee.mjs <email> --assign-all');
+console.log('or pick them out by name on /admin/training, which is usually easier.');
