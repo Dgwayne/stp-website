@@ -33,7 +33,7 @@ export default function AdminTrainingPage() {
 
     (async () => {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { router.replace('/login'); return; }
+      if (!user) { router.replace('/training'); return; }
 
       const res = await fetch('/api/admin/roster', {
         headers: { Authorization: `Bearer ${await token()}` },

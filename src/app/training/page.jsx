@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabaseClient';
+import TrainingSignIn from '@/components/TrainingSignIn';
 import '../training.css';
 
 export default function TrainingHome() {
@@ -13,6 +14,9 @@ export default function TrainingHome() {
   const [name, setName] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
   const [rows, setRows] = useState(null);
+  // null while we are still checking, then true or false.
+  const [authed, setAuthed] = useState(null);
+  const [reload, setReload] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -20,9 +24,12 @@ export default function TrainingHome() {
     (async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
-        router.replace('/login');
+        // Show the sign-in form here rather than redirecting, so the
+        // address people are given stays /training throughout.
+        if (!cancelled) setAuthed(false);
         return;
       }
+      if (!cancelled) setAuthed(true);
 
       const [{ data: profile }, { data: assignments }, { data: modules }, { data: attempts }] =
         await Promise.all([
@@ -62,17 +69,32 @@ export default function TrainingHome() {
     })();
 
     return () => { cancelled = true; };
-  }, [router, supabase]);
+  }, [router, supabase, reload]);
 
   async function signOut() {
     await supabase.auth.signOut();
-    router.replace('/login');
+    setRows(null);
+    setAuthed(false);
   }
 
   const done = rows?.filter((r) => r.best?.passed).length ?? 0;
   const total = rows?.length ?? 0;
   const pct = total ? Math.round((done / total) * 100) : 0;
   const next = rows?.find((r) => !r.best?.passed) ?? null;
+
+  if (authed === null) {
+    return <main className="stp"><div className="stp__shell"><p className="stp__lede">Loading.</p></div></main>;
+  }
+
+  if (authed === false) {
+    return (
+      <main className="stp">
+        <div className="stp__shell">
+          <TrainingSignIn onSignedIn={() => { setAuthed(null); setReload((r) => r + 1); }} />
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="stp">

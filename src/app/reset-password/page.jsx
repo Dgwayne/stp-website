@@ -88,7 +88,7 @@ export default function ResetPasswordPage() {
             <p className="stp__lede">{error || 'Checking your reset link.'}</p>
             {error && (
               <div className="stp__actions">
-                <Link className="stp__btn" href="/login">Back to sign in</Link>
+                <Link className="stp__btn" href="/training">Back to sign in</Link>
               </div>
             )}
           </>

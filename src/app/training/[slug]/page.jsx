@@ -26,7 +26,7 @@ export default function ModulePage() {
 
     (async () => {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { router.replace('/login'); return; }
+      if (!user) { router.replace('/training'); return; }
 
       const [{ data: mod }, { data: qs }] = await Promise.all([
         supabase.from('modules').select('*').eq('slug', slug).single(),

@@ -26,7 +26,7 @@ export default function StudyPage() {
 
     (async () => {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { router.replace('/login'); return; }
+      if (!user) { router.replace('/training'); return; }
 
       const { data } = await supabase.from('modules').select('title, pass_pct').eq('slug', slug).single();
       if (cancelled) return;
