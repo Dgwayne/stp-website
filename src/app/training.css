@@ -483,3 +483,14 @@
   transition: border-color 120ms ease, color 120ms ease;
 }
 .stp__linkBtn:hover { border-color: var(--signal); color: var(--paper); }
+
+/* Backstop for the clearance above. NavClearance measures the nav and is
+   the general answer, but if that value is ever stale or the script has
+   not run, a narrow screen is exactly where being under-padded hides the
+   top bar's buttons under the wrapped nav. Never go below a value that
+   clears the tallest nav we have measured (109px at 360px wide). */
+@media (max-width: 640px) {
+  .stp__shell {
+    padding-top: max(calc(var(--stp-nav, 61px) + 1.5rem), 8.25rem);
+  }
+}
