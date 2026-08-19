@@ -11,6 +11,7 @@ export default function TrainingHome() {
   const supabase = createClient();
 
   const [name, setName] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
   const [rows, setRows] = useState(null);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function TrainingHome() {
         await Promise.all([
           // username comes from the mobile app's signup; full_name is only
           // set for people added straight to training. Either will do.
-          supabase.from('profiles').select('full_name, username').eq('id', user.id).single(),
+          supabase.from('profiles').select('full_name, username, role').eq('id', user.id).single(),
           supabase.from('assignments').select('id, module_slug, due_on'),
           supabase.from('modules').select('slug, title, blurb, pass_pct, sort_order'),
           supabase
@@ -39,6 +40,7 @@ export default function TrainingHome() {
       if (cancelled) return;
 
       setName(profile?.full_name ?? profile?.username ?? '');
+      setIsAdmin(profile?.role === 'admin');
 
       const byModule = new Map((modules ?? []).map((m) => [m.slug, m]));
       const best = new Map();
@@ -145,6 +147,9 @@ export default function TrainingHome() {
         })}
 
         <div className="stp__actions">
+          {isAdmin && (
+            <Link className="stp__btn" href="/admin/training">Manage roster</Link>
+          )}
           <button className="stp__btn stp__btn--ghost" onClick={signOut}>Sign out</button>
         </div>
 

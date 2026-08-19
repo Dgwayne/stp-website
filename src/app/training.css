@@ -411,3 +411,34 @@
   border-color: var(--rule);
 }
 .stp__cardBtn--test:hover { border-color: var(--signal); opacity: 1; }
+
+/* ---- roster module picker ---- */
+.stp__picks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.85rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+}
+
+/* A toggle, not a link. Off reads as available, on reads as assigned. */
+.stp__pick {
+  text-align: left;
+  font-family: inherit;
+  font-size: 0.82rem;
+  color: var(--dim);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.45rem 0.65rem;
+  cursor: pointer;
+  transition: border-color 120ms ease, color 120ms ease;
+}
+.stp__pick:hover { border-color: var(--signal); }
+
+.stp__pick--on {
+  color: var(--paper);
+  border-color: var(--ok);
+  background: rgba(79, 180, 119, 0.08);
+}
