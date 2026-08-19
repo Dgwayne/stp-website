@@ -184,16 +184,20 @@ export default function ModulePage() {
     );
   }
 
-  const code = String(slug).slice(0, 4).toUpperCase();
-
   return (
     <main className="stp">
       <div className="stp__shell">
         <p className="stp__eyebrow">{module?.title}</p>
 
-        <code className="stp__vtec">
-          /O.NEW.STP.{code}.Q.{String(index + 1).padStart(4, '0')}.{String(questions.length).padStart(4, '0')}/
-        </code>
+        <div className="stp__quizTrack">
+          <span className="stp__quizCount">{index + 1} / {questions.length}</span>
+          <div className="stp__quizBar">
+            <div
+              className="stp__quizFill"
+              style={{ width: `${((index + 1) / questions.length) * 100}%` }}
+            />
+          </div>
+        </div>
 
         <p className="stp__prompt">{current.prompt}</p>
         {current.type === 'multi' && <p className="stp__hint">Select all that apply.</p>}

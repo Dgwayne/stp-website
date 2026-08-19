@@ -1,52 +1,43 @@
 {
-  "derived_from_bank_version": "2026.08.04",
+  "derived_from_bank_version": "2026.08.19",
   "review_by": "2027-03-01",
   "sources": [
     "NWSI 10-511 WFO Severe Weather Products Specification (Jan 26, 2023)",
+    "NWSI 10-513 WFO Winter Weather Products Specification (Nov 6, 2024)",
+    "NWSI 10-922 WFO Hydrologic Products Specification",
+    "NWSI 10-401 Fire Weather Services Product Specification (Aug 25, 2025)",
+    "NWSI 10-313 Marine Warning Products (Apr 2, 2024)",
     "SCN 21-56 Consolidation/Reformatting of Flood Products (Nov 2021)",
     "SCN 23-44 Consolidated Products Related to Cold (Oct 1, 2024)",
-    "NWS Heat product rename (Mar 4, 2025)",
-    "NWS Hazard Simplification project pages",
-    "NWS Glossary"
+    "SCN 24-88 Heat product rename (Mar 4, 2025)",
+    "NWS Hazard Simplification FAQ",
+    "NWS Glossary, SPC About and FAQ pages, NHC glossary"
   ],
   "modules": {
     "fundamentals": {
+      "tagline": "Four words carry the whole system. Learn what each demands of you.",
+      "minutes": 6,
       "intro": "Four tiers carry almost every hazard NWS issues. Knowing which tier you are looking at tells you what is expected of you before you read a single detail.",
+      "essentials": [
+        "Watch means be prepared. Warning means take action. Advisory means be aware.",
+        "Your local NWS office issues the warnings. The Storm Prediction Center issues the convective watches.",
+        "Not every warning sends an alert to phones.",
+        "Convective criteria are national. Most other thresholds are set by your local office."
+      ],
       "sections": [
         {
+          "kind": "tierLadder",
           "heading": "The four tiers",
-          "table": {
-            "columns": [
-              "Tier",
-              "What it means",
-              "What you do"
-            ],
-            "rows": [
-              [
-                "Watch",
-                "Conditions are favorable. The event is not certain.",
-                "Be prepared"
-              ],
-              [
-                "Warning",
-                "The hazard is imminent or occurring.",
-                "Take action"
-              ],
-              [
-                "Advisory",
-                "Hazardous or inconvenient, but below warning criteria.",
-                "Be aware, use caution"
-              ],
-              [
-                "Statement",
-                "Updates an active warning, or covers sub-severe conditions.",
-                "Stay informed"
-              ]
-            ]
-          },
+          "tiers": [
+            { "name": "Watch", "tone": "watch", "means": "Conditions are favorable. The event is not certain.", "action": "Be prepared" },
+            { "name": "Warning", "tone": "warning", "means": "The hazard is imminent or occurring.", "action": "Take action" },
+            { "name": "Advisory", "tone": "advisory", "means": "Hazardous or inconvenient, but below warning criteria.", "action": "Be aware" },
+            { "name": "Statement", "tone": "statement", "means": "Updates an active warning, or covers sub-severe conditions.", "action": "Stay informed" }
+          ],
           "note": "An advisory is not an all-clear, and it does not promise an upgrade. Advisories exist across the winter, wind, dust, fog, heat, flood and marine programs."
         },
         {
+          "kind": "prose",
           "heading": "Who issues what",
           "points": [
             "Tornado Warnings and Severe Thunderstorm Warnings come from your local Weather Forecast Office (WFO).",
@@ -55,37 +46,12 @@
           ]
         },
         {
+          "kind": "vtec",
           "heading": "Reading a VTEC string",
-          "body": "In a string such as /O.NEW.KMAF.SV.W.0043.../ the two letters before the significance code are the phenomenon, and the single letter after is the significance.",
-          "table": {
-            "columns": [
-              "Code",
-              "Significance"
-            ],
-            "rows": [
-              [
-                "W",
-                "Warning"
-              ],
-              [
-                "A",
-                "Watch"
-              ],
-              [
-                "Y",
-                "Advisory"
-              ],
-              [
-                "S",
-                "Statement"
-              ]
-            ]
-          },
-          "points": [
-            "Common phenomenon codes: SV = severe thunderstorm, TO = tornado, FF = flash flood."
-          ]
+          "intro": "Every watch, warning and advisory carries one of these machine strings. Two parts matter most to you: the phenomenon and the significance."
         },
         {
+          "kind": "prose",
           "heading": "Polygons and phone alerts",
           "points": [
             "Storm-based polygon warnings are drawn to the projected threat area rather than following county lines, which cuts down on over-warning people outside the storm path.",
@@ -99,21 +65,30 @@
       "changes": [
         {
           "what": "NWS plans to retire the terms Advisory and Special Weather Statement in favor of plain-language headlines. Watch and Warning are staying.",
-          "when": "Announced, repeatedly delayed, NOT yet implemented. Advisories are still live products."
+          "when": "Announced, repeatedly delayed. NWS says no earlier than calendar 2026 and has promised at least six months notice. Advisories are still live products."
         }
       ],
-      "essentials": [
-        "Watch means be prepared. Warning means take action. Advisory means be aware.",
-        "Your local NWS office issues the warnings. The Storm Prediction Center issues the convective watches.",
-        "Not every warning sends an alert to phones.",
-        "Convective criteria are national. Most other thresholds are set by your local office."
+      "quickChecks": [
+        { "q": "Conditions are favorable but the event is not certain. Which tier is that, and what do you do?", "a": "A Watch. Be prepared. Warning means take action, Advisory means be aware." },
+        { "q": "Who issues the Tornado Warning for your county, and who issued the watch before it?", "a": "Your local forecast office issues the warning. The Storm Prediction Center issued the watch." },
+        { "q": "Your phone stayed silent. Does that mean there is no warning near you?", "a": "No. WEA is selective by design, and not every warning sends a phone alert. Keep a second path, like the app or NOAA Weather Radio." },
+        { "q": "In /O.NEW.KMAF.SV.W.0043/, what are SV and W?", "a": "SV is the phenomenon, severe thunderstorm. W is the significance, Warning." }
       ]
     },
     "convective-warnings": {
+      "tagline": "Two numbers, three tags, and which storms buzz phones.",
+      "minutes": 7,
       "intro": "This is the module where a wrong answer has real operational consequences, which is why it needs 85 percent to pass. The criteria here are national, so these numbers are the same wherever you spot.",
+      "essentials": [
+        "Severe Thunderstorm Warning: 58 mph winds or 1.00 inch hail. Either one alone is enough.",
+        "A quarter is 1.00 inch. That is the size that matters.",
+        "Only a Destructive tag sends a severe thunderstorm warning to phones.",
+        "Every tornado warning goes to phones, whatever the tag."
+      ],
       "sections": [
         {
-          "heading": "Severe Thunderstorm Warning criteria",
+          "kind": "prose",
+          "heading": "The two numbers",
           "body": "Wind gusts of 58 mph and/or hail of 1.00 inch. Either one alone is enough. The hail criterion rose from 0.75 inch to 1.00 inch in 2010.",
           "points": [
             "58 mph is the conversion of 50 knots (57.5 mph, rounded). Warning text often renders it as 60 mph.",
@@ -121,145 +96,108 @@
           ]
         },
         {
-          "heading": "Hail size reference",
-          "table": {
-            "columns": [
-              "Common object",
-              "Diameter",
-              "Severe?"
-            ],
-            "rows": [
-              [
-                "Penny",
-                "0.75 inch",
-                "No, not since 2010"
-              ],
-              [
-                "Quarter",
-                "1.00 inch",
-                "Yes, this is the threshold"
-              ],
-              [
-                "Golf ball",
-                "1.75 inch",
-                "Yes, Considerable tag"
-              ],
-              [
-                "Baseball",
-                "2.75 inch",
-                "Yes, Destructive tag"
-              ]
-            ]
-          }
+          "kind": "hailScale",
+          "heading": "Hail size, to scale",
+          "items": [
+            { "name": "Penny", "inches": 0.75, "severe": false, "badge": "Not severe since 2010", "badgeTone": "no" },
+            { "name": "Quarter", "inches": 1.0, "severe": true, "threshold": true, "badge": "Warning threshold", "badgeTone": "yes" },
+            { "name": "Golf ball", "inches": 1.75, "severe": true, "badge": "Considerable", "badgeTone": "tag" },
+            { "name": "Baseball", "inches": 2.75, "severe": true, "badge": "Destructive", "badgeTone": "tag" }
+          ],
+          "note": "Report hail by comparing to a coin or ball, never a guess in inches. A quarter is the coin that matters."
         },
         {
+          "kind": "tagLadder",
           "heading": "Severe Thunderstorm Warning damage threat tags",
-          "table": {
-            "columns": [
-              "Tag",
-              "Requires at least",
-              "Triggers WEA?"
-            ],
-            "rows": [
-              [
-                "Base",
-                "Meets 58 mph / 1.00 inch",
-                "No"
-              ],
-              [
-                "Considerable",
-                "70 mph and/or 1.75 inch",
-                "No"
-              ],
-              [
-                "Destructive",
-                "80 mph and/or 2.75 inch",
-                "Yes"
-              ]
-            ]
-          },
+          "tags": [
+            { "name": "Base", "criteria": "Meets 58 mph and/or 1.00 inch hail", "wea": false },
+            { "name": "Considerable", "criteria": "At least 70 mph and/or 1.75 inch hail", "wea": false },
+            { "name": "Destructive", "criteria": "At least 80 mph and/or 2.75 inch hail", "wea": true }
+          ],
           "note": "The highest qualifying value of either wind or hail sets the tag. If your phone buzzes for a severe thunderstorm warning, it is the top tier."
         },
         {
+          "kind": "tagLadder",
           "heading": "Tornado Warning tags",
-          "table": {
-            "columns": [
-              "Tag",
-              "Meaning",
-              "Triggers WEA?"
-            ],
-            "rows": [
-              [
-                "Base",
-                "No tag",
-                "Yes"
-              ],
-              [
-                "Considerable",
-                "Elevated threat",
-                "Yes"
-              ],
-              [
-                "Catastrophic",
-                "Tornado Emergency wording",
-                "Yes"
-              ]
-            ]
-          },
+          "tags": [
+            { "name": "Base", "criteria": "Radar-indicated or reliably reported tornado, no tag line", "wea": true },
+            { "name": "Considerable", "criteria": "Elevated threat. This is the tag that carries PARTICULARLY DANGEROUS SITUATION wording in the warning", "wea": true },
+            { "name": "Catastrophic", "criteria": "Tornado Emergency wording", "wea": true }
+          ],
           "points": [
             "Every tornado warning fires a WEA regardless of tag. This is the opposite of severe thunderstorm warnings.",
-            "Catastrophic is used only when reliable sources confirm a violent tornado and there is a severe threat to life with catastrophic damage occurring.",
+            "Catastrophic is exceedingly rare: reliable sources or clear radar evidence confirm a damaging tornado, and a severe threat to life with catastrophic damage is occurring.",
             "A Tornado Warning may be issued on radar indication OR a reliable spotter report. Both demand the same protective action."
           ]
         },
         {
-          "heading": "The tag mix-up to avoid",
-          "body": "Severe Thunderstorm Warnings top out at Destructive. Tornado and Flash Flood Warnings top out at Catastrophic. Mixing these up is a common error."
+          "kind": "myths",
+          "heading": "The mix-up to avoid",
+          "myths": [
+            {
+              "myth": "Severe Thunderstorm Warnings go Base, Considerable, Catastrophic.",
+              "truth": "They top out at Destructive. Tornado and Flash Flood Warnings are the ones that top out at Catastrophic."
+            }
+          ]
         }
       ],
-      "essentials": [
-        "Severe Thunderstorm Warning: 58 mph winds or 1.00 inch hail. Either one alone is enough.",
-        "A quarter is 1.00 inch. That is the size that matters.",
-        "Only a Destructive tag sends a severe thunderstorm warning to phones.",
-        "Every tornado warning goes to phones, whatever the tag."
+      "quickChecks": [
+        { "q": "What are the two numbers that make a storm severe?", "a": "58 mph wind gusts and 1.00 inch hail, quarter size. Either one alone is enough." },
+        { "q": "Your phone buzzes with a Severe Thunderstorm Warning. What does that tell you about the tag?", "a": "It is the top tier, Destructive: at least 80 mph and/or baseball size hail. Base and Considerable do not alert phones." },
+        { "q": "Which warnings top out at Catastrophic, and which at Destructive?", "a": "Tornado and Flash Flood Warnings top out at Catastrophic. Severe Thunderstorm Warnings top out at Destructive." },
+        { "q": "A storm has 45 mph gusts and pea size hail. What product covers it?", "a": "A Special Weather Statement. It is below the severe thresholds." },
+        { "q": "Does a radar-indicated Tornado Warning demand less action than a confirmed one?", "a": "No. Both demand the same protective action." }
       ]
     },
     "watches-outlooks": {
+      "tagline": "The products that let you position instead of react.",
+      "minutes": 5,
       "intro": "The products that arrive before the warning. These are what let you position and prepare rather than react.",
+      "essentials": [
+        "SPC issues the watches. Your local office issues the warnings.",
+        "Risk levels run Marginal, Slight, Enhanced, Moderate, High. Marginal is first, not Slight.",
+        "Tornadoes still happen inside a Severe Thunderstorm Watch.",
+        "Do not wait for a watch to start operations."
+      ],
       "sections": [
         {
+          "kind": "compare",
           "heading": "Watch versus warning",
-          "table": {
-            "columns": [
-              "",
-              "Watch",
-              "Warning"
-            ],
+          "a": {
+            "title": "Watch",
+            "tone": "watch",
             "rows": [
-              [
-                "Issued by",
-                "Storm Prediction Center",
-                "Local WFO"
-              ],
-              [
-                "Area",
-                "Large, multi-county",
-                "Storm-specific polygon"
-              ],
-              [
-                "Duration",
-                "Several hours",
-                "Short-fused"
-              ]
+              ["Issued by", "Storm Prediction Center"],
+              ["Area", "Large, multi-county"],
+              ["Duration", "Several hours"],
+              ["Your move", "Position and prepare"]
+            ]
+          },
+          "b": {
+            "title": "Warning",
+            "tone": "warning",
+            "rows": [
+              ["Issued by", "Your local forecast office"],
+              ["Area", "Storm-specific polygon"],
+              ["Duration", "Short-fused"],
+              ["Your move", "Act now"]
             ]
           }
         },
         {
+          "kind": "riskLadder",
           "heading": "SPC Convective Outlook risk levels",
-          "body": "In ascending order: Marginal (1), Slight (2), Enhanced (3), Moderate (4), High (5).",
+          "levels": [
+            { "num": 1, "name": "Marginal", "color": "#66A366", "desc": "Isolated severe storms possible" },
+            { "num": 2, "name": "Slight", "color": "#FFE066", "desc": "Scattered severe storms possible" },
+            { "num": 3, "name": "Enhanced", "color": "#FFA366", "desc": "Numerous severe storms possible" },
+            { "num": 4, "name": "Moderate", "color": "#E06666", "desc": "Widespread severe storms likely" },
+            { "num": 5, "name": "High", "color": "#EE99EE", "desc": "Severe weather outbreak expected" }
+          ],
           "note": "Marginal comes before Slight. This ordering is a frequent trip-up."
         },
         {
+          "kind": "prose",
           "heading": "PDS wording",
           "points": [
             "PDS stands for Particularly Dangerous Situation, used in rare cases.",
@@ -268,392 +206,418 @@
           ]
         },
         {
+          "kind": "prose",
           "heading": "Mesoscale Discussions",
-          "body": "An SPC Mesoscale Discussion describes short-term evolving conditions and often precedes a watch, frequently stating watch probability and timing."
+          "body": "An SPC Mesoscale Discussion describes short-term evolving conditions and often precedes a watch, frequently stating watch probability and timing. SPC aims to issue one an hour or two before the watch itself."
         },
         {
+          "kind": "myths",
           "heading": "Two things spotters get wrong",
-          "points": [
-            "A Severe Thunderstorm Watch does not mean tornadoes are impossible. Brief tornadoes occur inside them regularly, especially with QLCS or squall-line circulations that give little lead time.",
-            "Do not wait for a watch to begin operations. Outlooks, the Hazardous Weather Outlook and Mesoscale Discussions all come first, and warnings are sometimes issued with no watch in effect at all."
+          "myths": [
+            {
+              "myth": "It is only a Severe Thunderstorm Watch, so no tornadoes today.",
+              "truth": "Brief tornadoes occur inside severe thunderstorm watches regularly, especially with QLCS or squall-line circulations that give little lead time."
+            },
+            {
+              "myth": "Wait for the watch before starting operations.",
+              "truth": "Outlooks, the Hazardous Weather Outlook and Mesoscale Discussions all come first, and warnings are sometimes issued with no watch in effect at all."
+            }
           ]
         }
       ],
-      "essentials": [
-        "SPC issues the watches. Your local office issues the warnings.",
-        "Risk levels run Marginal, Slight, Enhanced, Moderate, High. Marginal is first, not Slight.",
-        "Tornadoes still happen inside a Severe Thunderstorm Watch.",
-        "Do not wait for a watch to start operations."
+      "quickChecks": [
+        { "q": "Put these in order, lowest first: Slight, Marginal, Enhanced.", "a": "Marginal, then Slight, then Enhanced. Marginal is level 1 of 5." },
+        { "q": "A Severe Thunderstorm Watch is up. Can a tornado still happen?", "a": "Yes. Brief tornadoes occur inside severe thunderstorm watches, especially in QLCS squall lines, with little lead time." },
+        { "q": "What often shows up an hour or two before a watch?", "a": "An SPC Mesoscale Discussion, frequently stating watch probability and timing." },
+        { "q": "Should you wait for the watch before starting operations?", "a": "No. Outlooks, the HWO and Mesoscale Discussions come first, and warnings sometimes arrive with no watch at all." }
       ]
     },
     "flooding": {
+      "tagline": "Rewritten in 2021. Most older training is wrong here.",
+      "minutes": 6,
       "intro": "The flood program was significantly restructured in November 2021. Most older spotter training is wrong here, so pay attention to what no longer exists.",
-      "sections": [
-        {
-          "heading": "Flash Flood Warning",
-          "body": "Issued when life- or property-threatening short-term flooding is imminent or occurring, whether from heavy rainfall or from a dam or levee failure.",
-          "table": {
-            "columns": [
-              "Tag",
-              "Meaning",
-              "Triggers WEA?"
-            ],
-            "rows": [
-              [
-                "Base",
-                "Flash flooding imminent or occurring",
-                "No"
-              ],
-              [
-                "Considerable",
-                "Elevated threat",
-                "Yes"
-              ],
-              [
-                "Catastrophic",
-                "Flash Flood Emergency",
-                "Yes"
-              ]
-            ]
-          },
-          "note": "Base-tagged flash flood warnings deliberately do not fire a WEA. Previously every one did, which diluted the alert."
-        },
-        {
-          "heading": "What the 2021 consolidation changed",
-          "points": [
-            "The Flash Flood Watch survives only for non-convective causes: dam or levee failure and ice jams, plus excessive rainfall over burn scars or debris-flow-prone terrain.",
-            "When the cause is simply excessive rainfall, Flash Flood Watch and Flood Watch merged into a single Flood Watch.",
-            "Five separate advisory headlines, including Urban and Small Stream, Arroyo and Small Stream, and Hydrologic Advisory, all collapsed into one Flood Advisory."
-          ],
-          "note": "If your training material still lists Urban and Small Stream Flood Advisory as a distinct product, it is out of date."
-        },
-        {
-          "heading": "Flood Warning versus Flash Flood Warning",
-          "body": "The difference is onset speed and rate of rise. Flash flooding is rapid. A Flood Warning covers slower-developing areal or river flooding, including flooding that persists after the flash flood threat has ended."
-        },
-        {
-          "heading": "Flood Advisory",
-          "body": "Nuisance-level flooding: ponding on roads, minor stream overflow, not expected to be hazardous. It is not an all-clear, and conditions can escalate to a warning."
-        },
-        {
-          "heading": "Critical for arroyo and desert terrain",
-          "body": "Flash flooding can occur in an area receiving no rain at all. Runoff from upstream, burn scars, and dam or levee failure all produce flash flooding under clear skies.",
-          "points": [
-            "Flood Watches give hours of preparation lead time. Flash Flood Warnings are short-fused."
-          ]
-        }
-      ],
       "essentials": [
         "Flash flooding is rapid. A Flood Warning is slower or longer lasting.",
         "Base flash flood warnings do not go to phones. Considerable and Catastrophic do.",
         "Since 2021 the Flash Flood Watch only covers dam and levee failure, ice jams and burn scars.",
         "Flash flooding happens in places where it is not raining."
+      ],
+      "sections": [
+        {
+          "kind": "prose",
+          "heading": "Flash Flood Warning",
+          "body": "Issued when life- or property-threatening short-term flooding is imminent or occurring, whether from heavy rainfall or from a dam or levee failure."
+        },
+        {
+          "kind": "tagLadder",
+          "heading": "Flash Flood Warning damage threat tags",
+          "tags": [
+            { "name": "Base", "criteria": "Flash flooding imminent or occurring", "wea": false },
+            { "name": "Considerable", "criteria": "Elevated threat", "wea": true },
+            { "name": "Catastrophic", "criteria": "Flash Flood Emergency wording", "wea": true }
+          ],
+          "note": "Base-tagged flash flood warnings deliberately do not fire a WEA, an impact-based change rolled out in 2019 and 2020. Before that every flash flood warning buzzed, which diluted the alert."
+        },
+        {
+          "kind": "renames",
+          "heading": "What the 2021 consolidation changed",
+          "when": "November 2021",
+          "rows": [
+            {
+              "old": "Flash Flood Watch for rain-driven events",
+              "new": "Flood Watch",
+              "note": "The Flash Flood Watch survives only for dam or levee failure, ice jams, and excessive rain over burn scars or debris-flow-prone terrain."
+            },
+            {
+              "old": "Five advisories: Urban and Small Stream, Arroyo and Small Stream, Small Stream, Flood, Hydrologic",
+              "new": "One Flood Advisory",
+              "note": "If training material still lists Urban and Small Stream Flood Advisory as a distinct product, it is out of date."
+            }
+          ]
+        },
+        {
+          "kind": "compare",
+          "heading": "Flash Flood Warning versus Flood Warning",
+          "a": {
+            "title": "Flash Flood Warning",
+            "tone": "warning",
+            "rows": [
+              ["Onset", "Rapid: minutes to hours"],
+              ["Cause", "Intense rain, dam or levee failure"],
+              ["Fuse", "Short"]
+            ]
+          },
+          "b": {
+            "title": "Flood Warning",
+            "tone": "advisory",
+            "rows": [
+              ["Onset", "Slower: hours to days"],
+              ["Cause", "Areal or river flooding"],
+              ["Fuse", "Longer, persists after the flash threat ends"]
+            ]
+          },
+          "note": "The difference is onset speed and rate of rise, not severity."
+        },
+        {
+          "kind": "prose",
+          "heading": "Flood Advisory",
+          "body": "Ponding on roads, minor stream overflow: flooding that causes inconvenience rather than immediate danger. It is not an all-clear. If caution is ignored it can still threaten life or property, and conditions can escalate to a warning."
+        },
+        {
+          "kind": "myths",
+          "heading": "Dry ground is not safe ground",
+          "myths": [
+            {
+              "myth": "It is not raining here, so flash flooding cannot reach me.",
+              "truth": "Runoff from upstream, burn scars, and dam or levee failure all produce flash flooding under clear skies. Critical in arroyo and desert terrain."
+            }
+          ],
+          "points": [
+            "Flood Watches give hours of preparation lead time. Flash Flood Warnings are short-fused."
+          ]
+        }
+      ],
+      "quickChecks": [
+        { "q": "Which flash flood tags alert phones?", "a": "Considerable and Catastrophic. Base does not." },
+        { "q": "What tag does a Flash Flood Emergency carry?", "a": "Catastrophic." },
+        { "q": "It is dry where you stand. Can flash flooding still reach you?", "a": "Yes. Upstream rain, burn scars, and dam or levee failure produce flash floods under clear skies." },
+        { "q": "Since 2021, when does a Flash Flood Watch still get issued?", "a": "Only for dam or levee failure, ice jams, and burn scar or debris flow terrain. Ordinary rain threats use the Flood Watch." }
       ]
     },
     "winter": {
+      "tagline": "Rebuilt in October 2024. Several products no longer exist.",
+      "minutes": 7,
       "intro": "The cold-weather headlines were rebuilt on October 1, 2024. Several products you may have trained on no longer exist under those names.",
+      "essentials": [
+        "Wind Chill products are gone. They are Extreme Cold Warning and Cold Weather Advisory now.",
+        "Blizzard is about wind and visibility for 3 hours, not snow totals.",
+        "A ground blizzard needs no falling snow at all.",
+        "Snow amounts for a Winter Storm Warning are set by your local office."
+      ],
       "sections": [
         {
-          "heading": "What changed on October 1, 2024",
-          "table": {
-            "columns": [
-              "Old product",
-              "New product"
-            ],
-            "rows": [
-              [
-                "Wind Chill Warning",
-                "Extreme Cold Warning"
-              ],
-              [
-                "Wind Chill Watch",
-                "Extreme Cold Watch"
-              ],
-              [
-                "Wind Chill Advisory",
-                "Cold Weather Advisory (VTEC CW.Y)"
-              ],
-              [
-                "Hard Freeze Watch / Warning",
-                "Consolidated into Freeze Watch / Warning"
-              ]
-            ]
-          },
-          "note": "The VTEC phenomenon code WC was retired outright. The rename reflects that dangerous cold does not require wind. Freeze products now carry hard freeze messaging in the body text when appropriate."
+          "kind": "renames",
+          "heading": "The October 2024 rebuild",
+          "when": "Effective October 1, 2024",
+          "rows": [
+            { "old": "Wind Chill Warning", "new": "Extreme Cold Warning" },
+            { "old": "Wind Chill Watch", "new": "Extreme Cold Watch" },
+            {
+              "old": "Wind Chill Advisory",
+              "new": "Cold Weather Advisory",
+              "note": "New VTEC code CW.Y. The old WC phenomenon code was retired outright."
+            },
+            {
+              "old": "Hard Freeze Watch / Warning",
+              "new": "Folded into Freeze Watch / Warning",
+              "note": "Hard freeze wording now rides in the product body when it applies."
+            }
+          ],
+          "note": "The renames reflect that dangerous cold does not require wind. The cold products are now issued on temperature or wind chill, either one."
         },
         {
-          "heading": "Blizzard Warning",
-          "body": "Sustained wind or frequent gusts of 35 mph or more, with considerable falling and/or blowing snow reducing visibility below 1/4 mile, for 3 hours or longer.",
+          "kind": "criteriaAll",
+          "heading": "Blizzard Warning: three things at once",
+          "items": [
+            { "title": "35+ mph", "detail": "Sustained wind or frequent gusts" },
+            { "title": "Under 1/4 mile", "detail": "Visibility in considerable falling and/or blowing snow" },
+            { "title": "3+ hours", "detail": "Expected to persist" }
+          ],
+          "banner": "All three together. No snowfall total required.",
           "points": [
             "Blizzard criteria are about wind and visibility duration, not snowfall totals. No specific accumulation is required.",
             "Snow does not have to be falling. Blowing and drifting of existing snow can produce blizzard conditions under a clear sky, known as a ground blizzard."
           ]
         },
         {
+          "kind": "prose",
           "heading": "Snow Squall Warning",
           "body": "A short-lived, intense burst of snow with strong winds causing sudden whiteout and flash freezing. Polygon-based and short-fused. Accumulation is usually minor. The hazard is sudden visibility loss and icing, which drives multi-vehicle pileups.",
           "points": [
             "Fires a WEA only when it carries the significant tag, so the alert is reserved for substantial threats to safe travel.",
-            "Not issued where a Winter Storm Warning or Blizzard Warning is already active for the same area."
+            "Not issued where a Winter Storm Warning or Blizzard Warning is already active for the same area.",
+            "It can be issued during a Winter Weather Advisory when conditions briefly turn much worse."
           ]
         },
         {
+          "kind": "table",
           "heading": "The rest of the winter suite",
           "table": {
-            "columns": [
-              "Product",
-              "Issued for"
-            ],
+            "columns": ["Product", "Issued for"],
             "rows": [
-              [
-                "Ice Storm Warning",
-                "Roughly 1/4 inch or more of ice accretion, enough to bring down limbs and power lines"
-              ],
-              [
-                "Winter Storm Warning",
-                "A significant winter event that may combine snow, sleet, ice or blowing snow"
-              ],
-              [
-                "Winter Weather Advisory",
-                "Wintry precipitation below warning criteria but enough to cause travel difficulty"
-              ],
-              [
-                "Lake Effect Snow Warning",
-                "Available at regional discretion"
-              ]
+              ["Ice Storm Warning", "Roughly 1/4 inch or more of ice accretion, enough to bring down limbs and power lines"],
+              ["Winter Storm Warning", "A significant winter event that may combine snow, sleet, ice or blowing snow"],
+              ["Winter Weather Advisory", "Wintry precipitation below warning criteria but enough to cause travel difficulty"],
+              ["Lake Effect Snow Warning", "Available at regional discretion"]
             ]
           },
           "note": "The Lake Effect Snow Warning was folded into the Winter Storm Warning for the 2017-18 season, then reinstated effective October 2019 after partner pushback. Offices may use either product."
         }
       ],
       "local": "Winter Storm Warning accumulation thresholds, Winter Weather Advisory thresholds, and exact Ice Storm Warning accretion amounts are all set locally and vary widely by region. Blizzard criteria are the reliable national numbers in this module.",
-      "essentials": [
-        "Wind Chill products are gone. They are Extreme Cold Warning and Cold Weather Advisory now.",
-        "Blizzard is about wind and visibility for 3 hours, not snow totals.",
-        "A ground blizzard needs no falling snow at all.",
-        "Snow amounts for a Winter Storm Warning are set by your local office."
+      "quickChecks": [
+        { "q": "How much snow does a Blizzard Warning require?", "a": "None. It is wind of 35+ mph, visibility under 1/4 mile, for 3 or more hours. The snow can be entirely blowing snow, a ground blizzard." },
+        { "q": "What replaced the Wind Chill Advisory?", "a": "The Cold Weather Advisory, in October 2024. Wind Chill products are gone, and dangerous cold no longer requires wind." },
+        { "q": "When does a Snow Squall Warning alert phones?", "a": "Only when it carries the significant tag." },
+        { "q": "Is a Snow Squall Warning issued inside an active Winter Storm Warning?", "a": "No, they are kept separate. It can be issued during a Winter Weather Advisory if conditions briefly turn much worse." }
       ]
     },
     "non-precip": {
+      "tagline": "Mostly local numbers, one big rename, and the wind-source rule.",
+      "minutes": 6,
       "intro": "The Non-Precipitation Weather program. This is the most heavily local module in the bank, so treat most numbers here as typical rather than universal.",
-      "sections": [
-        {
-          "heading": "The March 2025 heat rename",
-          "table": {
-            "columns": [
-              "Old product",
-              "New product"
-            ],
-            "rows": [
-              [
-                "Excessive Heat Warning",
-                "Extreme Heat Warning"
-              ],
-              [
-                "Excessive Heat Watch",
-                "Extreme Heat Watch"
-              ],
-              [
-                "Heat Advisory",
-                "Unchanged"
-              ]
-            ]
-          },
-          "note": "Only the watch and warning were renamed, aligning the language with the Extreme Cold products. The Heat Advisory kept its name."
-        },
-        {
-          "heading": "Dust products",
-          "points": [
-            "Dust Storm Warning: visibility reduced to 1/4 mile or less, usually with winds of 25 mph or greater. The classic case is a convectively driven outflow dust wall.",
-            "Dust Advisory: short-duration dangerous blowing dust.",
-            "Blowing Dust Advisory: widespread dust over an extended period.",
-            "Both advisories mean stay alert and consider delaying travel."
-          ]
-        },
-        {
-          "heading": "Fog, wind, and cold",
-          "table": {
-            "columns": [
-              "Product",
-              "Typical trigger"
-            ],
-            "rows": [
-              [
-                "Dense Fog Advisory",
-                "Widespread visibility below 1/4 mile for an extended period"
-              ],
-              [
-                "High Wind Warning",
-                "Non-convective sustained winds around 40 mph, or gusts to 58 mph"
-              ],
-              [
-                "Freeze Warning",
-                "At or below 32 degrees during the growing season, generally sustained"
-              ],
-              [
-                "Frost Advisory",
-                "Near but above freezing, with light winds and clear skies favoring frost"
-              ]
-            ]
-          },
-          "note": "Outside the growing season a Freeze Warning is usually not issued."
-        },
-        {
-          "heading": "Same wind speed, different product",
-          "body": "Gusts of 58 mph from a thunderstorm produce a Severe Thunderstorm Warning. The same 58 mph from a non-convective gradient wind event produces a High Wind Warning. The distinction is the source: convective winds fall under the severe program, synoptic or gradient winds under the non-precipitation program."
-        }
-      ],
-      "local": "Heat criteria vary substantially by office and climate zone. What triggers a warning in the desert Southwest differs from the upper Midwest. High Wind Warning thresholds are likewise locally set. Dense Fog Advisory visibility varies by office.",
       "essentials": [
         "Excessive Heat became Extreme Heat in 2025. The Heat Advisory did not change.",
         "58 mph from a storm is a Severe Thunderstorm Warning. The same wind with no storm is a High Wind Warning.",
         "Dust Storm Warning means visibility of 1/4 mile or less.",
         "Most thresholds in this module are local, not national."
-      ]
-    },
-    "fire-weather": {
-      "intro": "Red Flag Warnings depend on fuels as well as weather, and the numeric criteria are entirely local. What matters here is the structure, not the numbers.",
-      "sections": [
-        {
-          "heading": "Red Flag Warning",
-          "body": "A warning-level product denoting high confidence that critical fire weather AND fuel conditions are occurring or will occur, generally within 24 hours."
-        },
-        {
-          "heading": "Fire Weather Watch",
-          "body": "Indicates potential for dangerous fire weather 24 to 96 hours out."
-        },
-        {
-          "heading": "What red flag criteria combine",
-          "points": [
-            "Low relative humidity",
-            "Sustained 20-foot winds above a threshold",
-            "Dry fuel conditions or a fire danger rating"
-          ],
-          "note": "All three must occur together, typically for three or more consecutive hours."
-        },
-        {
-          "heading": "PDS Red Flag Warnings",
-          "body": "PDS wording is not limited to convective products. Some offices have applied it to Red Flag Warnings in rare, extreme fire weather situations."
-        }
       ],
-      "local": "Red Flag Warning numeric criteria are NOT national. They are defined locally in coordination with land management agencies and vary considerably by region and fuel type. Do not memorize a humidity or wind number from another office.",
-      "essentials": [
-        "Red Flag needs dangerous weather and dry fuels together, not just wind.",
-        "Fire Weather Watch is 24 to 96 hours out. Red Flag Warning is within about 24 hours.",
-        "The actual numbers are set locally with land management agencies."
-      ]
-    },
-    "tropical-marine": {
-      "intro": "Timing windows define these products. Unlike most of the suite, the number that matters is usually hours of lead time rather than a wind speed.",
       "sections": [
         {
-          "heading": "Tropical timing and wind criteria",
-          "table": {
-            "columns": [
-              "Product",
-              "Condition",
-              "Within"
-            ],
-            "rows": [
-              [
-                "Hurricane Warning",
-                "Sustained winds 74 mph or greater expected",
-                "36 hours"
-              ],
-              [
-                "Hurricane Watch",
-                "Same conditions possible",
-                "48 hours"
-              ],
-              [
-                "Tropical Storm Warning",
-                "Sustained winds 39 to 73 mph expected",
-                "36 hours"
-              ],
-              [
-                "Storm Surge Warning",
-                "Life-threatening inundation danger",
-                "36 hours"
-              ],
-              [
-                "Storm Surge Watch",
-                "Life-threatening inundation possible",
-                "48 hours"
-              ]
-            ]
-          },
+          "kind": "renames",
+          "heading": "The March 2025 heat rename",
+          "when": "Effective March 4, 2025",
+          "rows": [
+            { "old": "Excessive Heat Warning", "new": "Extreme Heat Warning" },
+            { "old": "Excessive Heat Watch", "new": "Extreme Heat Watch" }
+          ],
+          "note": "Only the watch and warning were renamed, aligning the language with the Extreme Cold products. The Heat Advisory kept its name."
+        },
+        {
+          "kind": "prose",
+          "heading": "Dust products",
           "points": [
-            "Gust criteria are not used for tropical wind products, only sustained winds.",
-            "Storm surge products are separate from wind products and can cover different areas."
+            "Dust Storm Warning: visibility reduced to 1/4 mile or less, usually with winds of 25 mph or greater. The classic case is a convectively driven outflow dust wall.",
+            "Blowing Dust Warning: the same 1/4 mile visibility, from widespread wind-driven dust rather than a storm outflow.",
+            "Dust Advisory: short-duration dangerous blowing dust, visibility between 1 mile and 1/4 mile.",
+            "Blowing Dust Advisory: widespread dust in that same visibility band over an extended period.",
+            "Both advisories mean stay alert and consider delaying travel. Visibility of 1/4 mile or less is what makes it a warning."
           ]
         },
         {
-          "heading": "Extreme Wind Warning",
-          "body": "A short-fused warning for the onset of extreme sustained surface winds in the eyewall of a major hurricane, Category 3 or higher. It tells people to shelter immediately in an interior room. It is not used for non-tropical wind events."
-        },
-        {
-          "heading": "Marine wind products",
+          "kind": "table",
+          "heading": "Fog, wind, and cold",
           "table": {
-            "columns": [
-              "Product",
-              "Sustained winds or frequent gusts"
-            ],
+            "columns": ["Product", "Typical trigger"],
             "rows": [
-              [
-                "Gale Warning",
-                "34 to 47 knots"
-              ],
-              [
-                "Storm Warning",
-                "48 to 63 knots"
-              ],
-              [
-                "Hurricane Force Wind Warning",
-                "64 knots or more, not associated with a tropical cyclone"
-              ]
+              ["Dense Fog Advisory", "Widespread visibility below 1/4 mile for an extended period"],
+              ["High Wind Warning", "Non-convective sustained winds around 40 mph for an hour or more, or gusts to 58 mph for any duration"],
+              ["Freeze Warning", "At or below 32 degrees during the growing season, generally sustained"],
+              ["Frost Advisory", "Near but above freezing, with light winds and clear skies favoring frost"]
             ]
-          }
+          },
+          "note": "Outside the growing season a Freeze Warning is usually not issued."
         },
         {
+          "kind": "myths",
+          "heading": "Same wind speed, different product",
+          "myths": [
+            {
+              "myth": "58 mph always means a Severe Thunderstorm Warning.",
+              "truth": "Only when a thunderstorm produces it. The same 58 mph from gradient wind is a High Wind Warning. The source decides the product: convective winds fall under the severe program, synoptic winds under the non-precipitation program."
+            }
+          ]
+        }
+      ],
+      "local": "Heat criteria vary substantially by office and climate zone. What triggers a warning in the desert Southwest differs from the upper Midwest. High Wind Warning thresholds are likewise locally set. Dense Fog Advisory visibility varies by office.",
+      "quickChecks": [
+        { "q": "58 mph winds and not a storm in sight. What product?", "a": "High Wind Warning. The same speed from a thunderstorm is a Severe Thunderstorm Warning. The source decides." },
+        { "q": "What visibility makes dust a warning rather than an advisory?", "a": "1/4 mile or less. The advisories cover 1 mile down to 1/4 mile." },
+        { "q": "What was renamed in March 2025, and what kept its name?", "a": "Excessive Heat Watch and Warning became Extreme Heat Watch and Warning. The Heat Advisory kept its name." },
+        { "q": "Are heat thresholds the same everywhere?", "a": "No. Heat criteria are set locally and vary by office and climate zone." }
+      ]
+    },
+    "fire-weather": {
+      "tagline": "Structure over numbers. The numbers are local.",
+      "minutes": 4,
+      "intro": "Red Flag Warnings depend on fuels as well as weather, and the numeric criteria are entirely local. What matters here is the structure, not the numbers.",
+      "essentials": [
+        "Red Flag needs dangerous weather and dry fuels together, not just wind.",
+        "Fire Weather Watch is 18 to 96 hours out. Red Flag Warning is high confidence, generally within 48 hours.",
+        "The actual numbers are set locally with land management agencies."
+      ],
+      "sections": [
+        {
+          "kind": "prose",
+          "heading": "Red Flag Warning",
+          "body": "A warning-level product denoting high confidence that critical fire weather AND fuel conditions are occurring or will occur, generally within 48 hours. Offices are encouraged to issue with longer lead time when confidence is very high or the fire danger is critical."
+        },
+        {
+          "kind": "prose",
+          "heading": "Fire Weather Watch",
+          "body": "Indicates potential for dangerous fire weather, issued 18 to 96 hours ahead of the expected onset. The intent is to alert land managers and the public at least a day in advance."
+        },
+        {
+          "kind": "criteriaAll",
+          "heading": "What red flag criteria combine",
+          "items": [
+            { "title": "Low humidity", "detail": "Very dry air, below a locally set threshold" },
+            { "title": "Wind", "detail": "Sustained winds above a locally set threshold, often measured as 20-foot winds" },
+            { "title": "Dry fuels", "detail": "Fuel dryness or a fire danger rating" }
+          ],
+          "banner": "All together, commonly for three or more consecutive hours.",
+          "note": "The national directive sets no numbers at all. Every threshold is a local agreement between the forecast office and land management agencies."
+        },
+        {
+          "kind": "prose",
+          "heading": "PDS Red Flag Warnings",
+          "body": "PDS wording is not limited to convective products. Offices have applied it to Red Flag Warnings in rare, extreme fire weather situations, such as the windstorms ahead of the January 2025 Los Angeles fires."
+        }
+      ],
+      "local": "Red Flag Warning numeric criteria are NOT national. They are defined locally in coordination with land management agencies and vary considerably by region and fuel type. Do not memorize a humidity or wind number from another office.",
+      "quickChecks": [
+        { "q": "How far out is a Fire Weather Watch issued?", "a": "18 to 96 hours ahead of expected onset. The Red Flag Warning is high confidence, generally within 48 hours." },
+        { "q": "What three things combine for a red flag day?", "a": "Low humidity, wind, and dry fuels, all together. Weather alone is not enough." },
+        { "q": "Is there a national red flag humidity number?", "a": "No. Criteria are set locally with land management agencies. Do not memorize another office's number." }
+      ]
+    },
+    "tropical-marine": {
+      "tagline": "Lead time is the criterion. Hours matter as much as miles per hour.",
+      "minutes": 6,
+      "intro": "Timing windows define these products. Unlike most of the suite, the number that matters is usually hours of lead time rather than a wind speed.",
+      "essentials": [
+        "Warnings are 36 hours out. Watches are 48 hours out.",
+        "Hurricane is 74 mph sustained. Tropical Storm is 39 to 73 mph.",
+        "Marine thresholds are lower than land: 34 knots, or 3/4 inch hail.",
+        "Storm surge is a separate product from wind and can cover a different area."
+      ],
+      "sections": [
+        {
+          "kind": "timeline",
+          "heading": "How far ahead the products come",
+          "intro": "The clocks run to the anticipated arrival of tropical-storm-force winds, so preparations can finish before conditions shut them down.",
+          "bars": [
+            { "label": "Hurricane Watch", "hours": 48, "tone": "watch" },
+            { "label": "Storm Surge Watch", "hours": 48, "tone": "watch" },
+            { "label": "Hurricane Warning", "hours": 36, "tone": "warning" },
+            { "label": "Tropical Storm Warning", "hours": 36, "tone": "warning" },
+            { "label": "Storm Surge Warning", "hours": 36, "tone": "warning" }
+          ],
+          "note": "Gust criteria are not used for tropical wind products, only sustained winds. Storm surge products are separate from wind products and can cover different areas."
+        },
+        {
+          "kind": "prose",
+          "heading": "The wind numbers",
+          "points": [
+            "Hurricane products: sustained winds of 74 mph or greater.",
+            "Tropical Storm products: sustained winds of 39 to 73 mph.",
+            "Storm surge products: life-threatening inundation danger, drawn independently of the wind areas."
+          ]
+        },
+        {
+          "kind": "prose",
+          "heading": "Extreme Wind Warning",
+          "body": "A short-fused warning for the onset of extreme sustained surface winds, 115 mph or greater, in the eyewall of a major hurricane, Category 3 or higher, usually beginning within an hour. It tells people to shelter immediately in an interior room. It is not used for non-tropical wind events."
+        },
+        {
+          "kind": "windBands",
+          "heading": "The marine wind ladder",
+          "bands": [
+            { "name": "Gale Warning", "range": "34 to 47 kt", "span": 14, "color": "#FFE066" },
+            { "name": "Storm Warning", "range": "48 to 63 kt", "span": 16, "color": "#FFA366" },
+            { "name": "Hurricane Force", "range": "64+ kt", "span": 14, "color": "#E06666" }
+          ],
+          "caption": "Sustained winds or frequent gusts, in knots, not associated with a tropical cyclone"
+        },
+        {
+          "kind": "prose",
           "heading": "Special Marine Warning",
           "body": "Issued for winds of 34 knots or greater, hail 3/4 inch or larger, or waterspouts. Short-fused, generally valid up to about two hours.",
-          "note": "Marine thresholds are LOWER than the land severe criteria, because small vessels are vulnerable at lower wind speeds."
+          "note": "Marine thresholds are LOWER than the land severe criteria, because small vessels are vulnerable at lower wind speeds. Marine hail stayed at 3/4 inch when the land threshold moved to 1.00 inch in 2010."
         }
       ],
       "changes": [
         {
           "what": "The Small Craft Advisory is slated to become a Small Craft Warning, the notable exception to the plain-language transition, because of the direct threat to life and property.",
           "when": "Planned, not yet implemented."
+        },
+        {
+          "what": "The NHC forecast cone graphic now also depicts inland tropical storm and hurricane watches and warnings for the U.S., not just the coastline.",
+          "when": "Effective with the 2026 hurricane season."
         }
       ],
-      "essentials": [
-        "Warnings are 36 hours out. Watches are 48 hours out.",
-        "Hurricane is 74 mph sustained. Tropical Storm is 39 to 73 mph.",
-        "Marine thresholds are lower than land: 34 knots, or 3/4 inch hail.",
-        "Storm surge is a separate product from wind and can cover a different area."
+      "quickChecks": [
+        { "q": "How far ahead is a Hurricane Warning issued? A Hurricane Watch?", "a": "Warning 36 hours, Watch 48 hours, measured to the expected arrival of tropical-storm-force winds." },
+        { "q": "What is the Tropical Storm wind range?", "a": "39 to 73 mph sustained. Hurricane is 74 mph and up. Gusts are not used." },
+        { "q": "What does an Extreme Wind Warning mean?", "a": "Eyewall winds of a major hurricane, 115 mph or greater, arriving within about an hour. Shelter immediately in an interior room." },
+        { "q": "Why are marine severe thresholds lower than land?", "a": "Small vessels are vulnerable at lower speeds. 34 knots, 3/4 inch hail, or a waterspout triggers a Special Marine Warning." }
       ]
     },
     "statements": {
+      "tagline": "The everyday products, including the one your reports feed.",
+      "minutes": 5,
       "intro": "The non-warning products that carry most of the day-to-day information flow, including the one your own reports feed.",
+      "essentials": [
+        "A Severe Weather Statement updates or cancels a warning already running.",
+        "A Special Weather Statement covers storms just under severe.",
+        "Local Storm Reports are where your spotter reports land.",
+        "Report as it happens. Late reports mostly have archival value."
+      ],
       "sections": [
         {
+          "kind": "prose",
           "heading": "Severe Weather Statement (SVS)",
           "body": "Follows an active severe thunderstorm or tornado warning: updating its status, shrinking the polygon as the threat passes, or cancelling it. Damage threat tags can be upgraded through an SVS."
         },
         {
+          "kind": "prose",
           "heading": "Special Weather Statement",
-          "body": "Covers hazards warranting heightened awareness that fall short of watch, warning or advisory level: roughly 40 to 57 mph gusts, hail under 1 inch, or funnel clouds not expected to reach the ground."
+          "body": "Covers hazards warranting heightened awareness that fall short of watch, warning or advisory level: roughly 40 to 57 mph gusts, hail under 1 inch, frequent lightning, or funnel clouds not expected to become a tornado threat."
         },
         {
+          "kind": "prose",
           "heading": "Local Storm Report (LSR)",
           "body": "A record of observed severe or significant weather: hail size, wind damage, tornadoes, flooding. Many originate from spotter and public reports.",
           "note": "This is the product your reports feed. Report significant observations as they occur, safely. Timely reports have operational value, late reports mostly have archival value."
         },
         {
+          "kind": "prose",
           "heading": "Hazardous Weather Outlook (HWO)",
-          "body": "Describes expected hazards over a seven-day period, updated as needed. It includes a spotter activation statement, which is the section telling you whether activation is anticipated."
+          "body": "Describes expected hazards over a seven-day period, updated as needed. It includes a spotter activation statement, which is the section telling you whether activation is anticipated.",
+          "note": "Some offices have retired the text HWO in favor of a graphical version, moving the spotter activation statement into the Area Forecast Discussion. Which form you get depends on your office."
         },
         {
+          "kind": "prose",
           "heading": "Area Forecast Discussion (AFD)",
           "body": "A semi-technical explanation of forecaster reasoning, uncertainty and model disagreement. It is the single most useful product for anticipating how a forecaster is leaning."
         }
@@ -664,11 +628,11 @@
           "when": "Planned, not yet implemented."
         }
       ],
-      "essentials": [
-        "A Severe Weather Statement updates or cancels a warning already running.",
-        "A Special Weather Statement covers storms just under severe.",
-        "Local Storm Reports are where your spotter reports land.",
-        "Report as it happens. Late reports mostly have archival value."
+      "quickChecks": [
+        { "q": "A tornado warning polygon just shrank. What product did that?", "a": "A Severe Weather Statement, which updates, reduces, or cancels an active warning." },
+        { "q": "Where do your spotter reports end up?", "a": "In the Local Storm Report. Report as it happens, safely. Late reports mostly have archival value." },
+        { "q": "Which product tells you whether spotter activation is expected?", "a": "The Hazardous Weather Outlook. Some offices have retired the text version and moved the spotter statement into the AFD." },
+        { "q": "Which product explains what the forecaster is actually thinking?", "a": "The Area Forecast Discussion, including uncertainty and where the models disagree." }
       ]
     }
   }

@@ -5,7 +5,11 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabaseClient';
 import TrainingSignIn from '@/components/TrainingSignIn';
+import { ICONS, moduleMeta } from '@/components/trainingMeta';
 import '../training.css';
+
+const RING_R = 26;
+const RING_C = 2 * Math.PI * RING_R;
 
 export default function TrainingHome() {
   const router = useRouter();
@@ -119,12 +123,25 @@ export default function TrainingHome() {
 
         {total > 0 && (
           <div className="stp__progress">
-            <div className="stp__progressHead">
-              <span>{done} of {total} modules passed</span>
-              <span className="stp__progressPct">{pct}%</span>
-            </div>
-            <div className="stp__progressBar">
-              <div className="stp__progressFill" style={{ width: `${pct}%` }} />
+            <svg className="stp__ring" width="64" height="64" viewBox="0 0 64 64" role="img"
+              aria-label={`${done} of ${total} modules passed`}>
+              <circle className="stp__ringTrack" cx="32" cy="32" r={RING_R} fill="none" strokeWidth="6" />
+              <circle
+                className="stp__ringFill"
+                cx="32" cy="32" r={RING_R} fill="none" strokeWidth="6" strokeLinecap="round"
+                strokeDasharray={RING_C}
+                strokeDashoffset={RING_C * (1 - pct / 100)}
+                transform="rotate(-90 32 32)"
+              />
+              <text className="stp__ringText" x="32" y="36" textAnchor="middle">{pct}%</text>
+            </svg>
+            <div className="stp__progressBody">
+              <p className="stp__progressHead">{done} of {total} modules passed</p>
+              <p className="stp__progressSub">
+                {next
+                  ? <>Work through them in order. Next up: <strong>{next.module.title}</strong>. Read the training before taking the test.</>
+                  : 'All assigned modules passed. Retake any test whenever you want a refresher.'}
+              </p>
             </div>
           </div>
         )}
@@ -140,38 +157,47 @@ export default function TrainingHome() {
           </div>
         )}
 
-        {next && (
-          <p className="stp__lede">
-            Work through them in order. Start with <strong>{next.module.title}</strong>, and read the
-            training before taking the test.
-          </p>
-        )}
-
-        {rows?.map((r, i) => {
+        {rows?.map((r) => {
           const overdue = r.due_on && !r.best?.passed && new Date(r.due_on) < new Date();
           const blurb = (r.module.blurb ?? '').replace(/\.\s*$/, '');
+          const meta = moduleMeta(r.module_slug);
+          const passed = r.best?.passed;
+          const isNext = next && next.id === r.id;
+
+          const state = passed
+            ? { cls: 'stp__modState--pass', label: `Passed ${Math.round(r.best.score_pct)}%` }
+            : overdue
+              ? { cls: 'stp__modState--due', label: 'Overdue' }
+              : r.best
+                ? { cls: 'stp__modState--try', label: `Best ${Math.round(r.best.score_pct)}%` }
+                : { cls: 'stp__modState--new', label: 'Not started' };
 
           return (
-            <div key={r.id} className={`stp__card${r.best?.passed ? ' stp__card--done' : ''}`}>
-              <div className="stp__cardHead">
-                <span className="stp__num">{String(i + 1).padStart(2, '0')}</span>
-                <p className="stp__cardTitle">{r.module.title}</p>
+            <div
+              key={r.id}
+              className={`stp__mod${passed ? ' stp__mod--done' : ''}${isNext ? ' stp__mod--next' : ''}`}
+              style={{ '--accent': meta.accent }}
+            >
+              <div className="stp__modHead">
+                <div className="stp__modIcon">{ICONS[meta.icon]}</div>
+                <div>
+                  <p className="stp__modTitle">{r.module.title}</p>
+                  <p className="stp__modBlurb">{blurb}.</p>
+                </div>
+                <span className={`stp__modState ${state.cls}`}>{state.label}</span>
               </div>
 
-              <p className="stp__cardMeta">{blurb}.</p>
-
-              <p className="stp__cardFacts">
-                {r.best?.passed
-                  ? `Passed with ${Math.round(r.best.score_pct)}%`
-                  : r.best
-                    ? `Best so far ${Math.round(r.best.score_pct)}%, needs ${r.module.pass_pct}%`
-                    : `Pass at ${r.module.pass_pct}%`}
-                {r.due_on && (overdue
-                  ? `. Overdue, was due ${new Date(r.due_on).toLocaleDateString()}`
-                  : `. Due ${new Date(r.due_on).toLocaleDateString()}`)}
-              </p>
-
-              <div className="stp__cardActions">
+              <div className="stp__modFoot">
+                <span className="stp__modFacts">
+                  {passed
+                    ? 'Done. Retake any time.'
+                    : r.best
+                      ? `Needs ${r.module.pass_pct}% to pass`
+                      : `Pass at ${r.module.pass_pct}%`}
+                  {r.due_on && !passed && (overdue
+                    ? `. Was due ${new Date(r.due_on).toLocaleDateString()}`
+                    : `. Due ${new Date(r.due_on).toLocaleDateString()}`)}
+                </span>
                 <Link className="stp__cardBtn" href={`/training/${r.module_slug}/study`}>
                   Training
                 </Link>

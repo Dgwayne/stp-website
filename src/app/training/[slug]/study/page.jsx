@@ -5,6 +5,8 @@ import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabaseClient';
 import guide from '@/content/study-guide.json';
+import { ICONS, moduleMeta } from '@/components/trainingMeta';
+import { StudySection, Essentials, LocalPanel, QuickChecks } from '@/components/StudyBlocks';
 import '../../../training.css';
 
 // Reference material for a module. The content is derived from the same
@@ -20,6 +22,7 @@ export default function StudyPage() {
   const [checked, setChecked] = useState(false);
 
   const content = guide.modules[slug];
+  const meta = moduleMeta(slug);
 
   useEffect(() => {
     let cancelled = false;
@@ -57,70 +60,46 @@ export default function StudyPage() {
 
   return (
     <main className="stp">
-      <div className="stp__shell">
-        <p className="stp__eyebrow">Training</p>
-        <h1 className="stp__title">{module?.title ?? 'Study material'}</h1>
-        <p className="stp__lede">{content.intro}</p>
+      <div className="stp__shell study" style={{ '--accent': meta.accent }}>
+        <header className="study__hero">
+          <div className="study__heroTop">
+            <div className="study__heroIcon">{ICONS[meta.icon]}</div>
+            <div>
+              <div className="study__heroKicker">Training</div>
+              <h1 className="stp__title" style={{ margin: 0 }}>{module?.title ?? 'Study material'}</h1>
+            </div>
+          </div>
+          <p className="stp__lede" style={{ margin: 0 }}>{content.tagline ?? content.intro}</p>
+          <div className="study__heroMeta">
+            {content.minutes && <span>{content.minutes} min read</span>}
+            <span>{content.sections.length} topics</span>
+            {module?.pass_pct && <span>Pass at {module.pass_pct}%</span>}
+          </div>
+        </header>
 
-        {content.essentials && (
-          <section className="stp__card stp__card--key">
-            <h2 className="stp__h2">If you remember nothing else</h2>
-            <ul className="stp__list stp__list--key">
-              {content.essentials.map((e, i) => <li key={i}>{e}</li>)}
-            </ul>
-          </section>
-        )}
+        {content.tagline && <p className="stp__lede">{content.intro}</p>}
 
-        {content.sections.map((s, i) => (
-          <section className="stp__card" key={i}>
-            <h2 className="stp__h2">{s.heading}</h2>
-            {s.body && <p className="stp__body">{s.body}</p>}
+        {content.essentials && <Essentials items={content.essentials} />}
 
-            {s.table && (
-              <div className="stp__tableWrap">
-                <table className="stp__table">
-                  <thead>
-                    <tr>{s.table.columns.map((c, ci) => <th key={ci}>{c}</th>)}</tr>
-                  </thead>
-                  <tbody>
-                    {s.table.rows.map((r, ri) => (
-                      <tr key={ri}>{r.map((cell, cix) => <td key={cix}>{cell}</td>)}</tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+        {content.sections.map((s, i) => <StudySection section={s} key={i} />)}
 
-            {s.points && (
-              <ul className="stp__list">
-                {s.points.map((p, pi) => <li key={pi}>{p}</li>)}
-              </ul>
-            )}
-
-            {s.note && <p className="stp__callout">{s.note}</p>}
-          </section>
-        ))}
-
-        {content.local && (
-          <section className="stp__card stp__card--warn">
-            <h2 className="stp__h2">Set by your local office</h2>
-            <p className="stp__body">{content.local}</p>
-          </section>
-        )}
+        {content.local && <LocalPanel text={content.local} />}
 
         {content.changes && (
-          <section className="stp__card">
-            <h2 className="stp__h2">Changes to know</h2>
+          <section className="study__section">
+            <h2 className="study__h2">Changes to know</h2>
             {content.changes.map((c, ci) => (
-              <div className="stp__change" key={ci}>
-                <p className="stp__body">{c.what}</p>
-                <p className="stp__hint">{c.when}</p>
+              <div className="study__change" key={ci}>
+                <p className="study__changeWhat">{c.what}</p>
+                <p className="study__changeWhen">{c.when}</p>
               </div>
             ))}
           </section>
         )}
 
-        <div className="stp__actions">
+        {content.quickChecks && <QuickChecks checks={content.quickChecks} />}
+
+        <div className="study__cta">
           <Link className="stp__btn" href={`/training/${slug}`}>Take the test</Link>
           <Link className="stp__btn stp__btn--ghost" href="/training">Back to training</Link>
         </div>

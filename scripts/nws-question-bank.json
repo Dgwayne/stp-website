@@ -1,13 +1,17 @@
 {
-  "bank_version": "2026.08.04",
+  "bank_version": "2026.08.19",
   "scope": "National NWS criteria only. Locally-variable thresholds are flagged and never quizzed as fixed numbers.",
   "verified_against": [
     "NWSI 10-511 WFO Severe Weather Products Specification (Jan 26, 2023)",
+    "NWSI 10-513 WFO Winter Weather Products Specification (Nov 6, 2024)",
+    "NWSI 10-922 WFO Hydrologic Products Specification",
+    "NWSI 10-401 Fire Weather Services Product Specification (Aug 25, 2025)",
+    "NWSI 10-313 Marine Warning Products (Apr 2, 2024)",
     "SCN 21-56 Consolidation/Reformatting of Flood Products (Nov 2021)",
     "SCN 23-44 Consolidated Products Related to Cold (Oct 1, 2024)",
-    "NWS Heat product rename (Mar 4, 2025)",
-    "NWS Hazard Simplification project pages (Key Successes / Going Forward)",
-    "NWS Glossary"
+    "SCN 24-88 Heat product rename (Mar 4, 2025)",
+    "NWS Hazard Simplification FAQ",
+    "NWS Glossary, SPC About and FAQ pages, NHC glossary"
   ],
   "review_by": "2027-03-01",
   "modules": [
@@ -224,7 +228,7 @@
             "Any confirmed tornado on the ground"
           ],
           "answer": [1],
-          "explanation": "Catastrophic is used when a severe threat to human life and catastrophic damage is occurring, and only when reliable sources confirm a violent tornado. This is the Tornado Emergency wording."
+          "explanation": "Catastrophic is used in exceedingly rare situations when a severe threat to human life and catastrophic damage is occurring, confirmed by reliable sources or clear radar evidence. This is the Tornado Emergency wording. The considerable tag is the one that carries PARTICULARLY DANGEROUS SITUATION wording in warning text."
         },
         {
           "id": "conv-10",
@@ -412,7 +416,7 @@
             "None"
           ],
           "answer": [2],
-          "explanation": "Considerable and catastrophic trigger WEA. Base-tagged flash flood warnings do not. This changed deliberately — previously every flash flood warning pushed a WEA, which diluted the alert."
+          "explanation": "Considerable and catastrophic trigger WEA. Base-tagged flash flood warnings do not. This changed deliberately with the impact-based warning rollout in 2019 and 2020 — previously every flash flood warning pushed a WEA, which diluted the alert."
         },
         {
           "id": "flood-04",
@@ -697,7 +701,7 @@
             "One is for rural areas only"
           ],
           "answer": [1],
-          "explanation": "Dust Advisory addresses short-duration dangerous blowing dust. Blowing Dust Advisory addresses widespread dust over an extended period. Both mean stay alert and consider delaying travel."
+          "explanation": "Dust Advisory addresses short-duration dangerous blowing dust (convectively driven, like an outflow channel). Blowing Dust Advisory addresses widespread wind-driven dust over an extended period. Both cover visibility of 1 mile down to 1/4 mile; 1/4 mile or less becomes a warning. Both mean stay alert and consider delaying travel."
         },
         {
           "id": "np-05",
@@ -781,7 +785,7 @@
             "A burn ban is in effect"
           ],
           "answer": [1],
-          "explanation": "It is a warning-level product denoting high confidence that critical fire weather AND fuel conditions will occur, generally within 24 hours."
+          "explanation": "It is a warning-level product denoting high confidence that critical fire weather AND fuel conditions will occur, generally within 48 hours. Offices are encouraged to go out further when confidence is very high."
         },
         {
           "id": "fire-02",
@@ -789,12 +793,12 @@
           "prompt": "A Fire Weather Watch is typically issued:",
           "options": [
             "0 to 6 hours ahead",
-            "24 to 96 hours ahead of expected onset",
+            "18 to 96 hours ahead of expected onset",
             "Only after a Red Flag Warning expires",
             "Once per season"
           ],
           "answer": [1],
-          "explanation": "Fire Weather Watches indicate potential for dangerous fire weather 24 to 96 hours out."
+          "explanation": "Fire Weather Watches indicate potential for dangerous fire weather 18 to 96 hours out, with the intent of alerting users at least a day in advance."
         },
         {
           "id": "fire-03",
@@ -807,7 +811,7 @@
             "Measurable rainfall in the past 24 hours"
           ],
           "answer": [0, 1, 2],
-          "explanation": "Humidity, wind and fuel state must occur together, typically for three or more consecutive hours. The exact numbers differ by office and fuel type."
+          "explanation": "Humidity, wind and fuel state must occur together, commonly for three or more consecutive hours. The national directive sets no numbers at all; every threshold is a local agreement between the office and land management agencies."
         },
         {
           "id": "fire-04",
@@ -873,7 +877,7 @@
             "Mountain wave windstorms"
           ],
           "answer": [1],
-          "explanation": "A short-fused warning telling people to shelter immediately in an interior room as major hurricane eyewall winds arrive. It is not used for non-tropical wind events."
+          "explanation": "A short-fused warning for extreme sustained winds of 115 mph or greater, usually the eyewall of a major hurricane, telling people to shelter immediately in an interior room. It is not used for non-tropical wind events."
         },
         {
           "id": "trop-05",
@@ -944,12 +948,12 @@
           "prompt": "A Special Weather Statement is typically used for:",
           "options": [
             "Confirmed tornadoes",
-            "Sub-severe conditions such as 40 to 57 mph gusts, hail under 1 inch, or funnel clouds not expected to reach the ground",
+            "Sub-severe conditions such as 40 to 57 mph gusts, hail under 1 inch, or funnel clouds not expected to become a tornado threat",
             "River flooding",
             "Only aviation hazards"
           ],
           "answer": [1],
-          "explanation": "It covers hazards warranting heightened awareness that fall short of watch, warning or advisory level. Funnel cloud reports that are not expected to become tornadoes are typically handled here."
+          "explanation": "It covers hazards warranting heightened awareness that fall short of watch, warning or advisory level: sub-severe wind and hail, frequent lightning, and funnel clouds not expected to become a tornado threat."
         },
         {
           "id": "stmt-03",
@@ -975,7 +979,7 @@
             "The current calendar month"
           ],
           "answer": [1],
-          "explanation": "The HWO describes expected hazards over seven days and includes a spotter activation statement — the section that tells you whether activation is anticipated."
+          "explanation": "The HWO describes expected hazards over seven days and includes a spotter activation statement — the section that tells you whether activation is anticipated. Some offices have retired the text HWO for a graphical version, moving the spotter statement into the Area Forecast Discussion."
         },
         {
           "id": "stmt-05",
