@@ -442,3 +442,38 @@
   border-color: var(--ok);
   background: rgba(79, 180, 119, 0.08);
 }
+
+/* ---- top bar ----
+   Sign out used to sit under nine module cards, which is not a place
+   anyone looks for it. Account actions belong at the top. */
+.stp__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.35rem;
+}
+.stp__topbar .stp__eyebrow { margin: 0; }
+
+.stp__topActions {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.stp__linkBtn {
+  font-family: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--dim);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  transition: border-color 120ms ease, color 120ms ease;
+}
+.stp__linkBtn:hover { border-color: var(--signal); color: var(--paper); }

@@ -105,7 +105,16 @@ export default function TrainingHome() {
   return (
     <main className="stp">
       <div className="stp__shell">
-        <p className="stp__eyebrow">Spotter Tools Pro</p>
+        <div className="stp__topbar">
+          <p className="stp__eyebrow">Spotter Tools Pro</p>
+          <div className="stp__topActions">
+            {isAdmin && (
+              <Link className="stp__linkBtn" href="/admin/training">Manage roster</Link>
+            )}
+            <button className="stp__linkBtn" type="button" onClick={signOut}>Sign out</button>
+          </div>
+        </div>
+
         <h1 className="stp__title">{name ? `Training for ${name}` : 'Training'}</h1>
 
         {total > 0 && (
@@ -173,13 +182,6 @@ export default function TrainingHome() {
             </div>
           );
         })}
-
-        <div className="stp__actions">
-          {isAdmin && (
-            <Link className="stp__btn" href="/admin/training">Manage roster</Link>
-          )}
-          <button className="stp__btn stp__btn--ghost" onClick={signOut}>Sign out</button>
-        </div>
 
         <p className="stp__note">
           These modules cover national NWS criteria. Thresholds that your local forecast office sets

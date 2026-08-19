@@ -85,6 +85,12 @@ export default function AdminTrainingPage() {
     }
   }
 
+  async function signOut() {
+    await supabase.auth.signOut();
+    setPeople([]);
+    setState('signedout');
+  }
+
   const shown = useMemo(() => {
     const q = query.trim().toLowerCase();
     return people.filter((p) => {
@@ -125,7 +131,14 @@ export default function AdminTrainingPage() {
   return (
     <main className="stp">
       <div className="stp__shell">
-        <p className="stp__eyebrow">Spotter Tools Pro</p>
+        <div className="stp__topbar">
+          <p className="stp__eyebrow">Spotter Tools Pro</p>
+          <div className="stp__topActions">
+            <Link className="stp__linkBtn" href="/training">My training</Link>
+            <button className="stp__linkBtn" type="button" onClick={signOut}>Sign out</button>
+          </div>
+        </div>
+
         <h1 className="stp__title">Training roster</h1>
         <p className="stp__lede">
           {inTraining} of {people.length} accounts are in training. The rest are app users who have
@@ -233,10 +246,6 @@ export default function AdminTrainingPage() {
             </div>
           );
         })}
-
-        <div className="stp__actions">
-          <Link className="stp__btn stp__btn--ghost" href="/training">Back to my training</Link>
-        </div>
 
         <p className="stp__note">
           Unassigning does not delete anyone&apos;s scores. Attempt history is kept, so if you assign
