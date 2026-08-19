@@ -31,11 +31,13 @@
 .stp__shell {
   max-width: 46rem;
   margin: 0 auto;
-  /* The site nav is position:fixed and roughly 61px tall, so page content
-     has to start below it. At the old 1.75rem the eyebrow sat underneath
-     the nav, and once the top bar moved up here its buttons were covered
-     entirely: clicks landed on the nav instead. */
-  padding: 5.5rem 1.25rem 5rem;
+  /* The site nav is position:fixed and its height varies with width: 61px
+     on desktop, 109px at 360px wide once the wordmark and links wrap. A
+     fixed value is wrong somewhere, and where it is too small the top bar
+     lands under the nav and its buttons stop being clickable. NavClearance
+     measures the nav and publishes --stp-nav; the fallback covers the
+     moment before it runs. */
+  padding: calc(var(--stp-nav, 61px) + 1.5rem) 1.25rem 5rem;
 }
 
 /* ---- product-style header ---- */

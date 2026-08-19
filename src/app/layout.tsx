@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import NavClearance from "@/components/NavClearance";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -78,6 +79,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <SiteNav />
+        <NavClearance />
         <main className="flex-1">{children}</main>
         <SiteFooter />
       </body>
