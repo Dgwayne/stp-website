@@ -46,6 +46,15 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Module not found' }, { status: 404 });
   }
 
+  // The assignment is the access gate. questions_public already hides
+  // unassigned questions, but this route grades against the full bank and
+  // its response carries every answer and explanation for the module, so
+  // without this check any signed-up account could harvest the answer key
+  // by posting an empty attempt at each module slug.
+  if (!assignment) {
+    return NextResponse.json({ error: 'Not assigned this module' }, { status: 403 });
+  }
+
   const review = {};
   let correctCount = 0;
 
