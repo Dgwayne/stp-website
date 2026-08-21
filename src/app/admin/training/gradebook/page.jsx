@@ -17,6 +17,7 @@ export default function GradebookPage() {
   const [reload, setReload] = useState(0);
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
+  const [view, setView] = useState('team'); // 'team' | 'public'
 
   const token = useCallback(async () => {
     const { data: { session } } = await supabase.auth.getSession();
@@ -82,8 +83,12 @@ export default function GradebookPage() {
   }
 
   const modules = data?.modules ?? [];
-  const people = data?.people ?? [];
+  const allPeople = data?.people ?? [];
   const missed = data?.missed ?? [];
+
+  const teamPeople = allPeople.filter((p) => p.team);
+  const publicPeople = allPeople.filter((p) => !p.team);
+  const people = view === 'team' ? teamPeople : publicPeople;
 
   const totalAssigned = people.reduce((n, p) => n + p.assigned.length, 0);
   const totalPassed = people.reduce(
@@ -110,15 +115,37 @@ export default function GradebookPage() {
 
         <h1 className="stp__title">Gradebook</h1>
         <p className="stp__lede">
-          {people.length} {people.length === 1 ? 'person' : 'people'} in training, {totalPassed} of{' '}
-          {totalAssigned} assigned modules passed, {data?.attempts_total ?? 0} test attempts recorded.
+          {people.length} {people.length === 1 ? 'person' : 'people'} shown, {totalPassed} of{' '}
+          {totalAssigned} assigned modules passed, {data?.attempts_total ?? 0} test attempts recorded
+          overall.
         </p>
+
+        <div className="stp__cardActions" style={{ marginBottom: '1rem' }}>
+          <button
+            className={`stp__pick${view === 'team' ? ' stp__pick--on' : ''}`}
+            type="button"
+            onClick={() => setView('team')}
+          >
+            My team ({teamPeople.length})
+          </button>
+          <button
+            className={`stp__pick${view === 'public' ? ' stp__pick--on' : ''}`}
+            type="button"
+            onClick={() => setView('public')}
+          >
+            Public trainees ({publicPeople.length})
+          </button>
+        </div>
 
         {error && <p className="stp__error">{error}</p>}
 
         {people.length === 0 && (
           <div className="stp__card">
-            <p className="stp__cardMeta">Nobody is assigned any training yet. Assign modules on the roster page first.</p>
+            <p className="stp__cardMeta">
+              {view === 'team'
+                ? 'Nobody on the team is assigned any training yet. Assign modules on the roster page.'
+                : 'No public trainees yet. Anyone who signs in and taps Start free training will appear here.'}
+            </p>
           </div>
         )}
 

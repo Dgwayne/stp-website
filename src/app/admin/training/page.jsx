@@ -94,13 +94,17 @@ export default function AdminTrainingPage() {
   const shown = useMemo(() => {
     const q = query.trim().toLowerCase();
     return people.filter((p) => {
-      if (!showAll && !p.assigned.length && !q) return false;
+      // Default view is the team: hides unassigned app customers AND
+      // self-enrolled public trainees. Search or "show everyone" reveals
+      // both.
+      if (!showAll && !q && (!p.assigned.length || p.selfEnrolled)) return false;
       if (!q) return true;
       return p.email.toLowerCase().includes(q) || p.name.toLowerCase().includes(q);
     });
   }, [people, query, showAll]);
 
-  const inTraining = people.filter((p) => p.assigned.length).length;
+  const inTraining = people.filter((p) => p.assigned.length && !p.selfEnrolled).length;
+  const publicCount = people.filter((p) => p.selfEnrolled).length;
 
   if (state === 'loading') {
     return <main className="stp"><div className="stp__shell"><p className="stp__lede">Loading the roster.</p></div></main>;
@@ -142,8 +146,9 @@ export default function AdminTrainingPage() {
 
         <h1 className="stp__title">Training roster</h1>
         <p className="stp__lede">
-          {inTraining} of {people.length} accounts are in training. The rest are app users who have
-          not been assigned anything.
+          {inTraining} team {inTraining === 1 ? 'member' : 'members'} in training
+          {publicCount > 0 && <>, {publicCount} self-enrolled public {publicCount === 1 ? 'trainee' : 'trainees'}</>},
+          out of {people.length} accounts. Grades live in the gradebook; this page is for assigning.
         </p>
 
         <input
@@ -159,7 +164,7 @@ export default function AdminTrainingPage() {
             onClick={() => setShowAll((v) => !v)}
             type="button"
           >
-            {showAll ? 'Showing everyone' : 'Showing only people in training'}
+            {showAll ? 'Showing everyone' : 'Showing team only'}
           </button>
         </div>
 
@@ -182,6 +187,7 @@ export default function AdminTrainingPage() {
               <div className="stp__cardHead">
                 <p className="stp__cardTitle">{p.name || p.email || '(no name)'}</p>
                 {p.role === 'admin' && <span className="stp__chip stp__chip--pass">Admin</span>}
+                {p.selfEnrolled && <span className="stp__chip stp__chip--pending">Self-enrolled</span>}
               </div>
 
               <p className="stp__cardMeta">{p.email}</p>

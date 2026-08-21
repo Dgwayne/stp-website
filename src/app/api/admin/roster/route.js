@@ -64,16 +64,21 @@ export async function GET(request) {
     await Promise.all([
       db.from('modules').select('slug, title, pass_pct, sort_order').order('sort_order'),
       db.from('profiles').select('id, full_name, username, role'),
-      db.from('assignments').select('user_id, module_slug, due_on'),
+      db.from('assignments').select('user_id, module_slug, due_on, assigned_by'),
       db.from('attempts').select('user_id, module_slug, score_pct, passed').not('submitted_at', 'is', null),
     ]);
 
   const byId = new Map((profiles ?? []).map((p) => [p.id, p]));
 
   const assignedBy = new Map();
+  const teamBy = new Map();
   for (const a of assignments ?? []) {
     if (!assignedBy.has(a.user_id)) assignedBy.set(a.user_id, []);
     assignedBy.get(a.user_id).push(a.module_slug);
+    // Any admin- or script-made assignment marks them as team; a person
+    // whose every assignment is their own doing is a self-enrolled
+    // public trainee.
+    if (a.assigned_by === null || a.assigned_by !== a.user_id) teamBy.set(a.user_id, true);
   }
 
   // Best score per person per module, which is what counts as passing.
@@ -96,6 +101,7 @@ export async function GET(request) {
       role: p?.role ?? 'trainee',
       created_at: u.created_at ?? null,
       assigned: assignedBy.get(u.id) ?? [],
+      selfEnrolled: (assignedBy.get(u.id) ?? []).length > 0 && !teamBy.get(u.id),
       best: bestBy.get(u.id) ?? {},
     };
   });

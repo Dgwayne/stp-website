@@ -1463,6 +1463,90 @@
   .stp__gbMissCount { margin-left: auto; }
 }
 
+/* ============================================================
+   Dashboard categories + self-enroll
+   ============================================================ */
+
+.stp__cat { margin-bottom: 0.8rem; }
+
+.stp__catHead {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: var(--paper);
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--rule-dim);
+  padding: 0.75rem 0.2rem 0.65rem;
+  cursor: pointer;
+}
+.stp__catHead:hover .stp__catTitle { color: var(--signal); }
+.stp__catHead:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+
+.stp__catChevron {
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: 0 0 auto;
+  border-right: 2px solid var(--dim);
+  border-bottom: 2px solid var(--dim);
+  transform: rotate(-45deg);
+  transition: transform 140ms ease;
+}
+.stp__catChevron--open { transform: rotate(45deg); }
+
+.stp__catTitle {
+  font-weight: 800;
+  font-size: 0.98rem;
+  letter-spacing: -0.01em;
+  transition: color 120ms ease;
+}
+
+.stp__catCount {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--dim);
+  white-space: nowrap;
+}
+.stp__catCount--done { color: var(--ok); }
+
+.stp__catBar {
+  flex: 1;
+  max-width: 7rem;
+  height: 4px;
+  margin-left: auto;
+  background: var(--panel);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.stp__catFill {
+  display: block;
+  height: 100%;
+  background: var(--ok);
+  border-radius: 999px;
+  transition: width 240ms ease;
+}
+
+.stp__enroll {
+  border: 1px solid color-mix(in srgb, var(--signal) 45%, transparent);
+  background:
+    radial-gradient(500px 200px at 90% -30%, rgba(255, 182, 39, 0.08), transparent 70%),
+    linear-gradient(180deg, var(--raised), var(--panel));
+  border-radius: 14px;
+  padding: 1.3rem 1.4rem;
+}
+.stp__enrollTitle { font-weight: 800; font-size: 1.15rem; margin: 0 0 0.4rem; }
+.stp__enrollBody { color: var(--dim); font-size: 0.94rem; line-height: 1.6; margin: 0; max-width: 38rem; }
+.stp__enrollHint {
+  color: var(--faint);
+  font-size: 0.8rem;
+  margin: 0.9rem 0 0;
+  border-top: 1px dashed var(--rule-dim);
+  padding-top: 0.7rem;
+}
+
 /* Backstop for nav clearance: never go below the tallest measured
    nav (109px at 360px wide). */
 @media (max-width: 640px) {

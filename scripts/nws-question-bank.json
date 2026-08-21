@@ -1020,6 +1020,7 @@
       "title": "Local Criteria: Midland/Odessa",
       "blurb": "MAF's own trigger numbers: fire, snow, wind, dust and heat.",
       "pass_pct": 80,
+      "team_only": true,
       "questions": [
         {
           "id": "loc-01",

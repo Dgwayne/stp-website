@@ -91,7 +91,7 @@ export default function TrainingSignIn({ onSignedIn }) {
   }
 
   const lede = {
-    signin: 'Sign in with the same account you use in the Spotter Tools Pro app. If you signed up there with Google or Apple, use that button here too.',
+    signin: 'Free spotter training on the NWS warning system. Sign in with Google, Apple, or the same account you use in the Spotter Tools Pro app, then start training in one tap.',
     signup: 'Already use the Spotter Tools Pro app? Sign in with that account instead, you do not need a second one.',
     forgot: 'Enter the email your account uses and we will send a link to set a new password.',
   }[mode];

@@ -31,6 +31,8 @@ const modules = bank.modules.map((m, i) => ({
   pass_pct: m.pass_pct,
   sort_order: i,
   bank_version: bank.bank_version,
+  // Self-enrollment (POST /api/enroll) assigns every module except these.
+  team_only: m.team_only ?? false,
 }));
 
 const questions = bank.modules.flatMap((m) =>

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabaseClient';
 import TrainingSignIn from '@/components/TrainingSignIn';
-import { ICONS, moduleMeta } from '@/components/trainingMeta';
+import { ICONS, moduleMeta, CATEGORIES, FALLBACK_CATEGORY, categoryOf } from '@/components/trainingMeta';
 import '../training.css';
 
 const RING_R = 26;
@@ -21,6 +21,10 @@ export default function TrainingHome() {
   // null while we are still checking, then true or false.
   const [authed, setAuthed] = useState(null);
   const [reload, setReload] = useState(0);
+  const [enrolling, setEnrolling] = useState(false);
+  const [enrollError, setEnrollError] = useState('');
+  // null = automatic (open the category holding the next unpassed module).
+  const [openCats, setOpenCats] = useState(null);
 
   // Returning from an OAuth redirect, the code-for-session exchange runs
   // in the background after this page has already checked getUser() and
@@ -107,10 +111,54 @@ export default function TrainingHome() {
     setAuthed(false);
   }
 
+  // Self-enrollment: assigns every non-team module to the caller.
+  async function enroll() {
+    setEnrolling(true);
+    setEnrollError('');
+    const { data: { session } } = await supabase.auth.getSession();
+    const res = await fetch('/api/enroll', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${session?.access_token}` },
+    });
+    setEnrolling(false);
+    if (!res.ok) {
+      setEnrollError('Could not start your training. Check your connection and try again.');
+      return;
+    }
+    setRows(null);
+    setReload((r) => r + 1);
+  }
+
   const done = rows?.filter((r) => r.best?.passed).length ?? 0;
   const total = rows?.length ?? 0;
   const pct = total ? Math.round((done / total) * 100) : 0;
   const next = rows?.find((r) => !r.best?.passed) ?? null;
+
+  // Group assigned modules into categories, keeping category order and
+  // dropping empty ones. Unknown slugs land in the fallback group.
+  const groups = [];
+  if (rows?.length) {
+    const orderedCats = [...CATEGORIES, FALLBACK_CATEGORY];
+    for (const cat of orderedCats) {
+      const inCat = rows.filter((r) => categoryOf(r.module_slug).key === cat.key);
+      if (inCat.length) {
+        groups.push({
+          ...cat,
+          rows: inCat,
+          done: inCat.filter((r) => r.best?.passed).length,
+        });
+      }
+    }
+  }
+
+  const nextCatKey = next ? categoryOf(next.module_slug).key : null;
+  const effectiveOpen = openCats ?? new Set(nextCatKey ? [nextCatKey] : []);
+
+  function toggleCat(key) {
+    const nextSet = new Set(effectiveOpen);
+    if (nextSet.has(key)) nextSet.delete(key); else nextSet.add(key);
+    setOpenCats(nextSet);
+  }
 
   if (authed === null) {
     return <main className="stp"><div className="stp__shell"><p className="stp__lede">Loading.</p></div></main>;
@@ -172,63 +220,99 @@ export default function TrainingHome() {
         {rows === null && <p className="stp__lede">Loading your assignments.</p>}
 
         {rows?.length === 0 && (
-          <div className="stp__card">
-            <p className="stp__cardTitle">Nothing assigned yet</p>
-            <p className="stp__cardMeta">
-              Your training coordinator assigns modules. Check back after the next team meeting.
+          <div className="stp__enroll">
+            <p className="stp__enrollTitle">Free spotter training</p>
+            <p className="stp__enrollBody">
+              Nine modules on the NWS warning system: severe and tornado warnings, SPC
+              outlooks, flood, winter, fire and tropical products, and how spotter reports
+              feed the system. Study pages, then a short test per module. Retake as often
+              as you like.
+            </p>
+            <div className="stp__actions" style={{ marginTop: '0.9rem' }}>
+              <button className="stp__btn" type="button" onClick={enroll} disabled={enrolling}>
+                {enrolling ? 'Setting up your training' : 'Start free training'}
+              </button>
+            </div>
+            {enrollError && <p className="stp__error">{enrollError}</p>}
+            <p className="stp__enrollHint">
+              On a storm team using Spotter Tools Pro? Your coordinator can also assign your
+              team&apos;s local-criteria module.
             </p>
           </div>
         )}
 
-        {rows?.map((r) => {
-          const overdue = r.due_on && !r.best?.passed && new Date(r.due_on) < new Date();
-          const blurb = (r.module.blurb ?? '').replace(/\.\s*$/, '');
-          const meta = moduleMeta(r.module_slug);
-          const passed = r.best?.passed;
-          const isNext = next && next.id === r.id;
-
-          const state = passed
-            ? { cls: 'stp__modState--pass', label: `Passed ${Math.round(r.best.score_pct)}%` }
-            : overdue
-              ? { cls: 'stp__modState--due', label: 'Overdue' }
-              : r.best
-                ? { cls: 'stp__modState--try', label: `Best ${Math.round(r.best.score_pct)}%` }
-                : { cls: 'stp__modState--new', label: 'Not started' };
-
+        {groups.map((g) => {
+          const open = effectiveOpen.has(g.key);
           return (
-            <div
-              key={r.id}
-              className={`stp__mod${passed ? ' stp__mod--done' : ''}${isNext ? ' stp__mod--next' : ''}`}
-              style={{ '--accent': meta.accent }}
-            >
-              <div className="stp__modHead">
-                <div className="stp__modIcon">{ICONS[meta.icon]}</div>
-                <div>
-                  <p className="stp__modTitle">{r.module.title}</p>
-                  <p className="stp__modBlurb">{blurb}.</p>
-                </div>
-                <span className={`stp__modState ${state.cls}`}>{state.label}</span>
-              </div>
-
-              <div className="stp__modFoot">
-                <span className="stp__modFacts">
-                  {passed
-                    ? 'Done. Retake any time.'
-                    : r.best
-                      ? `Needs ${r.module.pass_pct}% to pass`
-                      : `Pass at ${r.module.pass_pct}%`}
-                  {r.due_on && !passed && (overdue
-                    ? `. Was due ${new Date(r.due_on).toLocaleDateString()}`
-                    : `. Due ${new Date(r.due_on).toLocaleDateString()}`)}
+            <section className="stp__cat" key={g.key}>
+              <button
+                className="stp__catHead"
+                type="button"
+                onClick={() => toggleCat(g.key)}
+                aria-expanded={open}
+              >
+                <span className={`stp__catChevron${open ? ' stp__catChevron--open' : ''}`} aria-hidden="true" />
+                <span className="stp__catTitle">{g.title}</span>
+                <span className={`stp__catCount${g.done === g.rows.length ? ' stp__catCount--done' : ''}`}>
+                  {g.done} / {g.rows.length}
                 </span>
-                <Link className="stp__cardBtn" href={`/training/${r.module_slug}/study`}>
-                  Training
-                </Link>
-                <Link className="stp__cardBtn stp__cardBtn--test" href={`/training/${r.module_slug}`}>
-                  {r.best ? 'Retake test' : 'Test'}
-                </Link>
-              </div>
-            </div>
+                <span className="stp__catBar" aria-hidden="true">
+                  <span className="stp__catFill" style={{ width: `${(g.done / g.rows.length) * 100}%` }} />
+                </span>
+              </button>
+
+              {open && g.rows.map((r) => {
+                const overdue = r.due_on && !r.best?.passed && new Date(r.due_on) < new Date();
+                const blurb = (r.module.blurb ?? '').replace(/\.\s*$/, '');
+                const meta = moduleMeta(r.module_slug);
+                const passed = r.best?.passed;
+                const isNext = next && next.id === r.id;
+
+                const state = passed
+                  ? { cls: 'stp__modState--pass', label: `Passed ${Math.round(r.best.score_pct)}%` }
+                  : overdue
+                    ? { cls: 'stp__modState--due', label: 'Overdue' }
+                    : r.best
+                      ? { cls: 'stp__modState--try', label: `Best ${Math.round(r.best.score_pct)}%` }
+                      : { cls: 'stp__modState--new', label: 'Not started' };
+
+                return (
+                  <div
+                    key={r.id}
+                    className={`stp__mod${passed ? ' stp__mod--done' : ''}${isNext ? ' stp__mod--next' : ''}`}
+                    style={{ '--accent': meta.accent }}
+                  >
+                    <div className="stp__modHead">
+                      <div className="stp__modIcon">{ICONS[meta.icon]}</div>
+                      <div>
+                        <p className="stp__modTitle">{r.module.title}</p>
+                        <p className="stp__modBlurb">{blurb}.</p>
+                      </div>
+                      <span className={`stp__modState ${state.cls}`}>{state.label}</span>
+                    </div>
+
+                    <div className="stp__modFoot">
+                      <span className="stp__modFacts">
+                        {passed
+                          ? 'Done. Retake any time.'
+                          : r.best
+                            ? `Needs ${r.module.pass_pct}% to pass`
+                            : `Pass at ${r.module.pass_pct}%`}
+                        {r.due_on && !passed && (overdue
+                          ? `. Was due ${new Date(r.due_on).toLocaleDateString()}`
+                          : `. Due ${new Date(r.due_on).toLocaleDateString()}`)}
+                      </span>
+                      <Link className="stp__cardBtn" href={`/training/${r.module_slug}/study`}>
+                        Training
+                      </Link>
+                      <Link className="stp__cardBtn stp__cardBtn--test" href={`/training/${r.module_slug}`}>
+                        {r.best ? 'Retake test' : 'Test'}
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </section>
           );
         })}
 

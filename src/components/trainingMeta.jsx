@@ -88,3 +88,35 @@ export const MODULE_META = {
 export function moduleMeta(slug) {
   return MODULE_META[slug] ?? { accent: '#FFB627', icon: 'broadcast' };
 }
+
+// Dashboard grouping. A module missing from every list lands in the
+// fallback group, so adding a module never breaks the dashboard; add it
+// here when you want it in a specific section.
+export const CATEGORIES = [
+  {
+    key: 'core',
+    title: 'The warning system',
+    slugs: ['fundamentals', 'convective-warnings', 'watches-outlooks'],
+  },
+  {
+    key: 'hazards',
+    title: 'Hazard programs',
+    slugs: ['flooding', 'winter', 'non-precip', 'fire-weather', 'tropical-marine'],
+  },
+  {
+    key: 'products',
+    title: 'Products and reporting',
+    slugs: ['statements'],
+  },
+  {
+    key: 'local',
+    title: 'Your local office',
+    slugs: ['local-maf'],
+  },
+];
+
+export const FALLBACK_CATEGORY = { key: 'more', title: 'More training' };
+
+export function categoryOf(slug) {
+  return CATEGORIES.find((c) => c.slugs.includes(slug)) ?? FALLBACK_CATEGORY;
+}

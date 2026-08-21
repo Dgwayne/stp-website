@@ -49,7 +49,7 @@ export async function GET(request) {
     await Promise.all([
       db.from('modules').select('slug, title, pass_pct, sort_order').order('sort_order'),
       db.from('profiles').select('id, full_name, username, role'),
-      db.from('assignments').select('user_id, module_slug, due_on'),
+      db.from('assignments').select('user_id, module_slug, due_on, assigned_by'),
       db
         .from('attempts')
         .select('user_id, module_slug, score_pct, passed, submitted_at, responses')
@@ -95,13 +95,18 @@ export async function GET(request) {
 
   const people = [...inTraining].map((id) => {
     const p = byId.get(id);
+    const mine = (assignments ?? []).filter((a) => a.user_id === id);
     return {
       id,
       name: p?.full_name ?? p?.username ?? '',
       email: emailById.get(id) ?? '',
       role: p?.role ?? 'trainee',
       cells: cellsBy.get(id) ?? {},
-      assigned: (assignments ?? []).filter((a) => a.user_id === id).map((a) => a.module_slug),
+      assigned: mine.map((a) => a.module_slug),
+      // Team members were assigned by an admin (or the create-trainee
+      // script, which leaves assigned_by null). Self-enrolled public
+      // trainees carry only their own id.
+      team: mine.some((a) => a.assigned_by === null || a.assigned_by !== id),
       last_at: Object.values(cellsBy.get(id) ?? {}).reduce(
         (m, c) => (c.last_at && (!m || c.last_at > m) ? c.last_at : m),
         null,
