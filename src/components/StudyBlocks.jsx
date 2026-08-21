@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { FIGURES } from './StudyFigures';
 
 /* Small inline icons, stroke-based so they inherit color. */
 const stroke = {
@@ -351,6 +352,18 @@ function Myths({ s }) {
   );
 }
 
+/* ---- schematic figure ---- */
+function Figure({ s }) {
+  const Fig = FIGURES[s.fig];
+  if (!Fig) return null;
+  return (
+    <div className="study__figure">
+      <Fig />
+      {s.caption && <p className="study__figCaption">{s.caption}</p>}
+    </div>
+  );
+}
+
 /* ---- plain table fallback ---- */
 function Table({ s }) {
   return (
@@ -383,6 +396,7 @@ const BLOCKS = {
   compare: Compare,
   myths: Myths,
   table: Table,
+  figure: Figure,
 };
 
 export function StudySection({ section }) {

@@ -1,5 +1,5 @@
 {
-  "bank_version": "2026.08.20",
+  "bank_version": "2026.08.21",
   "scope": "National NWS criteria only. Locally-variable thresholds are flagged and never quizzed as fixed numbers.",
   "verified_against": [
     "NWSI 10-511 WFO Severe Weather Products Specification (Jan 26, 2023)",
@@ -14,7 +14,9 @@
     "NWS Glossary, SPC About and FAQ pages, NHC glossary",
     "Texas Fire Weather Operating Plan and Southwest Area Fire Weather AOP 2026-2029 (MAF red flag criteria)",
     "NWS heavy snow criteria dataset, weather.gov/snow-criteria, MAF zones (queried Aug 2026)",
-    "MAF issued products and forecast discussions, IEM AFOS archive (NPWMAF, DSWMAF, AFDMAF)"
+    "MAF issued products and forecast discussions, IEM AFOS archive (NPWMAF, DSWMAF, AFDMAF)",
+    "NWS Weather Spotter's Field Guide (2011) + Basic/Advanced Spotters' Field Guides (structure content only, not criteria)",
+    "NOAA NSSL Severe Weather 101, NWS JetStream cloud pages, WMO International Cloud Atlas, AMS Glossary"
   ],
   "review_by": "2027-03-01",
   "modules": [
@@ -1154,6 +1156,163 @@
           "options": ["True", "False"],
           "answer": [0],
           "explanation": "True. MAF applies the national dust criteria and uses the full product suite heavily: dust is this office's signature hazard, with 45 Dust Storm Warnings issued in 2025 alone. The advisories cover visibility between 1/4 mile and 1 mile."
+        }
+      ]
+    },
+    {
+      "slug": "storm-structure",
+      "title": "Clouds and Storm Structure",
+      "blurb": "What you are looking at in the sky, and whether to report it.",
+      "pass_pct": 80,
+      "questions": [
+        {
+          "id": "str-01",
+          "type": "single",
+          "prompt": "In cloud names, the root 'nimbo' or 'nimbus' means:",
+          "options": ["Layer", "Heap or pile", "Curl of hair", "Rain"],
+          "answer": [3],
+          "explanation": "Nimbus is Latin for rain, which is why nimbostratus and cumulonimbus are the precipitation makers. Strato means layer, cumulo means heap, cirro means curl of hair. Decode any cloud name from those four roots."
+        },
+        {
+          "id": "str-02",
+          "type": "single",
+          "prompt": "Altocumulus and altostratus are classified as:",
+          "options": [
+            "High clouds, because alto means high",
+            "Mid-level clouds",
+            "Low clouds",
+            "Vertical development clouds"
+          ],
+          "answer": [1],
+          "explanation": "The trap in the name: alto does mean high in Latin, but the alto clouds are the MID-level family. The prefix only distinguishes them from their low-level cousins, stratus and cumulus. High clouds are the cirro family, made of ice."
+        },
+        {
+          "id": "str-03",
+          "type": "truefalse",
+          "prompt": "Mammatus clouds mean a tornado is imminent.",
+          "options": ["True", "False"],
+          "answer": [1],
+          "explanation": "False. Per the NWS glossary, mammatus often accompany severe thunderstorms but do not produce severe weather, and they can appear under clouds that are not thunderstorms at all. They are a photo opportunity, not a tornado signal."
+        },
+        {
+          "id": "str-04",
+          "type": "single",
+          "prompt": "What officially separates towering cumulus from a full cumulonimbus?",
+          "options": [
+            "Lightning frequency",
+            "The anvil: towering cumulus lacks the flattened, fibrous anvil top",
+            "Cloud base height",
+            "Rainfall rate"
+          ],
+          "answer": [1],
+          "explanation": "Towering cumulus is a large cumulus with great vertical growth but no anvil. When the updraft tops out and the summit spreads, glaciates and flattens into an anvil, it is a cumulonimbus, the thunderstorm cloud."
+        },
+        {
+          "id": "str-05",
+          "type": "single",
+          "prompt": "The MATURE stage of a thunderstorm is defined by:",
+          "options": [
+            "Updraft only, no rain yet",
+            "Updraft and downdraft coexisting, and it is the most dangerous stage",
+            "Downdraft only",
+            "The anvil detaching from the storm"
+          ],
+          "answer": [1],
+          "explanation": "Developing stage is updraft only. Mature is when precipitation creates a downdraft that coexists with the updraft, and it is the most likely time for hail, heavy rain, strong winds and tornadoes. Dissipating is downdraft dominated, once the gust front cuts off the storm's warm inflow."
+        },
+        {
+          "id": "str-06",
+          "type": "single",
+          "prompt": "What makes a supercell a supercell?",
+          "options": [
+            "Its size",
+            "A persistent rotating updraft, the mesocyclone",
+            "Producing hail of any size",
+            "Lasting more than 30 minutes"
+          ],
+          "answer": [1],
+          "explanation": "One quasi-steady, rotating updraft. Supercells can persist for hours and produce the majority of intense tornadoes, plus large hail and damaging winds. The rotation can be on radar 20 to 60 minutes before a tornado forms."
+        },
+        {
+          "id": "str-07",
+          "type": "single",
+          "prompt": "An isolated, persistent lowering attached beneath the rain-free base, with cloud elements rapidly rising into it, is a:",
+          "options": ["Shelf cloud", "Wall cloud", "Roll cloud", "Scud"],
+          "answer": [1],
+          "explanation": "A wall cloud: an abrupt, localized lowering under the rain-free (updraft) base, usually on the trailing or inflow side of the storm. It marks the strongest updraft, and if it rotates persistently, it is the primary place tornadoes develop."
+        },
+        {
+          "id": "str-08",
+          "type": "multi",
+          "prompt": "Which of these are TRUE of a shelf cloud? Select all.",
+          "options": [
+            "It forms on the leading edge of the storm, along the gust front",
+            "It slopes downward and moves away from the rain",
+            "It marks the storm's main updraft",
+            "It usually means damaging straight-line wind rather than a tornado"
+          ],
+          "answer": [0, 1, 3],
+          "explanation": "Shelf clouds are outflow: a wedge on the gust front that slopes down and pushes away from the precipitation, meaning wind. The wall cloud is the opposite in every column: inflow, holds position relative to the rain, slopes upward, marks the updraft."
+        },
+        {
+          "id": "str-09",
+          "type": "single",
+          "prompt": "The condensation funnel is only halfway to the ground, but a rotating cloud of dust and debris is visible beneath it. What is it?",
+          "options": [
+            "A funnel cloud, until the funnel touches the ground",
+            "A tornado, and it should be reported as one",
+            "A gustnado",
+            "Scud"
+          ],
+          "answer": [1],
+          "explanation": "A tornado. The visible funnel does not have to reach the ground: a debris cloud or dust whirl beneath the funnel confirms the circulation is on the surface. Do not wait for the condensation funnel, especially in dry country where cloud bases are high."
+        },
+        {
+          "id": "str-10",
+          "type": "single",
+          "prompt": "A shallow whirl of dust spins up along the gust front, with no connection to any rotation at cloud base. This is a:",
+          "options": [
+            "Tornado, and counts as one",
+            "Gustnado: not a tornado, but still worth reporting as a wind hazard",
+            "Landspout tornado",
+            "Dust devil, ignore it"
+          ],
+          "answer": [1],
+          "explanation": "A gustnado is an eddy in the storm's outflow. It does not connect to cloud-base rotation and is officially not a tornado; damaging ones are logged as thunderstorm wind events. It can still hurt people, so report it as what it is."
+        },
+        {
+          "id": "str-11",
+          "type": "truefalse",
+          "prompt": "A landspout is officially a tornado, even though it forms without a mesocyclone.",
+          "options": ["True", "False"],
+          "answer": [0],
+          "explanation": "True. A landspout is a tornado that does not come from storm-scale rotation: no wall cloud, no mesocyclone on radar, often under a still-growing towering cumulus. Officially a tornado, unlike the gustnado."
+        },
+        {
+          "id": "str-12",
+          "type": "multi",
+          "prompt": "Which features make a wall cloud especially significant for tornado potential? Select all.",
+          "options": [
+            "Persisting 10 minutes or longer",
+            "Persistent rotation on a vertical axis",
+            "Rapid vertical cloud motion and strong surface inflow",
+            "Any wall cloud guarantees a tornado"
+          ],
+          "answer": [0, 1, 2],
+          "explanation": "Persistence, persistent rotation, and rapid rising motion with strong inflow are the official tells. Fewer than half of observed wall clouds ever produce a tornado, so the last option is wrong: a rotating wall cloud is an urgent report, not a certainty."
+        },
+        {
+          "id": "str-13",
+          "type": "single",
+          "prompt": "The spotter reporting rule is:",
+          "options": [
+            "Report what you conclude is happening, with your best interpretation",
+            "Report only what you see, and give the event's location rather than your own",
+            "Wait until the event ends so the report is complete",
+            "Only report if you are completely certain"
+          ],
+          "answer": [1],
+          "explanation": "Report only what you see, not what you think you see, with what, when, and WHERE THE EVENT IS, not where you are. If you are unsure, report anyway and say you are unsure. Timeliness beats completeness, and honesty about uncertainty beats false confidence."
         }
       ]
     }

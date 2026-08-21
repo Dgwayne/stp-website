@@ -881,6 +881,24 @@
 }
 .study__vtecOut strong { color: var(--tone); font-family: var(--mono); }
 
+/* ---- schematic figures ---- */
+.study__figure {
+  border: 1px solid var(--rule-dim);
+  border-radius: 12px;
+  background: var(--void);
+  padding: 0.9rem 0.9rem 0.5rem;
+  overflow-x: auto;
+}
+.study__figure svg { min-width: 34rem; display: block; }
+.study__figCaption {
+  margin: 0.4rem 0 0.3rem;
+  text-align: center;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
 /* ---- myth vs reality ---- */
 .study__myths { display: grid; gap: 0.6rem; }
 .study__myth {
@@ -1528,6 +1546,23 @@
   border-radius: 999px;
   transition: width 240ms ease;
 }
+
+.stp__newMods {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  border: 1px solid color-mix(in srgb, var(--signal) 40%, transparent);
+  background: rgba(255, 182, 39, 0.05);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+.stp__newMods strong { color: var(--signal); }
+
+.stp__btn--sm { padding: 0.45rem 0.9rem; font-size: 0.85rem; }
 
 .stp__enroll {
   border: 1px solid color-mix(in srgb, var(--signal) 45%, transparent);

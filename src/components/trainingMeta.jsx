@@ -70,6 +70,12 @@ export const ICONS = {
       <circle cx="12" cy="10.5" r="2.2" />
     </svg>
   ),
+  cloud: (
+    <svg viewBox="0 0 24 24" {...stroke} aria-hidden="true">
+      <path d="M7 18a4 4 0 0 1-.6-7.96 5.5 5.5 0 0 1 10.7-1.2A4.4 4.4 0 0 1 17.5 18H7Z" />
+      <path d="M9.5 21h.01M13 21h.01M16.5 21h.01" />
+    </svg>
+  ),
 };
 
 export const MODULE_META = {
@@ -83,6 +89,7 @@ export const MODULE_META = {
   'tropical-marine': { accent: '#4FD1C5', icon: 'hurricane' },
   statements: { accent: '#9FB0C0', icon: 'doc' },
   'local-maf': { accent: '#E8A86B', icon: 'pin' },
+  'storm-structure': { accent: '#B49AE8', icon: 'cloud' },
 };
 
 export function moduleMeta(slug) {
@@ -107,6 +114,11 @@ export const CATEGORIES = [
     key: 'products',
     title: 'Products and reporting',
     slugs: ['statements'],
+  },
+  {
+    key: 'field',
+    title: 'Field skills',
+    slugs: ['storm-structure'],
   },
   {
     key: 'local',

@@ -1,5 +1,5 @@
 {
-  "derived_from_bank_version": "2026.08.20",
+  "derived_from_bank_version": "2026.08.21",
   "review_by": "2027-03-01",
   "sources": [
     "NWSI 10-511 WFO Severe Weather Products Specification (Jan 26, 2023)",
@@ -750,6 +750,171 @@
         { "q": "What wind speed triggers a plain Wind Advisory here?", "a": "Sustained winds around 30 mph. At 40 sustained or 58 gusting it becomes a High Wind Warning." },
         { "q": "Does MAF use heat index?", "a": "Almost never. Heat products here run on air temperature, stepped by elevation: roughly 105 does it in the basin and plains." },
         { "q": "How many Dust Storm Warnings did this office issue in 2025?", "a": "45. Dust is the signature local hazard. Warning means 1/4 mile visibility or less." }
+      ]
+    },
+    "storm-structure": {
+      "tagline": "What you are looking at, and whether to report it.",
+      "minutes": 9,
+      "intro": "The other modules teach the products. This one teaches the sky: how storms are built, which cloud features matter, and how to tell a tornado from the six things that impersonate one. Sourced from the NWS spotter field guides, the NWS glossary, NSSL and the WMO cloud atlas.",
+      "essentials": [
+        "Wall cloud: isolated, under the rain-free base, air rising in. Shelf cloud: leading edge, air pushing out. Inflow versus outflow is the whole game.",
+        "A debris cloud under a funnel means tornado. Do not wait for the condensation funnel to reach the ground.",
+        "Watch a suspicious feature for organized rotation on a vertical axis before you report it.",
+        "Mammatus and shelf clouds look terrifying. Neither one is a tornado signal."
+      ],
+      "sections": [
+        {
+          "kind": "figure",
+          "heading": "The life of a thunderstorm",
+          "fig": "storm-lifecycle",
+          "body": "Every thunderstorm runs the same arc. Developing: an updraft builds a towering cumulus, little to no rain. Mature: precipitation drags down a downdraft that coexists with the updraft, and this is when hail, damaging wind and tornadoes are most likely. Dissipating: the storm's own gust front pushes out and cuts off the warm inflow, the downdraft takes over, and the rain fades.",
+          "points": [
+            "An ordinary single cell lives roughly 30 to 60 minutes. Storms that keep building new updrafts can go for hours.",
+            "The anvil forms where the updraft stops rising and spreads out. A sharp-edged, solid anvil means a strong updraft; thin and wispy means a weak one."
+          ]
+        },
+        {
+          "kind": "table",
+          "heading": "The four storm modes",
+          "table": {
+            "columns": ["Mode", "What it is", "Main threats"],
+            "rows": [
+              ["Pulse / single cell", "Brief popcorn storm, 30 to 45 minutes", "Brief hail, downburst winds, rarely a weak tornado"],
+              ["Multicell cluster", "New cells keep forming on the gust front; the cluster outlives its cells by hours", "Downbursts, moderate hail, flooding, occasional weak tornadoes"],
+              ["Squall line / QLCS", "A line of storms, sometimes hundreds of miles long", "Damaging straight-line winds above all; quick spin-up tornadoes"],
+              ["Supercell", "One persistent rotating updraft, lasting hours", "The majority of intense tornadoes, giant hail, extreme wind"]
+            ]
+          },
+          "note": "QLCS tornadoes spin up fast along the line, often near a break in the line or on the north end of a bowing segment, and offer far less visual warning than supercell tornadoes. On radar, damaging wind concentrates at the apex of a bow echo."
+        },
+        {
+          "kind": "figure",
+          "heading": "Supercell anatomy",
+          "fig": "supercell-anatomy",
+          "body": "Learn this one picture and the sky starts making sense. The updraft is the storm's engine; the rain-free base beneath it is where the important features live. Precipitation falls ahead (the forward flank), and a second, drier downdraft wraps around the back of the rotation: the rear flank downdraft, or RFD.",
+          "points": [
+            "The wall cloud, if one forms, hangs under the rain-free base and marks the strongest updraft. Tornadoes are most likely near the intersection of the updraft and the RFD.",
+            "An overshooting top that persists means a very strong updraft. If it suddenly collapses, a burst of hail or damaging wind may be imminent.",
+            "A clear slot eating into the clouds behind the wall cloud is the RFD made visible, and it often precedes or accompanies tornado formation.",
+            "Mesocyclone is a radar term for the storm-scale rotation. On radar, precipitation wrapping around it draws the classic hook echo.",
+            "The flanking line of stair-stepped towers feeding the storm signals organization, and gust-front tornadoes can occasionally form along it."
+          ]
+        },
+        {
+          "kind": "prose",
+          "heading": "The three supercell flavors",
+          "body": "Classic supercells look like the diagram. Low-precipitation (LP) supercells, common near the dryline, look skeletal and translucent, but can still drop very large hail you cannot see falling. High-precipitation (HP) supercells bury their structure in rain, and they may be the most common type nationwide.",
+          "note": "HP supercells are the dangerous ones for spotters: the tornado can be completely rain-wrapped. The field guide's rule is absolute: do not drive through precipitation to see if a tornado is present."
+        },
+        {
+          "kind": "figure",
+          "heading": "Wall cloud versus shelf cloud",
+          "fig": "wall-vs-shelf",
+          "body": "The single most important distinction in spotting, because they are reported for opposite reasons and confused constantly."
+        },
+        {
+          "kind": "compare",
+          "heading": "The tells, side by side",
+          "a": {
+            "title": "Wall cloud",
+            "tone": "warning",
+            "rows": [
+              ["Where", "Isolated lowering under the rain-free base, trailing side"],
+              ["Air", "Inflow: rising, may rotate on a vertical axis"],
+              ["Versus the rain", "Holds position, slopes upward away from it"],
+              ["Means", "Updraft core; tornado potential when rotating"]
+            ]
+          },
+          "b": {
+            "title": "Shelf cloud",
+            "tone": "advisory",
+            "rows": [
+              ["Where", "Long wedge on the leading edge, along the gust front"],
+              ["Air", "Outflow: pushing out and down, ragged underside"],
+              ["Versus the rain", "Moves away from it, slopes downward"],
+              ["Means", "Damaging straight-line wind; usually not tornadic"]
+            ]
+          },
+          "note": "A shelf cloud can appear to roll on a horizontal axis. A wall cloud rotates on a vertical axis. If it spins like a merry-go-round, pay attention; if it rolls like a rolling pin, it is outflow."
+        },
+        {
+          "kind": "criteriaAll",
+          "heading": "When a wall cloud gets serious",
+          "items": [
+            { "title": "Persistence", "detail": "It lasts 10 minutes or more, holding position relative to the rain" },
+            { "title": "Rotation", "detail": "Persistent, organized rotation on a vertical axis" },
+            { "title": "Violent motion", "detail": "Cloud elements rising rapidly into it, strong surface inflow" }
+          ],
+          "banner": "Rotating wall cloud = urgent report. Rotation can precede the tornado by up to an hour.",
+          "note": "Fewer than half of observed wall clouds ever produce a tornado, and a non-rotating wall cloud is essentially harmless. That is exactly why your report of WHICH kind you see has operational value."
+        },
+        {
+          "kind": "myths",
+          "heading": "The impersonators",
+          "myths": [
+            {
+              "myth": "The funnel has to reach the ground before it counts as a tornado.",
+              "truth": "A rotating dust or debris cloud beneath the funnel confirms a tornado, full stop. In dry country with high cloud bases, the condensation funnel may never visibly reach the ground at all."
+            },
+            {
+              "myth": "That ragged dangling cloud is a developing funnel.",
+              "truth": "Probably scud: detached, wind-torn fragments that mimic funnels but do not rotate and are not attached. Wall clouds are always attached; funnels always rotate."
+            },
+            {
+              "myth": "A spinning dust cloud under the gust front is a tornado.",
+              "truth": "That is a gustnado, an outflow eddy with no connection to cloud-base rotation. Officially not a tornado, but still report it: it is a wind hazard."
+            },
+            {
+              "myth": "No supercell, no mesocyclone, so no tornado is possible.",
+              "truth": "Landspouts are true tornadoes that form without a mesocyclone, often under a still-growing tower, with no wall cloud and little radar warning."
+            }
+          ]
+        },
+        {
+          "kind": "prose",
+          "heading": "The five questions before you report",
+          "body": "The Spotter's Field Guide gives a screening test for any suspicious feature. If the answer to any question is no, it is probably not a tornado.",
+          "points": [
+            "Can I see it clearly?",
+            "Is the feature attached to the thunderstorm base?",
+            "Is it near the updraft, where tornadoes actually develop?",
+            "Is there organized rotation within the feature?",
+            "If it appears to be a tornado, is there debris?"
+          ],
+          "note": "Report only what you see, not what you think you see. Give the event's location, not your own. If you are unsure, report anyway and say you are unsure."
+        },
+        {
+          "kind": "table",
+          "heading": "Reading the sky: the cloud families",
+          "table": {
+            "columns": ["Level", "Height of base (mid-latitudes)", "Clouds"],
+            "rows": [
+              ["High", "16,500 to 45,000 ft", "Cirrus, cirrocumulus, cirrostratus. Ice."],
+              ["Middle", "6,500 to 23,000 ft", "Altocumulus, altostratus, nimbostratus. Mostly water."],
+              ["Low", "Surface to 6,500 ft", "Stratus, stratocumulus, cumulus, cumulonimbus"]
+            ]
+          },
+          "points": [
+            "Decode any name from four roots: cirro = curl of hair, cumulo = heap, strato = layer, nimbo = rain.",
+            "The trap: alto means high in Latin, but the alto clouds are the MIDDLE family.",
+            "Cumulus and cumulonimbus keep their bases low but can tower through every level; many courses teach them as their own vertical development family.",
+            "Altocumulus castellanus, turrets sprouting from mid-level cloud, is an official sign of instability aloft and can precede rapid thunderstorm development.",
+            "Towering cumulus becomes a cumulonimbus the moment the top glaciates and flattens into an anvil."
+          ]
+        },
+        {
+          "kind": "prose",
+          "heading": "Spotting at night",
+          "body": "Use lightning flashes to illuminate storm structure, and watch the horizon for the blue-green flashes of power lines arcing, which indicate damaging winds at that spot. A loud roar may mean a tornado is close, but not every tornado roars and some straight-line winds do.",
+          "note": "The field guide is blunt: nighttime storm spotting from a vehicle is dangerous and not recommended. Fixed position, escape route known, and more caution than daylight."
+        }
+      ],
+      "quickChecks": [
+        { "q": "A ragged lowering hangs near the storm base. What two things decide whether it is worth reporting?", "a": "Is it attached, and does it have organized rotation on a vertical axis? Scud is detached and does not rotate. Watch it for a minute or two before deciding." },
+        { "q": "The funnel is only halfway down, but dust is whirling beneath it. Tornado or funnel cloud?", "a": "Tornado. A debris cloud under the funnel confirms the circulation is on the ground. Report it as a tornado." },
+        { "q": "A long wedge of cloud is racing at you ahead of the rain. What is it and what does it mean?", "a": "A shelf cloud on the gust front. It means damaging straight-line wind, not usually a tornado. Brace and report the wind." },
+        { "q": "What makes a supercell a supercell?", "a": "A persistent rotating updraft, the mesocyclone. It can last hours and produces the majority of intense tornadoes." },
+        { "q": "Which lifecycle stage brings the severe weather?", "a": "Mature: updraft and downdraft coexisting. Developing is updraft only, dissipating is downdraft only." }
       ]
     }
   }

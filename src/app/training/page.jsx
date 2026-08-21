@@ -23,6 +23,9 @@ export default function TrainingHome() {
   const [reload, setReload] = useState(0);
   const [enrolling, setEnrolling] = useState(false);
   const [enrollError, setEnrollError] = useState('');
+  // Open modules this person does not have yet: /api/enroll only runs at
+  // first signup, so modules added later need their own invitation.
+  const [missingPublic, setMissingPublic] = useState([]);
   // null = automatic (open the category holding the next unpassed module).
   const [openCats, setOpenCats] = useState(null);
 
@@ -70,7 +73,7 @@ export default function TrainingHome() {
           // one person's dashboard and credited them with other people's
           // passes.
           supabase.from('assignments').select('id, module_slug, due_on').eq('user_id', user.id),
-          supabase.from('modules').select('slug, title, blurb, pass_pct, sort_order'),
+          supabase.from('modules').select('slug, title, blurb, pass_pct, sort_order, team_only'),
           supabase
             .from('attempts')
             .select('module_slug, score_pct, passed, submitted_at')
@@ -100,6 +103,11 @@ export default function TrainingHome() {
         .sort((a, b) => a.module.sort_order - b.module.sort_order);
 
       setRows(list);
+
+      const have = new Set((assignments ?? []).map((a) => a.module_slug));
+      setMissingPublic(
+        (modules ?? []).filter((m) => !m.team_only && !have.has(m.slug)).map((m) => m.title),
+      );
     })();
 
     return () => { cancelled = true; };
@@ -218,6 +226,18 @@ export default function TrainingHome() {
         )}
 
         {rows === null && <p className="stp__lede">Loading your assignments.</p>}
+
+        {rows?.length > 0 && missingPublic.length > 0 && (
+          <div className="stp__newMods">
+            <span>
+              New training available: <strong>{missingPublic.join(', ')}</strong>
+            </span>
+            <button className="stp__btn stp__btn--sm" type="button" onClick={enroll} disabled={enrolling}>
+              {enrolling ? 'Adding' : 'Add to my training'}
+            </button>
+            {enrollError && <p className="stp__error">{enrollError}</p>}
+          </div>
+        )}
 
         {rows?.length === 0 && (
           <div className="stp__enroll">
