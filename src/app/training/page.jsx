@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabaseClient';
@@ -21,6 +21,26 @@ export default function TrainingHome() {
   // null while we are still checking, then true or false.
   const [authed, setAuthed] = useState(null);
   const [reload, setReload] = useState(0);
+
+  // Returning from an OAuth redirect, the code-for-session exchange runs
+  // in the background after this page has already checked getUser() and
+  // shown the sign-in form. Listen for the session landing and reload,
+  // instead of leaving a signed-in person staring at the form. The ref
+  // gate keeps TOKEN_REFRESHED and ordinary password sign-ins (which
+  // already reload via onSignedIn) from triggering extra loads.
+  const authedRef = useRef(authed);
+  authedRef.current = authed;
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+      if (event === 'SIGNED_IN' && authedRef.current === false) {
+        setAuthed(null);
+        setReload((r) => r + 1);
+      }
+    });
+    return () => subscription.unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -113,7 +133,10 @@ export default function TrainingHome() {
           <p className="stp__eyebrow">Spotter Tools Pro</p>
           <div className="stp__topActions">
             {isAdmin && (
-              <Link className="stp__linkBtn" href="/admin/training">Manage roster</Link>
+              <>
+                <Link className="stp__linkBtn" href="/admin/training/gradebook">Gradebook</Link>
+                <Link className="stp__linkBtn" href="/admin/training">Manage roster</Link>
+              </>
             )}
             <button className="stp__linkBtn" type="button" onClick={signOut}>Sign out</button>
           </div>

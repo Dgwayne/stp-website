@@ -134,6 +134,7 @@ export default function AdminTrainingPage() {
         <div className="stp__topbar">
           <p className="stp__eyebrow">Spotter Tools Pro</p>
           <div className="stp__topActions">
+            <Link className="stp__linkBtn" href="/admin/training/gradebook">Gradebook</Link>
             <Link className="stp__linkBtn" href="/training">My training</Link>
             <button className="stp__linkBtn" type="button" onClick={signOut}>Sign out</button>
           </div>
