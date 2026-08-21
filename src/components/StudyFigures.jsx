@@ -240,8 +240,108 @@ function StormLifecycle() {
   );
 }
 
+/* ---- radar beam height vs range ---- */
+function BeamHeight() {
+  // Earth curvature exaggerated for teaching; the beam is straight.
+  const groundY = (x) => 330 + Math.pow((x - 70) / 660, 2) * 150;
+
+  const curve = [];
+  for (let x = 60; x <= 700; x += 20) curve.push(`${x},${groundY(x)}`);
+
+  return (
+    <svg viewBox="0 0 720 400" role="img" aria-label="Radar beam height increasing with range diagram" style={{ width: '100%', height: 'auto' }}>
+      {/* curved earth */}
+      <path d={`M60,${groundY(60)} L ${curve.join(' L ')} L 700,400 L 60,400 Z`} fill={C.ground} opacity="0.55" />
+      <polyline points={curve.join(' ')} fill="none" stroke={C.dim} strokeWidth="1.5" />
+
+      {/* radar tower */}
+      <line x1="70" y1="330" x2="70" y2="296" stroke={C.label} strokeWidth="3" />
+      <circle cx="70" cy="288" r="9" fill={C.label} />
+      <text x="70" y="352" textAnchor="middle" fontSize="12.5" style={monoDim}>Radar</text>
+
+      {/* beam: straight line rising away from curving earth */}
+      <g>
+        <path d="M70 288 L 700 176" stroke={C.up} strokeWidth="2" fill="none" />
+        <path d="M70 288 L 700 232" stroke={C.up} strokeWidth="2" fill="none" />
+        <path d="M70 288 L 700 176 L 700 232 Z" fill={C.up} opacity="0.14" />
+      </g>
+      <text x="250" y="243" fontSize="12.5" fill={C.up} fontFamily="var(--mono, monospace)">Beam travels straight</text>
+
+      {/* cone of silence */}
+      <path d="M70 288 L 40 150 L 100 150 Z" fill={C.inflow} opacity="0.18" />
+      <line x1="70" y1="288" x2="70" y2="150" stroke={C.inflow} strokeWidth="1" strokeDasharray="3 3" />
+      <text x="86" y="140" fontSize="11.5" fill={C.inflow} fontFamily="var(--mono, monospace)">Cone of silence</text>
+
+      {/* near storm: fully sampled */}
+      <g>
+        <ellipse cx="228" cy="250" rx="42" ry="16" fill={C.cloudLight} />
+        <rect x="196" y="252" width="64" height="66" rx="10" fill={C.cloud} />
+        <text x="228" y="378" textAnchor="middle" fontSize="12.5" style={mono}>Close storm</text>
+        <text x="228" y="394" textAnchor="middle" fontSize="11.5" style={monoDim}>beam samples low levels</text>
+      </g>
+
+      {/* far storm: beam overshoots the low levels */}
+      <g>
+        <ellipse cx="586" cy="150" rx="54" ry="18" fill={C.cloudLight} />
+        <rect x="548" y="152" width="76" height="150" rx="12" fill={C.cloud} />
+        <text x="586" y="378" textAnchor="middle" fontSize="12.5" style={mono}>Distant storm</text>
+        <text x="586" y="394" textAnchor="middle" fontSize="11.5" style={monoDim}>beam is above the low levels</text>
+      </g>
+
+      {/* the missed layer */}
+      <path d="M548 232 L 624 232 L 624 302 L 548 302 Z" fill={C.inflow} opacity="0.16" />
+      <Leader x1={624} y1={268} x2={678} y2={268} />
+      <text x="682" y="264" textAnchor="end" fontSize="11.5" fill={C.inflow} fontFamily="var(--mono, monospace)">not sampled</text>
+
+      <text x="20" y="26" fontSize="12.5" style={monoDim}>The beam is straight, the earth curves away: the farther the storm, the higher you are looking.</text>
+    </svg>
+  );
+}
+
+/* ---- velocity couplet ---- */
+function VelocityCouplet() {
+  // Geometry matters here: for PURE rotation the two velocity maxima sit
+  // at the SAME RANGE from the radar (equidistant, straddling the sight
+  // line). Maxima strung out ALONG one radial mean convergence or
+  // divergence instead. Radar is drawn due south of the couplet so the
+  // sight line is vertical and the pair is clearly equidistant.
+  return (
+    <svg viewBox="0 0 720 360" role="img" aria-label="Doppler velocity couplet showing cyclonic rotation" style={{ width: '100%', height: 'auto' }}>
+      {/* radar, due south of the feature */}
+      <circle cx="360" cy="312" r="7" fill={C.label} />
+      <text x="360" y="336" textAnchor="middle" fontSize="12.5" style={monoDim}>Radar</text>
+
+      {/* sight line straight out from the radar */}
+      <line x1="360" y1="304" x2="360" y2="62" stroke={C.leader} strokeWidth="1" strokeDasharray="4 4" />
+
+      {/* arc of constant range through both maxima */}
+      <path d="M232 168 A 168 168 0 0 1 488 168" fill="none" stroke={C.dim} strokeWidth="1" strokeDasharray="5 5" opacity="0.7" />
+      <text x="514" y="176" fontSize="11" style={monoDim}>same range</text>
+
+      {/* the couplet: inbound left, outbound right, straddling the sight line */}
+      <ellipse cx="300" cy="148" rx="58" ry="66" fill="#2E9E63" opacity="0.9" />
+      <ellipse cx="420" cy="148" rx="58" ry="66" fill="#C4423A" opacity="0.9" />
+      <text x="300" y="142" textAnchor="middle" fontSize="13" fontWeight="700" fill="#EAF7EF" fontFamily="var(--mono, monospace)">GREEN</text>
+      <text x="300" y="160" textAnchor="middle" fontSize="11" fill="#EAF7EF" fontFamily="var(--mono, monospace)">toward radar</text>
+      <text x="420" y="142" textAnchor="middle" fontSize="13" fontWeight="700" fill="#FDECEA" fontFamily="var(--mono, monospace)">RED</text>
+      <text x="420" y="160" textAnchor="middle" fontSize="11" fill="#FDECEA" fontFamily="var(--mono, monospace)">away from radar</text>
+
+      {/* rotation arrow over the pair */}
+      <path d="M258 66 A 108 108 0 0 1 462 66" fill="none" stroke={C.up} strokeWidth="2.5" strokeDasharray="6 4" />
+      <Head x={464} y={68} angle={56} color={C.up} />
+      <text x="360" y="44" textAnchor="middle" fontSize="12.5" fill={C.up} fontFamily="var(--mono, monospace)">cyclonic rotation</text>
+
+      <text x="360" y="252" textAnchor="middle" fontSize="12.5" style={mono}>Inbound and outbound side by side, at the same range = rotation</text>
+      <text x="360" y="272" textAnchor="middle" fontSize="11.5" style={monoDim}>Tighter packing means stronger rotation. Strung out along one radial instead? That is convergence.</text>
+      <text x="360" y="292" textAnchor="middle" fontSize="11.5" fill={C.inflow} fontFamily="var(--mono, monospace)">Left and right are from the RADAR looking out, not from your screen</text>
+    </svg>
+  );
+}
+
 export const FIGURES = {
   'supercell-anatomy': SupercellAnatomy,
   'wall-vs-shelf': WallVsShelf,
   'storm-lifecycle': StormLifecycle,
+  'beam-height': BeamHeight,
+  'velocity-couplet': VelocityCouplet,
 };

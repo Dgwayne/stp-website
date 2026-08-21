@@ -1,5 +1,5 @@
 {
-  "bank_version": "2026.08.21",
+  "bank_version": "2026.08.22",
   "scope": "National NWS criteria only. Locally-variable thresholds are flagged and never quizzed as fixed numbers.",
   "verified_against": [
     "NWSI 10-511 WFO Severe Weather Products Specification (Jan 26, 2023)",
@@ -1313,6 +1313,194 @@
           ],
           "answer": [1],
           "explanation": "Report only what you see, not what you think you see, with what, when, and WHERE THE EVENT IS, not where you are. If you are unsure, report anyway and say you are unsure. Timeliness beats completeness, and honesty about uncertainty beats false confidence."
+        }
+      ]
+    },
+    {
+      "slug": "radar-basics",
+      "title": "Reading Radar",
+      "blurb": "What the radar sees, what it misses, and why you still matter.",
+      "pass_pct": 80,
+      "questions": [
+        {
+          "id": "rad-01",
+          "type": "single",
+          "prompt": "What does the radar actually measure?",
+          "options": [
+            "Rainfall rate at the ground",
+            "The amount of power returned to the radar from targets in the beam",
+            "Cloud height",
+            "Wind speed at the surface"
+          ],
+          "answer": [1],
+          "explanation": "The radar sends a pulse and listens for the echo. It measures returned power, not rain. Everything else, including rainfall rate and hail size, is inferred from that. It also spends almost all of its time listening: only about 7 seconds of every hour are spent transmitting."
+        },
+        {
+          "id": "rad-02",
+          "type": "truefalse",
+          "prompt": "A higher dBZ value always means heavier rain is reaching the ground.",
+          "options": ["True", "False"],
+          "answer": [1],
+          "explanation": "False. Returned power scales with drop diameter to the sixth power, so a few big drops return the same power as many small ones. Warm tropical rain often shows only 35 to 45 dBZ while dumping 10 to 15 inches. Higher dBZ usually means heavier precipitation, but it is never a rainfall measurement."
+        },
+        {
+          "id": "rad-03",
+          "type": "single",
+          "prompt": "Why does clear-air mode show birds, bugs and dust that precipitation mode does not?",
+          "options": [
+            "It uses a different antenna",
+            "It is the radar in its most sensitive operation, scanning slower and sweeping fewer angles",
+            "It scans more elevation angles",
+            "It is a software error"
+          ],
+          "answer": [1],
+          "explanation": "Clear-air mode scans slower and sweeps fewer angles, and two of its patterns use a much longer pulse, which raises sensitivity. That extra sensitivity picks up small non-weather targets. The radar switches itself into precipitation mode once returns exceed a threshold."
+        },
+        {
+          "id": "rad-04",
+          "type": "single",
+          "prompt": "At about 100 miles from the radar, the lowest scan is sampling the storm at roughly:",
+          "options": [
+            "500 feet above ground",
+            "3,000 feet above ground",
+            "12,000 feet above ground",
+            "30,000 feet above ground"
+          ],
+          "answer": [2],
+          "explanation": "About 12,000 feet. The beam travels essentially straight while the earth curves away beneath it, so beam height climbs with range. At that height you are looking at the middle of the storm, not the part where tornadoes live."
+        },
+        {
+          "id": "rad-05",
+          "type": "multi",
+          "prompt": "A storm sits 100 miles from the nearest radar. Which of these are true? Select all.",
+          "options": [
+            "The lowest levels of the storm are not being sampled at all",
+            "The beam is roughly two miles wide there, so small features get smeared out",
+            "A weak-looking circulation may be much stronger below the beam",
+            "If the storm looks weaker than it did an hour ago, it is definitely weakening"
+          ],
+          "answer": [0, 1, 2],
+          "explanation": "The beam spreads about 1,000 feet every 10 miles, so detail vanishes with range and low-level features are missed entirely. Official guidance is to assume circulations are at least as strong below the beam as they appear on the lowest slice, and never to assume a storm is weakening just because it moved away from the radar."
+        },
+        {
+          "id": "rad-06",
+          "type": "single",
+          "prompt": "The difference between base and composite reflectivity is:",
+          "options": [
+            "Base is the lowest elevation slice; composite is the maximum from every elevation",
+            "Base is older data; composite is newer",
+            "Base is for rain; composite is for snow",
+            "There is no real difference"
+          ],
+          "answer": [0],
+          "explanation": "Base reflectivity is one slice, usually 0.5 degrees, and it arrives fast enough to show hook echoes and outflow boundaries. Composite takes the strongest return from every angle, which is excellent for judging intensity but masks the low-level structure that carries the tornado clues."
+        },
+        {
+          "id": "rad-07",
+          "type": "truefalse",
+          "prompt": "Doppler velocity shows which compass direction the wind is blowing.",
+          "options": ["True", "False"],
+          "answer": [1],
+          "explanation": "False, and this is the most common radar misread. A velocity value shows only the component of motion aimed at or away from THE RADAR. Motion straight across the beam registers as zero no matter how fast it is, and the displayed speed is always less than or equal to the true speed. Forecasters can infer wind direction from the overall pattern, but no single color tells you a compass direction."
+        },
+        {
+          "id": "rad-08",
+          "type": "single",
+          "prompt": "On standard velocity products, green and red mean:",
+          "options": [
+            "Green is wind from the west, red is wind from the east",
+            "Green is motion toward the radar, red is motion away from it",
+            "Green is light wind, red is strong wind",
+            "Green is rain, red is hail"
+          ],
+          "answer": [1],
+          "explanation": "Green is inbound, toward the radar. Red is outbound, away from it. Brighter shades mean faster. The line between them, where motion is perpendicular to the beam, is called the zero isodop."
+        },
+        {
+          "id": "rad-09",
+          "type": "single",
+          "prompt": "You see bright green immediately beside bright red. For that to be ROTATION rather than convergence, the two maxima must be:",
+          "options": [
+            "Lined up one behind the other along the same radial from the radar",
+            "Side by side at the same distance from the radar",
+            "Separated by at least ten miles",
+            "Exactly equal in color intensity"
+          ],
+          "answer": [1],
+          "explanation": "Pure rotation puts the two maxima equidistant from the radar, straddling the sight line. Maxima strung out along the same radial mean convergence or divergence instead. The tighter the pair, the stronger the rotation, and side-by-side adjacent gates is as tight as it gets."
+        },
+        {
+          "id": "rad-10",
+          "type": "single",
+          "prompt": "A mesocyclone is:",
+          "options": [
+            "A tornado as it appears on radar",
+            "A storm-scale region of rotation, typically 2 to 6 miles across, defined as a radar signature",
+            "A visible cloud feature that spotters should report by name",
+            "Another word for a wall cloud"
+          ],
+          "answer": [1],
+          "explanation": "It is a radar term, not something you can see, and it is far larger than any tornado that forms inside it. Detection often precedes a tornado, which is where warning lead time comes from. Report the wall cloud you can see, not a mesocyclone you cannot."
+        },
+        {
+          "id": "rad-11",
+          "type": "single",
+          "prompt": "A hook echo appears on radar. What does it tell you?",
+          "options": [
+            "A tornado is on the ground",
+            "Precipitation is wrapping around a rotating updraft, which favors tornado development",
+            "The storm is weakening",
+            "Large hail is guaranteed"
+          ],
+          "answer": [1],
+          "explanation": "The hook is precipitation drawn around the mesocyclone by the rear flank downdraft, usually in the right-rear of the storm relative to its motion. It marks a favorable setup, not a tornado on the ground. Textbook hooks are also far rarer than diagrams suggest."
+        },
+        {
+          "id": "rad-12",
+          "type": "single",
+          "prompt": "On a bow echo, the most damaging straight-line winds are usually found:",
+          "options": [
+            "At the northern end",
+            "At the apex, the crest of the bow",
+            "Well behind the line",
+            "Nowhere in particular"
+          ],
+          "answer": [1],
+          "explanation": "Winds concentrate at the crest of the bow. Circulations can develop at either end, and in the northern hemisphere the north end rotates cyclonically and can produce tornadoes, but the apex is where the wind damage runs."
+        },
+        {
+          "id": "rad-13",
+          "type": "multi",
+          "prompt": "Which are TRUE about a tornado debris signature? Select all.",
+          "options": [
+            "A drop in correlation coefficient must be co-located with a strong velocity couplet",
+            "It confirms a tornado is on the ground lofting debris",
+            "It gives forecasters extra lead time before a tornado forms",
+            "No debris signature means no tornado is occurring"
+          ],
+          "answer": [0, 1],
+          "explanation": "Debris tumbles chaotically, so correlation coefficient collapses right where the couplet is, and that co-location is the non-negotiable part. But it is confirmation, not prediction: by the time it appears, damage is already happening, and a real tornado may loft no debris the radar can see."
+        },
+        {
+          "id": "rad-14",
+          "type": "single",
+          "prompt": "Correlation coefficient values below about 0.80 usually indicate:",
+          "options": [
+            "Very heavy rain",
+            "Non-meteorological targets such as birds, bugs, smoke or debris",
+            "Snow",
+            "A radar malfunction"
+          ],
+          "answer": [1],
+          "explanation": "Low CC means the targets filling the beam are wildly unlike each other, which is exactly what birds, insects, smoke and tornado debris look like. Uniform rain or snow runs above 0.97, and hail or mixed precipitation sits in between."
+        },
+        {
+          "id": "rad-15",
+          "type": "truefalse",
+          "prompt": "Radar can show a tornado directly, so spotter reports are mostly a formality.",
+          "options": ["True", "False"],
+          "answer": [1],
+          "explanation": "False. Radar usually cannot resolve the tornado itself: within a few tens of miles the beam already fans out wider than the tornado, and it cannot see below cloud base except very close in. It detects rotation, and confirms a tornado only when debris is lofted high enough to sample. Radar tells you where to look; your eyes supply the ground truth."
         }
       ]
     }

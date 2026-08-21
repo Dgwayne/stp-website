@@ -1,5 +1,5 @@
 {
-  "derived_from_bank_version": "2026.08.21",
+  "derived_from_bank_version": "2026.08.22",
   "review_by": "2027-03-01",
   "sources": [
     "NWSI 10-511 WFO Severe Weather Products Specification (Jan 26, 2023)",
@@ -1000,6 +1000,260 @@
         { "q": "A long wedge of cloud is racing at you ahead of the rain. What is it and what does it mean?", "a": "A shelf cloud on the gust front. It means damaging straight-line wind, not usually a tornado. Brace and report the wind." },
         { "q": "What makes a supercell a supercell?", "a": "A persistent rotating updraft, the mesocyclone. It can last hours and produces the majority of intense tornadoes." },
         { "q": "Which lifecycle stage brings the severe weather?", "a": "Mature: updraft and downdraft coexisting. Developing is updraft only, dissipating is downdraft only." }
+      ]
+    },
+    "radar-basics": {
+      "tagline": "What the radar sees, what it misses, and why you still matter.",
+      "minutes": 10,
+      "intro": "Radar is the most powerful severe weather tool ever built, and it still cannot see a tornado. This module covers what the beam actually measures, the ways it lies to you at distance, the signatures worth knowing, and where your eyes fit into a system that depends on them.",
+      "essentials": [
+        "Radar measures returned power, not rain. Everything else is inferred.",
+        "The beam climbs as the earth curves away: at 100 miles you are looking 12,000 feet up, and the low levels are simply not sampled.",
+        "Velocity is motion toward or away from THE RADAR, never a compass direction.",
+        "Radar usually cannot resolve the tornado itself, and cannot see below cloud base except close in. It shows rotation; you supply the ground truth."
+      ],
+      "sections": [
+        {
+          "kind": "prose",
+          "heading": "What the radar is actually doing",
+          "body": "About 160 WSR-88D radars cover the country, run jointly by the National Weather Service, the FAA and the military. Each one transmits a brief pulse of energy, then listens for the echo. Timing the round trip gives range; the strength of the echo gives reflectivity. That is the whole trick.",
+          "points": [
+            "The pulses are astonishingly brief. Across a full hour, the radar spends only about seven seconds transmitting and the rest listening.",
+            "Reflectivity is reported in dBZ, a compressed logarithmic scale running from about -35 to +85, because raw returned power spans an absurd range of values.",
+            "The WSR-88D uses a 10 cm wavelength, which passes through heavy precipitation far better than the shorter wavelengths used by most other radars."
+          ]
+        },
+        {
+          "kind": "photos",
+          "items": [
+            {
+              "src": "/images/training/radar-site.jpg",
+              "alt": "NEXRAD radar dome with a large supercell thunderstorm behind it",
+              "caption": "A WSR-88D radome in South Dakota with a hail-producing supercell behind it. The dome protects the dish; the dish is what scans.",
+              "credit": "Eric Kurth, NOAA/NWS; NOAA Photo Library (Wea01195)"
+            }
+          ]
+        },
+        {
+          "kind": "table",
+          "heading": "The two operating modes",
+          "table": {
+            "columns": ["Mode", "What it does", "When you see it"],
+            "rows": [
+              ["Clear air", "Scans slower, sweeps fewer angles, and two of its patterns use a longer pulse for extra sensitivity. Full sweep takes roughly 7 to 10 minutes.", "Quiet weather. The extra sensitivity is why you see birds, bugs, dust and smoke."],
+              ["Precipitation", "Scans faster through more angles, roughly 4 to 6 minutes for a full volume.", "Anything convective. The radar switches itself over once returns cross a threshold."]
+            ]
+          },
+          "note": "Modern radars also cheat in your favor: they can cut a volume short when nothing is happening aloft, and insert extra sweeps of the lowest tilt. With those enabled, the lowest slice, where tornadoes live, can refresh roughly every 90 seconds instead of every four minutes."
+        },
+        {
+          "kind": "table",
+          "heading": "Reading dBZ",
+          "table": {
+            "columns": ["dBZ", "Generally means"],
+            "rows": [
+              ["Above 65", "Extremely heavy precipitation, likely including water-coated hail"],
+              ["50 to 65", "Heavy precipitation, possibly hail"],
+              ["40 to 50", "Moderate precipitation"],
+              ["20 to 40", "Light precipitation"],
+              ["0 to 20", "Very light precipitation, or clutter"]
+            ]
+          },
+          "note": "Guidelines, not measurements. Returned power scales with drop diameter to the SIXTH power, so a handful of big drops returns as much as a downpour of small ones. Tropical rain routinely shows only 35 to 45 dBZ while dropping a foot of water."
+        },
+        {
+          "kind": "figure",
+          "heading": "The single most important limitation",
+          "fig": "beam-height",
+          "body": "The beam leaves the radar in a nearly straight line. The earth curves away beneath it. The result is that the farther a storm sits from the radar, the higher up you are looking at it, until the part of the storm that matters most is entirely below the beam.",
+          "points": [
+            "At about 100 miles, the lowest scan is roughly 12,000 feet above ground.",
+            "The beam also widens as it travels, spreading about 1,000 feet every 10 miles, so it is nearly two miles across at 100 miles out. Small features blur into nothing.",
+            "Directly above the radar is the cone of silence: volume scans top out at 19.5 degrees of elevation, so storms overhead go unsampled above that angle.",
+            "Features are not stacked vertically either. Beyond about 50 miles, a low-level circulation can sit several miles away from the mid-level rotation shown on your screen."
+          ]
+        },
+        {
+          "kind": "photos",
+          "items": [
+            {
+              "src": "/images/training/beam-spread.jpg",
+              "alt": "NOAA chart showing the lowest radar scan rising and widening with range",
+              "caption": "The lowest scan, plotted against range. The beam climbs and fattens the whole way out.",
+              "credit": "NOAA/NWS JetStream"
+            }
+          ]
+        },
+        {
+          "kind": "photos",
+          "heading": "The same tornado, two radars",
+          "items": [
+            {
+              "src": "/images/training/jarrell-close.jpg",
+              "alt": "Radar reflectivity showing a sharply defined hook echo from a nearby radar",
+              "caption": "Jarrell, Texas from 20 miles away: beam height about 1,300 feet. The hook is unmistakable and an EF-3 is on the ground.",
+              "credit": "NOAA/NWS JetStream"
+            },
+            {
+              "src": "/images/training/jarrell-far.jpg",
+              "alt": "Radar reflectivity of the same storm from a distant radar, with the hook barely visible",
+              "caption": "The same storm, same moment, from 98 miles: beam height about 11,600 feet. The hook is faint at best.",
+              "credit": "NOAA/NWS JetStream"
+            }
+          ]
+        },
+        {
+          "kind": "myths",
+          "myths": [
+            {
+              "myth": "That distant storm looks like it is falling apart on radar.",
+              "truth": "It may be doing nothing of the kind. As a storm moves away, the beam samples higher and higher in it, where rotation is weaker. Official guidance is to assume circulations are at least as strong below the beam as they look on the lowest slice, and never to call a storm weakening just because it moved away."
+            }
+          ]
+        },
+        {
+          "kind": "compare",
+          "heading": "Base versus composite reflectivity",
+          "a": {
+            "title": "Base reflectivity",
+            "tone": "warning",
+            "rows": [
+              ["What", "One elevation slice, usually 0.5 degrees"],
+              ["Speed", "Available almost immediately"],
+              ["Strength", "Shows hook echoes and outflow boundaries"],
+              ["Weakness", "The strongest part of a storm may sit above the slice"]
+            ]
+          },
+          "b": {
+            "title": "Composite reflectivity",
+            "tone": "advisory",
+            "rows": [
+              ["What", "The maximum return from every elevation, merged"],
+              ["Speed", "Only after a full volume scan"],
+              ["Strength", "Fast read on which storms are strongest"],
+              ["Weakness", "Masks low-level structure, including hooks"]
+            ]
+          },
+          "note": "Use composite to find the storms that matter, then base to look at the one you care about."
+        },
+        {
+          "kind": "figure",
+          "heading": "Velocity: motion toward you, not motion north",
+          "fig": "velocity-couplet",
+          "body": "Doppler velocity measures only the part of a target motion that is aimed directly at or away from the radar. Motion straight across the beam reads as zero no matter how fast it is, and the displayed speed is always less than or equal to the true speed.",
+          "points": [
+            "Green is inbound, toward the radar. Red is outbound, away from it. Brighter means faster.",
+            "Inbound beside outbound at the same range means rotation. The tighter the pair, the stronger the rotation.",
+            "If the two maxima are strung out along the same radial instead, that is convergence or divergence, not rotation.",
+            "Base velocity includes the storm motion itself, which can mask rotation in a fast-moving storm. Storm-relative velocity subtracts that motion out."
+          ]
+        },
+        {
+          "kind": "photos",
+          "items": [
+            {
+              "src": "/images/training/velocity-couplet.jpg",
+              "alt": "Side by side radar reflectivity and velocity showing a hook echo and a tight rotation couplet",
+              "caption": "Reflectivity and velocity of the same storm: hook on the left, tight inbound-outbound couplet on the right, tornado in progress near Oklahoma City.",
+              "credit": "NOAA/NWS JetStream"
+            }
+          ]
+        },
+        {
+          "kind": "prose",
+          "heading": "Rotation has a size hierarchy",
+          "points": [
+            "A mesocyclone is a storm-scale rotation, typically 2 to 6 miles across. It is a radar term for a signature meeting criteria for strength, depth and duration, and it is far bigger than any tornado inside it. You cannot see a mesocyclone; you see the wall cloud beneath it.",
+            "A tornadic vortex signature is much smaller and tighter, essentially adjacent radar gates of opposite motion. It strongly raises the odds of a tornado without guaranteeing one, and often appears aloft before touchdown.",
+            "Neither one is a tornado. Both are rotation the radar can resolve, which is a different thing."
+          ]
+        },
+        {
+          "kind": "photos",
+          "heading": "Signatures worth knowing",
+          "items": [
+            {
+              "src": "/images/training/hook-echo.jpg",
+              "alt": "Radar reflectivity showing a classic hook echo on a supercell",
+              "caption": "A hook echo: precipitation wrapped around the mesocyclone by the rear flank downdraft, in the right-rear of the storm. Favorable, not proof.",
+              "credit": "NOAA/NWS JetStream"
+            },
+            {
+              "src": "/images/training/bow-echo.jpg",
+              "alt": "Radar reflectivity showing a bowing line segment with annotation arrows",
+              "caption": "A bow echo. The damaging straight-line winds run at the apex; the north end can spin up tornadoes.",
+              "credit": "NOAA/NWS JetStream"
+            },
+            {
+              "src": "/images/training/hail-spike.jpg",
+              "alt": "Radar reflectivity showing a spike extending away from a storm core",
+              "caption": "A hail spike: energy bouncing between huge hailstones and the ground arrives late, so the radar paints a false spike pointing away from itself. A strong hint of severe hail.",
+              "credit": "NOAA/NWS Louisville, KY"
+            }
+          ]
+        },
+        {
+          "kind": "prose",
+          "heading": "What dual-polarization added",
+          "body": "Between 2011 and 2013 the network gained the ability to pulse vertically as well as horizontally, which means the radar can now infer the SHAPE of what it is hitting, not just how much is there.",
+          "points": [
+            "Differential reflectivity compares the two. Flattened raindrops read above zero. Tumbling hail looks round to the radar and reads near zero, so high reflectivity with near-zero differential reflectivity says hail.",
+            "Correlation coefficient measures how alike the targets in the beam are. Above 0.97 is uniform rain or snow. Between 0.80 and 0.97 suggests a mix, or hail. Below 0.80 means the beam is full of things that are nothing like each other: birds, insects, smoke, or debris.",
+            "Specific differential phase tracks how much the beam is slowed by what it passes through, which sharpens heavy-rainfall and flash-flood estimates."
+          ]
+        },
+        {
+          "kind": "photos",
+          "items": [
+            {
+              "src": "/images/training/debris-signature.jpg",
+              "alt": "Four-panel radar display showing reflectivity, two velocity tilts, and correlation coefficient with a debris signature",
+              "caption": "A tornado debris signature. Hook in reflectivity, tight couplet in velocity at two tilts, and a circled collapse in correlation coefficient exactly where the couplet is. That is lofted debris: a tornado on the ground doing damage.",
+              "credit": "NOAA/NWS JetStream"
+            },
+            {
+              "src": "/images/training/no-debris.jpg",
+              "alt": "Radar panels showing a strong velocity couplet with no drop in correlation coefficient",
+              "caption": "And the counter-example that matters: a large tornado was in progress here, with no correlation coefficient drop at all. No debris signature never means no tornado.",
+              "credit": "NOAA/NWS JetStream"
+            }
+          ],
+          "note": "A debris signature confirms; it does not predict. By the time debris is aloft, damage is already happening. And the drop must be co-located with the couplet, or it is not a debris signature at all."
+        },
+        {
+          "kind": "table",
+          "heading": "When the radar lies",
+          "table": {
+            "columns": ["Artifact", "What you see", "Why"],
+            "rows": [
+              ["Ground clutter", "A blotch of returns permanently around the radar", "Buildings, hills and terrain reflecting the beam. It does not move or evolve."],
+              ["Anomalous propagation", "Convincing but fake precipitation, often at night", "A temperature inversion bends the beam into the ground. Check a neighboring radar for a second opinion."],
+              ["Beam blockage", "Storms mysteriously weaker in one direction", "Terrain, buildings or wind farms blocking the beam. Anything downrange looks weaker than it is."],
+              ["Range folding", "Purple haze where data should be", "The radar cannot tell which pulse an echo belongs to, so it discards the data."],
+              ["Bright band", "A ring of enhanced returns around the radar", "Melting snowflakes coated in water look like huge raindrops. Easiest to spot on higher tilts."],
+              ["Attenuation", "Weak returns directly behind an intense core", "Energy absorbed on the way through. Less severe on these radars than most, but real."]
+            ]
+          }
+        },
+        {
+          "kind": "prose",
+          "heading": "Where you come in",
+          "body": "Radar usually cannot resolve the tornado itself. That is not a limitation of your app or of any particular radar; it is physics. Within a few tens of miles the beam is already wider than a tornado, it cannot see below cloud base except very close in, and what it detects is rotation. Most detected circulations never produce a tornado at all.",
+          "points": [
+            "Radar tells you which storm to watch and where on it to look. That is enormous, and it is not the same as knowing what is happening.",
+            "Your report of what is actually occurring under the storm is what closes the loop, and it matters most exactly where radar is weakest: far from the site, in terrain, and below the beam.",
+            "Use both. Check the structure on radar, then confirm with your eyes, and report what you see."
+          ],
+          "note": "This is why an unwarned tornado is usually a coverage story. In one documented case the nearest beam was 13,000 feet up, showing barely any echo at all, while an EF-1 was on the ground underneath it."
+        }
+      ],
+      "quickChecks": [
+        { "q": "Your screen shows 60 dBZ. How much rain is falling?", "a": "Unknown. dBZ measures returned power, and a few large drops return as much as many small ones. It suggests heavy precipitation and possibly hail, but it is not a rainfall measurement." },
+        { "q": "A storm 100 miles away shows weak rotation. What should you assume?", "a": "That the beam is about 12,000 feet up and two miles wide, so the real circulation below it is at least as strong as what you see, possibly much stronger." },
+        { "q": "Green sits right beside red on velocity. Rotation or not?", "a": "Rotation only if the two maxima are side by side at the same range from the radar. Strung out along the same radial, it is convergence or divergence." },
+        { "q": "Does green mean the wind is blowing west?", "a": "No. Green means motion toward the radar, wherever the radar happens to be. Velocity is radar-relative, never a compass direction." },
+        { "q": "Correlation coefficient collapses right on top of a tight couplet. What does that mean?", "a": "A tornado debris signature: debris is being lofted, so a tornado is on the ground doing damage. It confirms rather than predicts, and its absence proves nothing." },
+        { "q": "Radar shows a textbook hook. Do you report a tornado?", "a": "No. You report what you can see. A hook means precipitation wrapping a rotating updraft, which is favorable, but the radar cannot resolve the tornado itself and cannot see below cloud base at that range." }
       ]
     }
   }

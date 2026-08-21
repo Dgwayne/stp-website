@@ -76,6 +76,13 @@ export const ICONS = {
       <path d="M9.5 21h.01M13 21h.01M16.5 21h.01" />
     </svg>
   ),
+  radar: (
+    <svg viewBox="0 0 24 24" {...stroke} aria-hidden="true">
+      <path d="M12 12 4.9 7.6a8.3 8.3 0 1 1-.5 8.2" />
+      <circle cx="12" cy="12" r="1.8" fill="currentColor" stroke="none" />
+      <path d="M12 12l7.5-4.6" />
+    </svg>
+  ),
 };
 
 export const MODULE_META = {
@@ -90,6 +97,7 @@ export const MODULE_META = {
   statements: { accent: '#9FB0C0', icon: 'doc' },
   'local-maf': { accent: '#E8A86B', icon: 'pin' },
   'storm-structure': { accent: '#B49AE8', icon: 'cloud' },
+  'radar-basics': { accent: '#5BD6A8', icon: 'radar' },
 };
 
 export function moduleMeta(slug) {
@@ -118,7 +126,7 @@ export const CATEGORIES = [
   {
     key: 'field',
     title: 'Field skills',
-    slugs: ['storm-structure'],
+    slugs: ['storm-structure', 'radar-basics'],
   },
   {
     key: 'local',
