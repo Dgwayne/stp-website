@@ -1,5 +1,5 @@
 {
-  "bank_version": "2026.08.19",
+  "bank_version": "2026.08.20",
   "scope": "National NWS criteria only. Locally-variable thresholds are flagged and never quizzed as fixed numbers.",
   "verified_against": [
     "NWSI 10-511 WFO Severe Weather Products Specification (Jan 26, 2023)",
@@ -11,7 +11,10 @@
     "SCN 23-44 Consolidated Products Related to Cold (Oct 1, 2024)",
     "SCN 24-88 Heat product rename (Mar 4, 2025)",
     "NWS Hazard Simplification FAQ",
-    "NWS Glossary, SPC About and FAQ pages, NHC glossary"
+    "NWS Glossary, SPC About and FAQ pages, NHC glossary",
+    "Texas Fire Weather Operating Plan and Southwest Area Fire Weather AOP 2026-2029 (MAF red flag criteria)",
+    "NWS heavy snow criteria dataset, weather.gov/snow-criteria, MAF zones (queried Aug 2026)",
+    "MAF issued products and forecast discussions, IEM AFOS archive (NPWMAF, DSWMAF, AFDMAF)"
   ],
   "review_by": "2027-03-01",
   "modules": [
@@ -1009,6 +1012,147 @@
           "options": ["True", "False"],
           "answer": [0],
           "explanation": "True — planned, not yet implemented. The content survives; the headline term goes away and gains VTEC coding with an '.S' significance code."
+        }
+      ]
+    },
+    {
+      "slug": "local-maf",
+      "title": "Local Criteria: Midland/Odessa",
+      "blurb": "MAF's own trigger numbers: fire, snow, wind, dust and heat.",
+      "pass_pct": 80,
+      "questions": [
+        {
+          "id": "loc-01",
+          "type": "single",
+          "prompt": "MAF's Red Flag Warning humidity criterion is relative humidity of:",
+          "options": [
+            "25 percent or less",
+            "20 percent or less",
+            "15 percent or less",
+            "10 percent or less"
+          ],
+          "answer": [2],
+          "explanation": "15 percent or less, per the Texas and Southwest Area fire weather operating plans that govern MAF. It must occur simultaneously with the wind and fuel criteria for 3 or more hours."
+        },
+        {
+          "id": "loc-02",
+          "type": "single",
+          "prompt": "MAF's Red Flag Warning wind criterion, measured as 20-foot winds, is:",
+          "options": [
+            "Sustained 15 mph or greater, or gusts 25 mph or greater",
+            "Sustained 20 mph or greater, or gusts 35 mph or greater",
+            "Sustained 30 mph or greater, or gusts 45 mph or greater",
+            "Sustained 25 mph or greater, gusts not considered"
+          ],
+          "answer": [1],
+          "explanation": "20-foot sustained winds of 20 mph or greater, OR gusts of 35 mph or greater. Against a forecast range, the sustained wind is judged on the midpoint: 15 to 25 mph meets it, 15 to 20 does not."
+        },
+        {
+          "id": "loc-03",
+          "type": "single",
+          "prompt": "Beyond wind and humidity, MAF red flag criteria require:",
+          "options": [
+            "An ongoing wildfire somewhere in the area",
+            "NFDRS fire danger rating of High or greater, with all conditions occurring together for 3 or more hours",
+            "A burn ban in every affected county",
+            "Energy Release Component above the 90th percentile"
+          ],
+          "answer": [1],
+          "explanation": "The fuel gate is the NFDRS adjective rating of High or greater, and all three conditions must hold simultaneously for 3 or more hours across some part of a fire weather zone. MAF also invented the Red Flag Threat Index (RFTI), used to rate how far beyond criteria an event goes."
+        },
+        {
+          "id": "loc-04",
+          "type": "single",
+          "prompt": "Under the operating plan that governs MAF, the fire products cover these windows:",
+          "options": [
+            "Red Flag Warning 0 to 6 hours, Fire Weather Watch 6 to 24 hours",
+            "Red Flag Warning 12 to 48 hours, Fire Weather Watch 18 to 96 hours",
+            "Both are issued only same-day",
+            "Red Flag Warning 24 hours, Fire Weather Watch 5 days"
+          ],
+          "answer": [1],
+          "explanation": "Red Flag Warnings identify events highly likely or imminent, usually within 12 to 48 hours. Fire Weather Watches flag the same threat 18 to 96 hours out, consistent with the national directive."
+        },
+        {
+          "id": "loc-05",
+          "type": "single",
+          "prompt": "For Midland, Odessa and the Permian Basin lowlands, a Winter Storm Warning for snow requires an event total of about:",
+          "options": [
+            "2 inches",
+            "3 inches",
+            "4 inches",
+            "6 inches"
+          ],
+          "answer": [1],
+          "explanation": "3 inches per event in the basin and lowland zones, per the official NWS heavy snow criteria dataset for the MAF forecast area. Criteria are guidance, not strict thresholds: forecasters can warn below them when impact or timing justifies it."
+        },
+        {
+          "id": "loc-06",
+          "type": "single",
+          "prompt": "In the Guadalupe and Davis mountains and MAF's northern tier, the Winter Storm Warning snow criterion is an event total of about:",
+          "options": [
+            "3 inches",
+            "4 inches",
+            "6 inches",
+            "8 inches"
+          ],
+          "answer": [1],
+          "explanation": "4 inches per event for the mountain zones, the northern tier and the southeast New Mexico zones. The lowland zones are 3 inches."
+        },
+        {
+          "id": "loc-07",
+          "type": "truefalse",
+          "prompt": "MAF's Winter Storm Warning criteria are still 4 inches in 12 hours or 6 inches in 24 hours.",
+          "options": ["True", "False"],
+          "answer": [1],
+          "explanation": "False. The tabulated 12- and 24-hour criteria were retired beginning with the 2023-24 winter season, and the current directive carries the event-total framework forward. Criteria are event totals now: about 3 inches in the basin, 4 inches in the Guadalupes, Davis Mountains and northern tier."
+        },
+        {
+          "id": "loc-08",
+          "type": "single",
+          "prompt": "MAF's High Wind Warning thresholds, including for the Guadalupe Mountains zone, are:",
+          "options": [
+            "Sustained 40 mph or gusts 58 mph, the same everywhere in the forecast area",
+            "Sustained 50 mph in the mountains, 40 mph elsewhere",
+            "Gusts of 74 mph or greater",
+            "Sustained 58 mph or greater"
+          ],
+          "answer": [0],
+          "explanation": "Sustained 40 mph or gusts to 58 mph, and the Guadalupes have no separate higher carve-out. The mountains simply meet those numbers far more often than the basin does."
+        },
+        {
+          "id": "loc-09",
+          "type": "single",
+          "prompt": "A plain Wind Advisory at MAF is issued for sustained winds of about:",
+          "options": [
+            "20 mph",
+            "25 mph",
+            "30 mph",
+            "40 mph"
+          ],
+          "answer": [2],
+          "explanation": "30 mph, per MAF's own product definitions, matching the national 30 to 39 mph advisory band. 40 mph sustained is High Wind Warning territory."
+        },
+        {
+          "id": "loc-10",
+          "type": "single",
+          "prompt": "Heat products at MAF are typically written in terms of:",
+          "options": [
+            "Heat index values, like the Gulf Coast offices use",
+            "Air temperature, with thresholds that step by elevation",
+            "Humidity alone",
+            "One fixed national temperature"
+          ],
+          "answer": [1],
+          "explanation": "West Texas is dry, so MAF heat products run on air temperature, not heat index, and the trigger steps by elevation: roughly mid 90s in the mountains, around 105 in the basin and plains, and around 110 along the Rio Grande, as reflected consistently in MAF's issued products. The rare exceptions are the more humid far-northeastern zones."
+        },
+        {
+          "id": "loc-11",
+          "type": "truefalse",
+          "prompt": "A Dust Storm Warning here means visibility has dropped to 1/4 mile or less.",
+          "options": ["True", "False"],
+          "answer": [0],
+          "explanation": "True. MAF applies the national dust criteria and uses the full product suite heavily: dust is this office's signature hazard, with 45 Dust Storm Warnings issued in 2025 alone. The advisories cover visibility between 1/4 mile and 1 mile."
         }
       ]
     }

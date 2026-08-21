@@ -1,5 +1,5 @@
 {
-  "derived_from_bank_version": "2026.08.19",
+  "derived_from_bank_version": "2026.08.20",
   "review_by": "2027-03-01",
   "sources": [
     "NWSI 10-511 WFO Severe Weather Products Specification (Jan 26, 2023)",
@@ -633,6 +633,123 @@
         { "q": "Where do your spotter reports end up?", "a": "In the Local Storm Report. Report as it happens, safely. Late reports mostly have archival value." },
         { "q": "Which product tells you whether spotter activation is expected?", "a": "The Hazardous Weather Outlook. Some offices have retired the text version and moved the spotter statement into the AFD." },
         { "q": "Which product explains what the forecaster is actually thinking?", "a": "The Area Forecast Discussion, including uncertainty and where the models disagree." }
+      ]
+    },
+    "local-maf": {
+      "tagline": "The numbers your office actually uses. Nobody else's.",
+      "minutes": 7,
+      "intro": "The national modules flag every threshold that is set locally. This module is those numbers for NWS Midland/Odessa: pulled from the fire operating plans that govern MAF, the official NWS snow-criteria dataset, and MAF's own issued products. Nothing here is borrowed from a neighboring office, and where MAF publishes no number, this module says so instead of inventing one.",
+      "essentials": [
+        "Red flag here: humidity 15 percent or less, 20-foot winds 20 mph sustained or 35 gusting, fuels at NFDRS High or drier, all together for 3 or more hours.",
+        "Winter Storm Warning snow: 3 inches per event in the basin, 4 inches in the Guadalupes, Davis Mountains and northern tier. The old 12- and 24-hour numbers are gone.",
+        "Wind Advisory at 30. High Wind Warning at 40 sustained or 58 gusts, Guadalupes included.",
+        "Heat here is air temperature stepped by elevation, not heat index."
+      ],
+      "sections": [
+        {
+          "kind": "criteriaAll",
+          "heading": "Red Flag Warning: the MAF recipe",
+          "items": [
+            { "title": "RH 15% or less", "detail": "Very dry air, judged on the minimum of a forecast range" },
+            { "title": "Wind 20 / 35", "detail": "20-foot winds sustained 20+ mph, or gusts 35+ mph, judged on the midpoint of a range" },
+            { "title": "Fuels High+", "detail": "NFDRS fire danger rating of High or greater" }
+          ],
+          "banner": "All three at once, for 3 or more hours.",
+          "points": [
+            "Red Flag Warnings cover events highly likely or imminent, usually 12 to 48 hours out. Fire Weather Watches flag the same threat 18 to 96 hours out.",
+            "Conditions just beneath criteria get a Fire Danger Statement rather than a warning.",
+            "The Red Flag Threat Index, which rates how far beyond criteria an event goes, was invented at this office."
+          ]
+        },
+        {
+          "kind": "compare",
+          "heading": "Winter Storm Warning snow, per event",
+          "a": {
+            "title": "Basin and lowlands",
+            "tone": "advisory",
+            "rows": [
+              ["Criterion", "3 inches per event"],
+              ["Where", "Midland, Odessa and the Permian Basin lowlands, 23 zones"]
+            ]
+          },
+          "b": {
+            "title": "Mountains and northern tier",
+            "tone": "watch",
+            "rows": [
+              ["Criterion", "4 inches per event"],
+              ["Where", "Guadalupe and Davis mountains, the northern tier and southeast New Mexico, 14 zones"]
+            ]
+          },
+          "note": "Criteria are guidance, not strict thresholds. Forecasters can and do warn below them when timing or impact justifies it, like snow arriving at rush hour."
+        },
+        {
+          "kind": "myths",
+          "heading": "Two local myths",
+          "myths": [
+            {
+              "myth": "A Winter Storm Warning here still takes 4 inches in 12 hours or 6 in 24.",
+              "truth": "Those criteria were retired beginning with the 2023-24 winter season. It is an event total now: 3 inches in the basin, 4 in the Guadalupes, Davis Mountains and northern tier."
+            },
+            {
+              "myth": "The Guadalupe Mountains have their own higher wind thresholds.",
+              "truth": "Same numbers as the rest of the forecast area: 40 mph sustained or 58 mph gusts. The mountains just meet them far more often."
+            }
+          ]
+        },
+        {
+          "kind": "table",
+          "heading": "Wind and fog",
+          "table": {
+            "columns": ["Product", "MAF trigger"],
+            "rows": [
+              ["Wind Advisory", "Sustained winds around 30 mph"],
+              ["High Wind Warning", "Sustained 40 mph, or gusts to 58 mph"],
+              ["Dense Fog Advisory", "Visibility 1/4 mile or less"]
+            ]
+          },
+          "note": "These match the national defaults, confirmed in MAF's own issued product text rather than assumed."
+        },
+        {
+          "kind": "prose",
+          "heading": "Dust: the signature hazard",
+          "body": "MAF is one of the most active dust offices in the country: 45 Dust Storm Warnings in 2025 alone, plus the full advisory suite. The criteria are the national ones from the dust module, and here you will actually use them.",
+          "points": [
+            "Dust Storm Warning and Blowing Dust Warning: visibility 1/4 mile or less.",
+            "Dust Advisory and Blowing Dust Advisory: visibility between 1/4 mile and 1 mile.",
+            "The convective ones (outflow dust walls off storms) are the polygon products. The synoptic ones (all-day west wind events) are zone-based."
+          ]
+        },
+        {
+          "kind": "prose",
+          "heading": "Heat: by elevation, not humidity",
+          "body": "West Texas heat is dry heat, so MAF writes its heat products in air temperature, not heat index, and the trigger steps down as the terrain climbs. As consistently reflected in MAF's advisories and forecast discussions: around 95 in the mountains, around 100 in the higher elevations, around 105 in the basin and plains, and around 110 along the Rio Grande, where Extreme Heat Warning territory runs roughly 110 to 115.",
+          "note": "MAF has never formally published heat criteria. These tiers come from an audit of three and a half years of their issued products, so treat them as strong guidance rather than gospel, and expect the far-northeastern zones, the more humid corner, to occasionally use heat index instead."
+        },
+        {
+          "kind": "prose",
+          "heading": "Cold",
+          "body": "Since the October 2024 rebuild, MAF issues Cold Weather Advisories for wind chills roughly in the plus-15-to-below-zero range depending on zone, with the warm Presidio Valley held to a colder bar, and Extreme Cold Warnings when wind chills run around 5 below zero and colder. Freeze products use the standard 32 degrees at the growing season bookends, typically October through December and April.",
+          "note": "Also from the product archive: MAF essentially never issues a Frost Advisory. Zero were issued from April 2023 through August 2026. Around here, cold that matters is freeze or wind chill."
+        },
+        {
+          "kind": "prose",
+          "heading": "What is deliberately missing here",
+          "body": "MAF publishes no Winter Weather Advisory snowfall number, no formal heat or cold criteria, and no office criteria page at all. Where that is the case, this module says so rather than borrowing a neighboring office's numbers. When in doubt during an event, the WHAT line of the product itself tells you what the forecaster is treating as criteria."
+        }
+      ],
+      "local": "This whole module is the local numbers the other nine keep telling you to look up. Sources: the Texas and Southwest Area fire weather operating plans, the official NWS heavy-snow criteria dataset at weather.gov/snow-criteria, and MAF's own issued products and discussions. If a neighboring office's webpage disagrees with these, it does not apply here.",
+      "changes": [
+        {
+          "what": "Winter Storm Warning snow criteria moved from 12- and 24-hour totals to per-event totals nationwide; MAF's are 3 inches (basin) and 4 inches (high mountains, northern tier and southeast New Mexico).",
+          "when": "Beginning with the 2023-24 winter season; the current directive carries it forward."
+        }
+      ],
+      "quickChecks": [
+        { "q": "Recite the red flag recipe for this office.", "a": "Humidity 15 percent or less, 20-foot winds 20+ mph sustained or 35+ gusting, NFDRS High or greater, all together for 3 or more hours." },
+        { "q": "Snow is coming to Midland proper. How much triggers a Winter Storm Warning?", "a": "About 3 inches for the event. In the Guadalupes, Davis mountains or the northern tier, 4 inches." },
+        { "q": "What wind speed triggers a plain Wind Advisory here?", "a": "Sustained winds around 30 mph. At 40 sustained or 58 gusting it becomes a High Wind Warning." },
+        { "q": "Does MAF use heat index?", "a": "Almost never. Heat products here run on air temperature, stepped by elevation: roughly 105 does it in the basin and plains." },
+        { "q": "How many Dust Storm Warnings did this office issue in 2025?", "a": "45. Dust is the signature local hazard. Warning means 1/4 mile visibility or less." }
       ]
     }
   }

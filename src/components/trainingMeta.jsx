@@ -64,6 +64,12 @@ export const ICONS = {
       <path d="M14 3v4h4M9 12h6M9 16h6" />
     </svg>
   ),
+  pin: (
+    <svg viewBox="0 0 24 24" {...stroke} aria-hidden="true">
+      <path d="M12 21s-6.5-5.5-6.5-10.5a6.5 6.5 0 0 1 13 0C18.5 15.5 12 21 12 21Z" />
+      <circle cx="12" cy="10.5" r="2.2" />
+    </svg>
+  ),
 };
 
 export const MODULE_META = {
@@ -76,6 +82,7 @@ export const MODULE_META = {
   'fire-weather': { accent: '#FF7A45', icon: 'flame' },
   'tropical-marine': { accent: '#4FD1C5', icon: 'hurricane' },
   statements: { accent: '#9FB0C0', icon: 'doc' },
+  'local-maf': { accent: '#E8A86B', icon: 'pin' },
 };
 
 export function moduleMeta(slug) {
