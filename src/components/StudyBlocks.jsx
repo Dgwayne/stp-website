@@ -364,6 +364,24 @@ function Figure({ s }) {
   );
 }
 
+/* ---- real photographs, credited ---- */
+function Photos({ s }) {
+  const cols = s.items.length > 1 ? 2 : 1;
+  return (
+    <div className={`study__photos${cols === 2 ? ' study__photos--two' : ''}`}>
+      {s.items.map((p) => (
+        <figure className="study__photoCard" key={p.src}>
+          <img src={p.src} alt={p.alt} loading="lazy" />
+          <figcaption>
+            {p.caption && <span className="study__photoCaption">{p.caption}</span>}
+            {p.credit && <span className="study__photoCredit">{p.credit}</span>}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
 /* ---- plain table fallback ---- */
 function Table({ s }) {
   return (
@@ -397,6 +415,7 @@ const BLOCKS = {
   myths: Myths,
   table: Table,
   figure: Figure,
+  photos: Photos,
 };
 
 export function StudySection({ section }) {

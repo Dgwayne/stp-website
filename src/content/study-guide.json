@@ -774,6 +774,23 @@
           ]
         },
         {
+          "kind": "photos",
+          "items": [
+            {
+              "src": "/images/training/towering-cumulus.jpg",
+              "alt": "Two crisp towering cumulus clouds with hard cauliflower tops",
+              "caption": "Towering cumulus: hard cauliflower top, no anvil yet. The developing stage.",
+              "credit": "Ralph F. Kresge, NOAA Photo Library (wea00088)"
+            },
+            {
+              "src": "/images/training/cumulonimbus-anvil.jpg",
+              "alt": "Large cumulonimbus with a flattened spreading anvil top",
+              "caption": "The flattened, spreading anvil makes it a cumulonimbus. This is the thunderstorm cloud.",
+              "credit": "NOAA Photo Library, OAR/ERL/NSSL (nssl0035)"
+            }
+          ]
+        },
+        {
           "kind": "table",
           "heading": "The four storm modes",
           "table": {
@@ -798,6 +815,17 @@
             "A clear slot eating into the clouds behind the wall cloud is the RFD made visible, and it often precedes or accompanies tornado formation.",
             "Mesocyclone is a radar term for the storm-scale rotation. On radar, precipitation wrapping around it draws the classic hook echo.",
             "The flanking line of stair-stepped towers feeding the storm signals organization, and gust-front tornadoes can occasionally form along it."
+          ]
+        },
+        {
+          "kind": "photos",
+          "items": [
+            {
+              "src": "/images/training/supercell.jpg",
+              "alt": "Classic supercell at dusk with wide anvil and striated updraft tower",
+              "caption": "A classic supercell near Humboldt, Nebraska: anvil spread wide, striated tower marking the rotating updraft.",
+              "credit": "Stephen Corfidi, NOAA/NWS SPC; NOAA Photo Library (wea03319)"
+            }
           ]
         },
         {
@@ -838,6 +866,23 @@
           "note": "A shelf cloud can appear to roll on a horizontal axis. A wall cloud rotates on a vertical axis. If it spins like a merry-go-round, pay attention; if it rolls like a rolling pin, it is outflow."
         },
         {
+          "kind": "photos",
+          "items": [
+            {
+              "src": "/images/training/wall-cloud.jpg",
+              "alt": "Wall cloud with tail cloud hanging beneath a rain-free storm base",
+              "caption": "The real thing: wall cloud with tail cloud under a rain-free base, Oklahoma-Texas border, 1980. Isolated, attached, right next to the rain.",
+              "credit": "NOAA Photo Library, OAR/ERL/NSSL (nssl0108)"
+            },
+            {
+              "src": "/images/training/shelf-cloud.jpg",
+              "alt": "Wedge-shaped shelf cloud leading a thunderstorm gust front",
+              "caption": "Shelf cloud on a gust front, New Mexico, 1982. A long wedge on the storm's leading edge: outflow, wind.",
+              "credit": "NOAA Photo Library, OAR/ERL/NSSL (nssl0045)"
+            }
+          ]
+        },
+        {
           "kind": "criteriaAll",
           "heading": "When a wall cloud gets serious",
           "items": [
@@ -871,6 +916,35 @@
           ]
         },
         {
+          "kind": "photos",
+          "items": [
+            {
+              "src": "/images/training/tornado-debris.jpg",
+              "alt": "Tornado whose condensation funnel stops well above the ground while a dust cloud swirls at the surface",
+              "caption": "The most important photo in this module. The funnel is nowhere near the ground, but the dust cloud at the surface means this IS a tornado. Cordell, Oklahoma, 1981.",
+              "credit": "NOAA Photo Library, OAR/ERL/NSSL (nssl0053)"
+            },
+            {
+              "src": "/images/training/funnel-cloud.jpg",
+              "alt": "White condensation funnel hanging in the air, not reaching the ground",
+              "caption": "A funnel cloud near El Reno, Oklahoma: rotating, aloft, no debris beneath. Not yet a tornado.",
+              "credit": "NOAA Photo Library, OAR/ERL/NSSL (nssl0117)"
+            },
+            {
+              "src": "/images/training/scud.jpg",
+              "alt": "Ragged low scud cloud fragments beneath a developing storm",
+              "caption": "Ragged scud fragments under a storm. Detached and not rotating: not a funnel, not a wall cloud.",
+              "credit": "NOAA Photo Library, OAR/ERL/NSSL (nssl0046)"
+            },
+            {
+              "src": "/images/training/gustnado.jpg",
+              "alt": "Dust whirl spinning along a gust front in an urban area",
+              "caption": "A gustnado along a gust front, Louisville, 2005. Ground debris with no cloud-base rotation above it: not a tornado, still a hazard.",
+              "credit": "Courtesy NOAA/NWS Louisville"
+            }
+          ]
+        },
+        {
           "kind": "prose",
           "heading": "The five questions before you report",
           "body": "The Spotter's Field Guide gives a screening test for any suspicious feature. If the answer to any question is no, it is probably not a tornado.",
@@ -900,6 +974,17 @@
             "Cumulus and cumulonimbus keep their bases low but can tower through every level; many courses teach them as their own vertical development family.",
             "Altocumulus castellanus, turrets sprouting from mid-level cloud, is an official sign of instability aloft and can precede rapid thunderstorm development.",
             "Towering cumulus becomes a cumulonimbus the moment the top glaciates and flattens into an anvil."
+          ]
+        },
+        {
+          "kind": "photos",
+          "items": [
+            {
+              "src": "/images/training/mammatus.jpg",
+              "alt": "Field of smooth pouch-like mammatus clouds",
+              "caption": "Mammatus over Hobart, Oklahoma, 1977. They often accompany severe storms but do not produce severe weather. A photo opportunity, not a tornado signal.",
+              "credit": "NOAA Photo Library, OAR/ERL/NSSL (nssl0131)"
+            }
           ]
         },
         {

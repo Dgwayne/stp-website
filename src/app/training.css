@@ -899,6 +899,42 @@
   letter-spacing: 0.05em;
 }
 
+/* ---- real photographs ---- */
+.study__photos { display: grid; gap: 0.7rem; }
+.study__photos--two { grid-template-columns: 1fr 1fr; }
+@media (max-width: 560px) {
+  .study__photos--two { grid-template-columns: 1fr; }
+}
+
+.study__photoCard {
+  margin: 0;
+  border: 1px solid var(--rule-dim);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--void);
+}
+.study__photoCard img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.study__photoCard figcaption {
+  padding: 0.55rem 0.8rem 0.65rem;
+}
+.study__photoCaption {
+  display: block;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+.study__photoCredit {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  color: var(--faint);
+}
+
 /* ---- myth vs reality ---- */
 .study__myths { display: grid; gap: 0.6rem; }
 .study__myth {
