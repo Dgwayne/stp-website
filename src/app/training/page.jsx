@@ -243,10 +243,10 @@ export default function TrainingHome() {
           <div className="stp__enroll">
             <p className="stp__enrollTitle">Free spotter training</p>
             <p className="stp__enrollBody">
-              Nine modules on the NWS warning system: severe and tornado warnings, SPC
-              outlooks, flood, winter, fire and tropical products, and how spotter reports
-              feed the system. Study pages, then a short test per module. Retake as often
-              as you like.
+              Twelve modules on the NWS warning system and field skills: severe and tornado
+              warnings, SPC outlooks, flood, winter, fire and tropical products, storm
+              structure, radar, and the CAPE and shear parameters behind every forecast.
+              Study pages, then a short test per module. Retake as often as you like.
             </p>
             <div className="stp__actions" style={{ marginTop: '0.9rem' }}>
               <button className="stp__btn" type="button" onClick={enroll} disabled={enrolling}>

@@ -338,10 +338,206 @@ function VelocityCouplet() {
   );
 }
 
+/* ---- CAPE and CIN: a rising parcel against its environment ---- */
+function CapeCin() {
+  // Height rows shared by both curves so the filled regions line up.
+  // Environment temperature (solid) vs a lifted surface parcel (dashed).
+  const env = [[540, 360], [505, 320], [522, 285], [483, 240], [448, 190], [410, 140], [370, 90], [345, 62]];
+  const parcel = [[540, 360], [495, 320], [488, 285], [483, 240], [474, 190], [462, 140], [445, 90], [436, 62]];
+  const pts = (arr) => arr.map(([x, y]) => `${x},${y}`).join(' ');
+
+  return (
+    <svg viewBox="0 0 720 430" role="img" aria-label="CAPE and CIN parcel diagram" style={{ width: '100%', height: 'auto' }}>
+      {/* ground */}
+      <line x1="40" y1="370" x2="700" y2="370" stroke={C.ground} strokeWidth="2" />
+
+      {/* CIN: parcel colder than environment, below the cap */}
+      <polygon
+        points={pts([[540, 360], [495, 320], [488, 285], [483, 240], [522, 285], [505, 320]])}
+        fill={C.down}
+        opacity="0.32"
+      />
+      {/* CAPE: parcel warmer than environment, above the LFC */}
+      <polygon
+        points={pts([[483, 240], [474, 190], [462, 140], [445, 90], [436, 62], [345, 62], [370, 90], [410, 140], [448, 190]])}
+        fill={C.up}
+        opacity="0.28"
+      />
+
+      {/* environment temperature curve */}
+      <polyline points={pts(env)} fill="none" stroke={C.inflow} strokeWidth="3" strokeLinejoin="round" />
+      {/* parcel path */}
+      <polyline points={pts(parcel)} fill="none" stroke={C.label} strokeWidth="2.5" strokeDasharray="7 5" strokeLinejoin="round" />
+
+      {/* surface parcel */}
+      <circle cx="540" cy="360" r="6" fill={C.up} />
+      <text x="556" y="352" fontSize="13" style={mono}>Warm, moist</text>
+      <text x="556" y="368" fontSize="13" style={mono}>surface air</text>
+
+      {/* LFC marker */}
+      <circle cx="483" cy="240" r="4.5" fill={C.label} />
+      <Leader x1={489} y1={240} x2={556} y2={228} />
+      <text x="562" y="224" fontSize="13" style={mono}>LFC: free ascent</text>
+      <text x="562" y="240" fontSize="12" style={monoDim}>starts here</text>
+
+      {/* CIN label */}
+      <Leader x1={508} y1={296} x2={542} y2={306} />
+      <text x="548" y="302" fontSize="14" fontWeight="700" fill={C.rain} fontFamily="var(--mono, monospace)">CIN: the cap</text>
+      <text x="548" y="319" fontSize="12" style={monoDim}>parcel colder than its</text>
+      <text x="548" y="334" fontSize="12" style={monoDim}>surroundings, held down</text>
+
+      {/* CAPE label */}
+      <text x="424" y="140" textAnchor="middle" fontSize="17" fontWeight="700" fill={C.up} fontFamily="var(--mono, monospace)">CAPE</text>
+      <text x="424" y="158" textAnchor="middle" fontSize="12" style={monoDim}>parcel warmer,</text>
+      <text x="424" y="172" textAnchor="middle" fontSize="12" style={monoDim}>accelerates upward</text>
+
+      {/* top hint */}
+      <text x="390" y="40" textAnchor="middle" fontSize="12.5" style={monoDim}>Rise continues to the equilibrium level, where the anvil spreads out</text>
+
+      {/* legend */}
+      <line x1="60" y1="70" x2="102" y2="70" stroke={C.inflow} strokeWidth="3" />
+      <text x="110" y="74" fontSize="12.5" style={mono}>Air around the storm</text>
+      <line x1="60" y1="92" x2="102" y2="92" stroke={C.label} strokeWidth="2.5" strokeDasharray="7 5" />
+      <text x="110" y="96" fontSize="12.5" style={mono}>Rising parcel</text>
+
+      {/* axes */}
+      <Arrow d="M60 340 L 60 130" color={C.dim} w={1.5} />
+      <Head x={60} y={126} angle={-90} color={C.dim} />
+      <text x="52" y="238" fontSize="12" style={monoDim} transform="rotate(-90 52 238)" textAnchor="middle">HEIGHT</text>
+      <Arrow d="M420 400 L 660 400" color={C.dim} w={1.5} />
+      <Head x={664} y={400} angle={0} color={C.dim} />
+      <text x="360" y="404" textAnchor="end" fontSize="12" style={monoDim}>WARMER</text>
+
+      <text x="40" y="424" fontSize="12" style={monoDim}>Blue area holds the storm down. Orange area is the fuel once something breaks through.</text>
+    </svg>
+  );
+}
+
+/* ---- Wind shear ladder: why shear organizes storms ---- */
+function ShearLadder() {
+  // Small wind-profile arrows at three heights for each panel.
+  const winds = (x0, lens) => (
+    <g>
+      {lens.map((len, i) => {
+        const y = 196 - i * 44;
+        return (
+          <g key={i}>
+            <line x1={x0} y1={y} x2={x0 + len} y2={y} stroke={C.dim} strokeWidth="2.2" />
+            <Head x={x0 + len + 2} y={y} angle={0} color={C.dim} />
+          </g>
+        );
+      })}
+    </g>
+  );
+
+  return (
+    <svg viewBox="0 0 720 350" role="img" aria-label="Storm organization under increasing wind shear" style={{ width: '100%', height: 'auto' }}>
+      <line x1="20" y1="262" x2="700" y2="262" stroke={C.ground} strokeWidth="2" />
+
+      {/* panel 1: no shear */}
+      <text x="130" y="32" textAnchor="middle" fontSize="14" fontWeight="700" style={mono}>WEAK SHEAR</text>
+      {winds(34, [22, 22, 22])}
+      <Puff cx="150" cy="200" r="26" />
+      <Puff cx="150" cy="162" r="30" />
+      <Puff cx="148" cy="124" r="26" />
+      <Arrow d="M138 250 L 138 116" color={C.up} w={2.5} />
+      <Head x={138} y={112} angle={-90} color={C.up} />
+      {[156, 168, 180].map((x) => (
+        <line key={x} x1={x} y1="150" x2={x - 2} y2="256" stroke={C.rain} strokeWidth="2" opacity="0.5" />
+      ))}
+      <text x="130" y="290" textAnchor="middle" fontSize="12.5" style={mono}>Rain falls back into the updraft</text>
+      <text x="130" y="308" textAnchor="middle" fontSize="12" style={monoDim}>One brief pulse, then collapse</text>
+
+      {/* panel 2: moderate shear */}
+      <text x="370" y="32" textAnchor="middle" fontSize="14" fontWeight="700" style={mono}>MODERATE SHEAR</text>
+      {winds(274, [16, 30, 46])}
+      <Puff cx="410" cy="196" r="26" fill={C.cloudDark} />
+      <Puff cx="412" cy="160" r="28" fill={C.cloudDark} />
+      {[418, 430, 442].map((x) => (
+        <line key={x} x1={x} y1="182" x2={x + 2} y2="256" stroke={C.rain} strokeWidth="2" opacity="0.5" />
+      ))}
+      <Puff cx="352" cy="222" r="16" />
+      <Puff cx="358" cy="200" r="19" />
+      <Arrow d="M348 252 L 352 192" color={C.up} w={2.2} />
+      <Head x={352} y={188} angle={-86} color={C.up} />
+      <text x="370" y="290" textAnchor="middle" fontSize="12.5" style={mono}>New cells fire on the flank as old ones rain out</text>
+      <text x="370" y="308" textAnchor="middle" fontSize="12" style={monoDim}>A multicell family, renewing for hours</text>
+
+      {/* panel 3: strong shear */}
+      <text x="600" y="32" textAnchor="middle" fontSize="14" fontWeight="700" style={mono}>STRONG SHEAR</text>
+      {winds(504, [14, 38, 64])}
+      {/* tilted storm: base left, top displaced right */}
+      <Puff cx="580" cy="204" r="26" />
+      <Puff cx="600" cy="168" r="30" />
+      <Puff cx="624" cy="132" r="28" />
+      <rect x="600" y="94" width="104" height="24" rx="12" fill={C.cloudLight} />
+      <Arrow d="M566 252 C 574 220, 592 170, 616 128" color={C.up} w={2.8} />
+      <Head x={618} y={124} angle={-60} color={C.up} />
+      {[652, 666, 680].map((x) => (
+        <line key={x} x1={x} y1="150" x2={x - 4} y2="256" stroke={C.rain} strokeWidth="2" opacity="0.5" />
+      ))}
+      <text x="590" y="290" textAnchor="middle" fontSize="12.5" style={mono}>Rain falls clear of the updraft</text>
+      <text x="590" y="308" textAnchor="middle" fontSize="12" style={monoDim}>One rotating storm, hours long</text>
+
+      <text x="20" y="338" fontSize="12" style={monoDim}>Grey arrows: wind at low, middle and upper levels. The difference between them is the shear.</text>
+    </svg>
+  );
+}
+
+/* ---- Hodograph pair: straight vs curved, SRH as swept area ---- */
+function HodographPair() {
+  return (
+    <svg viewBox="0 0 720 340" role="img" aria-label="Straight versus curved hodograph comparison" style={{ width: '100%', height: 'auto' }}>
+      <line x1="360" y1="16" x2="360" y2="300" stroke={C.ground} strokeWidth="1.5" strokeDasharray="4 5" />
+
+      {/* ---- left: straight ---- */}
+      <text x="180" y="32" textAnchor="middle" fontSize="14" fontWeight="700" style={mono}>STRAIGHT HODOGRAPH</text>
+      {[45, 90].map((r) => (
+        <circle key={r} cx="120" cy="240" r={r} fill="none" stroke={C.leader} strokeWidth="1" opacity="0.6" />
+      ))}
+      <polyline points="120,240 158,212 216,168 282,118" fill="none" stroke={C.label} strokeWidth="2.5" strokeLinejoin="round" />
+      {[[120, 240, '0'], [158, 212, '1 km'], [216, 168, '3 km'], [282, 118, '6 km']].map(([x, y, l]) => (
+        <g key={l}>
+          <circle cx={x} cy={y} r="4.5" fill={C.up} />
+          <text x={Number(x) + 10} y={Number(y) - 6} fontSize="12" style={mono}>{l}</text>
+        </g>
+      ))}
+      <text x="180" y="286" textAnchor="middle" fontSize="12.5" style={mono}>Wind changes with height, but in a line</text>
+      <text x="180" y="304" textAnchor="middle" fontSize="12" style={monoDim}>Splitting storms: mirror left and right movers</text>
+
+      {/* ---- right: curved ---- */}
+      <text x="540" y="32" textAnchor="middle" fontSize="14" fontWeight="700" style={mono}>CURVED HODOGRAPH</text>
+      {[45, 90].map((r) => (
+        <circle key={r} cx="470" cy="250" r={r} fill="none" stroke={C.leader} strokeWidth="1" opacity="0.6" />
+      ))}
+      {/* SRH: area swept between the low-level trace and the storm motion */}
+      <polygon points="530,196 470,250 528,238 566,196" fill={C.up} opacity="0.3" />
+      <path d="M470 250 C 510 246, 546 224, 566 196 C 580 174, 584 148, 578 124" fill="none" stroke={C.label} strokeWidth="2.5" />
+      {[[470, 250, '0'], [528, 238, '1 km'], [566, 196, '3 km'], [578, 124, '6 km']].map(([x, y, l]) => (
+        <g key={l}>
+          <circle cx={x} cy={y} r="4.5" fill={C.up} />
+          <text x={Number(x) + 10} y={Number(y) + 14} fontSize="12" style={mono}>{l}</text>
+        </g>
+      ))}
+      <circle cx="530" cy="196" r="5" fill={C.inflow} />
+      <text x="518" y="186" fontSize="12" fill={C.inflow} fontFamily="var(--mono, monospace)">storm</text>
+      <Leader x1={530} y1={222} x2={478} y2={168} />
+      <text x="416" y="160" fontSize="12.5" fill={C.up} fontFamily="var(--mono, monospace)">SRH: the swept area</text>
+      <text x="540" y="286" textAnchor="middle" fontSize="12.5" style={mono}>Winds turn clockwise with height</text>
+      <text x="540" y="304" textAnchor="middle" fontSize="12" style={monoDim}>Right mover favored: supercell country</text>
+
+      <text x="20" y="330" fontSize="12" style={monoDim}>Each dot is the wind at that height, drawn from a common origin. Shape matters as much as speed.</text>
+    </svg>
+  );
+}
+
 export const FIGURES = {
   'supercell-anatomy': SupercellAnatomy,
   'wall-vs-shelf': WallVsShelf,
   'storm-lifecycle': StormLifecycle,
   'beam-height': BeamHeight,
   'velocity-couplet': VelocityCouplet,
+  'cape-cin': CapeCin,
+  'shear-ladder': ShearLadder,
+  'hodograph-srh': HodographPair,
 };

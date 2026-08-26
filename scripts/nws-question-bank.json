@@ -1,5 +1,5 @@
 {
-  "bank_version": "2026.08.22",
+  "bank_version": "2026.08.26",
   "scope": "National NWS criteria only. Locally-variable thresholds are flagged and never quizzed as fixed numbers.",
   "verified_against": [
     "NWSI 10-511 WFO Severe Weather Products Specification (Jan 26, 2023)",
@@ -16,7 +16,15 @@
     "NWS heavy snow criteria dataset, weather.gov/snow-criteria, MAF zones (queried Aug 2026)",
     "MAF issued products and forecast discussions, IEM AFOS archive (NPWMAF, DSWMAF, AFDMAF)",
     "NWS Weather Spotter's Field Guide (2011) + Basic/Advanced Spotters' Field Guides (structure content only, not criteria)",
-    "NOAA NSSL Severe Weather 101, NWS JetStream cloud pages, WMO International Cloud Atlas, AMS Glossary"
+    "NOAA NSSL Severe Weather 101, NWS JetStream cloud pages, WMO International Cloud Atlas, AMS Glossary",
+    "SPC Mesoanalysis parameter help pages: CAPE flavors, lapse rates, LCL, shear, SRH, EHI, SCP, STP (Aug 2026)",
+    "SPC sounding analysis help pages and SPC Tornado FAQ (Aug 2026)",
+    "NWS Glossary: CAPE, CIN, cap, loaded gun, lifted index, LCL, hodograph, mesocyclone, landspout, dryline, outflow boundary, low level jet, elevated convection (Aug 2026)",
+    "NWS JetStream Max severe weather and thunderstorm pages (Aug 2026)",
+    "NOAA NSSL Severe Weather 101, thunderstorms and tornadoes (Aug 2026)",
+    "NWS Louisville severe weather forecasting training and NWS ZHU training pages",
+    "NOAA GSL Rapid Refresh/HRRR pages, NSSL Warn-on-Forecast product descriptions, SPC HREF guidance FAQ",
+    "SPC mesoanalysis archive and severe weather event archive, March 31 2023"
   ],
   "review_by": "2027-03-01",
   "modules": [
@@ -414,12 +422,7 @@
           "id": "flood-03",
           "type": "single",
           "prompt": "Which Flash Flood Warning tags trigger a Wireless Emergency Alert?",
-          "options": [
-            "All flash flood warnings",
-            "Catastrophic only",
-            "Considerable and Catastrophic",
-            "None"
-          ],
+          "options": ["All flash flood warnings", "Catastrophic only", "Considerable and Catastrophic", "None"],
           "answer": [2],
           "explanation": "Considerable and catastrophic trigger WEA. Base-tagged flash flood warnings do not. This changed deliberately with the impact-based warning rollout in 2019 and 2020 — previously every flash flood warning pushed a WEA, which diluted the alert."
         },
@@ -448,12 +451,7 @@
           "id": "flood-06",
           "type": "single",
           "prompt": "The 2021 consolidation also merged five separate advisory headlines — including Urban and Small Stream, Arroyo and Small Stream, and Hydrologic Advisory — into:",
-          "options": [
-            "Flood Watch",
-            "Flood Advisory",
-            "Areal Flood Warning",
-            "Special Weather Statement"
-          ],
+          "options": ["Flood Watch", "Flood Advisory", "Areal Flood Warning", "Special Weather Statement"],
           "answer": [1],
           "explanation": "All five collapsed into a single Flood Advisory. If your training material still lists 'Urban and Small Stream Flood Advisory' as a distinct product, it is out of date."
         },
@@ -511,12 +509,7 @@
           "id": "win-01",
           "type": "single",
           "prompt": "As of October 1, 2024, the Wind Chill Warning was replaced by:",
-          "options": [
-            "Extreme Cold Warning",
-            "Hard Freeze Warning",
-            "Cold Weather Advisory",
-            "Winter Storm Warning"
-          ],
+          "options": ["Extreme Cold Warning", "Hard Freeze Warning", "Cold Weather Advisory", "Winter Storm Warning"],
           "answer": [0],
           "explanation": "Wind Chill Warning became Extreme Cold Warning; Wind Chill Watch became Extreme Cold Watch. The VTEC phenomenon code 'WC' was retired outright."
         },
@@ -660,12 +653,7 @@
           "id": "np-01",
           "type": "single",
           "prompt": "In March 2025, the Excessive Heat Warning was renamed to:",
-          "options": [
-            "Extreme Heat Warning",
-            "Dangerous Heat Warning",
-            "Heat Emergency",
-            "Severe Heat Warning"
-          ],
+          "options": ["Extreme Heat Warning", "Dangerous Heat Warning", "Heat Emergency", "Severe Heat Warning"],
           "answer": [0],
           "explanation": "Excessive Heat Watch and Warning became Extreme Heat Watch and Warning, effective March 2025, aligning the language with Extreme Cold products."
         },
@@ -1028,12 +1016,7 @@
           "id": "loc-01",
           "type": "single",
           "prompt": "MAF's Red Flag Warning humidity criterion is relative humidity of:",
-          "options": [
-            "25 percent or less",
-            "20 percent or less",
-            "15 percent or less",
-            "10 percent or less"
-          ],
+          "options": ["25 percent or less", "20 percent or less", "15 percent or less", "10 percent or less"],
           "answer": [2],
           "explanation": "15 percent or less, per the Texas and Southwest Area fire weather operating plans that govern MAF. It must occur simultaneously with the wind and fuel criteria for 3 or more hours."
         },
@@ -1080,12 +1063,7 @@
           "id": "loc-05",
           "type": "single",
           "prompt": "For Midland, Odessa and the Permian Basin lowlands, a Winter Storm Warning for snow requires an event total of about:",
-          "options": [
-            "2 inches",
-            "3 inches",
-            "4 inches",
-            "6 inches"
-          ],
+          "options": ["2 inches", "3 inches", "4 inches", "6 inches"],
           "answer": [1],
           "explanation": "3 inches per event in the basin and lowland zones, per the official NWS heavy snow criteria dataset for the MAF forecast area. Criteria are guidance, not strict thresholds: forecasters can warn below them when impact or timing justifies it."
         },
@@ -1093,12 +1071,7 @@
           "id": "loc-06",
           "type": "single",
           "prompt": "In the Guadalupe and Davis mountains and MAF's northern tier, the Winter Storm Warning snow criterion is an event total of about:",
-          "options": [
-            "3 inches",
-            "4 inches",
-            "6 inches",
-            "8 inches"
-          ],
+          "options": ["3 inches", "4 inches", "6 inches", "8 inches"],
           "answer": [1],
           "explanation": "4 inches per event for the mountain zones, the northern tier and the southeast New Mexico zones. The lowland zones are 3 inches."
         },
@@ -1127,12 +1100,7 @@
           "id": "loc-09",
           "type": "single",
           "prompt": "A plain Wind Advisory at MAF is issued for sustained winds of about:",
-          "options": [
-            "20 mph",
-            "25 mph",
-            "30 mph",
-            "40 mph"
-          ],
+          "options": ["20 mph", "25 mph", "30 mph", "40 mph"],
           "answer": [2],
           "explanation": "30 mph, per MAF's own product definitions, matching the national 30 to 39 mph advisory band. 40 mph sustained is High Wind Warning territory."
         },
@@ -1501,6 +1469,225 @@
           "options": ["True", "False"],
           "answer": [1],
           "explanation": "False. Radar usually cannot resolve the tornado itself: within a few tens of miles the beam already fans out wider than the tornado, and it cannot see below cloud base except very close in. It detects rotation, and confirms a tornado only when debris is lofted high enough to sample. Radar tells you where to look; your eyes supply the ground truth."
+        }
+      ]
+    },
+    {
+      "slug": "severe-parameters",
+      "title": "Reading the Environment",
+      "blurb": "CAPE, CIN, shear and helicity: the numbers that say whether storms fire, how strong they get, and which ones can spin.",
+      "pass_pct": 80,
+      "questions": [
+        {
+          "id": "sev-01",
+          "type": "single",
+          "prompt": "According to SPC, what are the four ingredients needed for tornadic thunderstorms?",
+          "options": [
+            "Moisture, instability, lift, and wind shear",
+            "Heat, humidity, low pressure, and lightning",
+            "CAPE, CIN, hail, and rain",
+            "A warm front, a cold front, a dryline, and an outflow boundary"
+          ],
+          "answer": [0],
+          "explanation": "Moisture, instability and lift build any thunderstorm. Wind shear is the fourth ingredient that organizes storms into rotating, long-lived severe ones. SPC's own FAQ words it exactly this way: forecasters look for enough moisture, instability, lift, and wind shear for tornadic thunderstorms."
+        },
+        {
+          "id": "sev-02",
+          "type": "single",
+          "prompt": "What does CAPE measure?",
+          "options": [
+            "The spin available to a developing storm",
+            "The strength of the cap holding storms back",
+            "The energy available to a rising parcel of air, the fuel for updrafts, in J/kg",
+            "The change in wind between the surface and 6 km"
+          ],
+          "answer": [2],
+          "explanation": "Convective Available Potential Energy is the buoyant energy a lifted parcel picks up while it is warmer than its surroundings. It is directly related to the maximum potential updraft speed, so more CAPE means stronger updrafts are possible. It says nothing about spin; that is the wind field's job."
+        },
+        {
+          "id": "sev-03",
+          "type": "single",
+          "prompt": "Which CAPE range does SPC label moderate instability?",
+          "options": ["0 to 100 J/kg", "1000 to 2500 J/kg", "Above 10,000 J/kg", "250 to 500 J/kg"],
+          "answer": [1],
+          "explanation": "SPC's published scale: below 1000 J/kg is weak instability, 1000 to 2500 is moderate, 2500 to 4000 is strong, and above 4000 is extreme. The NWS glossary adds the caveat that matters most: there is no CAPE value above which severe weather becomes imminent."
+        },
+        {
+          "id": "sev-04",
+          "type": "single",
+          "prompt": "What is CIN?",
+          "options": [
+            "The energy powering a storm's downdraft",
+            "A measure of updraft rotation",
+            "The temperature at the top of the cap",
+            "The negative area on a sounding, energy that must be overcome before storms can initiate"
+          ],
+          "answer": [3],
+          "explanation": "Convective inhibition is the layer where a lifted parcel is colder than its surroundings and gets pushed back down. Its value reflects the strength of the cap. Daytime heating and lift along boundaries erode it; SPC's tornado parameter treats mixed-layer CIN stronger than 200 J/kg as enough to zero out the parameter."
+        },
+        {
+          "id": "sev-05",
+          "type": "single",
+          "prompt": "A forecaster calls the morning sounding a loaded gun. What does that mean?",
+          "options": [
+            "A sounding with no instability at all",
+            "Storms are already ongoing at the launch site",
+            "Extreme instability trapped under a cap, primed for explosive storm development if the cap breaks",
+            "The balloon data failed quality control"
+          ],
+          "answer": [2],
+          "explanation": "The NWS glossary definition: a sounding with extreme instability held back by a cap, so explosive thunderstorm development can be expected if the cap weakens or the air below warms enough to break it. The cap lets fuel build all day, which is exactly why cap-break days can go from blue sky to tornado warnings in an hour."
+        },
+        {
+          "id": "sev-06",
+          "type": "single",
+          "prompt": "Storms are rumbling at 2 a.m. on top of a cool, stable surface layer. Which version of CAPE still sees their fuel?",
+          "options": [
+            "MUCAPE, which lifts the most unstable parcel in the lowest 300 mb",
+            "SBCAPE, because all storms feed on surface air",
+            "None, storms cannot exist over stable surface air",
+            "The lifted index, because it uses the 500 mb temperature"
+          ],
+          "answer": [0],
+          "explanation": "These are elevated storms, running on unstable air above the stable surface layer. Most Unstable CAPE searches the lowest 300 mb for the best parcel, so it finds elevated fuel that surface-based measures miss. The glossary notes surface-based indices typically underestimate instability in these setups, and severe weather is still possible, though less likely than with surface-based storms."
+        },
+        {
+          "id": "sev-07",
+          "type": "single",
+          "prompt": "Why does vertical wind shear make storms stronger and longer lived?",
+          "options": [
+            "It adds moisture to the storm's inflow",
+            "It tilts the updraft so rain and the downdraft fall away from it instead of choking it",
+            "It warms the surface faster",
+            "It weakens the cap"
+          ],
+          "answer": [1],
+          "explanation": "With no shear, rain falls straight back into the updraft and the cell dies in about half an hour. Shear tilts the storm so the updraft and downdraft occupy separate parts of it; the downdraft stops cutting off the updraft and the storm persists. Strong shear also produces rotating updrafts, the defining feature of supercells."
+        },
+        {
+          "id": "sev-08",
+          "type": "single",
+          "prompt": "SPC associates supercells with what amount of surface to 6 km bulk shear?",
+          "options": [
+            "5 to 10 knots",
+            "Any value, shear does not matter for storm type",
+            "Only values above 100 knots",
+            "35 to 40 knots and greater"
+          ],
+          "answer": [3],
+          "explanation": "SPC's mesoanalysis help puts supercells at 0-6 km shear of 35 to 40 knots and greater, and storms generally become more organized and persistent as shear increases. NWS training ladders run the same direction: under 20 knots disorganized storms, 20 to 35 organized multicells, around 40 and above supercells."
+        },
+        {
+          "id": "sev-09",
+          "type": "single",
+          "prompt": "What does storm relative helicity (SRH) measure?",
+          "options": [
+            "The potential for cyclonic updraft rotation in right-moving supercells, measured relative to storm motion",
+            "The total rainfall a storm can produce",
+            "The buoyant energy of a rising parcel",
+            "The maximum hail size aloft"
+          ],
+          "answer": [0],
+          "explanation": "SRH is computed for the lowest 1 km and 3 km relative to how the storm moves, which is why the same wind profile can give two storms different SRH. SPC's guidance: 0-1 km SRH above 100 m2/s2 and 0-3 km above 250 suggest an increased tornado threat with supercells, with no clear threshold separating tornadic from non-tornadic."
+        },
+        {
+          "id": "sev-10",
+          "type": "single",
+          "prompt": "The hodograph curves clockwise with height. What does that favor?",
+          "options": [
+            "Two equal storms splitting left and right",
+            "No storms at all",
+            "A dominant right-moving supercell with a rotating updraft",
+            "Weak pulse storms only"
+          ],
+          "answer": [2],
+          "explanation": "A straight hodograph favors splitting storms, near mirror images moving left and right of the winds. Clockwise curvature, common when a low-level jet strengthens the low-level winds, favors the right mover, and right-moving supercells carry the high severe and tornado potential."
+        },
+        {
+          "id": "sev-11",
+          "type": "single",
+          "prompt": "Which cloud-base environment favors significant tornadoes?",
+          "options": [
+            "Very high cloud bases above 2500 m",
+            "Cloud base height has no relation to tornado potential",
+            "Dry low-level air, since it cools downdrafts",
+            "Low LCL heights, below about 1000 m, with humid air near the ground"
+          ],
+          "answer": [3],
+          "explanation": "SPC's Significant Tornado Parameter treats mixed-layer LCLs under 1000 m as fully favorable, ramps down in between, and zeroes out entirely above 2000 m. More low-level humidity means a lower cloud base, which is why a 60 degree dewpoint spring day feels so much more dangerous than a bone-dry one with the same CAPE."
+        },
+        {
+          "id": "sev-12",
+          "type": "single",
+          "prompt": "The Significant Tornado Parameter reads above 1 on the mesoanalysis. What does that actually mean?",
+          "options": [
+            "A significant tornado is currently on the ground",
+            "The environment resembles those where most significant tornadoes have occurred, while most non-tornadic supercells sit below 1",
+            "A tornado warning is automatically issued",
+            "Storms are certain to develop within the hour"
+          ],
+          "answer": [1],
+          "explanation": "SPC's published finding: a majority of F2 and greater tornadoes have occurred with STP above 1 within an hour of the tornado, while most non-tornadic supercells sat below 1. It blends CAPE, effective SRH, deep shear, LCL height and CIN into one overlap detector. It describes the environment; storms still have to initiate and organize."
+        },
+        {
+          "id": "sev-13",
+          "type": "single",
+          "prompt": "According to NSSL, about what share of supercells actually produce tornadoes?",
+          "options": ["Nearly all of them", "About three quarters", "As few as 20 percent", "Under 1 percent"],
+          "answer": [2],
+          "explanation": "NSSL: as few as 20 percent of all supercell thunderstorms produce tornadoes, and why one storm does while a nearby storm does not is still an open research question. That is why a rotating wall cloud always deserves your full attention but does not by itself mean a tornado is coming."
+        },
+        {
+          "id": "sev-14",
+          "type": "single",
+          "prompt": "Which is true of squall line (QLCS) tornadoes?",
+          "options": [
+            "They account for nearly 20 percent of tornadoes and tend to be weaker, brief, and most common late at night and early in the morning",
+            "They are usually stronger than supercell tornadoes",
+            "Lines of storms cannot produce tornadoes",
+            "They only occur in the High Plains"
+          ],
+          "answer": [0],
+          "explanation": "NSSL: nearly 20 percent of all tornadoes come from quasi-linear convective systems, they frequently occur late at night and early in the morning, and they tend to be weaker and shorter lived than supercell tornadoes. They are also harder to detect, which is why NSSL is still researching better ways to catch them."
+        },
+        {
+          "id": "sev-15",
+          "type": "single",
+          "prompt": "What is the dryline?",
+          "options": [
+            "The line where rain changes to snow",
+            "The boundary between moist and dry air masses, a major severe weather trigger on the Great Plains",
+            "The edge of a thunderstorm's rain shaft",
+            "A line of retired weather stations"
+          ],
+          "answer": [1],
+          "explanation": "The glossary calls it a boundary separating moist and dry air masses and an important factor in Great Plains severe weather. It usually advances east during the afternoon; passage brings a sharp humidity drop and a wind shift. Severe, sometimes tornadic storms often develop along it or just into the moist air to its east."
+        },
+        {
+          "id": "sev-16",
+          "type": "single",
+          "prompt": "A model shows simulated radar reflectivity for tomorrow evening. What are you looking at?",
+          "options": [
+            "A satellite estimate of current rainfall",
+            "Yesterday's radar loop replayed",
+            "A blend of every radar within 100 miles",
+            "The model's forecast of what radar might look like, not actual radar data"
+          ],
+          "answer": [3],
+          "explanation": "Convection-allowing models like the 3 km, hourly updated HRRR are fine enough to draw individual storms, and simulated reflectivity is the model painting its forecast in radar colors. Treat the pattern and mode as guidance, not the exact cells. Modelers also track updraft helicity, which flags where the model is spinning up rotating storms."
+        },
+        {
+          "id": "sev-17",
+          "type": "single",
+          "prompt": "What is the SPC mesoanalysis?",
+          "options": [
+            "A seven day severe weather outlook",
+            "A national radar mosaic",
+            "An hourly analysis of the current severe weather environment, blending model data with surface observations",
+            "A satellite cloud-top product"
+          ],
+          "answer": [2],
+          "explanation": "SPC runs an objective analysis every hour, using the latest RAP model as a first guess and merging in surface observations, then computes the full menu of severe weather diagnostics from it. It is the operational tool for watching CAPE, shear and the composite indices evolve in real time as a severe weather day unfolds."
         }
       ]
     }

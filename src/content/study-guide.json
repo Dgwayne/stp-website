@@ -1,5 +1,5 @@
 {
-  "derived_from_bank_version": "2026.08.22",
+  "derived_from_bank_version": "2026.08.26",
   "review_by": "2027-03-01",
   "sources": [
     "NWSI 10-511 WFO Severe Weather Products Specification (Jan 26, 2023)",
@@ -11,7 +11,15 @@
     "SCN 23-44 Consolidated Products Related to Cold (Oct 1, 2024)",
     "SCN 24-88 Heat product rename (Mar 4, 2025)",
     "NWS Hazard Simplification FAQ",
-    "NWS Glossary, SPC About and FAQ pages, NHC glossary"
+    "NWS Glossary, SPC About and FAQ pages, NHC glossary",
+    "SPC Mesoanalysis parameter help pages: CAPE flavors, lapse rates, LCL, shear, SRH, EHI, SCP, STP (Aug 2026)",
+    "SPC sounding analysis help pages and SPC Tornado FAQ (Aug 2026)",
+    "NWS Glossary: CAPE, CIN, cap, loaded gun, lifted index, LCL, hodograph, mesocyclone, landspout, dryline, outflow boundary, low level jet, elevated convection (Aug 2026)",
+    "NWS JetStream Max severe weather and thunderstorm pages (Aug 2026)",
+    "NOAA NSSL Severe Weather 101, thunderstorms and tornadoes (Aug 2026)",
+    "NWS Louisville severe weather forecasting training and NWS ZHU training pages",
+    "NOAA GSL Rapid Refresh/HRRR pages, NSSL Warn-on-Forecast product descriptions, SPC HREF guidance FAQ",
+    "SPC mesoanalysis archive and severe weather event archive, March 31 2023"
   ],
   "modules": {
     "fundamentals": {
@@ -29,10 +37,30 @@
           "kind": "tierLadder",
           "heading": "The four tiers",
           "tiers": [
-            { "name": "Watch", "tone": "watch", "means": "Conditions are favorable. The event is not certain.", "action": "Be prepared" },
-            { "name": "Warning", "tone": "warning", "means": "The hazard is imminent or occurring.", "action": "Take action" },
-            { "name": "Advisory", "tone": "advisory", "means": "Hazardous or inconvenient, but below warning criteria.", "action": "Be aware" },
-            { "name": "Statement", "tone": "statement", "means": "Updates an active warning, or covers sub-severe conditions.", "action": "Stay informed" }
+            {
+              "name": "Watch",
+              "tone": "watch",
+              "means": "Conditions are favorable. The event is not certain.",
+              "action": "Be prepared"
+            },
+            {
+              "name": "Warning",
+              "tone": "warning",
+              "means": "The hazard is imminent or occurring.",
+              "action": "Take action"
+            },
+            {
+              "name": "Advisory",
+              "tone": "advisory",
+              "means": "Hazardous or inconvenient, but below warning criteria.",
+              "action": "Be aware"
+            },
+            {
+              "name": "Statement",
+              "tone": "statement",
+              "means": "Updates an active warning, or covers sub-severe conditions.",
+              "action": "Stay informed"
+            }
           ],
           "note": "An advisory is not an all-clear, and it does not promise an upgrade. Advisories exist across the winter, wind, dust, fog, heat, flood and marine programs."
         },
@@ -69,10 +97,22 @@
         }
       ],
       "quickChecks": [
-        { "q": "Conditions are favorable but the event is not certain. Which tier is that, and what do you do?", "a": "A Watch. Be prepared. Warning means take action, Advisory means be aware." },
-        { "q": "Who issues the Tornado Warning for your county, and who issued the watch before it?", "a": "Your local forecast office issues the warning. The Storm Prediction Center issued the watch." },
-        { "q": "Your phone stayed silent. Does that mean there is no warning near you?", "a": "No. WEA is selective by design, and not every warning sends a phone alert. Keep a second path, like the app or NOAA Weather Radio." },
-        { "q": "In /O.NEW.KMAF.SV.W.0043/, what are SV and W?", "a": "SV is the phenomenon, severe thunderstorm. W is the significance, Warning." }
+        {
+          "q": "Conditions are favorable but the event is not certain. Which tier is that, and what do you do?",
+          "a": "A Watch. Be prepared. Warning means take action, Advisory means be aware."
+        },
+        {
+          "q": "Who issues the Tornado Warning for your county, and who issued the watch before it?",
+          "a": "Your local forecast office issues the warning. The Storm Prediction Center issued the watch."
+        },
+        {
+          "q": "Your phone stayed silent. Does that mean there is no warning near you?",
+          "a": "No. WEA is selective by design, and not every warning sends a phone alert. Keep a second path, like the app or NOAA Weather Radio."
+        },
+        {
+          "q": "In /O.NEW.KMAF.SV.W.0043/, what are SV and W?",
+          "a": "SV is the phenomenon, severe thunderstorm. W is the significance, Warning."
+        }
       ]
     },
     "convective-warnings": {
@@ -99,10 +139,35 @@
           "kind": "hailScale",
           "heading": "Hail size, to scale",
           "items": [
-            { "name": "Penny", "inches": 0.75, "severe": false, "badge": "Not severe since 2010", "badgeTone": "no" },
-            { "name": "Quarter", "inches": 1.0, "severe": true, "threshold": true, "badge": "Warning threshold", "badgeTone": "yes" },
-            { "name": "Golf ball", "inches": 1.75, "severe": true, "badge": "Considerable", "badgeTone": "tag" },
-            { "name": "Baseball", "inches": 2.75, "severe": true, "badge": "Destructive", "badgeTone": "tag" }
+            {
+              "name": "Penny",
+              "inches": 0.75,
+              "severe": false,
+              "badge": "Not severe since 2010",
+              "badgeTone": "no"
+            },
+            {
+              "name": "Quarter",
+              "inches": 1.0,
+              "severe": true,
+              "threshold": true,
+              "badge": "Warning threshold",
+              "badgeTone": "yes"
+            },
+            {
+              "name": "Golf ball",
+              "inches": 1.75,
+              "severe": true,
+              "badge": "Considerable",
+              "badgeTone": "tag"
+            },
+            {
+              "name": "Baseball",
+              "inches": 2.75,
+              "severe": true,
+              "badge": "Destructive",
+              "badgeTone": "tag"
+            }
           ],
           "note": "Report hail by comparing to a coin or ball, never a guess in inches. A quarter is the coin that matters."
         },
@@ -110,9 +175,21 @@
           "kind": "tagLadder",
           "heading": "Severe Thunderstorm Warning damage threat tags",
           "tags": [
-            { "name": "Base", "criteria": "Meets 58 mph and/or 1.00 inch hail", "wea": false },
-            { "name": "Considerable", "criteria": "At least 70 mph and/or 1.75 inch hail", "wea": false },
-            { "name": "Destructive", "criteria": "At least 80 mph and/or 2.75 inch hail", "wea": true }
+            {
+              "name": "Base",
+              "criteria": "Meets 58 mph and/or 1.00 inch hail",
+              "wea": false
+            },
+            {
+              "name": "Considerable",
+              "criteria": "At least 70 mph and/or 1.75 inch hail",
+              "wea": false
+            },
+            {
+              "name": "Destructive",
+              "criteria": "At least 80 mph and/or 2.75 inch hail",
+              "wea": true
+            }
           ],
           "note": "The highest qualifying value of either wind or hail sets the tag. If your phone buzzes for a severe thunderstorm warning, it is the top tier."
         },
@@ -120,9 +197,21 @@
           "kind": "tagLadder",
           "heading": "Tornado Warning tags",
           "tags": [
-            { "name": "Base", "criteria": "Radar-indicated or reliably reported tornado, no tag line", "wea": true },
-            { "name": "Considerable", "criteria": "Elevated threat. This is the tag that carries PARTICULARLY DANGEROUS SITUATION wording in the warning", "wea": true },
-            { "name": "Catastrophic", "criteria": "Tornado Emergency wording", "wea": true }
+            {
+              "name": "Base",
+              "criteria": "Radar-indicated or reliably reported tornado, no tag line",
+              "wea": true
+            },
+            {
+              "name": "Considerable",
+              "criteria": "Elevated threat. This is the tag that carries PARTICULARLY DANGEROUS SITUATION wording in the warning",
+              "wea": true
+            },
+            {
+              "name": "Catastrophic",
+              "criteria": "Tornado Emergency wording",
+              "wea": true
+            }
           ],
           "points": [
             "Every tornado warning fires a WEA regardless of tag. This is the opposite of severe thunderstorm warnings.",
@@ -142,11 +231,26 @@
         }
       ],
       "quickChecks": [
-        { "q": "What are the two numbers that make a storm severe?", "a": "58 mph wind gusts and 1.00 inch hail, quarter size. Either one alone is enough." },
-        { "q": "Your phone buzzes with a Severe Thunderstorm Warning. What does that tell you about the tag?", "a": "It is the top tier, Destructive: at least 80 mph and/or baseball size hail. Base and Considerable do not alert phones." },
-        { "q": "Which warnings top out at Catastrophic, and which at Destructive?", "a": "Tornado and Flash Flood Warnings top out at Catastrophic. Severe Thunderstorm Warnings top out at Destructive." },
-        { "q": "A storm has 45 mph gusts and pea size hail. What product covers it?", "a": "A Special Weather Statement. It is below the severe thresholds." },
-        { "q": "Does a radar-indicated Tornado Warning demand less action than a confirmed one?", "a": "No. Both demand the same protective action." }
+        {
+          "q": "What are the two numbers that make a storm severe?",
+          "a": "58 mph wind gusts and 1.00 inch hail, quarter size. Either one alone is enough."
+        },
+        {
+          "q": "Your phone buzzes with a Severe Thunderstorm Warning. What does that tell you about the tag?",
+          "a": "It is the top tier, Destructive: at least 80 mph and/or baseball size hail. Base and Considerable do not alert phones."
+        },
+        {
+          "q": "Which warnings top out at Catastrophic, and which at Destructive?",
+          "a": "Tornado and Flash Flood Warnings top out at Catastrophic. Severe Thunderstorm Warnings top out at Destructive."
+        },
+        {
+          "q": "A storm has 45 mph gusts and pea size hail. What product covers it?",
+          "a": "A Special Weather Statement. It is below the severe thresholds."
+        },
+        {
+          "q": "Does a radar-indicated Tornado Warning demand less action than a confirmed one?",
+          "a": "No. Both demand the same protective action."
+        }
       ]
     },
     "watches-outlooks": {
@@ -188,11 +292,36 @@
           "kind": "riskLadder",
           "heading": "SPC Convective Outlook risk levels",
           "levels": [
-            { "num": 1, "name": "Marginal", "color": "#66A366", "desc": "Isolated severe storms possible" },
-            { "num": 2, "name": "Slight", "color": "#FFE066", "desc": "Scattered severe storms possible" },
-            { "num": 3, "name": "Enhanced", "color": "#FFA366", "desc": "Numerous severe storms possible" },
-            { "num": 4, "name": "Moderate", "color": "#E06666", "desc": "Widespread severe storms likely" },
-            { "num": 5, "name": "High", "color": "#EE99EE", "desc": "Severe weather outbreak expected" }
+            {
+              "num": 1,
+              "name": "Marginal",
+              "color": "#66A366",
+              "desc": "Isolated severe storms possible"
+            },
+            {
+              "num": 2,
+              "name": "Slight",
+              "color": "#FFE066",
+              "desc": "Scattered severe storms possible"
+            },
+            {
+              "num": 3,
+              "name": "Enhanced",
+              "color": "#FFA366",
+              "desc": "Numerous severe storms possible"
+            },
+            {
+              "num": 4,
+              "name": "Moderate",
+              "color": "#E06666",
+              "desc": "Widespread severe storms likely"
+            },
+            {
+              "num": 5,
+              "name": "High",
+              "color": "#EE99EE",
+              "desc": "Severe weather outbreak expected"
+            }
           ],
           "note": "Marginal comes before Slight. This ordering is a frequent trip-up."
         },
@@ -226,10 +355,22 @@
         }
       ],
       "quickChecks": [
-        { "q": "Put these in order, lowest first: Slight, Marginal, Enhanced.", "a": "Marginal, then Slight, then Enhanced. Marginal is level 1 of 5." },
-        { "q": "A Severe Thunderstorm Watch is up. Can a tornado still happen?", "a": "Yes. Brief tornadoes occur inside severe thunderstorm watches, especially in QLCS squall lines, with little lead time." },
-        { "q": "What often shows up an hour or two before a watch?", "a": "An SPC Mesoscale Discussion, frequently stating watch probability and timing." },
-        { "q": "Should you wait for the watch before starting operations?", "a": "No. Outlooks, the HWO and Mesoscale Discussions come first, and warnings sometimes arrive with no watch at all." }
+        {
+          "q": "Put these in order, lowest first: Slight, Marginal, Enhanced.",
+          "a": "Marginal, then Slight, then Enhanced. Marginal is level 1 of 5."
+        },
+        {
+          "q": "A Severe Thunderstorm Watch is up. Can a tornado still happen?",
+          "a": "Yes. Brief tornadoes occur inside severe thunderstorm watches, especially in QLCS squall lines, with little lead time."
+        },
+        {
+          "q": "What often shows up an hour or two before a watch?",
+          "a": "An SPC Mesoscale Discussion, frequently stating watch probability and timing."
+        },
+        {
+          "q": "Should you wait for the watch before starting operations?",
+          "a": "No. Outlooks, the HWO and Mesoscale Discussions come first, and warnings sometimes arrive with no watch at all."
+        }
       ]
     },
     "flooding": {
@@ -252,9 +393,21 @@
           "kind": "tagLadder",
           "heading": "Flash Flood Warning damage threat tags",
           "tags": [
-            { "name": "Base", "criteria": "Flash flooding imminent or occurring", "wea": false },
-            { "name": "Considerable", "criteria": "Elevated threat", "wea": true },
-            { "name": "Catastrophic", "criteria": "Flash Flood Emergency wording", "wea": true }
+            {
+              "name": "Base",
+              "criteria": "Flash flooding imminent or occurring",
+              "wea": false
+            },
+            {
+              "name": "Considerable",
+              "criteria": "Elevated threat",
+              "wea": true
+            },
+            {
+              "name": "Catastrophic",
+              "criteria": "Flash Flood Emergency wording",
+              "wea": true
+            }
           ],
           "note": "Base-tagged flash flood warnings deliberately do not fire a WEA, an impact-based change rolled out in 2019 and 2020. Before that every flash flood warning buzzed, which diluted the alert."
         },
@@ -312,16 +465,26 @@
               "truth": "Runoff from upstream, burn scars, and dam or levee failure all produce flash flooding under clear skies. Critical in arroyo and desert terrain."
             }
           ],
-          "points": [
-            "Flood Watches give hours of preparation lead time. Flash Flood Warnings are short-fused."
-          ]
+          "points": ["Flood Watches give hours of preparation lead time. Flash Flood Warnings are short-fused."]
         }
       ],
       "quickChecks": [
-        { "q": "Which flash flood tags alert phones?", "a": "Considerable and Catastrophic. Base does not." },
-        { "q": "What tag does a Flash Flood Emergency carry?", "a": "Catastrophic." },
-        { "q": "It is dry where you stand. Can flash flooding still reach you?", "a": "Yes. Upstream rain, burn scars, and dam or levee failure produce flash floods under clear skies." },
-        { "q": "Since 2021, when does a Flash Flood Watch still get issued?", "a": "Only for dam or levee failure, ice jams, and burn scar or debris flow terrain. Ordinary rain threats use the Flood Watch." }
+        {
+          "q": "Which flash flood tags alert phones?",
+          "a": "Considerable and Catastrophic. Base does not."
+        },
+        {
+          "q": "What tag does a Flash Flood Emergency carry?",
+          "a": "Catastrophic."
+        },
+        {
+          "q": "It is dry where you stand. Can flash flooding still reach you?",
+          "a": "Yes. Upstream rain, burn scars, and dam or levee failure produce flash floods under clear skies."
+        },
+        {
+          "q": "Since 2021, when does a Flash Flood Watch still get issued?",
+          "a": "Only for dam or levee failure, ice jams, and burn scar or debris flow terrain. Ordinary rain threats use the Flood Watch."
+        }
       ]
     },
     "winter": {
@@ -340,8 +503,14 @@
           "heading": "The October 2024 rebuild",
           "when": "Effective October 1, 2024",
           "rows": [
-            { "old": "Wind Chill Warning", "new": "Extreme Cold Warning" },
-            { "old": "Wind Chill Watch", "new": "Extreme Cold Watch" },
+            {
+              "old": "Wind Chill Warning",
+              "new": "Extreme Cold Warning"
+            },
+            {
+              "old": "Wind Chill Watch",
+              "new": "Extreme Cold Watch"
+            },
             {
               "old": "Wind Chill Advisory",
               "new": "Cold Weather Advisory",
@@ -359,9 +528,18 @@
           "kind": "criteriaAll",
           "heading": "Blizzard Warning: three things at once",
           "items": [
-            { "title": "35+ mph", "detail": "Sustained wind or frequent gusts" },
-            { "title": "Under 1/4 mile", "detail": "Visibility in considerable falling and/or blowing snow" },
-            { "title": "3+ hours", "detail": "Expected to persist" }
+            {
+              "title": "35+ mph",
+              "detail": "Sustained wind or frequent gusts"
+            },
+            {
+              "title": "Under 1/4 mile",
+              "detail": "Visibility in considerable falling and/or blowing snow"
+            },
+            {
+              "title": "3+ hours",
+              "detail": "Expected to persist"
+            }
           ],
           "banner": "All three together. No snowfall total required.",
           "points": [
@@ -385,9 +563,15 @@
           "table": {
             "columns": ["Product", "Issued for"],
             "rows": [
-              ["Ice Storm Warning", "Roughly 1/4 inch or more of ice accretion, enough to bring down limbs and power lines"],
+              [
+                "Ice Storm Warning",
+                "Roughly 1/4 inch or more of ice accretion, enough to bring down limbs and power lines"
+              ],
               ["Winter Storm Warning", "A significant winter event that may combine snow, sleet, ice or blowing snow"],
-              ["Winter Weather Advisory", "Wintry precipitation below warning criteria but enough to cause travel difficulty"],
+              [
+                "Winter Weather Advisory",
+                "Wintry precipitation below warning criteria but enough to cause travel difficulty"
+              ],
               ["Lake Effect Snow Warning", "Available at regional discretion"]
             ]
           },
@@ -396,10 +580,22 @@
       ],
       "local": "Winter Storm Warning accumulation thresholds, Winter Weather Advisory thresholds, and exact Ice Storm Warning accretion amounts are all set locally and vary widely by region. Blizzard criteria are the reliable national numbers in this module.",
       "quickChecks": [
-        { "q": "How much snow does a Blizzard Warning require?", "a": "None. It is wind of 35+ mph, visibility under 1/4 mile, for 3 or more hours. The snow can be entirely blowing snow, a ground blizzard." },
-        { "q": "What replaced the Wind Chill Advisory?", "a": "The Cold Weather Advisory, in October 2024. Wind Chill products are gone, and dangerous cold no longer requires wind." },
-        { "q": "When does a Snow Squall Warning alert phones?", "a": "Only when it carries the significant tag." },
-        { "q": "Is a Snow Squall Warning issued inside an active Winter Storm Warning?", "a": "No, they are kept separate. It can be issued during a Winter Weather Advisory if conditions briefly turn much worse." }
+        {
+          "q": "How much snow does a Blizzard Warning require?",
+          "a": "None. It is wind of 35+ mph, visibility under 1/4 mile, for 3 or more hours. The snow can be entirely blowing snow, a ground blizzard."
+        },
+        {
+          "q": "What replaced the Wind Chill Advisory?",
+          "a": "The Cold Weather Advisory, in October 2024. Wind Chill products are gone, and dangerous cold no longer requires wind."
+        },
+        {
+          "q": "When does a Snow Squall Warning alert phones?",
+          "a": "Only when it carries the significant tag."
+        },
+        {
+          "q": "Is a Snow Squall Warning issued inside an active Winter Storm Warning?",
+          "a": "No, they are kept separate. It can be issued during a Winter Weather Advisory if conditions briefly turn much worse."
+        }
       ]
     },
     "non-precip": {
@@ -418,8 +614,14 @@
           "heading": "The March 2025 heat rename",
           "when": "Effective March 4, 2025",
           "rows": [
-            { "old": "Excessive Heat Warning", "new": "Extreme Heat Warning" },
-            { "old": "Excessive Heat Watch", "new": "Extreme Heat Watch" }
+            {
+              "old": "Excessive Heat Warning",
+              "new": "Extreme Heat Warning"
+            },
+            {
+              "old": "Excessive Heat Watch",
+              "new": "Extreme Heat Watch"
+            }
           ],
           "note": "Only the watch and warning were renamed, aligning the language with the Extreme Cold products. The Heat Advisory kept its name."
         },
@@ -441,7 +643,10 @@
             "columns": ["Product", "Typical trigger"],
             "rows": [
               ["Dense Fog Advisory", "Widespread visibility below 1/4 mile for an extended period"],
-              ["High Wind Warning", "Non-convective sustained winds around 40 mph for an hour or more, or gusts to 58 mph for any duration"],
+              [
+                "High Wind Warning",
+                "Non-convective sustained winds around 40 mph for an hour or more, or gusts to 58 mph for any duration"
+              ],
               ["Freeze Warning", "At or below 32 degrees during the growing season, generally sustained"],
               ["Frost Advisory", "Near but above freezing, with light winds and clear skies favoring frost"]
             ]
@@ -461,10 +666,22 @@
       ],
       "local": "Heat criteria vary substantially by office and climate zone. What triggers a warning in the desert Southwest differs from the upper Midwest. High Wind Warning thresholds are likewise locally set. Dense Fog Advisory visibility varies by office.",
       "quickChecks": [
-        { "q": "58 mph winds and not a storm in sight. What product?", "a": "High Wind Warning. The same speed from a thunderstorm is a Severe Thunderstorm Warning. The source decides." },
-        { "q": "What visibility makes dust a warning rather than an advisory?", "a": "1/4 mile or less. The advisories cover 1 mile down to 1/4 mile." },
-        { "q": "What was renamed in March 2025, and what kept its name?", "a": "Excessive Heat Watch and Warning became Extreme Heat Watch and Warning. The Heat Advisory kept its name." },
-        { "q": "Are heat thresholds the same everywhere?", "a": "No. Heat criteria are set locally and vary by office and climate zone." }
+        {
+          "q": "58 mph winds and not a storm in sight. What product?",
+          "a": "High Wind Warning. The same speed from a thunderstorm is a Severe Thunderstorm Warning. The source decides."
+        },
+        {
+          "q": "What visibility makes dust a warning rather than an advisory?",
+          "a": "1/4 mile or less. The advisories cover 1 mile down to 1/4 mile."
+        },
+        {
+          "q": "What was renamed in March 2025, and what kept its name?",
+          "a": "Excessive Heat Watch and Warning became Extreme Heat Watch and Warning. The Heat Advisory kept its name."
+        },
+        {
+          "q": "Are heat thresholds the same everywhere?",
+          "a": "No. Heat criteria are set locally and vary by office and climate zone."
+        }
       ]
     },
     "fire-weather": {
@@ -491,9 +708,18 @@
           "kind": "criteriaAll",
           "heading": "What red flag criteria combine",
           "items": [
-            { "title": "Low humidity", "detail": "Very dry air, below a locally set threshold" },
-            { "title": "Wind", "detail": "Sustained winds above a locally set threshold, often measured as 20-foot winds" },
-            { "title": "Dry fuels", "detail": "Fuel dryness or a fire danger rating" }
+            {
+              "title": "Low humidity",
+              "detail": "Very dry air, below a locally set threshold"
+            },
+            {
+              "title": "Wind",
+              "detail": "Sustained winds above a locally set threshold, often measured as 20-foot winds"
+            },
+            {
+              "title": "Dry fuels",
+              "detail": "Fuel dryness or a fire danger rating"
+            }
           ],
           "banner": "All together, commonly for three or more consecutive hours.",
           "note": "The national directive sets no numbers at all. Every threshold is a local agreement between the forecast office and land management agencies."
@@ -506,9 +732,18 @@
       ],
       "local": "Red Flag Warning numeric criteria are NOT national. They are defined locally in coordination with land management agencies and vary considerably by region and fuel type. Do not memorize a humidity or wind number from another office.",
       "quickChecks": [
-        { "q": "How far out is a Fire Weather Watch issued?", "a": "18 to 96 hours ahead of expected onset. The Red Flag Warning is high confidence, generally within 48 hours." },
-        { "q": "What three things combine for a red flag day?", "a": "Low humidity, wind, and dry fuels, all together. Weather alone is not enough." },
-        { "q": "Is there a national red flag humidity number?", "a": "No. Criteria are set locally with land management agencies. Do not memorize another office's number." }
+        {
+          "q": "How far out is a Fire Weather Watch issued?",
+          "a": "18 to 96 hours ahead of expected onset. The Red Flag Warning is high confidence, generally within 48 hours."
+        },
+        {
+          "q": "What three things combine for a red flag day?",
+          "a": "Low humidity, wind, and dry fuels, all together. Weather alone is not enough."
+        },
+        {
+          "q": "Is there a national red flag humidity number?",
+          "a": "No. Criteria are set locally with land management agencies. Do not memorize another office's number."
+        }
       ]
     },
     "tropical-marine": {
@@ -527,11 +762,31 @@
           "heading": "How far ahead the products come",
           "intro": "The clocks run to the anticipated arrival of tropical-storm-force winds, so preparations can finish before conditions shut them down.",
           "bars": [
-            { "label": "Hurricane Watch", "hours": 48, "tone": "watch" },
-            { "label": "Storm Surge Watch", "hours": 48, "tone": "watch" },
-            { "label": "Hurricane Warning", "hours": 36, "tone": "warning" },
-            { "label": "Tropical Storm Warning", "hours": 36, "tone": "warning" },
-            { "label": "Storm Surge Warning", "hours": 36, "tone": "warning" }
+            {
+              "label": "Hurricane Watch",
+              "hours": 48,
+              "tone": "watch"
+            },
+            {
+              "label": "Storm Surge Watch",
+              "hours": 48,
+              "tone": "watch"
+            },
+            {
+              "label": "Hurricane Warning",
+              "hours": 36,
+              "tone": "warning"
+            },
+            {
+              "label": "Tropical Storm Warning",
+              "hours": 36,
+              "tone": "warning"
+            },
+            {
+              "label": "Storm Surge Warning",
+              "hours": 36,
+              "tone": "warning"
+            }
           ],
           "note": "Gust criteria are not used for tropical wind products, only sustained winds. Storm surge products are separate from wind products and can cover different areas."
         },
@@ -553,9 +808,24 @@
           "kind": "windBands",
           "heading": "The marine wind ladder",
           "bands": [
-            { "name": "Gale Warning", "range": "34 to 47 kt", "span": 14, "color": "#FFE066" },
-            { "name": "Storm Warning", "range": "48 to 63 kt", "span": 16, "color": "#FFA366" },
-            { "name": "Hurricane Force", "range": "64+ kt", "span": 14, "color": "#E06666" }
+            {
+              "name": "Gale Warning",
+              "range": "34 to 47 kt",
+              "span": 14,
+              "color": "#FFE066"
+            },
+            {
+              "name": "Storm Warning",
+              "range": "48 to 63 kt",
+              "span": 16,
+              "color": "#FFA366"
+            },
+            {
+              "name": "Hurricane Force",
+              "range": "64+ kt",
+              "span": 14,
+              "color": "#E06666"
+            }
           ],
           "caption": "Sustained winds or frequent gusts, in knots, not associated with a tropical cyclone"
         },
@@ -577,10 +847,22 @@
         }
       ],
       "quickChecks": [
-        { "q": "How far ahead is a Hurricane Warning issued? A Hurricane Watch?", "a": "Warning 36 hours, Watch 48 hours, measured to the expected arrival of tropical-storm-force winds." },
-        { "q": "What is the Tropical Storm wind range?", "a": "39 to 73 mph sustained. Hurricane is 74 mph and up. Gusts are not used." },
-        { "q": "What does an Extreme Wind Warning mean?", "a": "Eyewall winds of a major hurricane, 115 mph or greater, arriving within about an hour. Shelter immediately in an interior room." },
-        { "q": "Why are marine severe thresholds lower than land?", "a": "Small vessels are vulnerable at lower speeds. 34 knots, 3/4 inch hail, or a waterspout triggers a Special Marine Warning." }
+        {
+          "q": "How far ahead is a Hurricane Warning issued? A Hurricane Watch?",
+          "a": "Warning 36 hours, Watch 48 hours, measured to the expected arrival of tropical-storm-force winds."
+        },
+        {
+          "q": "What is the Tropical Storm wind range?",
+          "a": "39 to 73 mph sustained. Hurricane is 74 mph and up. Gusts are not used."
+        },
+        {
+          "q": "What does an Extreme Wind Warning mean?",
+          "a": "Eyewall winds of a major hurricane, 115 mph or greater, arriving within about an hour. Shelter immediately in an interior room."
+        },
+        {
+          "q": "Why are marine severe thresholds lower than land?",
+          "a": "Small vessels are vulnerable at lower speeds. 34 knots, 3/4 inch hail, or a waterspout triggers a Special Marine Warning."
+        }
       ]
     },
     "statements": {
@@ -629,10 +911,22 @@
         }
       ],
       "quickChecks": [
-        { "q": "A tornado warning polygon just shrank. What product did that?", "a": "A Severe Weather Statement, which updates, reduces, or cancels an active warning." },
-        { "q": "Where do your spotter reports end up?", "a": "In the Local Storm Report. Report as it happens, safely. Late reports mostly have archival value." },
-        { "q": "Which product tells you whether spotter activation is expected?", "a": "The Hazardous Weather Outlook. Some offices have retired the text version and moved the spotter statement into the AFD." },
-        { "q": "Which product explains what the forecaster is actually thinking?", "a": "The Area Forecast Discussion, including uncertainty and where the models disagree." }
+        {
+          "q": "A tornado warning polygon just shrank. What product did that?",
+          "a": "A Severe Weather Statement, which updates, reduces, or cancels an active warning."
+        },
+        {
+          "q": "Where do your spotter reports end up?",
+          "a": "In the Local Storm Report. Report as it happens, safely. Late reports mostly have archival value."
+        },
+        {
+          "q": "Which product tells you whether spotter activation is expected?",
+          "a": "The Hazardous Weather Outlook. Some offices have retired the text version and moved the spotter statement into the AFD."
+        },
+        {
+          "q": "Which product explains what the forecaster is actually thinking?",
+          "a": "The Area Forecast Discussion, including uncertainty and where the models disagree."
+        }
       ]
     },
     "local-maf": {
@@ -650,9 +944,18 @@
           "kind": "criteriaAll",
           "heading": "Red Flag Warning: the MAF recipe",
           "items": [
-            { "title": "RH 15% or less", "detail": "Very dry air, judged on the minimum of a forecast range" },
-            { "title": "Wind 20 / 35", "detail": "20-foot winds sustained 20+ mph, or gusts 35+ mph, judged on the midpoint of a range" },
-            { "title": "Fuels High+", "detail": "NFDRS fire danger rating of High or greater" }
+            {
+              "title": "RH 15% or less",
+              "detail": "Very dry air, judged on the minimum of a forecast range"
+            },
+            {
+              "title": "Wind 20 / 35",
+              "detail": "20-foot winds sustained 20+ mph, or gusts 35+ mph, judged on the midpoint of a range"
+            },
+            {
+              "title": "Fuels High+",
+              "detail": "NFDRS fire danger rating of High or greater"
+            }
           ],
           "banner": "All three at once, for 3 or more hours.",
           "points": [
@@ -745,11 +1048,26 @@
         }
       ],
       "quickChecks": [
-        { "q": "Recite the red flag recipe for this office.", "a": "Humidity 15 percent or less, 20-foot winds 20+ mph sustained or 35+ gusting, NFDRS High or greater, all together for 3 or more hours." },
-        { "q": "Snow is coming to Midland proper. How much triggers a Winter Storm Warning?", "a": "About 3 inches for the event. In the Guadalupes, Davis mountains or the northern tier, 4 inches." },
-        { "q": "What wind speed triggers a plain Wind Advisory here?", "a": "Sustained winds around 30 mph. At 40 sustained or 58 gusting it becomes a High Wind Warning." },
-        { "q": "Does MAF use heat index?", "a": "Almost never. Heat products here run on air temperature, stepped by elevation: roughly 105 does it in the basin and plains." },
-        { "q": "How many Dust Storm Warnings did this office issue in 2025?", "a": "45. Dust is the signature local hazard. Warning means 1/4 mile visibility or less." }
+        {
+          "q": "Recite the red flag recipe for this office.",
+          "a": "Humidity 15 percent or less, 20-foot winds 20+ mph sustained or 35+ gusting, NFDRS High or greater, all together for 3 or more hours."
+        },
+        {
+          "q": "Snow is coming to Midland proper. How much triggers a Winter Storm Warning?",
+          "a": "About 3 inches for the event. In the Guadalupes, Davis mountains or the northern tier, 4 inches."
+        },
+        {
+          "q": "What wind speed triggers a plain Wind Advisory here?",
+          "a": "Sustained winds around 30 mph. At 40 sustained or 58 gusting it becomes a High Wind Warning."
+        },
+        {
+          "q": "Does MAF use heat index?",
+          "a": "Almost never. Heat products here run on air temperature, stepped by elevation: roughly 105 does it in the basin and plains."
+        },
+        {
+          "q": "How many Dust Storm Warnings did this office issue in 2025?",
+          "a": "45. Dust is the signature local hazard. Warning means 1/4 mile visibility or less."
+        }
       ]
     },
     "storm-structure": {
@@ -796,10 +1114,26 @@
           "table": {
             "columns": ["Mode", "What it is", "Main threats"],
             "rows": [
-              ["Pulse / single cell", "Brief popcorn storm, 30 to 45 minutes", "Brief hail, downburst winds, rarely a weak tornado"],
-              ["Multicell cluster", "New cells keep forming on the gust front; the cluster outlives its cells by hours", "Downbursts, moderate hail, flooding, occasional weak tornadoes"],
-              ["Squall line / QLCS", "A line of storms, sometimes hundreds of miles long", "Damaging straight-line winds above all; quick spin-up tornadoes"],
-              ["Supercell", "One persistent rotating updraft, lasting hours", "The majority of intense tornadoes, giant hail, extreme wind"]
+              [
+                "Pulse / single cell",
+                "Brief popcorn storm, 30 to 45 minutes",
+                "Brief hail, downburst winds, rarely a weak tornado"
+              ],
+              [
+                "Multicell cluster",
+                "New cells keep forming on the gust front; the cluster outlives its cells by hours",
+                "Downbursts, moderate hail, flooding, occasional weak tornadoes"
+              ],
+              [
+                "Squall line / QLCS",
+                "A line of storms, sometimes hundreds of miles long",
+                "Damaging straight-line winds above all; quick spin-up tornadoes"
+              ],
+              [
+                "Supercell",
+                "One persistent rotating updraft, lasting hours",
+                "The majority of intense tornadoes, giant hail, extreme wind"
+              ]
             ]
           },
           "note": "QLCS tornadoes spin up fast along the line, often near a break in the line or on the north end of a bowing segment, and offer far less visual warning than supercell tornadoes. On radar, damaging wind concentrates at the apex of a bow echo."
@@ -886,9 +1220,18 @@
           "kind": "criteriaAll",
           "heading": "When a wall cloud gets serious",
           "items": [
-            { "title": "Persistence", "detail": "It lasts 10 minutes or more, holding position relative to the rain" },
-            { "title": "Rotation", "detail": "Persistent, organized rotation on a vertical axis" },
-            { "title": "Violent motion", "detail": "Cloud elements rising rapidly into it, strong surface inflow" }
+            {
+              "title": "Persistence",
+              "detail": "It lasts 10 minutes or more, holding position relative to the rain"
+            },
+            {
+              "title": "Rotation",
+              "detail": "Persistent, organized rotation on a vertical axis"
+            },
+            {
+              "title": "Violent motion",
+              "detail": "Cloud elements rising rapidly into it, strong surface inflow"
+            }
           ],
           "banner": "Rotating wall cloud = urgent report. Rotation can precede the tornado by up to an hour.",
           "note": "Fewer than half of observed wall clouds ever produce a tornado, and a non-rotating wall cloud is essentially harmless. That is exactly why your report of WHICH kind you see has operational value."
@@ -995,11 +1338,26 @@
         }
       ],
       "quickChecks": [
-        { "q": "A ragged lowering hangs near the storm base. What two things decide whether it is worth reporting?", "a": "Is it attached, and does it have organized rotation on a vertical axis? Scud is detached and does not rotate. Watch it for a minute or two before deciding." },
-        { "q": "The funnel is only halfway down, but dust is whirling beneath it. Tornado or funnel cloud?", "a": "Tornado. A debris cloud under the funnel confirms the circulation is on the ground. Report it as a tornado." },
-        { "q": "A long wedge of cloud is racing at you ahead of the rain. What is it and what does it mean?", "a": "A shelf cloud on the gust front. It means damaging straight-line wind, not usually a tornado. Brace and report the wind." },
-        { "q": "What makes a supercell a supercell?", "a": "A persistent rotating updraft, the mesocyclone. It can last hours and produces the majority of intense tornadoes." },
-        { "q": "Which lifecycle stage brings the severe weather?", "a": "Mature: updraft and downdraft coexisting. Developing is updraft only, dissipating is downdraft only." }
+        {
+          "q": "A ragged lowering hangs near the storm base. What two things decide whether it is worth reporting?",
+          "a": "Is it attached, and does it have organized rotation on a vertical axis? Scud is detached and does not rotate. Watch it for a minute or two before deciding."
+        },
+        {
+          "q": "The funnel is only halfway down, but dust is whirling beneath it. Tornado or funnel cloud?",
+          "a": "Tornado. A debris cloud under the funnel confirms the circulation is on the ground. Report it as a tornado."
+        },
+        {
+          "q": "A long wedge of cloud is racing at you ahead of the rain. What is it and what does it mean?",
+          "a": "A shelf cloud on the gust front. It means damaging straight-line wind, not usually a tornado. Brace and report the wind."
+        },
+        {
+          "q": "What makes a supercell a supercell?",
+          "a": "A persistent rotating updraft, the mesocyclone. It can last hours and produces the majority of intense tornadoes."
+        },
+        {
+          "q": "Which lifecycle stage brings the severe weather?",
+          "a": "Mature: updraft and downdraft coexisting. Developing is updraft only, dissipating is downdraft only."
+        }
       ]
     },
     "radar-basics": {
@@ -1040,8 +1398,16 @@
           "table": {
             "columns": ["Mode", "What it does", "When you see it"],
             "rows": [
-              ["Clear air", "Scans slower, sweeps fewer angles, and two of its patterns use a longer pulse for extra sensitivity. Full sweep takes roughly 7 to 10 minutes.", "Quiet weather. The extra sensitivity is why you see birds, bugs, dust and smoke."],
-              ["Precipitation", "Scans faster through more angles, roughly 4 to 6 minutes for a full volume.", "Anything convective. The radar switches itself over once returns cross a threshold."]
+              [
+                "Clear air",
+                "Scans slower, sweeps fewer angles, and two of its patterns use a longer pulse for extra sensitivity. Full sweep takes roughly 7 to 10 minutes.",
+                "Quiet weather. The extra sensitivity is why you see birds, bugs, dust and smoke."
+              ],
+              [
+                "Precipitation",
+                "Scans faster through more angles, roughly 4 to 6 minutes for a full volume.",
+                "Anything convective. The radar switches itself over once returns cross a threshold."
+              ]
             ]
           },
           "note": "Modern radars also cheat in your favor: they can cut a volume short when nothing is happening aloft, and insert extra sweeps of the lowest tilt. With those enabled, the lowest slice, where tornadoes live, can refresh roughly every 90 seconds instead of every four minutes."
@@ -1226,12 +1592,36 @@
           "table": {
             "columns": ["Artifact", "What you see", "Why"],
             "rows": [
-              ["Ground clutter", "A blotch of returns permanently around the radar", "Buildings, hills and terrain reflecting the beam. It does not move or evolve."],
-              ["Anomalous propagation", "Convincing but fake precipitation, often at night", "A temperature inversion bends the beam into the ground. Check a neighboring radar for a second opinion."],
-              ["Beam blockage", "Storms mysteriously weaker in one direction", "Terrain, buildings or wind farms blocking the beam. Anything downrange looks weaker than it is."],
-              ["Range folding", "Purple haze where data should be", "The radar cannot tell which pulse an echo belongs to, so it discards the data."],
-              ["Bright band", "A ring of enhanced returns around the radar", "Melting snowflakes coated in water look like huge raindrops. Easiest to spot on higher tilts."],
-              ["Attenuation", "Weak returns directly behind an intense core", "Energy absorbed on the way through. Less severe on these radars than most, but real."]
+              [
+                "Ground clutter",
+                "A blotch of returns permanently around the radar",
+                "Buildings, hills and terrain reflecting the beam. It does not move or evolve."
+              ],
+              [
+                "Anomalous propagation",
+                "Convincing but fake precipitation, often at night",
+                "A temperature inversion bends the beam into the ground. Check a neighboring radar for a second opinion."
+              ],
+              [
+                "Beam blockage",
+                "Storms mysteriously weaker in one direction",
+                "Terrain, buildings or wind farms blocking the beam. Anything downrange looks weaker than it is."
+              ],
+              [
+                "Range folding",
+                "Purple haze where data should be",
+                "The radar cannot tell which pulse an echo belongs to, so it discards the data."
+              ],
+              [
+                "Bright band",
+                "A ring of enhanced returns around the radar",
+                "Melting snowflakes coated in water look like huge raindrops. Easiest to spot on higher tilts."
+              ],
+              [
+                "Attenuation",
+                "Weak returns directly behind an intense core",
+                "Energy absorbed on the way through. Less severe on these radars than most, but real."
+              ]
             ]
           }
         },
@@ -1248,12 +1638,313 @@
         }
       ],
       "quickChecks": [
-        { "q": "Your screen shows 60 dBZ. How much rain is falling?", "a": "Unknown. dBZ measures returned power, and a few large drops return as much as many small ones. It suggests heavy precipitation and possibly hail, but it is not a rainfall measurement." },
-        { "q": "A storm 100 miles away shows weak rotation. What should you assume?", "a": "That the beam is about 12,000 feet up and two miles wide, so the real circulation below it is at least as strong as what you see, possibly much stronger." },
-        { "q": "Green sits right beside red on velocity. Rotation or not?", "a": "Rotation only if the two maxima are side by side at the same range from the radar. Strung out along the same radial, it is convergence or divergence." },
-        { "q": "Does green mean the wind is blowing west?", "a": "No. Green means motion toward the radar, wherever the radar happens to be. Velocity is radar-relative, never a compass direction." },
-        { "q": "Correlation coefficient collapses right on top of a tight couplet. What does that mean?", "a": "A tornado debris signature: debris is being lofted, so a tornado is on the ground doing damage. It confirms rather than predicts, and its absence proves nothing." },
-        { "q": "Radar shows a textbook hook. Do you report a tornado?", "a": "No. You report what you can see. A hook means precipitation wrapping a rotating updraft, which is favorable, but the radar cannot resolve the tornado itself and cannot see below cloud base at that range." }
+        {
+          "q": "Your screen shows 60 dBZ. How much rain is falling?",
+          "a": "Unknown. dBZ measures returned power, and a few large drops return as much as many small ones. It suggests heavy precipitation and possibly hail, but it is not a rainfall measurement."
+        },
+        {
+          "q": "A storm 100 miles away shows weak rotation. What should you assume?",
+          "a": "That the beam is about 12,000 feet up and two miles wide, so the real circulation below it is at least as strong as what you see, possibly much stronger."
+        },
+        {
+          "q": "Green sits right beside red on velocity. Rotation or not?",
+          "a": "Rotation only if the two maxima are side by side at the same range from the radar. Strung out along the same radial, it is convergence or divergence."
+        },
+        {
+          "q": "Does green mean the wind is blowing west?",
+          "a": "No. Green means motion toward the radar, wherever the radar happens to be. Velocity is radar-relative, never a compass direction."
+        },
+        {
+          "q": "Correlation coefficient collapses right on top of a tight couplet. What does that mean?",
+          "a": "A tornado debris signature: debris is being lofted, so a tornado is on the ground doing damage. It confirms rather than predicts, and its absence proves nothing."
+        },
+        {
+          "q": "Radar shows a textbook hook. Do you report a tornado?",
+          "a": "No. You report what you can see. A hook means precipitation wrapping a rotating updraft, which is favorable, but the radar cannot resolve the tornado itself and cannot see below cloud base at that range."
+        }
+      ]
+    },
+    "severe-parameters": {
+      "tagline": "The numbers behind every storm: what fires them, what feeds them, and which ones can spin.",
+      "minutes": 13,
+      "intro": "Before the first storm fires, the atmosphere has already decided what kind of day it will be. Forecasters read that decision from a handful of parameters: CAPE for fuel, CIN for the lid, shear for organization, helicity for spin. This module teaches you to read them too, on the same maps and soundings SPC uses, so a wall of numbers in a forecast discussion turns into a picture of the day ahead.",
+      "essentials": [
+        "Storms need moisture, instability and lift. Wind shear is the fourth ingredient that turns them severe.",
+        "CAPE is fuel, CIN is the lid. A capped atmosphere can store huge energy and release it all at once, or never.",
+        "Tornado potential lives in the lowest kilometer: low cloud bases, strong low-level shear, big SRH.",
+        "Parameters describe the environment, not the outcome. No value makes a storm certain, and SPC treats them as ingredients, not checklists."
+      ],
+      "sections": [
+        {
+          "kind": "prose",
+          "heading": "The recipe",
+          "body": "Three ingredients build any thunderstorm: moisture to condense into cloud and rain, instability so air that gets nudged upward keeps accelerating, and lift to provide the nudge. SPC adds a fourth for the storms this module cares about: wind shear, which organizes ordinary storms into severe, rotating ones. Every parameter that follows is just a way of measuring one of these four.",
+          "points": [
+            "Moisture: watch the surface dewpoint. More moisture also lowers cloud bases, which matters later in this module.",
+            "Instability: measured as CAPE, the energy a rising parcel picks up.",
+            "Lift: fronts, drylines, outflow boundaries, terrain, sea breezes, or plain afternoon heating.",
+            "Shear: the change in wind speed and direction with height, the difference between a pulse storm and a supercell."
+          ]
+        },
+        {
+          "kind": "figure",
+          "heading": "Fuel and the lid",
+          "fig": "cape-cin",
+          "body": "Take a bubble of warm, humid surface air and lift it. While it is colder than the air around it, it fights you: that resistance is CIN, the cap. If it breaks through to where it is warmer than its surroundings, it accelerates on its own: that free energy is CAPE. The whole drama of a severe weather day is whether parcels get through the blue area to spend the orange one.",
+          "caption": "The dashed line is the rising parcel, the solid line is the environment it climbs through. CIN is the energy toll on the way up; CAPE is the payout above the level of free convection."
+        },
+        {
+          "kind": "table",
+          "heading": "How much fuel is a lot",
+          "body": "SPC publishes a plain-language scale for mixed-layer CAPE.",
+          "table": {
+            "columns": ["CAPE", "SPC label"],
+            "rows": [
+              ["Under 1000 J/kg", "Weak instability"],
+              ["1000 to 2500 J/kg", "Moderate instability"],
+              ["2500 to 4000 J/kg", "Strong instability"],
+              ["Over 4000 J/kg", "Extreme instability"]
+            ]
+          },
+          "note": "These labels describe fuel, not certainty. The NWS glossary is explicit that there is no CAPE value above which severe weather becomes imminent. A capped 4000 J/kg day can produce nothing at all."
+        },
+        {
+          "kind": "table",
+          "heading": "Three flavors of CAPE",
+          "body": "The number depends on which parcel you lift, and the differences are not academic: they decide whether you see the fuel at all.",
+          "table": {
+            "columns": ["Flavor", "Parcel it lifts", "When it matters"],
+            "rows": [
+              ["SBCAPE", "Air right at the surface", "Classic daytime storms feeding on surface air"],
+              [
+                "MLCAPE",
+                "The average of the lowest 100 mb",
+                "The steadier everyday estimate; it is what SPC's tornado parameter uses"
+              ],
+              [
+                "MUCAPE",
+                "The most unstable parcel in the lowest 300 mb",
+                "Elevated storms running above a stable surface layer, like storms after midnight"
+              ]
+            ]
+          },
+          "note": "When storms run on top of cool, stable surface air, surface-based indices underestimate the instability. MUCAPE still sees the elevated fuel, which is why it is the go-to for nighttime and morning setups."
+        },
+        {
+          "kind": "prose",
+          "heading": "The cap: why big days can go quiet",
+          "body": "On the Plains, hot dry air off the high terrain of Mexico and the Rockies often slides east over cooler, moist Gulf air. Warm air over cool air is an inversion, and this one acts as a lid: NWS training calls it the cap. With the cap in place, surface storms are prevented even when CAPE is large, and the air below keeps warming and moistening, loading more potential energy underneath.",
+          "points": [
+            "A sounding with extreme instability trapped under a cap is the famous loaded gun. If the cap breaks, development is explosive.",
+            "The cap erodes from below by daytime heating, and it can be punched by lift along a front, dryline or outflow boundary.",
+            "SPC's tornado parameter gives a feel for scale: mixed-layer CIN weaker than 50 J/kg barely matters, and stronger than 200 J/kg zeroes the parameter out.",
+            "The all-or-nothing nature of capped days is why a forecast can honestly say both possibly nothing and possibly the worst day of the year."
+          ]
+        },
+        {
+          "kind": "photos",
+          "heading": "Fuel on the map",
+          "body": "This is what CAPE and CIN look like on the SPC mesoanalysis during a real outbreak: March 31, 2023, one of the biggest severe weather days of that year.",
+          "items": [
+            {
+              "src": "/images/training/meso-mlcape.png",
+              "alt": "SPC mesoanalysis map of MLCAPE contours and MLCIN shading on March 31 2023",
+              "caption": "2000 UTC, March 31, 2023: MLCAPE contours reach 2000 to 3000 J/kg from Texas up the Mississippi Valley, with MLCIN shading marking where the cap still holds. Storms erupted along this corridor within hours.",
+              "credit": "NOAA/NWS Storm Prediction Center, mesoanalysis archive"
+            }
+          ]
+        },
+        {
+          "kind": "prose",
+          "heading": "When and where storms fire",
+          "body": "CAPE only tells you what is possible once a parcel is lifted; something still has to do the lifting. Forecasters time initiation by watching the lid: heating toward the convective temperature, the surface temperature at which parcels can rise freely on their own, and boundaries that force air upward through what remains of the cap.",
+          "points": [
+            "Fronts lift warm air over their slope; cold fronts do it most abruptly.",
+            "The dryline separates moist Gulf air from dry desert air on the Plains. It mixes eastward during the afternoon, and severe, sometimes tornadic storms often fire along it or just east of it in the moist air.",
+            "Outflow boundaries are mini cold fronts left by earlier storms. New storms often develop along them, especially where two boundaries intersect.",
+            "Terrain forces air upward, which is why the Rockies' east slopes light up on summer afternoons.",
+            "The convective temperature is approximate by design: storms frequently develop before or after it is reached, or not at all."
+          ]
+        },
+        {
+          "kind": "figure",
+          "heading": "Shear: the organizer",
+          "fig": "shear-ladder",
+          "body": "Instability decides how strong an updraft can be. Shear decides what kind of storm that updraft builds. With little shear, a storm dumps its rain straight back into its own updraft and chokes in about 30 minutes. With shear, the updraft tilts, the rain lands elsewhere, and the storm can persist, organize and rotate.",
+          "points": [
+            "SPC: storms tend to become more organized and persistent as vertical shear increases. Supercells are commonly associated with 0-6 km shear of 35 to 40 knots and greater.",
+            "NWS training ladders: under 20 knots, disorganized single cells; 20 to 35 knots, organized multicells; around 40 and above, supercells.",
+            "For storms feeding on elevated air, SPC's effective bulk shear makes the same call while accounting for where the storm actually inhales; 25 to 40 knots and greater favors supercells."
+          ]
+        },
+        {
+          "kind": "photos",
+          "heading": "Shear on the map",
+          "items": [
+            {
+              "src": "/images/training/meso-shear.png",
+              "alt": "SPC mesoanalysis map of effective bulk shear on March 31 2023",
+              "caption": "The same hour: effective bulk shear of 50 to 70 knots overlays the instability corridor, far beyond the 35 to 40 knots SPC associates with supercells. Fuel and organization in the same place is the signature of an outbreak.",
+              "credit": "NOAA/NWS Storm Prediction Center, mesoanalysis archive"
+            }
+          ]
+        },
+        {
+          "kind": "figure",
+          "heading": "The hodograph: spin you can read from a chart",
+          "fig": "hodograph-srh",
+          "body": "A hodograph connects the tips of the wind vectors at each height, drawn from one origin. Its shape encodes what the storm will do with the shear. Storm relative helicity is literally an area on this chart: the region swept between the low-level trace and the storm's motion. Because it is measured relative to storm motion, two storms in the same environment can have different SRH.",
+          "points": [
+            "Straight hodograph: storms split into near mirror-image left and right movers.",
+            "Clockwise curve in the low levels, often courtesy of a strengthening low-level jet: the right mover is favored, and right movers carry the high severe potential.",
+            "SPC guidance: 0-1 km SRH above 100 m2/s2 and 0-3 km SRH above 250 m2/s2 suggest an increased tornado threat with supercells. Larger is better, with no clean cutoff.",
+            "0-1 km bulk shear above 15 to 20 knots also tends to favor supercell tornadoes."
+          ]
+        },
+        {
+          "kind": "photos",
+          "heading": "Helicity on the map",
+          "items": [
+            {
+              "src": "/images/training/meso-srh.png",
+              "alt": "SPC mesoanalysis map of 0-1 km storm relative helicity on March 31 2023",
+              "caption": "0-1 km storm relative helicity at 2000 UTC: a broad plume over 300 m2/s2 with pockets far higher across the Midwest and Mid-South. Values like these, over strong instability, are as loud as this map gets.",
+              "credit": "NOAA/NWS Storm Prediction Center, mesoanalysis archive"
+            }
+          ]
+        },
+        {
+          "kind": "prose",
+          "heading": "Why one storm makes a tornado and its neighbor does not",
+          "body": "NSSL's number is humbling: as few as 20 percent of supercells produce tornadoes, and why one does while a nearby storm does not is still an open research question. What the environment can tell you is which storms deserve your closest attention.",
+          "points": [
+            "Low cloud bases. SPC's tornado parameter treats mixed-layer LCLs under 1000 m as fully favorable and zeroes out above 2000 m. Humid low-level air means low bases.",
+            "Strong low-level shear and helicity, the 0-1 km numbers from the previous section. The tornado question is decided in the lowest kilometer.",
+            "VORTEX2 research points at the temperature of downdraft air wrapping around the mesocyclone, though modeling shows tornadoes can also form without those differences. Genuinely unfinished science.",
+            "Keep the scales straight: a mesocyclone is a 2 to 6 mile wide rotation, far larger than the tornado that may form inside it. Radar sees the mesocyclone; spotters confirm the tornado."
+          ]
+        },
+        {
+          "kind": "myths",
+          "heading": "Myths worth killing",
+          "myths": [
+            {
+              "myth": "Huge CAPE means tornadoes are coming",
+              "truth": "CAPE measures fuel for the updraft, nothing about spin. Tornado potential rides on the low-level wind field and cloud-base height. Plenty of extreme CAPE days deliver hail and wind but no tornadoes, and the NWS is explicit that no CAPE value makes severe weather imminent."
+            },
+            {
+              "myth": "A mesocyclone on radar is a tornado",
+              "truth": "A mesocyclone is storm-scale rotation 2 to 6 miles across, far larger than any tornado, and many mesocyclones never produce one. Even a tornado vortex signature raises probability without guaranteeing a tornado. Ground truth still comes from people."
+            },
+            {
+              "myth": "These parameters are forecasts",
+              "truth": "SPC's own help pages say most of these parameters have not been tested as forecast tools. They describe the environment right now. SPC forecasters think in ingredients and processes, not checklists and thresholds."
+            },
+            {
+              "myth": "Squall lines do not make tornadoes",
+              "truth": "Nearly 20 percent of all tornadoes come from quasi-linear convective systems. They tend to be weaker and brief, favor late night and early morning, and are harder to detect, which is exactly why they are dangerous."
+            }
+          ]
+        },
+        {
+          "kind": "table",
+          "heading": "Composite indices: overlap detectors",
+          "body": "Composite parameters multiply the ingredients together so the map lights up only where everything overlaps. One big ingredient cannot carry a composite; a zero anywhere zeroes the product.",
+          "table": {
+            "columns": ["Index", "What it blends", "The published signal"],
+            "rows": [
+              [
+                "EHI",
+                "CAPE with SRH",
+                "0-1 km EHI above 1 to 2 has been associated with significant tornadoes in supercells"
+              ],
+              [
+                "Supercell Composite (SCP)",
+                "MUCAPE, effective SRH, effective shear, CIN",
+                "Larger values mean greater overlap of supercell ingredients; positive values favor right-moving supercells"
+              ],
+              [
+                "Significant Tornado Parameter (STP)",
+                "MLCAPE, effective SRH, effective shear, LCL height, CIN",
+                "Most significant (F2+) tornadoes occurred with STP above 1; most non-tornadic supercells sat below 1"
+              ]
+            ]
+          },
+          "note": "STP is the closest thing to a tornado-environment dashboard in one number, precisely because it multiplies all five things this module taught. It still only describes the environment."
+        },
+        {
+          "kind": "photos",
+          "heading": "When everything overlaps",
+          "items": [
+            {
+              "src": "/images/training/meso-stp.png",
+              "alt": "SPC mesoanalysis map of the significant tornado parameter on March 31 2023",
+              "caption": "2100 UTC: the Significant Tornado Parameter over 3, locally higher, from Iowa into Tennessee. Compare with the CAPE, shear and helicity maps above: this product is those maps multiplied together, and the corridor it highlights is where the day's strong tornadoes occurred.",
+              "credit": "NOAA/NWS Storm Prediction Center, mesoanalysis archive"
+            }
+          ]
+        },
+        {
+          "kind": "photos",
+          "heading": "One sounding, the whole module",
+          "items": [
+            {
+              "src": "/images/training/sounding-ilx.png",
+              "alt": "SPC observed sounding from Lincoln Illinois at 2100 UTC March 31 2023 with skew-T, hodograph and severe parameters",
+              "caption": "Lincoln, Illinois, 2100 UTC, a special balloon launch during the outbreak. Read the boxes: about 1750 J/kg of surface CAPE with zero CIN, a cloud base near 885 m, 0-1 km SRH of 299 m2/s2, and a Significant Tornado Parameter of 2.9. Every number this module taught, live on one chart.",
+              "credit": "NOAA/NWS Storm Prediction Center, severe weather event archive"
+            }
+          ]
+        },
+        {
+          "kind": "prose",
+          "heading": "What keeps storms alive, and what kills them",
+          "body": "A storm is a machine that dies the moment its warm, moist inflow stops. Everything about longevity comes down to protecting that inflow.",
+          "points": [
+            "An ordinary cell lives about 30 minutes: rain falls back into the updraft, the downdraft takes over, and the storm dissipates.",
+            "A storm's own gust front can race out ahead and cut off the warm moist air feeding it.",
+            "Supercells persist for hours because the tilted, rotating updraft keeps rain and downdraft out of its own way.",
+            "At night, the southerly low-level jet common over the Plains keeps feeding organized systems above the cooled surface layer. That is elevated convection, and MUCAPE is the gauge that still sees its fuel.",
+            "Tornadoes often die when cold outflow wraps around the parent circulation and cuts off its warm inflow. SPC notes the irony: some outflow helps create tornadoes, other outflow kills them."
+          ]
+        },
+        {
+          "kind": "prose",
+          "heading": "Watching it live: models and the mesoanalysis",
+          "body": "Two tools turn these parameters from theory into a workflow. The SPC mesoanalysis is an hourly objective analysis, the RAP model as a first guess corrected with real surface observations, that maps every parameter in this module across the country, usually updated by a quarter past each hour. For the future, convection-allowing models like the 3 km, hourly updated HRRR are fine enough to draw individual storms: simulated reflectivity shows the model's forecast of what radar might look like, and updraft helicity flags where the model spins up rotating storms.",
+          "points": [
+            "Model reflectivity is a forecast, not radar. Trust the pattern and storm mode more than exact cell locations.",
+            "SPC's calibrated severe guidance leans on model updraft helicity to find rotating storms in the forecast.",
+            "In Spotter Tools Pro, the same fields are on the map: model CAPE, CIN, helicity and EHI layers in the Models tab, mesoanalysis severe parameters as a map layer, and skew-T and hodograph soundings on a long press.",
+            "The workflow on a severe day: models the night before for mode and timing, mesoanalysis through the day for the real environment, radar and spotters once storms are up."
+          ]
+        }
+      ],
+      "quickChecks": [
+        {
+          "q": "MLCAPE hits 3000 J/kg over your county at noon. Are severe storms guaranteed?",
+          "a": "No. That is strong instability on SPC's scale, but CAPE is only fuel. If nothing lifts parcels through the cap, the day can stay quiet, and the NWS glossary is explicit that no CAPE value makes severe weather imminent."
+        },
+        {
+          "q": "Storms are firing and 0-6 km bulk shear is 45 knots. What storm type should you expect?",
+          "a": "Supercells. SPC associates them with 0-6 km shear of 35 to 40 knots and greater. Strong shear tilts and organizes updrafts into long-lived rotating storms."
+        },
+        {
+          "q": "What does SRH tell you that CAPE cannot?",
+          "a": "Spin. CAPE measures buoyant fuel for the updraft; SRH measures the potential for that updraft to rotate, computed relative to storm motion over the lowest 1 or 3 km."
+        },
+        {
+          "q": "The Significant Tornado Parameter just jumped past 2. Is a tornado on the ground?",
+          "a": "Not necessarily, and maybe never. STP means the environment now resembles those where most significant tornadoes have occurred. Storms still have to initiate, become supercells and tighten low-level rotation. Check radar and spotter reports for what is actually happening."
+        },
+        {
+          "q": "A squall line arrives at 3 a.m. Is the tornado risk zero?",
+          "a": "No. Nearly 20 percent of tornadoes come from quasi-linear systems, and they favor exactly these hours. They tend to be weaker and brief, and they are harder to detect, so warnings can come with little lead time."
+        },
+        {
+          "q": "Yesterday had huge CAPE but storms stayed messy, pulsing up and dying. What was missing?",
+          "a": "Shear. Without it, rain falls straight back into the updraft and each cell chokes itself in about 30 minutes. Organization, longevity and rotation all come from the wind profile, not from CAPE."
+        }
       ]
     }
   }
