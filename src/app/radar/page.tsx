@@ -66,14 +66,47 @@ const blocks: Block[] = [
     title: "Full radar transport bar",
     body: [
       "Loop the past several volume scans with the controls you'd expect from a desktop radar app, but built for one-thumb use in the truck.",
+      "Deep loops are held compactly and expanded only as each frame is shown, so a long loop fits in memory, loads faster and plays smoothly instead of being thinned down to a handful of frames.",
     ],
     bullets: [
       "Play / pause and step forward / back frame by frame",
       "Drag the timeline scrubber to any frame in the loop",
       "Pick playback speed, slow walk-throughs or full-pace loops",
-      "Pick frame count, short loop or long history",
+      "Pick frame count, up to about eight hours of Level III history",
       "Background frame loading with progress so you know when it's ready",
       "Optional FastScan sweep: a beam-reveal animation with range rings and live pipeline chips",
+    ],
+  },
+  {
+    id: "archive",
+    eyebrow: "Radar Archive",
+    title: "Scrub back to any date and time",
+    body: [
+      "The map has a second clock. Pick a date and a time and the radar loads as it was at that instant, so you can walk back through an event you missed or study one you did not.",
+      "Storm cell tracks and mesocyclone markers load at the same instant, and an amber banner with a Return to Live button rides the top of the map so you always know which clock you are on.",
+    ],
+    bullets: [
+      "Level III back to March 2022, keeping its full loop depth",
+      "Level II back to 2017, with the download size shown before you spend it",
+      "Enter the time in Local, UTC, Eastern, Central, Mountain, Arizona, Pacific, Alaska or Hawaii, and it converts for you",
+      "A same-moment line cross references UTC and your own zone, with the date, so a lookup that rolled past midnight is obvious",
+      "Storm-relative velocity, the cross section and the wind profile all follow the archived clock rather than today's",
+      "Layers with no history switch off rather than sitting on live data under a past-tense banner",
+    ],
+  },
+  {
+    id: "loop-share",
+    eyebrow: "Share",
+    title: "Send a loop out of the app",
+    body: [
+      "Record the loop that is on screen and hand it straight to the share sheet, so a chase loop can reach a net, a group chat or a post without a screen recorder.",
+    ],
+    bullets: [
+      "GIF or MP4, on Android, iOS and Windows",
+      "Single-site radar, the national composite, satellite, weather models and air quality",
+      "Pick an output size and see the estimated file size before you commit",
+      "Product, site and time burned into every frame, so the loop still says what it is",
+      "Encoding runs off the main thread, so the app keeps working while it renders",
     ],
   },
   {

@@ -6,10 +6,45 @@ import FeatureSpotlight from "@/components/FeatureSpotlight";
 
 const features: Feature[] = [
   {
+    icon: "⏪",
+    title: "Radar Archive",
+    description:
+      "Pick a date and a time and the radar loads as it was at that instant, with storm tracks and mesocyclone markers along for the ride. Level III reaches back to March 2022 and Level II to 2017. Enter the time in whichever zone you are thinking in, Central or UTC or your own, and the app converts it for you.",
+    href: "/radar",
+  },
+  {
+    icon: "🎬",
+    title: "Share Any Loop as a GIF or MP4",
+    description:
+      "Record what is on screen and hand it straight to the share sheet: single-site radar, the national composite, satellite, weather models or air quality. Pick a size, see the file size before you commit, and every frame carries a stamp so the loop still says what it is once it leaves the app.",
+    href: "/features",
+  },
+  {
+    icon: "✏️",
+    title: "Draw on the Map",
+    description:
+      "Mark up the map and have it stay put through pan, zoom and tilt. Freehand, lines, arrows, boxes and circles, eleven forecaster presets including fronts with correct pips, outflow boundaries, hail cores and damage corridors, per-shape measurements, a saved library and PNG export.",
+    href: "/draw",
+  },
+  {
+    icon: "📥",
+    title: "Offline Maps",
+    description:
+      "Download a basemap area before you head out and roads, town names and your GPS position keep working with no signal. Choose a centre, a radius and a detail level, see the size estimate first, then watch it download. Android and iOS.",
+    href: "/features",
+  },
+  {
+    icon: "🔥",
+    title: "Wildfires & Earthquakes",
+    description:
+      "Active NIFC wildfire incidents with burn perimeters and NASA FIRMS satellite hotspots, plus worldwide USGS earthquakes with felt-range rings and real ShakeMap contours. Both tappable for the full picture, and both available as alerts.",
+    href: "/features",
+  },
+  {
     icon: "📡",
     title: "GPU Radar: Level 2, III & TDWR",
     description:
-      "GPU-rendered and crisp at any zoom. NEXRAD Level 2 decoded on-device (reflectivity, velocity, correlation coefficient, spectrum width), plus WSR-88D Level III, dual-pol products (ZDR, CC, KDP, hydrometeor classification), derived products (VIL, Digital Precip Rate, storm-relative velocity, rotation), vertical cross sections, a VAD Wind Profile panel, storm tracks with mesocyclone and TVS markers, and the 45-site TDWR network.",
+      "GPU-rendered and crisp at any zoom. NEXRAD Level 2 decoded on-device (reflectivity, velocity, correlation coefficient, spectrum width), plus WSR-88D Level III, dual-pol products (ZDR, CC, KDP, hydrometeor classification), derived products (VIL, Digital Precip Rate, storm-relative velocity, rotation), vertical cross sections, a VAD Wind Profile panel, storm tracks with mesocyclone and TVS markers, and the 45-site TDWR network. Level III loops now run about eight hours deep.",
     href: "/radar",
   },
   {
@@ -128,7 +163,7 @@ const features: Feature[] = [
     icon: "🌫️",
     title: "Air Quality (AQI)",
     description:
-      "EPA AirNow air quality on the map: Combined AQI, PM2.5, and Ozone, with a 24-hour loop animation and a smooth contour surface. Tap any station for its reading.",
+      "EPA AirNow air quality on the map: Combined AQI, PM2.5, Ozone and PM10, with a 24-hour loop, a smooth contour surface, and NOAA analyst-drawn smoke plumes shaded underneath. Tap any station for its reading, a 24-hour trend and the multi-day forecast for its area.",
     href: "/features",
   },
   {
@@ -142,15 +177,15 @@ const features: Feature[] = [
     icon: "📈",
     title: "Weather Models",
     description:
-      "Overlay HRRR, GFS, and RRFS forecast guidance (reflectivity, temperature, wind, CAPE, and precipitation) with an animated time bar and color legend.",
+      "Overlay HRRR, GFS, RRFS, NAM, ECMWF, ICON-D2 and more, grouped by region in a picker served from our backend so new models appear without an app update. Reflectivity, temperature, wind, CAPE and precipitation, with an animated time bar, a colour legend for every product, and support for 15-minute runs.",
     href: "/features",
   },
   {
     icon: "🎯",
     title: "Storm Track Projection",
     description:
-      "Drag a heading line to draw a forecast cone with configurable speed and spread, then auto-detect every town inside it with an ETA.",
-    href: "/features",
+      "Draw the storm's leading edge and you are done. The motion comes off the radar automatically, averaged across every tracked cell near what you drew, and you get the swath, time marks across it, and every town in the path with its arrival time, down to villages of a few hundred people.",
+    href: "/storm-track",
   },
   {
     icon: "👆",

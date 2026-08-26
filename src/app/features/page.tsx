@@ -10,7 +10,7 @@ import AutoVideo from "@/components/AutoVideo";
 export const metadata: Metadata = {
   title: "Features | Spotter Tools Pro",
   description:
-    "The full Spotter Tools Pro feature list: GPU radar (Level 2, III & TDWR), live wind flow, mesoanalysis, storm cell deep dive, on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras, weather models, opt-in presence, smart push alerts, and severe weather reporting.",
+    "The full Spotter Tools Pro feature list: a radar archive back to 2017, loop export to GIF or MP4, GPU radar (Level 2, III & TDWR) with eight-hour loops, ground-anchored map drawing, storm track projection, offline basemaps, wildfire and earthquake layers, live wind flow, mesoanalysis, on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras, weather models, opt-in presence, smart push alerts, and severe weather reporting.",
   openGraph: {
     title: "Spotter Tools Pro | Features",
     description:
@@ -126,7 +126,7 @@ const categories: Category[] = [
       {
         title: "Air quality (AirNow AQI)",
         description:
-          "EPA AirNow air quality on the map: Combined AQI, PM2.5, and Ozone, with a 24-hour loop animation, a smooth contour surface, and per-station readings on tap.",
+          "EPA AirNow air quality on the map: Combined AQI, PM2.5, Ozone and PM10, with a 24-hour loop, a smooth contour surface, an EPA category legend, and NOAA analyst-drawn smoke plumes shaded underneath so smoke aloft shows where it adds something the surface number does not. Tap any monitor for its reading, a past-24-hours trend and the multi-day forecast for its area.",
       },
       {
         title: "City & place search",
@@ -154,6 +154,21 @@ const categories: Category[] = [
           "Switch between basemap styles to match the conditions and your preference.",
       },
       {
+        title: "Offline basemaps",
+        description:
+          "Download a map area before you head out and roads, town names and your GPS position keep working with no signal. Pick a centre from GPS or by searching, choose a radius and a detail level, see the size estimate, then download with live progress. Android and iOS.",
+      },
+      {
+        title: "A basemap roster that can grow",
+        description:
+          "Eleven styles including our own Midnight, Blue Nav and Spotter Tools Grey, served from our backend so new basemaps arrive without waiting for an app update. Your Labels and Roads customisations still apply to whatever is pushed.",
+      },
+      {
+        title: "Measure distance",
+        description:
+          "Drop points and read the distance and bearing between them, for sizing a hail swath or working out how far out a wall cloud is.",
+      },
+      {
         title: "Mapbox location search",
         description:
           "Geocode addresses, towns, and landmarks to jump anywhere on the map instantly.",
@@ -161,7 +176,7 @@ const categories: Category[] = [
       {
         title: "Storm track projection",
         description:
-          "Drag a heading line to draw a forecast cone with configurable speed and spread, and the app auto-detects every town inside it with an ETA.",
+          "Draw the storm's leading edge and finish; that is the whole interaction. The motion comes off the radar, averaged across every tracked cell within forty miles of what you drew, so one decaying cell out front cannot drag the projection sideways. You get the swath, time marks across it, and every town in the path with its arrival time, from a 49,794-place gazetteer with a population floor of fifty, because the villages are the point. Arrival times count from the radar frame you drew on, not the wall clock.",
       },
       {
         title: "Long-press context menu",
@@ -248,6 +263,11 @@ const categories: Category[] = [
           "Play, pause, scrub, change loop speed, and pick frame count, same controls you'd expect from a desktop radar app.",
       },
       {
+        title: "Loops about eight hours deep",
+        description:
+          "Level III loops now offer 48, 72 and 96 frames. Frames are held in a compact form and expanded only when they are shown, so a deep loop fits in memory, loads faster and plays smoothly instead of being thinned down to a handful of frames.",
+      },
+      {
         title: "FastScan sweep (optional)",
         description:
           "An optional beam-reveal sweep animation with range rings and live pipeline status chips, off by default and switchable in settings.",
@@ -289,6 +309,149 @@ const categories: Category[] = [
       caption: "Built-in palettes plus user-imported .pal files",
     },
     cta: { href: "/radar", label: "Radar deep-dive" },
+  },
+  {
+    id: "archive",
+    eyebrow: "Time Travel",
+    title: "The Radar Archive",
+    intro:
+      "The map has a second clock. Pick a date and a time and the radar loads as it was at that instant, so you can walk back through an event you missed or study one you did not.",
+    features: [
+      {
+        title: "Scrub back to any date and time",
+        description:
+          "Level III reaches back to March 2022 and keeps its full loop ladder, so an archived loop is as deep as a live one. Level II reaches 2017 on a shorter ladder, and the picker tells you the download size before you spend it.",
+      },
+      {
+        title: "Storm tracks and mesocyclones come with it",
+        description:
+          "The archive is not just the reflectivity image. Storm cell tracks and mesocyclone markers load at the same instant, so the whole picture agrees with itself.",
+      },
+      {
+        title: "Enter the time in the zone you are thinking in",
+        description:
+          "Looking up a 6:42 PM Central event from Mountain time is the normal case, not the exception. Pick Central, type 6:42 PM, done. Local, UTC, Eastern, Central, Mountain, Arizona, Pacific, Alaska and Hawaii, with Arizona and Hawaii broken out because they skip daylight saving. A same-moment line always cross references UTC and your own zone, carrying the date as well as the time.",
+      },
+      {
+        title: "A mode, not a layer",
+        description:
+          "One clock governs everything that has history, so nothing drifts out of sync. Layers with no archive behind them switch off rather than sitting on live data under a past-tense banner, and an amber banner with a Return to Live button rides the top of the map the whole time.",
+      },
+      {
+        title: "Every reading follows the clock",
+        description:
+          "Storm-relative velocity subtracts the storm motion measured at that time rather than today's, the cross section builds only from tilts belonging to that scan, and archived Level II velocity is unfolded against the wind profile measured from the archived scan itself.",
+      },
+      {
+        title: "The sweep stops",
+        description:
+          "The beam that paints gates in as it passes them is a claim that data is arriving right now. Over a scan from two years ago it is simply false, so it goes off with the rest of the live-only chrome.",
+      },
+    ],
+    cta: { href: "/radar", label: "Radar deep-dive" },
+  },
+  {
+    id: "loop-share",
+    eyebrow: "Share",
+    title: "Send a Loop Out of the App",
+    intro:
+      "Record what is on screen and hand it to the share sheet, so a chase loop can reach a net, a group chat or a post without a screen recorder.",
+    features: [
+      {
+        title: "GIF or MP4, on every platform",
+        description:
+          "Both formats on Android, iOS and Windows. Pick an output size and see the estimated file size before you commit, with a warning past 15 MB rather than finding out after the encode.",
+      },
+      {
+        title: "Five loops, not just radar",
+        description:
+          "Single-site radar, the national composite mosaic, satellite, weather models and air quality all carry the same Share button.",
+      },
+      {
+        title: "A stamp burned into every frame",
+        description:
+          "Product, site and time ride on the image itself, so the loop still says what it is once it has left the app and nobody has to ask what they are looking at.",
+      },
+      {
+        title: "It does not lock up the app",
+        description:
+          "GIF encoding runs off the main thread, so a long loop keeps working in the background instead of freezing everything while it renders.",
+      },
+    ],
+  },
+  {
+    id: "drawing",
+    eyebrow: "Markup",
+    title: "Draw on the Map",
+    intro:
+      "Mark up the map the way you would a paper chart, with every shape anchored to the ground instead of the screen so it stays where you put it.",
+    features: [
+      {
+        title: "It stays where you drew it",
+        description:
+          "Circle a hook echo, pan half a county, and the circle is still on the hook echo. Every shape stores real coordinates and survives pan, zoom, rotate and tilt.",
+      },
+      {
+        title: "Freehand, lines, arrows, boxes and circles",
+        description:
+          "With a contrast halo on by default, so a stroke stays readable even where it crosses a 65 dBZ core.",
+      },
+      {
+        title: "Eleven forecaster presets",
+        description:
+          "Warm, cold, stationary and occluded fronts with correct pips, plus outflow boundary, dryline, rotation, hail core, damage corridor, target box and escape route. Pips sit on the side the boundary is advancing into, worked out from the shape of the line rather than which end you started from.",
+      },
+      {
+        title: "Edit anything you have drawn",
+        description:
+          "Select a shape to move it, drag its vertices, resize it, add a text label, or change dash, opacity, fill and stacking order. Fifty levels of undo and redo behind you.",
+      },
+      {
+        title: "Every shape measures itself",
+        description:
+          "Length and bearing, radius, dimensions, area, corridor width in miles. So you can draw the thing you just measured.",
+      },
+      {
+        title: "Saved, and shareable",
+        description:
+          "The current sketch autosaves and comes back on launch, there is a named library to save and reopen your work, and you can export as a PNG or as GeoJSON.",
+      },
+      {
+        title: "Hand a drawing to Storm Track",
+        description:
+          "Draw a line and it becomes the storm's leading edge; draw an arrow and it becomes the motion. The projection maths stays in one place instead of being reinvented here.",
+      },
+    ],
+    cta: { href: "/draw", label: "How to draw on the map" },
+  },
+  {
+    id: "hazards",
+    eyebrow: "Beyond the Storm",
+    title: "Wildfires & Earthquakes",
+    intro:
+      "Severe weather is not the only thing worth watching. Both layers are off by default and both can alert you.",
+    features: [
+      {
+        title: "Active wildfire incidents",
+        description:
+          "NIFC WFIGS incidents, fed by IRWIN so state agency fires are covered too, with optional burn perimeters. Tap a fire for acreage, containment, cause, behaviour, crew size, complexity, managing team, fuel, cost to date and distance from you.",
+      },
+      {
+        title: "Satellite thermal hotspots",
+        description:
+          "NASA FIRMS detections as tappable dots, sized by fire radiative power so the burning cores stand out of the scatter, with brightness temperature, satellite, day or night pass and footprint on tap. Fire cards also carry a satellite activity summary: detections in the last 24 and 6 hours, peak radiative power and the latest pass.",
+      },
+      {
+        title: "Worldwide earthquakes",
+        description:
+          "Straight from the USGS real-time feeds, with the magnitude printed inside every dot and a pickable magnitude floor and time window. Tap one for depth, timing, distance from you, felt reports, PAGER alert level, tsunami zone and review status.",
+      },
+      {
+        title: "Felt range, measured where it exists",
+        description:
+          "A dashed ring is our estimate of where the quake was perceptible. A solid contour is the real USGS ShakeMap, fetched when you tap an event, and it replaces the estimate rather than drawing alongside it. The map always tells you which one you are looking at.",
+      },
+    ],
   },
   {
     id: "cameras",
@@ -369,6 +532,21 @@ const categories: Category[] = [
         title: "HRRR, GFS & RRFS overlays",
         description:
           "Pull HRRR, GFS, and RRFS guidance directly onto the map: reflectivity, 2 m temperature, wind, CAPE, precipitation, and more.",
+      },
+      {
+        title: "A picker that groups by region",
+        description:
+          "CONUS, Global, Ensembles, Tropical, Europe, Asia, Marine and Air Quality, served from our backend so new models appear without an app update. NAM, ECMWF and ICON-D2 sit alongside the CONUS three.",
+      },
+      {
+        title: "Sub-hourly runs",
+        description:
+          "Support for 15-minute models, so a run that publishes every quarter hour can be scrubbed frame by frame instead of collapsed to the hour.",
+      },
+      {
+        title: "A legend for every product",
+        description:
+          "Every colour ramp is mirrored from the source table, so the strip beside the map matches the pixels on it.",
       },
       {
         title: "Animated time bar",
@@ -522,6 +700,11 @@ const categories: Category[] = [
           "Pull observed balloon data or HRRR forecast profiles for a point, the current state or the hours ahead, and scrub through hourly frames.",
       },
       {
+        title: "GFS for the places HRRR does not reach",
+        description:
+          "GFS joins the model picker as the coverage model, so Alaska, Hawaii, Puerto Rico and offshore points get a sounding where the high-resolution models have no data.",
+      },
+      {
         title: "Plain-language read",
         description:
           "A written interpretation of the profile, including what happens to storms moving into the area rather than only whether new storms can fire. A capped sounding no longer makes an inbound mature storm look doomed, since inhibition guards initiation, not an established updraft. Adds a dry-microburst callout and handles high-shear low-CAPE setups.",
@@ -559,6 +742,21 @@ const categories: Category[] = [
         title: "Event-type filters",
         description:
           "Per-event toggles for tornado warnings, severe thunderstorm warnings, flash flood, fire weather, and more.",
+      },
+      {
+        title: "Earthquake alerts",
+        description:
+          "Alerts based on what you would actually feel rather than a fixed radius, so a distant large quake reaches you and a small nearby one does not spam you. Set your own magnitude floor, with an optional major-quakes-anywhere-in-the-US toggle. Off by default.",
+      },
+      {
+        title: "Wildfire alerts",
+        description:
+          "New incidents discovered near you, with a minimum-size picker and a prescribed-burn filter, plus rapid-growth alerts for a fire you are already watching. Off by default.",
+      },
+      {
+        title: "Air quality alerts",
+        description:
+          "Fires when the monitor nearest one of your zones crosses the EPA category you pick, with optional follow-ups as it keeps worsening. Off by default.",
       },
       {
         title: "Custom sound profile + DND override",
@@ -662,6 +860,16 @@ const categories: Category[] = [
         title: "Searchable settings",
         description:
           "A sticky search field at the top of Settings filters every control on the page, so you find a toggle in seconds.",
+      },
+      {
+        title: "More map, when you want it",
+        description:
+          "Collapse the bottom navigation bar on the map into a slim strip and hand its height back to the map. Tap the strip to bring it back, and the choice sticks.",
+      },
+      {
+        title: "Built to be read at arm's length",
+        description:
+          "The app carries its own typefaces so it looks the same on every platform, with a monospaced face for every number so figures line up in a column. Chrome floating over the radar is drawn neutral, because colour over the map is reserved for data: an accent that lands inside the reflectivity ramp is one you have to decode twice.",
       },
       {
         title: "Connection status indicator",

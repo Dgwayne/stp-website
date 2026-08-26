@@ -128,6 +128,20 @@ const blocks: Block[] = [
     flip: true,
   },
   {
+    id: "hazards",
+    eyebrow: "Beyond Severe Weather",
+    title: "Earthquakes, wildfires and air quality",
+    body: [
+      "Three more feeds you can watch, each with its own settings, its own notification sound, and all three off until you turn them on.",
+    ],
+    bullets: [
+      "Earthquakes alert on what you would actually feel rather than a fixed radius, so a large distant quake reaches you and a small nearby one does not spam you. Set your own magnitude floor, with an optional major-quakes-anywhere-in-the-US toggle",
+      "Wildfires alert on newly discovered incidents near you, with a minimum-size picker and a prescribed-burn filter, plus rapid growth on a fire you are already watching",
+      "Air quality alerts when the monitor nearest one of your zones crosses the EPA category you pick, with optional follow-ups as it keeps worsening",
+      "Alert distances are shown in miles throughout, on every label and every slider",
+    ],
+  },
+  {
     id: "spc",
     eyebrow: "SPC Products",
     title: "Mesoscale discussions and convective outlooks",
