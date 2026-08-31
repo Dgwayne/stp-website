@@ -97,6 +97,26 @@ type DiedRow = {
   rss_curve: string | null;
   memory_pressure_events: number | null;
 };
+/// Radar sessions where single-site radar was enabled, split by whether
+/// the app ever built a quad. Optional so a dashboard deploy that lands
+/// before the Worker's renders empty instead of throwing.
+type RadarStallRow = {
+  app_version: string | null;
+  platform: string | null;
+  radar_sessions: number;
+  stalled: number;
+  installs: number;
+  stalled_installs: number;
+};
+
+type RadarFailureRow = {
+  key: string;
+  app_version: string | null;
+  events: number;
+  sessions: number;
+  installs: number;
+};
+
 type HourRow = { hour: number; sessions: number };
 type GoDarkRow = {
   install_id: string;
@@ -160,6 +180,8 @@ type Stats = {
   regions: RegionRow[];
   startup_percentiles: Record<string, { n: number; p50: number; p95: number; max: number }>;
   died_sessions: DiedRow[];
+  radar_stall?: RadarStallRow[];
+  radar_failures?: RadarFailureRow[];
   hours: HourRow[];
   go_dark: GoDarkRow[];
   recent: RecentRow[];
@@ -331,6 +353,168 @@ function SummaryCard({ s }: { s: Stats }) {
 }
 
 // ── Tiny presentational pieces ─────────────────────────────────────────
+
+/// Radar failures the crash reporter structurally cannot see.
+///
+/// The Level 2 pipeline returns null on every failure path, so a radar
+/// that silently never paints produces no Sentry event — the 1.0.62
+/// wedged-decompress-helper bug was found only because a user wrote in.
+/// Both halves are built from data already in D1, so they backfill
+/// across every release in the table rather than starting at zero.
+function RadarHealthCard({
+  stall,
+  failures,
+}: {
+  stall: RadarStallRow[];
+  failures: RadarFailureRow[];
+}) {
+  // Roll the per-platform rows up to one line per version, and keep the
+  // platform split as a subline: a stall that is mobile-only (as every
+  // one so far has been) is a different bug from one that includes
+  // Windows, which drives radar through its own controller.
+  const byVersion = new Map<
+    string,
+    { sessions: number; stalled: number; installs: number; plats: Map<string, number> }
+  >();
+  for (const r of stall) {
+    const v = r.app_version ?? "—";
+    if (!byVersion.has(v)) {
+      byVersion.set(v, { sessions: 0, stalled: 0, installs: 0, plats: new Map() });
+    }
+    const e = byVersion.get(v)!;
+    e.sessions += r.radar_sessions;
+    e.stalled += r.stalled;
+    e.installs += r.stalled_installs;
+    if (r.stalled > 0) {
+      e.plats.set(r.platform ?? "?", (e.plats.get(r.platform ?? "?") ?? 0) + r.stalled);
+    }
+  }
+  const versions = [...byVersion.entries()].sort((a, b) =>
+    a[0].localeCompare(b[0], undefined, { numeric: true }),
+  );
+
+  const failureKeys = [...new Set(failures.map((f) => f.key))].sort();
+  const totalStalled = versions.reduce((n, [, e]) => n + e.stalled, 0);
+
+  return (
+    <Card title="Radar health (30d)" wide>
+      {versions.length === 0 ? (
+        <p className="text-sm text-muted">
+          No radar sessions in range.
+        </p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[560px]">
+            <thead>
+              <tr>
+                <th className={th}>Version</th>
+                <th className={th}>Radar sessions</th>
+                <th className={th}>Never painted</th>
+                <th className={th}>Rate</th>
+                <th className={th}>Installs</th>
+                <th className={th}>Where</th>
+              </tr>
+            </thead>
+            <tbody>
+              {versions.map(([v, e]) => (
+                <tr key={v} className="border-t border-white/5">
+                  <td className={td}>{v}</td>
+                  <td className={td}>{fmtInt(e.sessions)}</td>
+                  <td className={td}>{fmtInt(e.stalled)}</td>
+                  <td className={td}>
+                    {e.sessions > 0 ? fmtPct(e.stalled / e.sessions) : "—"}
+                  </td>
+                  <td className={td}>{e.installs > 0 ? fmtInt(e.installs) : "—"}</td>
+                  <td className={td}>
+                    {e.plats.size === 0
+                      ? "—"
+                      : [...e.plats.entries()]
+                          .sort((a, b) => b[1] - a[1])
+                          .map(([p, n]) => `${p} ${n}`)
+                          .join(", ")}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      <p className="mt-2 text-[11px] text-muted">
+        Sessions with single-site radar enabled for 20 s or more where the
+        app never built a single quad — radar on, nothing drawn. Read the
+        rate, not the count: a user who enabled the layer and panned away
+        lands here too, so this is a symptom to compare across releases,
+        not a bug count.
+        {totalStalled === 0 ? " Nothing stalled in range." : ""}
+      </p>
+
+      <h3 className="mt-5 mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
+        Failure counters
+      </h3>
+      {failureKeys.length === 0 ? (
+        <p className="text-sm text-muted">
+          No counters reported. The l2_* keys ship with 1.0.64 and read
+          nothing until it is adopted.
+        </p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[560px]">
+            <thead>
+              <tr>
+                <th className={th}>Counter</th>
+                <th className={th}>By version (installs)</th>
+                <th className={th}>Events</th>
+                <th className={th}>Sessions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {failureKeys.map((k) => {
+                const rows = failures.filter((f) => f.key === k);
+                const events = rows.reduce((n, r) => n + r.events, 0);
+                // Sessions sum cleanly across versions; installs do NOT
+                // (one install that upgraded mid-window appears under
+                // both), so the per-version install counts stay inline
+                // rather than being rolled into a misleading total.
+                const sessions = rows.reduce((n, r) => n + r.sessions, 0);
+                return (
+                  <tr key={k} className="border-t border-white/5">
+                    <td className={td}>{prettyKey(k)}</td>
+                    <td className={td}>
+                      {rows
+                        .slice()
+                        .sort((a, b) =>
+                          `${a.app_version}`.localeCompare(
+                            `${b.app_version}`,
+                            undefined,
+                            { numeric: true },
+                          ),
+                        )
+                        .map((r) => `${r.app_version ?? "—"} (${r.installs})`)
+                        .join(", ")}
+                    </td>
+                    <td className={td}>{fmtInt(events)}</td>
+                    <td className={td}>{fmtInt(sessions)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+      <p className="mt-2 text-[11px] text-muted">
+        <strong>l2 fetch hung</strong> is the canary: every leg under a
+        Level 2 fetch is bounded, so if it ever fires there is another
+        unbounded wait still out there.{" "}
+        <strong>radar loop thinned</strong>{" "}
+        means a loop would not fit its
+        memory budget and dropped frames to keep the span — the loop
+        budget&rsquo;s own docs call thinning rare and name this counter as
+        the signal to revisit those numbers.
+      </p>
+    </Card>
+  );
+}
 
 function Card({
   title,
@@ -885,6 +1069,11 @@ export default function TelemetryDashboard() {
           </p>
         </Card>
 
+        <RadarHealthCard
+          stall={s.radar_stall ?? []}
+          failures={s.radar_failures ?? []}
+        />
+
         <Card title="Died sessions (30d)" wide>
           {s.died_sessions.length === 0 ? (
             <p className="text-sm text-muted">
@@ -905,9 +1094,13 @@ export default function TelemetryDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {s.died_sessions.map((d2) => (
+                  {s.died_sessions.map((d2, i) => (
+                    // Index included deliberately: one install can log two
+                    // deaths inside the same received_at batch, and
+                    // received_at+device_model alone collided (React then
+                    // warns and may drop a row from an OOM triage table).
                     <tr
-                      key={`${d2.received_at}-${d2.device_model}`}
+                      key={`${d2.received_at}-${d2.device_model}-${i}`}
                       className="border-t border-white/5"
                     >
                       <td className={td}>{fmtWhen(d2.received_at)}</td>
