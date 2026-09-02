@@ -86,8 +86,8 @@ const blocks: Block[] = [
       "Storm cell tracks and mesocyclone markers load at the same instant, and an amber banner with a Return to Live button rides the top of the map so you always know which clock you are on.",
     ],
     bullets: [
-      "Level III back to March 2022, keeping its full loop depth",
-      "Level II back to 2017, with the download size shown before you spend it",
+      "Level III back to May 1992, keeping its full loop depth",
+      "Level 2 back to June 1991, with the download size shown before you spend it",
       "Enter the time in Local, UTC, Eastern, Central, Mountain, Arizona, Pacific, Alaska or Hawaii, and it converts for you",
       "A same-moment line cross references UTC and your own zone, with the date, so a lookup that rolled past midnight is obvious",
       "Storm-relative velocity, the cross section and the wind profile all follow the archived clock rather than today's",

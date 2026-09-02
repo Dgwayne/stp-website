@@ -151,7 +151,7 @@ const blocks: Block[] = [
     bullets: [
       "Mesoscale Discussions, short-fuse SPC forecast areas with full text",
       "Day 1 / Day 2 Convective Outlooks, Categorical, Tornado, Wind, and Hail",
-      "Today's SPC tornado, hail, and damaging-wind reports as map markers",
+      "Live NWS Local Storm Reports as map markers, every report type the offices publish",
       "Optional notification when a new MCD is posted that overlaps your zones",
     ],
     screenshot: {

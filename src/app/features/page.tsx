@@ -10,7 +10,7 @@ import AutoVideo from "@/components/AutoVideo";
 export const metadata: Metadata = {
   title: "Features | Spotter Tools Pro",
   description:
-    "The full Spotter Tools Pro feature list: a radar archive back to 2017, loop export to GIF or MP4, GPU radar (Level 2, III & TDWR) with eight-hour loops, ground-anchored map drawing, storm track projection, offline basemaps, wildfire and earthquake layers, live wind flow, mesoanalysis, on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras, weather models, opt-in presence, smart push alerts, and severe weather reporting.",
+    "The full Spotter Tools Pro feature list: a radar archive back to the early 1990s, loop export to GIF or MP4, GPU radar (Level 2, III & TDWR) with eight-hour loops, ground-anchored map drawing, storm track projection, offline basemaps, wildfire and earthquake layers, live wind flow, mesoanalysis, on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras, weather models, opt-in presence, smart push alerts, and severe weather reporting.",
   openGraph: {
     title: "Spotter Tools Pro | Features",
     description:
@@ -99,9 +99,9 @@ const categories: Category[] = [
           "Tornado, severe thunderstorm, flash flood, and fire warnings as full polygons, plus tornado / severe watch boxes.",
       },
       {
-        title: "SPC storm reports",
+        title: "NWS Local Storm Reports",
         description:
-          "Today's SPC tornado, hail, and damaging-wind reports plotted in real time.",
+          "Storm reports straight from the NWS offices that publish them, minutes fresh, covering every report type from tornadoes and hail to downed trees and flooding, with seven filter groups and times in your own clock.",
       },
       {
         title: "Mesoscale discussions",
@@ -320,7 +320,7 @@ const categories: Category[] = [
       {
         title: "Scrub back to any date and time",
         description:
-          "Level III reaches back to March 2022 and keeps its full loop ladder, so an archived loop is as deep as a live one. Level II reaches 2017 on a shorter ladder, and the picker tells you the download size before you spend it.",
+          "Level 2 reaches back to June 1991 and Level III to May 1992, so Moore, El Reno and Bridge Creek all load. Coverage thins the further back you go, the app says when a radar recorded nothing, and the picker shows the download size before you spend it.",
       },
       {
         title: "Storm tracks and mesocyclones come with it",
@@ -811,7 +811,7 @@ const categories: Category[] = [
       {
         title: "Browse SPC reports on the map",
         description:
-          "Toggle today's SPC tornado / hail / wind reports as map markers and tap any of them for full detail.",
+          "Toggle live NWS Local Storm Reports as map markers, every report type the offices publish, and tap any of them for full detail.",
       },
     ],
     screenshot: {

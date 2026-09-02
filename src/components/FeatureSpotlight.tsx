@@ -1,3 +1,4 @@
+import Image from "next/image";
 import AutoVideo from "@/components/AutoVideo";
 
 type Props = {
@@ -5,7 +6,14 @@ type Props = {
   title: string;
   description: string;
   src: string;
-  poster: string;
+  /** Poster frame for a video spotlight. Omit when `still` is set. */
+  poster?: string;
+  /**
+   * Render `src` as a static screenshot instead of a video. The intrinsic
+   * size keeps next/image from laying out at 0x0; the rendered width is
+   * still the column's.
+   */
+  still?: { width: number; height: number };
   flip?: boolean;
   /**
    * Tall phone-shaped capture (roughly 9:20). Left unconstrained it would run
@@ -26,6 +34,7 @@ export default function FeatureSpotlight({
   description,
   src,
   poster,
+  still,
   flip = false,
   portrait = false,
 }: Props) {
@@ -37,7 +46,17 @@ export default function FeatureSpotlight({
             portrait ? "mx-auto w-full max-w-[280px]" : ""
           }`}
         >
-          <AutoVideo src={src} poster={poster} className="w-full" />
+          {still ? (
+            <Image
+              src={src}
+              alt={title}
+              width={still.width}
+              height={still.height}
+              className="w-full"
+            />
+          ) : (
+            <AutoVideo src={src} poster={poster ?? ""} className="w-full" />
+          )}
         </div>
       </figure>
       <div className={flip ? "lg:order-1" : ""}>

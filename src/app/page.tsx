@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import FeatureCard, { type Feature } from "@/components/FeatureCard";
 import ScreenshotStrip, { type Screenshot } from "@/components/ScreenshotStrip";
 import SectionHeader from "@/components/SectionHeader";
@@ -6,193 +7,67 @@ import FeatureSpotlight from "@/components/FeatureSpotlight";
 
 const features: Feature[] = [
   {
-    icon: "⏪",
-    title: "Radar Archive",
+    icon: "📡",
+    title: "GPU Radar: Level 2, III & TDWR",
     description:
-      "Pick a date and a time and the radar loads as it was at that instant, with storm tracks and mesocyclone markers along for the ride. Level III reaches back to March 2022 and Level II to 2017. Enter the time in whichever zone you are thinking in, Central or UTC or your own, and the app converts it for you.",
+      "GPU-rendered and crisp at any zoom. NEXRAD Level 2 decoded on-device, WSR-88D Level III and dual-pol products, vertical cross sections, a VAD Wind Profile panel, storm tracks with mesocyclone and TVS markers, and the 45-site TDWR network. Level III loops run about eight hours deep.",
     href: "/radar",
+  },
+  {
+    icon: "⏪",
+    title: "Radar Archive to the 1990s",
+    description:
+      "Pick a date and a time and the radar loads as it was at that instant, with storm tracks and mesocyclones along for the ride. Level 2 reaches back to 1991 and Level III to 1992, so Moore, El Reno and Bridge Creek all load. Enter the time in whichever zone you are thinking in and the app converts it.",
+    href: "/radar",
+  },
+  {
+    icon: "✈️",
+    title: "Hurricane Hunters",
+    description:
+      "Live NOAA and Air Force reconnaissance on the map: flight-level observations along the track and the vortex centre fixes the crews send back from the eye, plus a Recon Graphs screen charting surface wind, flight-level wind and pressure through the whole mission.",
+    href: "/features",
   },
   {
     icon: "🎬",
     title: "Share Any Loop as a GIF or MP4",
     description:
-      "Record what is on screen and hand it straight to the share sheet: single-site radar, the national composite, satellite, weather models or air quality. Pick a size, see the file size before you commit, and every frame carries a stamp so the loop still says what it is once it leaves the app.",
-    href: "/features",
-  },
-  {
-    icon: "✏️",
-    title: "Draw on the Map",
-    description:
-      "Mark up the map and have it stay put through pan, zoom and tilt. Freehand, lines, arrows, boxes and circles, eleven forecaster presets including fronts with correct pips, outflow boundaries, hail cores and damage corridors, per-shape measurements, a saved library and PNG export.",
-    href: "/draw",
-  },
-  {
-    icon: "📥",
-    title: "Offline Maps",
-    description:
-      "Download a basemap area before you head out and roads, town names and your GPS position keep working with no signal. Choose a centre, a radius and a detail level, see the size estimate first, then watch it download. Android and iOS.",
-    href: "/features",
-  },
-  {
-    icon: "🔥",
-    title: "Wildfires & Earthquakes",
-    description:
-      "Active NIFC wildfire incidents with burn perimeters and NASA FIRMS satellite hotspots, plus worldwide USGS earthquakes with felt-range rings and real ShakeMap contours. Both tappable for the full picture, and both available as alerts.",
-    href: "/features",
-  },
-  {
-    icon: "📡",
-    title: "GPU Radar: Level 2, III & TDWR",
-    description:
-      "GPU-rendered and crisp at any zoom. NEXRAD Level 2 decoded on-device (reflectivity, velocity, correlation coefficient, spectrum width), plus WSR-88D Level III, dual-pol products (ZDR, CC, KDP, hydrometeor classification), derived products (VIL, Digital Precip Rate, storm-relative velocity, rotation), vertical cross sections, a VAD Wind Profile panel, storm tracks with mesocyclone and TVS markers, and the 45-site TDWR network. Level III loops now run about eight hours deep.",
-    href: "/radar",
-  },
-  {
-    icon: "🎞️",
-    title: "Composite & Animated Radar",
-    description:
-      "CONUS MRMS composite mosaic, now GPU-rendered and crisp at every zoom, with a full transport bar (play, scrub, speed), up to 12-hour playback, and a quality-controlled base-reflectivity mosaic.",
-    href: "/radar",
-  },
-  {
-    icon: "💨",
-    title: "Live Wind Flow",
-    description:
-      "A beautiful animated wind layer streams live surface wind across the map as flowing, speed-colored particles. See exactly where the wind is ripping at a glance.",
-    href: "/features",
-  },
-  {
-    icon: "🪟",
-    title: "Dual-View Radar Compare",
-    description:
-      "Split the screen to compare two radar views side by side (different products or two sites), each with its own controls.",
-    href: "/radar",
-  },
-  {
-    icon: "🎈",
-    title: "On-Device Soundings",
-    description:
-      "Tap anywhere on the map for a full atmospheric profile: skew-T, hodograph, and complete sounding analysis from observed balloon data and HRRR forecasts, with a forecast-hour scrubber.",
-    href: "/features",
-  },
-  {
-    icon: "🌪️",
-    title: "Mesoanalysis",
-    description:
-      "SPC-style severe-weather parameters layered right under the radar: CAPE, shear, storm-relative helicity, and derived composites like Supercell and Significant Tornado, sampled anywhere with a bilinear crosshair readout.",
-    href: "/features",
-  },
-  {
-    icon: "⚡",
-    title: "Live Lightning",
-    description:
-      "Real-time GOES GLM lightning strikes on the map, with an adjustable display window, bolt size, and radar-loop sync.",
-    href: "/features",
-  },
-  {
-    icon: "🛰️",
-    title: "GOES Satellite",
-    description:
-      "GOES-East and GOES-West imagery (Infrared, Water Vapor, Visible, and GeoColor) with the full NESDIS sector list, 22 East and 12 West regions, plus a West Pacific typhoon view from Himawari. Radar-synced cloud loop, GPU cross-fade, and on-map product chips.",
-    href: "/features",
-  },
-  {
-    icon: "🌀",
-    title: "Tropical & Hurricane Tracking",
-    description:
-      "Worldwide tropical tracking: NHC outlook areas, named-storm cones, model spaghetti tracks, intensity, wind field, coastal watches/warnings, and tropical-storm-force wind arrival times. Tap any storm for details.",
-    href: "/features",
-  },
-  {
-    icon: "📹",
-    title: "Live Storm Chasers",
-    description:
-      "Watch major storm chasers stream live from the field via YouTube and Facebook Live, right on the map. Live badges update in real time so you always see who's broadcasting now.",
-    href: "/features",
-  },
-  {
-    icon: "📷",
-    title: "Live Traffic & Sky Cameras",
-    description:
-      "Tens of thousands of DOT traffic cameras across 37 states, plus FAA, Windy, NOAA buoy, USGS volcano, National Park, and ALERTWildfire cameras, with live video where it's offered.",
-    href: "/features",
-  },
-  {
-    icon: "👥",
-    title: "Presence (opt-in)",
-    description:
-      "Turn it on to see other Spotter Tools Pro users on the map (avatars, usernames, and bios) and let them see you. Off by default; nothing is shared unless you opt in.",
-    href: "/features",
-  },
-  {
-    icon: "🚨",
-    title: "Smart Push Alerts",
-    description:
-      "Background watcher fires NWS warning notifications whether the app is open or closed, with watch zones, filter modes, custom sounds, full-screen tornado-emergency takeover, and an estimated population count inside each warning polygon.",
-    href: "/alerts",
-  },
-  {
-    icon: "⚠️",
-    title: "NWS, SPC & Convective Outlooks",
-    description:
-      "Warnings, watches, mesoscale discussions, and a full outlooks suite: SPC convective Day 1 to 8, thunderstorm, excessive rainfall, fire weather, winter storm severity, CPC 6 to 10 day, and drought, all overlaid on the map.",
-    href: "/alerts",
-  },
-  {
-    icon: "🌤️",
-    title: "NWS Point Forecast",
-    description:
-      "Tap anywhere for the full National Weather Service forecast: current conditions, day and night periods, a 48 hour trend chart, the Area Forecast Discussion, and every grid layer the local office publishes, each one explained in plain English. Cached for when you lose signal.",
-    href: "/features",
-  },
-  {
-    icon: "📱",
-    title: "Home Screen Widget",
-    description:
-      "Put the forecast for any place on your home screen. Pick the location, choose hours or days, and match it to your theme. Optional strip when a warning or watch covers the spot.",
-    href: "/features",
-  },
-  {
-    icon: "🔔",
-    title: "Critical Alerts on iOS",
-    description:
-      "Apple approved Critical Alerts for Spotter Tools Pro. Tornado Emergencies, Particularly Dangerous Situation warnings, and Flash Flood Emergencies can break through Do Not Disturb and the silent switch when you opt in.",
-    href: "/alerts",
-  },
-  {
-    icon: "🌫️",
-    title: "Air Quality (AQI)",
-    description:
-      "EPA AirNow air quality on the map: Combined AQI, PM2.5, Ozone and PM10, with a 24-hour loop, a smooth contour surface, and NOAA analyst-drawn smoke plumes shaded underneath. Tap any station for its reading, a 24-hour trend and the multi-day forecast for its area.",
-    href: "/features",
-  },
-  {
-    icon: "🗺️",
-    title: "Surface Fronts & Pressure",
-    description:
-      "WPC surface analysis on the map: cold, warm, stationary, and occluded fronts plus high and low pressure centers, from the Coded Surface Bulletin.",
-    href: "/features",
-  },
-  {
-    icon: "📈",
-    title: "Weather Models",
-    description:
-      "Overlay HRRR, GFS, RRFS, NAM, ECMWF, ICON-D2 and more, grouped by region in a picker served from our backend so new models appear without an app update. Reflectivity, temperature, wind, CAPE and precipitation, with an animated time bar, a colour legend for every product, and support for 15-minute runs.",
+      "Record what is on screen and hand it straight to the share sheet: single-site radar, the national composite, satellite, weather models or air quality. Every frame carries a stamp so the loop still says what it is once it leaves the app.",
     href: "/features",
   },
   {
     icon: "🎯",
     title: "Storm Track Projection",
     description:
-      "Draw the storm's leading edge and you are done. The motion comes off the radar automatically, averaged across every tracked cell near what you drew, and you get the swath, time marks across it, and every town in the path with its arrival time, down to villages of a few hundred people.",
+      "Draw the storm's leading edge and you are done. The motion comes off the radar automatically, and you get the swath, time marks across it, and every town in the path with its arrival time, down to villages of a few hundred people.",
     href: "/storm-track",
   },
   {
-    icon: "👆",
-    title: "Long-Press Map Menu",
+    icon: "✏️",
+    title: "Draw on the Map",
     description:
-      "Press and hold anywhere on the map for a quick context menu: pull a point sounding, list the nearest radars, inspect that spot, or find the nearest cameras.",
+      "Mark up the map and have it stay put through pan, zoom and tilt. Freehand, lines, arrows, boxes and circles, eleven forecaster presets including fronts with correct pips, per-shape measurements, a saved library and PNG export.",
+    href: "/draw",
+  },
+  {
+    icon: "💨",
+    title: "Live Wind Flow",
+    description:
+      "Real surface wind as thousands of flowing, speed-colored particles, drawn on top of every layer so it is never buried. Density, size, speed and opacity are all yours to tune.",
     href: "/features",
+  },
+  {
+    icon: "🎈",
+    title: "On-Device Soundings",
+    description:
+      "Skew-T and hodograph for any point, observed balloon data or forecast profiles, with a full parameter analysis and a plain-language read of what the environment supports.",
+    href: "/features",
+  },
+  {
+    icon: "🚨",
+    title: "Smart Push Alerts",
+    description:
+      "A background watch worker with custom zones, including your home, population inside the polygon, filter modes up to Outbreak, custom sounds with DND override, and a full-screen takeover for Tornado Emergencies. Earthquake, wildfire and air quality alerts too.",
+    href: "/alerts",
   },
   {
     icon: "📍",
@@ -202,31 +77,17 @@ const features: Feature[] = [
     href: "/features",
   },
   {
-    icon: "📋",
-    title: "Severe Weather Reporting",
+    icon: "📷",
+    title: "Live Traffic & Sky Cameras",
     description:
-      "Submit tornado, hail, wind, flood, funnel, wall-cloud, and damage reports straight to Spotter Network, with the exact fields the form expects and offline queueing.",
+      "Tens of thousands of cameras on the map with live video where the agency streams it, across dozens of state DOT and specialty sources. See conditions on the ground before you commit to a route.",
     href: "/features",
   },
   {
-    icon: "🎨",
-    title: "Customizable Color Tables",
+    icon: "🌀",
+    title: "Tropical & Hurricane Tracking",
     description:
-      "Sixteen built-in palettes plus import your own GR2Analyst-style .pal files for BR, BV, and CC.",
-    href: "/radar",
-  },
-  {
-    icon: "🌡️",
-    title: "Surface Observations & METARs",
-    description:
-      "Live METAR station data plus RTMA analyzed surface fields (temperature, dew point, theta-e, wind, and gusts) and MRMS observed precipitation totals, all as true observations rather than forecast output.",
-    href: "/features",
-  },
-  {
-    icon: "🔬",
-    title: "Storm Cell Deep Dive",
-    description:
-      "Tap a cell for an expanded readout: rainfall rate, peak reflectivity, storm-top height, footprint, mass and volume, an age tracker, and at-a-glance severe indices.",
+      "Worldwide tropical cyclone tracking with forecast cones, wind fields, satellite, and NHC products, all on the same map as your radar.",
     href: "/features",
   },
 ];
@@ -265,6 +126,22 @@ const marqueeScreenshots: Screenshot[] = [
 ];
 
 const spotlights = [
+  {
+    eyebrow: "Hurricane Hunters",
+    title: "Fly the Mission With the Recon Crews",
+    description:
+      "A new Aviation layer puts live NOAA and Air Force reconnaissance on the map: the flight track, flight-level observations, and the vortex centre fixes radioed back from the eye. Open Recon Graphs for the whole mission charted, surface wind against flight-level wind with the tropical-storm and hurricane-force bands marked, then pressure and the centre-fix history.",
+    src: "/images/v164/recon-graphs.jpg",
+    still: { width: 1456, height: 918 },
+  },
+  {
+    eyebrow: "Local Storm Reports",
+    title: "Ground Truth, Minutes Old",
+    description:
+      "Storm reports now come straight from the NWS offices that publish them, minutes fresh, covering every report type from tornadoes and hail to downed trees and flooding. Tap any report for the full story, filter to what you care about, and get times in your own clock.",
+    src: "/images/v164/storm-reports-lsr.jpg",
+    still: { width: 1387, height: 955 },
+  },
   {
     eyebrow: "Point forecast",
     title: "The Full NWS Forecast, Anywhere You Tap",
@@ -345,24 +222,23 @@ export default function Home() {
   return (
     <>
       {/* ---- HERO ---- */}
-      <section className="hero-bg flex flex-col items-center justify-center px-6 pt-36 pb-24 text-center">
+      <section className="hero-bg flex flex-col items-center justify-center px-6 pt-24 pb-16 text-center">
         <div className="animate-fade-in-up">
           <Image
             src="/images/stp-logo-mark.png"
             alt="Spotter Tools Pro logo"
-            width={160}
-            height={160}
+            width={112}
+            height={112}
             priority
-            className="mx-auto mb-8 rounded-3xl drop-shadow-2xl"
+            className="mx-auto mb-6 rounded-2xl drop-shadow-2xl"
           />
           <h1 className="mb-4 text-5xl font-extrabold tracking-tight sm:text-6xl">
             <span className="gradient-text">Spotter Tools Pro</span>
           </h1>
           <p className="mx-auto mb-8 max-w-xl text-lg text-muted sm:text-xl">
-            Severe weather, in your pocket and on your desktop. Built for enthusiasts, storm chasers,
-            and spotters. GPU-rendered radar, live wind flow, soundings, lightning,
-            satellite, worldwide tropical, smart push alerts, live storm chasers,
-            tens of thousands of live cameras, and the full NWS / SPC suite.
+            Severe weather, in your pocket and on your desktop. GPU radar, a
+            deep radar archive, live wind flow, smart push alerts, and the full
+            NWS / SPC suite, built for chasers and spotters.
           </p>
           {/*
             Official store badges, used unmodified as each vendor's brand
@@ -425,28 +301,27 @@ export default function Home() {
               />
             </a>
             <a
-              href="#features"
+              href="#in-app"
               className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 font-semibold transition-all hover:border-white/30 hover:bg-white/5"
             >
               Learn More
             </a>
           </div>
-        </div>
-      </section>
-
-      {/* ---- FEATURES (top-level cards) ---- */}
-      <section id="features" className="px-6 py-24">
-        <div className="mx-auto max-w-6xl">
-          <SectionHeader
-            eyebrow="Capabilities"
-            title="Everything Severe Weather, in One App"
-            description="Pro-grade tools for weather enthusiasts, storm chasers, and certified spotters alike. No ads, no third-party trackers, no required account. Just tools."
-          />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {features.map((f) => (
-              <FeatureCard key={f.title} feature={f} />
-            ))}
-          </div>
+          <figure className="mx-auto mt-14 max-w-4xl">
+            <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+              <Image
+                src="/images/v164/hero-radar-warnings.jpg"
+                alt="GPU radar with shaded warning polygons, lightning and storm reports on the live map"
+                width={1018}
+                height={911}
+                priority
+                className="w-full"
+              />
+            </div>
+            <figcaption className="mt-3 text-xs text-muted">
+              Live in the app: Level 2 radar with shaded warnings, lightning, and watch outlines.
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -475,6 +350,30 @@ export default function Home() {
             description="A few highlights from the app. Explore the deep-dive pages for the full tour."
           />
           <ScreenshotStrip screenshots={marqueeScreenshots} />
+        </div>
+      </section>
+
+      {/* ---- FEATURES (top-level cards) ---- */}
+      <section id="features" className="px-6 py-24">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeader
+            eyebrow="Capabilities"
+            title="Everything Severe Weather, in One App"
+            description="The highlights. Pro-grade tools with no ads, no third-party trackers, and no required account."
+          />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {features.map((f) => (
+              <FeatureCard key={f.title} feature={f} />
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Link
+              href="/features"
+              className="inline-flex items-center gap-2 rounded-full border border-brand-teal/40 px-6 py-3 font-semibold text-brand-teal transition-all hover:border-brand-teal hover:bg-brand-teal/10"
+            >
+              See every feature <span aria-hidden>&rarr;</span>
+            </Link>
+          </div>
         </div>
       </section>
 
