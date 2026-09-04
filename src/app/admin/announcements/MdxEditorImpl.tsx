@@ -13,6 +13,8 @@ import {
   imagePlugin,
   markdownShortcutPlugin,
   directivesPlugin,
+  diffSourcePlugin,
+  DiffSourceToggleWrapper,
   toolbarPlugin,
   UndoRedo,
   BoldItalicUnderlineToggles,
@@ -173,9 +175,14 @@ export default function MdxEditorImpl({
         markdownShortcutPlugin(),
         imagePlugin({ imageUploadHandler }),
         directivesPlugin({ directiveDescriptors: [videoDirectiveDescriptor] }),
+        // Source mode is the paste target for markdown generated outside the
+        // editor (e.g. a converted Word doc). Rich-text paste cannot carry
+        // images: Word puts them on the clipboard as local file:// temp
+        // paths that the browser is not allowed to read.
+        diffSourcePlugin({ viewMode: "rich-text" }),
         toolbarPlugin({
           toolbarContents: () => (
-            <>
+            <DiffSourceToggleWrapper options={["rich-text", "source"]}>
               <UndoRedo />
               <Separator />
               <BoldItalicUnderlineToggles />
@@ -187,7 +194,7 @@ export default function MdxEditorImpl({
               <InsertImage />
               <InsertVideoButton videoUpload={videoUpload} />
               <InsertThematicBreak />
-            </>
+            </DiffSourceToggleWrapper>
           ),
         }),
       ]}
