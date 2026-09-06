@@ -11,7 +11,10 @@ type Severity =
   // Preset rather than a look: the app has no case for it and renders it as
   // info (exactly what update messages used before), but picking it here fills
   // in the "Update!" button and the right store link. Safe on every install.
-  | "updateAvailable";
+  | "updateAvailable"
+  // Same idea: prefills an "enjoying the app?" message plus the review link
+  // for the ticked platform. Also renders as info on every install.
+  | "reviewRequest";
 
 type Item = {
   // Stable React key, internal only — never published. The user-facing `id` is
@@ -45,6 +48,7 @@ const SEVERITIES: Severity[] = [
   "success",
   "whatsNew",
   "updateAvailable",
+  "reviewRequest",
 ];
 const PLATFORMS = ["android", "ios", "windows"];
 
@@ -60,28 +64,61 @@ const STORE_URLS: Record<string, string> = {
   // links only open the browser on Windows.
   windows: "ms-windows-store://pdp/?ProductId=9NFQK1X16KZS",
 };
-const UPDATE_ACTION_LABEL = "Update!";
-// Default title + body the updateAvailable preset drops in when those fields
-// are still empty, so a whole update prompt is one dropdown + one platform tick.
-const UPDATE_TITLE = "A new version is available";
-const UPDATE_BODY =
-  "There's a new version available. Tap Update! below to go to the store and " +
-  "update to the latest version.";
+// Where a "Leave a review" button sends people, per platform. iOS has a real
+// write-review deep link and Windows a Store-app rating dialog; Google Play
+// has no review URL param, so Android lands on the listing and users tap Rate.
+const REVIEW_URLS: Record<string, string> = {
+  android:
+    "https://play.google.com/store/apps/details?id=com.dustin.spottertools",
+  ios: "https://apps.apple.com/us/app/spotter-tools-pro/id6775985245?action=write-review",
+  windows: "ms-windows-store://review/?ProductId=9NFQK1X16KZS",
+};
 
-// Apply the updateAvailable preset: pin the button label and point it at the
-// store for the targeted platform. Only fires for a SINGLE platform, because
-// one actionUrl cannot serve two stores — with none or several ticked the URL
-// is left alone and the editor shows a warning instead of guessing.
+// Severity values that are presets rather than looks: picking one pins the
+// action button label, points its URL at the right store for the targeted
+// platform, and drops a default title/body into empty fields — so a whole
+// prompt is one dropdown + one platform tick.
+const PRESETS: Partial<
+  Record<
+    Severity,
+    { label: string; urls: Record<string, string>; title: string; body: string }
+  >
+> = {
+  updateAvailable: {
+    label: "Update!",
+    urls: STORE_URLS,
+    title: "A new version is available",
+    body:
+      "There's a new version available. Tap Update! below to go to the store " +
+      "and update to the latest version.",
+  },
+  reviewRequest: {
+    label: "Leave a review",
+    urls: REVIEW_URLS,
+    title: "Enjoying Spotter Tools Pro?",
+    body:
+      "We hope Spotter Tools Pro has been a great addition to your severe " +
+      "weather toolkit! If you have a moment, we'd love for you to leave a " +
+      "quick review in the store. It really helps other spotters and weather " +
+      "enthusiasts discover the app. Thank you for your support!",
+  },
+};
+
+// Apply the severity preset (if any): pin the button label and point it at the
+// right URL for the targeted platform. Only fires for a SINGLE platform,
+// because one actionUrl cannot serve two stores — with none or several ticked
+// the URL is left alone and the editor shows a warning instead of guessing.
 //
 // Called from the severity dropdown and the platform checkboxes only, not on
 // every edit, so both fields stay hand-editable afterwards.
-function withUpdatePreset(it: Item): Item {
-  if (it.severity !== "updateAvailable") return it;
+function withSeverityPreset(it: Item): Item {
+  const preset = PRESETS[it.severity];
+  if (!preset) return it;
   const only = it.platforms?.length === 1 ? it.platforms[0] : null;
-  const url = only ? STORE_URLS[only] : null;
+  const url = only ? preset.urls[only] : null;
   return {
     ...it,
-    actionLabel: UPDATE_ACTION_LABEL,
+    actionLabel: preset.label,
     actionUrl: url ?? it.actionUrl ?? null,
   };
 }
@@ -249,14 +286,15 @@ export default function AnnouncementsAdmin() {
     setItems((prev) =>
       prev.map((it, i) => {
         if (i !== index) return it;
-        const next = withUpdatePreset({ ...it, severity });
-        if (severity !== "updateAvailable") return next;
-        // Fill an empty title/body with the update defaults. The body editor
+        const next = withSeverityPreset({ ...it, severity });
+        const preset = PRESETS[severity];
+        if (!preset) return next;
+        // Fill an empty title/body with the preset defaults. The body editor
         // (MDXEditor) ignores value changes after mount, so when we actually
         // change the body we re-key the row (`_uid`) to remount it and show
         // the prefilled text. A body the user already typed is left alone.
-        const title = next.title.trim() ? next.title : UPDATE_TITLE;
-        const body = next.body.trim() ? next.body : UPDATE_BODY;
+        const title = next.title.trim() ? next.title : preset.title;
+        const body = next.body.trim() ? next.body : preset.body;
         return {
           ...next,
           title,
@@ -275,7 +313,7 @@ export default function AnnouncementsAdmin() {
         if (set.has(p)) set.delete(p);
         else set.add(p);
         const arr = Array.from(set);
-        return withUpdatePreset({
+        return withSeverityPreset({
           ...it,
           platforms: arr.length ? arr : undefined,
         });
@@ -511,7 +549,7 @@ export default function AnnouncementsAdmin() {
               </div>
             </div>
 
-            {it.severity === "updateAvailable" &&
+            {PRESETS[it.severity] &&
               (it.platforms?.length === 1 ? (
                 <p className="mt-2 text-xs text-muted">
                   Button and store link filled in for{" "}
@@ -521,8 +559,8 @@ export default function AnnouncementsAdmin() {
               ) : (
                 <p className="mt-2 text-xs text-amber-300">
                   Tick exactly one platform to fill the store link in — a single
-                  action URL can only point at one store, so an update prompt
-                  needs one message per platform.
+                  action URL can only point at one store, so this preset needs
+                  one message per platform.
                 </p>
               ))}
           </div>
