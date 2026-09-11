@@ -57,7 +57,12 @@ export async function generateMetadata({
   // Absolute, and on the real domain: metadataBase falls back to the
   // vercel.app host because NEXT_PUBLIC_SITE_URL is unset in production, and
   // a link shared to Facebook should show spottertools.pro.
-  const canonical = `${SITE}/whats-new/${version}`;
+  //
+  // The SHORT url is canonical, because spottertools.pro/1.0.69 is the link
+  // that actually gets posted (next.config rewrites it here). Facebook keys
+  // shares on og:url, so pointing it at the long path would make a shared
+  // short link resolve to a different address than the one pasted.
+  const canonical = `${SITE}/${version}`;
   const ogPath = `/images/whats-new-${version}.jpg`;
   const hasOg = fs.existsSync(path.join(process.cwd(), "public", ogPath));
   const ogImage = `${SITE}${ogPath}`;

@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "stp-website",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Spotter App/stp-website/node_modules/next/dist/bin/next",
+        "start",
+        "C:/Spotter App/stp-website"
+      ],
+      "port": 3000
+    }
+  ]
+}
