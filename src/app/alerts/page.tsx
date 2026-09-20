@@ -153,6 +153,9 @@ const blocks: Block[] = [
       "Day 1 / Day 2 Convective Outlooks, Categorical, Tornado, Wind, and Hail",
       "Live NWS Local Storm Reports as map markers, every report type the offices publish",
       "Optional notification when a new MCD is posted that overlaps your zones",
+      "Outlook notifications describe the risk over your own watch zones, not the highest risk anywhere in the country, so a moderate risk three states away no longer arrives quoting numbers you cannot find on your map",
+      "Tapping an outlook alert turns the outlook layer on and flies you to your strongest zone",
+      "A nationwide watch zone no longer means the whole country for outlooks, and there is a setting if you preferred the old behaviour. Warnings are unchanged",
     ],
     screenshot: {
       src: "/images/screenshots/alert-outlook-day1.jpg",

@@ -10,7 +10,7 @@ import AutoVideo from "@/components/AutoVideo";
 export const metadata: Metadata = {
   title: "Features | Spotter Tools Pro",
   description:
-    "The full Spotter Tools Pro feature list: a radar archive back to the early 1990s, loop export to GIF or MP4, GPU radar (Level 2, III & TDWR) with eight-hour loops, ground-anchored map drawing, storm track projection, offline basemaps, wildfire and earthquake layers, live wind flow, mesoanalysis, on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras, weather models, opt-in presence, smart push alerts, and severe weather reporting.",
+    "The full Spotter Tools Pro feature list: 3D storm volumes you can fly around, a radar archive back to the early 1990s, loop export to GIF or MP4, GPU radar (Level 2, III & TDWR) with eight-hour loops, ground-anchored map drawing, storm track projection, offline basemaps, wildfire and earthquake layers, live wind flow, mesoanalysis, on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras across 48 states, weather models, opt-in presence, smart push alerts, severe weather reporting, and a real Windows desktop app.",
   openGraph: {
     title: "Spotter Tools Pro | Features",
     description:
@@ -183,6 +183,11 @@ const categories: Category[] = [
         description:
           "Press and hold anywhere on the map for a quick menu: pull a point sounding, list the nearest radars, inspect that spot, or find the nearest cameras.",
       },
+      {
+        title: "Turn the map, or lock it",
+        description:
+          "Twist with two fingers to rotate, or hold the right mouse button and drag on Windows. It takes a deliberate twist, so a pinch with a wobble in it will not leave you sitting three degrees off, and there is a detent at north plus a lock button if you would rather it never turned at all. Chaser Mode still locks north up.",
+      },
     ],
     screenshot: {
       src: "/images/screenshots/layer-selector.jpg",
@@ -200,12 +205,32 @@ const categories: Category[] = [
     eyebrow: "Radar",
     title: "GPU Radar: Level 2, Level III & TDWR",
     intro:
-      "Real, decoded NEXRAD in your hand, GPU-rendered and crisp at any zoom, now with WSR-88D Level III, dual-pol products, the full TDWR network, and dual-view split-screen compare.",
+      "Real, decoded NEXRAD in your hand, GPU-rendered and crisp at any zoom, now with a 3D storm volume you can fly around, WSR-88D Level III, dual-pol products, the full TDWR network, and dual-view split-screen compare.",
     features: [
+      {
+        title: "3D storm volume",
+        description:
+          "Every tilt of a Level 2 scan resampled into a single solid you can orbit, so you read how a storm is built instead of inferring it one elevation at a time. Debris and rotation are marked inside the storm, opacity follows rain rate so heavy cores stay solid while light rain goes sheer, height is yours to set including true scale, and the volume plays with the loop.",
+      },
+      {
+        title: "Nationwide 3D mosaic",
+        description:
+          "The volume is not tied to one radar's umbrella. Switch to the national mosaic for the same solid anywhere in the lower 48 at about a two minute cadence. Site 3D and national 3D each carry their own opacity, so the mosaic can sit sheer for context under your own radar.",
+      },
+      {
+        title: "Volumes built on our servers",
+        description:
+          "The prepared volume arrives ready to draw, so it appears almost immediately rather than after your phone has ground through a full scan. If none is available for your site, the app quietly builds one locally as before. The 3D chip only appears when your device can render it, and it always starts off so you never get a pitched 3D map you did not ask for.",
+      },
       {
         title: "NEXRAD Level 2 decoding",
         description:
           "Reflectivity (BR), Velocity (BV), Correlation Coefficient (CC), Spectrum Width, and Storm-Relative Velocity decoded directly from raw Level 2 data, no third-party tile server.",
+      },
+      {
+        title: "Instant Level 2, six products",
+        description:
+          "Six Level 2 products paint in about a second rather than after a full scan download: reflectivity, velocity, correlation coefficient, spectrum width, storm relative velocity and normalized rotation. The scan time and VCP are printed on the panel so you know how old the picture is, and if the fast lane is ever slow the app falls back to the full on-device decode.",
       },
       {
         title: "GPU-rendered, sharp at any zoom",
@@ -238,9 +263,9 @@ const categories: Category[] = [
           "Draw a line across a storm and read a vertical slice through it, so you can see the structure from the ground up instead of only the view from above. Backed by full-volume Level 2 decoding, so every tilt of the scan is available.",
       },
       {
-        title: "3D beam-height tilt",
+        title: "Beam-height tilt",
         description:
-          "Pitch the map and the radar beam climbs with distance, the way the real beam does, so you can see how a storm stacks up in the sky.",
+          "Separate from the 3D volume, and useful for a different reason. Pitch the map and the radar beam climbs with distance, the way the real beam does, which makes overshoot obvious: at long range you are not looking at the storm's base, you are looking well up inside it.",
       },
       {
         title: "FastScan sweep & range rings",
@@ -308,6 +333,11 @@ const categories: Category[] = [
       alt: "Color table picker",
       caption: "Built-in palettes plus user-imported .pal files",
     },
+    video: {
+      src: "/videos/radar-3d-volume.mp4",
+      poster: "/videos/radar-3d-volume-poster.jpg",
+      caption: "The Level 2 volume, orbited around a line of storms.",
+    },
     cta: { href: "/radar", label: "Radar deep-dive" },
   },
   {
@@ -363,9 +393,14 @@ const categories: Category[] = [
           "Both formats on Android, iOS and Windows. Pick an output size and see the estimated file size before you commit, with a warning past 15 MB rather than finding out after the encode.",
       },
       {
+        title: "Sized for a desktop map",
+        description:
+          "A new XL setting at 1440 pixels, because a desktop map canvas is three to four times the area of a phone's and the old ceiling left it soft. Roughly three times the bitrate at the same size setting, so detail holds up instead of smearing.",
+      },
+      {
         title: "Five loops, not just radar",
         description:
-          "Single-site radar, the national composite mosaic, satellite, weather models and air quality all carry the same Share button.",
+          "Single-site radar, the national composite mosaic, satellite, weather models and air quality all carry the same Share button. Exported loops carry the 3D volume too, so what you share is what you saw.",
       },
       {
         title: "A stamp burned into every frame",
@@ -461,14 +496,14 @@ const categories: Category[] = [
       "See conditions on the ground with tens of thousands of cameras on the map, with live video where the agency streams it.",
     features: [
       {
-        title: "37 states of DOT traffic cameras",
+        title: "48 states of DOT traffic cameras",
         description:
-          "State transportation cameras coast to coast, live HLS video where the agency offers it, frequently-updated stills where it doesn't.",
+          "State transportation cameras coast to coast, live HLS video where the agency offers it, frequently-updated stills where it doesn't. 61 sources in all, and new ones reach you without waiting for an app update.",
       },
       {
         title: "Beyond the highways",
         description:
-          "FAA WeatherCams, Windy community webcams, NOAA offshore buoy cams, USGS volcano cams, National Park vista cams, and ALERTWildfire fire-watch cameras.",
+          "FAA WeatherCams, Windy community webcams, NOAA offshore buoy cams, USGS volcano cams, USGS river cams, National Park vista cams, ALERTWildfire fire-watch cameras, and the Kentucky Mesonet's 78 statewide weather cameras.",
       },
       {
         title: "Fullscreen & direction-aware",
@@ -479,6 +514,11 @@ const categories: Category[] = [
         title: "Choose your sources",
         description:
           "Pick exactly which states and agencies appear on the map from a single Camera Sources sheet, keeping it focused on your area.",
+      },
+      {
+        title: "Readable in a dense metro",
+        description:
+          "An amber video badge marks a live feed and a blue-grey photo badge marks stills, so you know before you tap. Cluster bubbles are small and translucent rather than solid discs, and a Group nearby cameras switch lets you turn clustering off entirely when you want every camera in a metro shown individually.",
       },
     ],
     screenshot: {
@@ -585,7 +625,12 @@ const categories: Category[] = [
       {
         title: "48 hour trend chart",
         description:
-          "A temperature trend over a tappable hour-by-hour strip, so you can read the shape of the next two days at a glance.",
+          "A temperature trend over a tappable hour-by-hour strip, so you can read the shape of the next two days at a glance. The strip labels the day at the start and at every midnight, so a long scroll never leaves you guessing which day you are on.",
+      },
+      {
+        title: "Dates, wind and trends on the cards",
+        description:
+          "Every period carries its date, on the rail and in the list. Wind is on the card, with a rising or falling temperature arrow when the office flags one, and rain chance is always drawn, so a dry day between two wet ones reads as a clear 0% rather than nothing at all.",
       },
       {
         title: "The Area Forecast Discussion",
@@ -637,9 +682,9 @@ const categories: Category[] = [
           "The region picker carries NESDIS STAR's own sector layout, 22 GOES-East regions and 12 GOES-West, in a two-level picker grouped by spacecraft.",
       },
       {
-        title: "West Pacific typhoon view",
+        title: "Pacific coverage, basin to landfall",
         description:
-          "A Himawari GeoColor region covering the typhoon basin from Japan out into the open Pacific, imagery courtesy of CIRA.",
+          "Himawari GeoColor across the typhoon basin, with the northwest Pacific region widened to keep the East China Sea approach in frame and dedicated Japan and Philippines sectors for a sharper landfall view. The central Pacific region reaches 30 North, so a recurving hurricane stays on screen. Imagery courtesy of CIRA.",
       },
       {
         title: "Worldwide tropical & hurricane tracking",
@@ -727,6 +772,11 @@ const categories: Category[] = [
         title: "Custom watch zones",
         description:
           "Track your current location, a fixed home zone, custom counties / forecast zones, or any combination at once.",
+      },
+      {
+        title: "SPC outlooks matched to your zones",
+        description:
+          "An outlook notification describes the risk over your own watch zones rather than the highest risk anywhere in the country, and tapping it turns the outlook layer on and flies you to your strongest zone. A nationwide zone no longer means the whole country for outlooks, and a setting brings the old behaviour back if you want it.",
       },
       {
         title: "Population inside the polygon",
@@ -841,6 +891,40 @@ const categories: Category[] = [
         title: "Built to stay free & fast",
         description:
           "Powered by an edge-cached backend so the map stays snappy and the feature stays free, no subscription, ever.",
+      },
+    ],
+  },
+  {
+    id: "windows",
+    eyebrow: "Windows",
+    title: "A Real Desktop App, Not a Stretched Phone App",
+    intro:
+      "The same app on Windows, with the things a desktop can do that a phone cannot: a big canvas, a mouse, and the ability to keep watching while you get on with something else.",
+    features: [
+      {
+        title: "Close it and keep the alerts",
+        description:
+          "Hit the X with alerts on and Spotter Tools Pro hides to the system tray instead of quitting, so the watch worker keeps polling and warnings still reach you while the window is gone. It asks you once what you want it to do, and Settings holds the answer if you change your mind.",
+      },
+      {
+        title: "Draws at your monitor's rate",
+        description:
+          "The map was held to 55 frames a second no matter what your display could do. It now draws at your panel's rate, measured 55 to 154 on a 165 Hz monitor, so a pan is even rather than stuttering. On a 60 Hz monitor you were always getting the full 60, so this is not something you will see.",
+      },
+      {
+        title: "Dual view you can resize",
+        description:
+          "Drag the hairline between the two panes to give one more room. The second pane follows zooms as well as pans, so the two maps stay in step instead of drifting apart, and satellite always draws under radar whatever order you turn them on in.",
+      },
+      {
+        title: "Right-drag to orbit",
+        description:
+          "Hold the right mouse button and drag: sideways turns the map, up and down tilts it, with proper inertia when you let go. Ctrl and left-drag does the same on a trackpad, and a touchscreen gets twist and two finger tilt.",
+      },
+      {
+        title: "Tuned for the machine you have",
+        description:
+          "A 4K panel on integrated graphics asks for a lot of pixels. The map measures what your machine can actually do and trims its own work to match, so a laptop iGPU stays responsive instead of grinding.",
       },
     ],
   },

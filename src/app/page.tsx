@@ -7,10 +7,17 @@ import FeatureSpotlight from "@/components/FeatureSpotlight";
 
 const features: Feature[] = [
   {
+    icon: "🧊",
+    title: "Storms in 3D",
+    description:
+      "Stand the whole scan up as a solid you can fly around. Your own site's Level 2 volume in full detail, or the nationwide mosaic anywhere in the lower 48. Debris and rotation are marked inside the storm, cores show through the envelope, and it plays with the loop. Our servers build the volume, so it appears almost immediately.",
+    href: "/radar",
+  },
+  {
     icon: "📡",
     title: "GPU Radar: Level 2, III & TDWR",
     description:
-      "GPU-rendered and crisp at any zoom. NEXRAD Level 2 decoded on-device, WSR-88D Level III and dual-pol products, vertical cross sections, a VAD Wind Profile panel, storm tracks with mesocyclone and TVS markers, and the 45-site TDWR network. Level III loops run about eight hours deep.",
+      "GPU-rendered and crisp at any zoom. NEXRAD Level 2 decoded on-device, WSR-88D Level III and dual-pol products, vertical cross sections, a VAD Wind Profile panel, storm tracks with mesocyclone and TVS markers, and the 45-site TDWR network. Six Level 2 products paint in about a second. Level III loops run about eight hours deep.",
     href: "/radar",
   },
   {
@@ -19,13 +26,6 @@ const features: Feature[] = [
     description:
       "Pick a date and a time and the radar loads as it was at that instant, with storm tracks and mesocyclones along for the ride. Level 2 reaches back to 1991 and Level III to 1992, so Moore, El Reno and Bridge Creek all load. Enter the time in whichever zone you are thinking in and the app converts it.",
     href: "/radar",
-  },
-  {
-    icon: "✈️",
-    title: "Hurricane Hunters",
-    description:
-      "Live NOAA and Air Force reconnaissance on the map: flight-level observations along the track and the vortex centre fixes the crews send back from the eye, plus a Recon Graphs screen charting surface wind, flight-level wind and pressure through the whole mission.",
-    href: "/features",
   },
   {
     icon: "🎬",
@@ -80,14 +80,14 @@ const features: Feature[] = [
     icon: "📷",
     title: "Live Traffic & Sky Cameras",
     description:
-      "Tens of thousands of cameras on the map with live video where the agency streams it, across dozens of state DOT and specialty sources. See conditions on the ground before you commit to a route.",
+      "Tens of thousands of cameras on the map with live video where the agency streams it, across 61 state DOT and specialty sources covering 48 states. See conditions on the ground before you commit to a route.",
     href: "/features",
   },
   {
     icon: "🌀",
-    title: "Tropical & Hurricane Tracking",
+    title: "Tropical, and the Hurricane Hunters",
     description:
-      "Worldwide tropical cyclone tracking with forecast cones, wind fields, satellite, and NHC products, all on the same map as your radar.",
+      "Worldwide tropical cyclone tracking with forecast cones, wind fields, satellite and NHC products, on the same map as your radar. Plus a live Aviation layer carrying NOAA and Air Force reconnaissance: flight-level observations along the track, the vortex centre fixes the crews send back from the eye, and a Recon Graphs screen charting the whole mission.",
     href: "/features",
   },
 ];
@@ -111,7 +111,7 @@ const marqueeScreenshots: Screenshot[] = [
   {
     src: "/images/screenshots/camera-sources.jpg",
     alt: "Camera source picker listing state DOT and agency feeds",
-    caption: "45 camera sources across 37 states, pick what you see",
+    caption: "61 camera sources across 48 states, pick what you see",
   },
   {
     src: "/images/screenshots/layers-models-cameras.jpg",
@@ -126,6 +126,33 @@ const marqueeScreenshots: Screenshot[] = [
 ];
 
 const spotlights = [
+  {
+    eyebrow: "Storms in 3D",
+    title: "Fly Around the Whole Storm",
+    description:
+      "Radar has always been a flat slice. Now the whole Level 2 scan stands up as a solid you can orbit, so you see how a storm is built instead of inferring it one tilt at a time. Debris and rotation are marked inside the storm rather than hidden in a couplet you have to go find. Opacity follows rain rate, so heavy cores stay solid while light rain goes sheer and you can see straight into it from any side. Height is yours to set, including true scale, and the volume runs with the loop.",
+    src: "/videos/radar-3d-volume.mp4",
+    poster: "/videos/radar-3d-volume-poster.jpg",
+    portrait: true,
+  },
+  {
+    eyebrow: "Nationwide in 3D",
+    title: "The Whole Mosaic, Stood Up",
+    description:
+      "The 3D volume is not tied to one radar's umbrella. Switch to the national mosaic and you get the same solid anywhere in the lower 48, refreshed at about a two minute cadence, so a line running three states over reads as a structure rather than a smear. Site 3D and national 3D each carry their own opacity, so you can leave the mosaic sheer for context and keep your own radar solid on top of it.",
+    src: "/videos/radar-3d-national.mp4",
+    poster: "/videos/radar-3d-national-poster.jpg",
+    portrait: true,
+  },
+  {
+    eyebrow: "Instant Level 2",
+    title: "Tap a Site, Get the Real Scan",
+    description:
+      "Level 2 used to mean waiting on a full scan download before anything appeared. Six products now paint in about a second: reflectivity, velocity, correlation coefficient, spectrum width, storm relative velocity and normalized rotation. The scan time and VCP are printed right there, so you always know how old what you are looking at really is, and if the fast lane is ever slow the app falls back to the full decode rather than leaving you waiting.",
+    src: "/videos/radar-instant-l2.mp4",
+    poster: "/videos/radar-instant-l2-poster.jpg",
+    portrait: true,
+  },
   {
     eyebrow: "Hurricane Hunters",
     title: "Fly the Mission With the Recon Crews",
@@ -160,10 +187,10 @@ const spotlights = [
     portrait: true,
   },
   {
-    eyebrow: "3D radar",
+    eyebrow: "Beam height",
     title: "Tilt the Map, See the Beam Rise",
     description:
-      "Pitch the map and the radar beam climbs with distance, the way the real beam does. Watch how a storm stacks up in the sky instead of guessing from a flat picture.",
+      "Separate from the 3D volume, and useful for a different reason. Pitch the map and the radar beam climbs with distance, the way the real beam does, which makes overshoot obvious: at 100 miles out you are not looking at the storm's base, you are looking well up inside it.",
     src: "/videos/radar-3d-tilt.mp4",
     poster: "/videos/radar-3d-tilt-poster.jpg",
     portrait: true,
@@ -236,9 +263,9 @@ export default function Home() {
             <span className="gradient-text">Spotter Tools Pro</span>
           </h1>
           <p className="mx-auto mb-8 max-w-xl text-lg text-muted sm:text-xl">
-            Severe weather, in your pocket and on your desktop. GPU radar, a
-            deep radar archive, live wind flow, smart push alerts, and the full
-            NWS / SPC suite, built for chasers and spotters.
+            Severe weather, in your pocket and on your desktop. Storms in 3D,
+            GPU radar, a deep radar archive, live wind flow, smart push alerts,
+            and the full NWS / SPC suite, built for chasers and spotters.
           </p>
           {/*
             Official store badges, used unmodified as each vendor's brand

@@ -6,7 +6,7 @@ import SectionHeader from "@/components/SectionHeader";
 export const metadata: Metadata = {
   title: "Radar | Spotter Tools Pro",
   description:
-    "Real-time NEXRAD Level 2 radar decoding, the full TDWR terminal-radar network, composite mosaic, full animation transport, custom GR2Analyst-style color tables, and storm cell picker, on iOS and Android.",
+    "3D storm volumes you can fly around, real-time NEXRAD Level 2 decoding, the full TDWR terminal-radar network, composite mosaic, a radar archive to the 1990s, custom GR2Analyst-style color tables and storm cell picker, on iOS, Android and Windows.",
   openGraph: {
     title: "Spotter Tools Pro | Radar",
     description:
@@ -61,6 +61,44 @@ const blocks: Block[] = [
     flip: true,
   },
   {
+    id: "volume-3d",
+    eyebrow: "3D Storm Volume",
+    title: "The whole scan, standing up",
+    body: [
+      "Radar has always been a flat slice. Turn the volume on and every tilt of the Level 2 scan is resampled into a single solid you can fly around, so you read how a storm is built instead of inferring it one elevation at a time.",
+      "Two ways in, and it follows whichever layer you are on: your own site's volume for one storm in full detail, or the nationwide mosaic at about a two minute cadence so you are not tied to one radar's umbrella. Each carries its own opacity, so the mosaic can stay sheer for context while your site's radar stays solid on top.",
+      "Our servers build the volume and send it down ready to draw, so it appears almost immediately rather than after your phone has ground through a full scan. If no prepared volume exists for your site, the app quietly builds one locally as before.",
+    ],
+    bullets: [
+      "Debris and rotation marked inside the storm, not hidden in a couplet you have to find",
+      "Opacity follows rain rate, so heavy cores stay solid and light rain goes sheer",
+      "Height is yours to set, including true scale for real proportions",
+      "It plays with the loop, so you watch a storm build and collapse in three dimensions",
+      "Renders at whatever resolution keeps your device smooth, dropping detail before frames",
+    ],
+    screenshot: {
+      src: "/images/v170/volume-3d.jpg",
+      alt: "Storm cells rendered as a 3D volume above the map",
+      caption: "The Level 2 volume, orbited around a line of storms",
+    },
+  },
+  {
+    id: "instant-l2",
+    eyebrow: "Instant Level 2",
+    title: "Tap a site, get the real scan",
+    body: [
+      "Level 2 used to mean waiting on a full scan download before anything appeared on screen. Six products now paint in about a second: reflectivity, velocity, correlation coefficient, spectrum width, storm relative velocity and normalized rotation.",
+      "The scan time and VCP are printed on the panel, so you always know how old what you are looking at really is. Opening a site paints the real Level 2 data rather than standing in a Level III picture that can be a minute older.",
+      "Nothing about it can leave you worse off. If the fast lane is slow or unavailable, the app falls back to the full on-device decode it always did.",
+    ],
+    screenshot: {
+      src: "/images/v170/instant-l2.jpg",
+      alt: "Level 2 velocity with a tornadic couplet and the scan time readout",
+      caption: "Level 2 velocity, one minute old, with the VCP printed on the panel",
+    },
+    flip: true,
+  },
+  {
     id: "animation",
     eyebrow: "Animation",
     title: "Full radar transport bar",
@@ -92,6 +130,9 @@ const blocks: Block[] = [
       "A same-moment line cross references UTC and your own zone, with the date, so a lookup that rolled past midnight is obvious",
       "Storm-relative velocity, the cross section and the wind profile all follow the archived clock rather than today's",
       "Layers with no history switch off rather than sitting on live data under a past-tense banner",
+      "Loops build about a third faster than they used to and start playing sooner: a cold two hour Level 2 loop went from about two and a half minutes to about a minute and forty",
+      "Each frame downloads only the part of the file it needs and unpacks only the tilt it paints, rather than the whole scan",
+      "Phones with memory to spare keep more of the loop instead of thinning a two hour loop down to a handful of frames",
     ],
   },
   {
@@ -104,8 +145,10 @@ const blocks: Block[] = [
     bullets: [
       "GIF or MP4, on Android, iOS and Windows",
       "Single-site radar, the national composite, satellite, weather models and air quality",
-      "Pick an output size and see the estimated file size before you commit",
+      "Pick an output size and see the estimated file size before you commit, up to a new XL at 1440 pixels for a desktop-sized map",
+      "Roughly three times the bitrate at the same size setting, so a shared loop holds up instead of smearing",
       "Product, site and time burned into every frame, so the loop still says what it is",
+      "The 3D volume comes with it, so what you share is what you were looking at",
       "Encoding runs off the main thread, so the app keeps working while it renders",
     ],
   },
@@ -161,11 +204,11 @@ const blocks: Block[] = [
   },
   {
     id: "tilt-3d",
-    eyebrow: "3D Tilt",
+    eyebrow: "Beam Height",
     title: "Pitch the map and watch the beam rise",
     body: [
-      "Radar does not look straight ahead. The beam climbs as it travels, so a distant echo is sampled thousands of feet up while a nearby one is near the surface. Pitch the map and Spotter Tools Pro draws that geometry, lifting each sweep to its true height.",
-      "It makes beam overshoot obvious and shows how a storm stacks up in the sky, on both iOS and Android.",
+      "Separate from the 3D volume above, and useful for a different reason. Radar does not look straight ahead: the beam climbs as it travels, so a distant echo is sampled thousands of feet up while a nearby one is near the surface. Pitch the map and Spotter Tools Pro draws that geometry, lifting each sweep to its true height.",
+      "It makes beam overshoot obvious. At long range you are not looking at the storm's base, you are looking well up inside it, and this is the view that shows you by how much. On both iOS and Android.",
     ],
     flip: true,
   },
@@ -201,7 +244,7 @@ export default function RadarPage() {
         <SectionHeader
           eyebrow="Radar"
           title="Real radar, not a screenshot"
-          description="NEXRAD Level 2 decoded directly on your phone, a CONUS composite for the big picture, a full animation transport, and color tables you can swap or import."
+          description="NEXRAD Level 2 decoded directly on your phone, a 3D storm volume you can fly around, a CONUS composite for the big picture, a full animation transport, and color tables you can swap or import."
         />
 
         <div className="space-y-24">
