@@ -241,6 +241,7 @@ const safeJson = <T,>(s: string | null | undefined, fallback: T): T => {
 const GROUPS: [string, string][] = [
   ["feature_", "Features"],
   ["radar_product_", "Radar products"],
+  ["radar_expert_", "Expert mode"],
   ["radar_site_", "Radar sites"],
   ["model_product_", "Model products"],
   ["model_", "Models"],

@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
         source: "/:version(\\d+\\.\\d+\\.\\d+)",
         destination: "/whats-new/:version",
       },
+      // spottertools.pro/1.0.71/howto: the step by step guide for that
+      // release's new features, same short-link reasoning as above.
+      {
+        source: "/:version(\\d+\\.\\d+\\.\\d+)/howto",
+        destination: "/whats-new/:version/howto",
+      },
     ];
   },
 };
