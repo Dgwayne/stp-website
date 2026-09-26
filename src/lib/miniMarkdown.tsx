@@ -124,18 +124,40 @@ export function renderMarkdown(md: string): React.ReactNode[] {
     }
     flushSteps();
 
-    const img = line.match(/^!\[\]\((.+?)\)$/);
+    // `![](src)` is a full-width picture, as the release pages use it.
+    // `![Caption](src#w=320)` adds a caption under it and caps its width,
+    // for the how-to guides' tall, narrow app screenshots.
+    const img = line.match(/^!\[(.*?)\]\((.+?)\)$/);
     if (img) {
       flushBullets();
-      out.push(
+      const caption = img[1];
+      const [src, frag] = img[2].split("#");
+      const w = frag?.match(/^w=(\d+)$/)?.[1];
+      const picture = (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          key={`img-${idx}`}
-          src={img[1]}
-          alt=""
+          src={src}
+          alt={caption}
           loading="lazy"
-          className="my-7 w-full rounded-xl border border-white/10 shadow-lg shadow-black/40"
-        />,
+          style={w ? { maxWidth: `${w}px` } : undefined}
+          className={`${w ? "mx-auto " : ""}w-full rounded-xl border border-white/10 shadow-lg shadow-black/40`}
+        />
+      );
+      out.push(
+        caption || w ? (
+          <figure key={`img-${idx}`} className="my-7">
+            {picture}
+            {caption && (
+              <figcaption className="mt-3 text-center text-sm text-muted">
+                {inline(caption, `cap-${idx}`)}
+              </figcaption>
+            )}
+          </figure>
+        ) : (
+          <div key={`img-${idx}`} className="my-7">
+            {picture}
+          </div>
+        ),
       );
       return;
     }
