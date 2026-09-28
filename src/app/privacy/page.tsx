@@ -16,8 +16,8 @@ export default function PrivacyPage() {
 
       <div className="prose-custom space-y-8 text-muted leading-relaxed">
         <p className="text-sm">
-          <strong className="text-foreground">Last updated:</strong> August 4,
-          2026
+          <strong className="text-foreground">Last updated:</strong> September
+          28, 2026
           <br />
           <strong className="text-foreground">Developer:</strong> DGWayne
           (Dustin Garner)
@@ -133,6 +133,47 @@ export default function PrivacyPage() {
             accounts are optional, and you can permanently delete your account
             and its data at any time from within the App (Settings &rarr;
             Spotter Tools Pro Account &rarr; Delete).
+          </p>
+
+          <h3 className="mb-2 mt-6 text-lg font-semibold text-foreground">
+            Settings Sync (Optional)
+          </h3>
+          <p>
+            If you are signed into a Spotter Tools Pro account, the App saves a
+            copy of your app settings to your account so they follow you to
+            your other devices (Android, iOS, and Windows). Sync turns on when
+            you sign in, and you can turn it off, or choose which groups of
+            settings sync, in Settings &rarr; Spotter Tools Pro Account.
+          </p>
+          <p className="mt-3">
+            <strong className="text-foreground">What is synced:</strong> map
+            style and theme, map layer choices and their options, radar display
+            settings (including color tables you imported and your favorite
+            radar sites), alert and notification preferences including your
+            alert zones, marker and icon sizes, and your saved home location.
+          </p>
+          <p className="mt-3">
+            Alert zones and your home location contain map coordinates you
+            chose. They are stored only so your other devices can use them.
+            They are not shared with other users and are not used for anything
+            else.
+          </p>
+          <p className="mt-3">
+            <strong className="text-foreground">Never synced:</strong> your
+            Spotter Network credentials, whether you share your location with
+            other users, your live location, and settings that only make sense
+            on one device.
+          </p>
+          <p className="mt-3">
+            <strong className="text-foreground">Where it&apos;s stored:</strong>{" "}
+            with your account at Supabase, on servers in the United States.
+          </p>
+          <p className="mt-3">
+            <strong className="text-foreground">You control this:</strong>{" "}
+            turn sync off on any device, remove the saved copy from your
+            account at any time (Settings &rarr; Spotter Tools Pro Account
+            &rarr; Choose what syncs &rarr; Delete saved settings), or delete
+            your account, which removes it as well.
           </p>
 
           <h3 className="mb-2 mt-6 text-lg font-semibold text-foreground">
@@ -383,7 +424,7 @@ export default function PrivacyPage() {
                   </td>
                   <td className="py-3 pr-4">
                     Hosts optional Spotter Tools Pro accounts (email, username,
-                    map-avatar access)
+                    map-avatar access, and synced app settings)
                   </td>
                   <td className="py-3">
                     <a
@@ -434,8 +475,9 @@ export default function PrivacyPage() {
             <li>
               <strong className="text-foreground">Account data.</strong> If you
               create an optional Spotter Tools Pro account, your account data
-              (email, username, and map-avatar access) is stored by Supabase on
-              servers in the United States, as described above.
+              (email, username, map-avatar access, and your synced app
+              settings while sync is on) is stored by Supabase on servers in
+              the United States, as described above.
             </li>
             <li>
               <strong className="text-foreground">Presence data.</strong> If you
@@ -537,7 +579,8 @@ export default function PrivacyPage() {
           <p>
             If you create an optional Spotter Tools Pro account, you can
             permanently delete it — and all associated account data (email,
-            username, and map-avatar access) — at any time from within the App:{" "}
+            username, map-avatar access, and synced settings) — at any time
+            from within the App:{" "}
             <strong className="text-foreground">
               Settings &rarr; Spotter Tools Pro Account &rarr; Delete
             </strong>
