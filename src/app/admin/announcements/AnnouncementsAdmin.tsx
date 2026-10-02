@@ -143,6 +143,46 @@ function localToIso(local: string): string | null {
   return Number.isNaN(d.getTime()) ? null : d.toISOString();
 }
 
+// Where a message sits in its schedule window right now. Drives the chip on
+// the collapsed header so the list can be scanned without opening anything.
+type Schedule = "live" | "scheduled" | "expired";
+function scheduleOf(it: Item, now = Date.now()): Schedule {
+  const s = it.startsAt ? Date.parse(it.startsAt) : NaN;
+  const e = it.endsAt ? Date.parse(it.endsAt) : NaN;
+  if (!Number.isNaN(e) && e < now) return "expired";
+  if (!Number.isNaN(s) && s > now) return "scheduled";
+  return "live";
+}
+const SCHEDULE_CHIP: Record<Schedule, string> = {
+  live: "border-brand-green/40 bg-brand-green/10 text-brand-green",
+  scheduled: "border-sky-400/40 bg-sky-400/10 text-sky-300",
+  expired: "border-white/10 bg-white/5 text-muted",
+};
+const SEVERITY_CHIP: Record<Severity, string> = {
+  info: "border-sky-400/40 text-sky-300",
+  warning: "border-amber-400/40 text-amber-300",
+  success: "border-brand-green/40 text-brand-green",
+  whatsNew: "border-brand-teal/40 text-brand-teal",
+  updateAvailable: "border-violet-400/40 text-violet-300",
+  reviewRequest: "border-pink-400/40 text-pink-300",
+};
+function shortDate(iso?: string | null): string {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+}
+// One-line schedule summary for the header: "Sep 3 → Sep 10", "from Sep 3",
+// "until Sep 10", or "" when the message has no window.
+function scheduleLabel(it: Item): string {
+  const s = shortDate(it.startsAt);
+  const e = shortDate(it.endsAt);
+  if (s && e) return `${s} → ${e}`;
+  if (s) return `from ${s}`;
+  if (e) return `until ${e}`;
+  return "";
+}
+
 function blankItem(): Item {
   return {
     _uid: nextUid(),
@@ -183,6 +223,24 @@ export default function AnnouncementsAdmin() {
   const [items, setItems] = useState<Item[]>([]);
   const [status, setStatus] = useState<Status>(null);
   const [busy, setBusy] = useState(false);
+  // Which cards are expanded. Loaded messages start collapsed so a long list
+  // reads as a table of headers; a freshly added message opens for editing.
+  const [open, setOpen] = useState<Set<string>>(() => new Set());
+  const [filter, setFilter] = useState("");
+
+  function setOpenFor(uid: string, value: boolean) {
+    setOpen((prev) => {
+      const next = new Set(prev);
+      if (value) next.add(uid);
+      else next.delete(uid);
+      return next;
+    });
+  }
+  function addMessage() {
+    const it = blankItem();
+    setItems((p) => [...p, it]);
+    setOpenFor(it._uid, true);
+  }
 
   async function call(
     action: "load" | "publish",
@@ -239,6 +297,7 @@ export default function AnnouncementsAdmin() {
     // Client-side guardrails before the Worker's own validation.
     for (const [i, it] of items.entries()) {
       if (!it.id.trim() || !it.title.trim() || !it.body.trim()) {
+        setOpenFor(it._uid, true);
         setStatus({
           kind: "error",
           msg: `Message #${i + 1} needs an id, a title, and a body.`,
@@ -283,6 +342,11 @@ export default function AnnouncementsAdmin() {
     );
   }
   function setSeverity(index: number, severity: Severity) {
+    // Re-keying the row (below) changes its uid, so keep it expanded under
+    // the new one. A stray uid in the open-set when no re-key happens is
+    // harmless.
+    const fresh = nextUid();
+    setOpenFor(fresh, true);
     setItems((prev) =>
       prev.map((it, i) => {
         if (i !== index) return it;
@@ -299,7 +363,7 @@ export default function AnnouncementsAdmin() {
           ...next,
           title,
           body,
-          _uid: body !== next.body ? nextUid() : next._uid,
+          _uid: body !== next.body ? fresh : next._uid,
         };
       }),
     );
@@ -371,17 +435,56 @@ export default function AnnouncementsAdmin() {
     2,
   );
 
+  const q = filter.trim().toLowerCase();
+  const matches = (it: Item) =>
+    !q ||
+    it.id.toLowerCase().includes(q) ||
+    it.title.toLowerCase().includes(q) ||
+    it.severity.toLowerCase().includes(q) ||
+    (it.platforms ?? []).some((p) => p.includes(q));
+  const visibleCount = items.filter(matches).length;
+  const liveCount = items.filter((it) => scheduleOf(it) === "live").length;
+
   return (
     <main className="mx-auto max-w-3xl px-6 pt-28 pb-24">
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Announcements</h1>
+      <div className="mb-4 flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">Announcements</h1>
+          <p className="mt-1 text-xs text-muted">
+            {items.length} message{items.length === 1 ? "" : "s"}, {liveCount}{" "}
+            live now
+          </p>
+        </div>
         <button
-          onClick={() => setItems((p) => [...p, blankItem()])}
+          onClick={addMessage}
           className="rounded-md border border-brand-teal/50 px-3 py-1.5 text-sm text-brand-teal hover:bg-brand-teal/10"
         >
           + Add message
         </button>
       </div>
+
+      {items.length > 1 && (
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <input
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            placeholder="Filter by id, title, severity, platform…"
+            className={`${inputCls} min-w-[200px] flex-1`}
+          />
+          <button
+            onClick={() => setOpen(new Set(items.map((it) => it._uid)))}
+            className="rounded-md border border-white/10 px-3 py-2 text-xs text-muted hover:bg-white/5"
+          >
+            Expand all
+          </button>
+          <button
+            onClick={() => setOpen(new Set())}
+            className="rounded-md border border-white/10 px-3 py-2 text-xs text-muted hover:bg-white/5"
+          >
+            Collapse all
+          </button>
+        </div>
+      )}
 
       {banner && <div className="mb-6">{banner}</div>}
 
@@ -391,180 +494,250 @@ export default function AnnouncementsAdmin() {
           list clears whatever is currently showing.
         </p>
       )}
+      {items.length > 0 && visibleCount === 0 && (
+        <p className="rounded-md border border-white/10 bg-surface px-4 py-6 text-center text-sm text-muted">
+          No messages match “{filter.trim()}”.
+        </p>
+      )}
 
-      <div className="space-y-5">
-        {items.map((it, i) => (
-          <div
-            key={it._uid}
-            className="rounded-lg border border-white/10 bg-surface p-4"
-          >
-            <div className="mb-3 flex items-center gap-3">
-              <input
-                value={it.id}
-                onChange={(e) => update(i, { id: e.target.value })}
-                placeholder="unique-id"
-                className={`${inputCls} font-mono`}
-              />
-              <select
-                value={it.severity}
-                onChange={(e) => setSeverity(i, e.target.value as Severity)}
-                className={`${inputCls} max-w-[170px]`}
+      <div className="space-y-3">
+        {items.map((it, i) => {
+          const isOpen = open.has(it._uid);
+          const sched = scheduleOf(it);
+          const when = scheduleLabel(it);
+          // Hidden via CSS rather than unmounted so the body editor keeps its
+          // undo history and cursor across collapse/expand, and the filter
+          // never remounts anything either.
+          const shown = matches(it);
+          return (
+            <div
+              key={it._uid}
+              className={`rounded-lg border bg-surface ${
+                isOpen ? "border-white/20" : "border-white/10"
+              } ${shown ? "" : "hidden"}`}
+            >
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={() => setOpenFor(it._uid, !isOpen)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setOpenFor(it._uid, !isOpen);
+                  }
+                }}
+                className="flex cursor-pointer select-none items-center gap-3 px-4 py-3 hover:bg-white/[0.03]"
               >
-                {SEVERITIES.map((s) => (
-                  <option key={s} value={s}>
-                    {s}
-                  </option>
-                ))}
-              </select>
-              <button
-                onClick={() =>
-                  setItems((p) => p.filter((x) => x._uid !== it._uid))
-                }
-                className="shrink-0 rounded-md border border-red-500/40 px-3 py-2 text-sm text-red-300 hover:bg-red-500/10"
+                <span
+                  className={`text-muted transition-transform ${
+                    isOpen ? "rotate-90" : ""
+                  }`}
+                  aria-hidden
+                >
+                  ▸
+                </span>
+                <span
+                  className={`shrink-0 rounded-full border px-2 py-0.5 text-[11px] font-medium ${SCHEDULE_CHIP[sched]}`}
+                >
+                  {sched}
+                </span>
+                <span
+                  className={`shrink-0 rounded-full border px-2 py-0.5 text-[11px] ${SEVERITY_CHIP[it.severity]}`}
+                >
+                  {it.severity}
+                </span>
+                <span className="min-w-0 flex-1 truncate text-sm text-foreground">
+                  {it.title.trim() || (
+                    <span className="italic text-muted">Untitled</span>
+                  )}
+                  <span className="ml-2 font-mono text-xs text-muted">
+                    {it.id}
+                  </span>
+                </span>
+                <span className="hidden shrink-0 text-xs text-muted sm:inline">
+                  {when}
+                  {when && it.platforms?.length ? " · " : ""}
+                  {it.platforms?.join(", ") ?? ""}
+                  {!when && !it.platforms?.length ? "all platforms" : ""}
+                </span>
+              </div>
+
+              <div
+                className={isOpen ? "border-t border-white/10 p-4" : "hidden"}
               >
-                Remove
-              </button>
-            </div>
-
-            <div className="mb-3">
-              <label className={labelCls}>Title</label>
-              <input
-                value={it.title}
-                onChange={(e) => update(i, { title: e.target.value })}
-                placeholder="Short headline"
-                className={inputCls}
-              />
-            </div>
-
-            <div className="mb-3">
-              <label className={labelCls}>Body</label>
-              <MarkdownField
-                value={it.body}
-                onChange={(md) => update(i, { body: md })}
-                password={password}
-              />
-            </div>
-
-            <div className="mb-3 grid grid-cols-2 gap-3">
-              <div>
-                <label className={labelCls}>Starts (local, optional)</label>
-                <input
-                  type="datetime-local"
-                  value={isoToLocal(it.startsAt)}
-                  onChange={(e) =>
-                    update(i, { startsAt: localToIso(e.target.value) })
-                  }
-                  className={inputCls}
-                />
-              </div>
-              <div>
-                <label className={labelCls}>Ends (local, optional)</label>
-                <input
-                  type="datetime-local"
-                  value={isoToLocal(it.endsAt)}
-                  onChange={(e) =>
-                    update(i, { endsAt: localToIso(e.target.value) })
-                  }
-                  className={inputCls}
-                />
-              </div>
-            </div>
-
-            <div className="mb-3 flex flex-wrap items-center gap-4">
-              <label className="flex items-center gap-2 text-sm text-foreground">
-                <input
-                  type="checkbox"
-                  checked={!!it.reshowEachLaunch}
-                  onChange={(e) =>
-                    update(i, { reshowEachLaunch: e.target.checked })
-                  }
-                />
-                Re-show each launch (until it ends)
-              </label>
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-muted">Platforms:</span>
-                {PLATFORMS.map((p) => (
-                  <label
-                    key={p}
-                    className="flex items-center gap-1.5 text-sm text-foreground"
+                <div className="mb-3 flex items-center gap-3">
+                  <input
+                    value={it.id}
+                    onChange={(e) => update(i, { id: e.target.value })}
+                    placeholder="unique-id"
+                    className={`${inputCls} font-mono`}
+                  />
+                  <select
+                    value={it.severity}
+                    onChange={(e) => setSeverity(i, e.target.value as Severity)}
+                    className={`${inputCls} max-w-[170px]`}
                   >
+                    {SEVERITIES.map((s) => (
+                      <option key={s} value={s}>
+                        {s}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    onClick={() =>
+                      setItems((p) => p.filter((x) => x._uid !== it._uid))
+                    }
+                    className="shrink-0 rounded-md border border-red-500/40 px-3 py-2 text-sm text-red-300 hover:bg-red-500/10"
+                  >
+                    Remove
+                  </button>
+                </div>
+
+                <div className="mb-3">
+                  <label className={labelCls}>Title</label>
+                  <input
+                    value={it.title}
+                    onChange={(e) => update(i, { title: e.target.value })}
+                    placeholder="Short headline"
+                    className={inputCls}
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label className={labelCls}>Body</label>
+                  <MarkdownField
+                    value={it.body}
+                    onChange={(md) => update(i, { body: md })}
+                    password={password}
+                  />
+                </div>
+
+                <div className="mb-3 grid grid-cols-2 gap-3">
+                  <div>
+                    <label className={labelCls}>Starts (local, optional)</label>
+                    <input
+                      type="datetime-local"
+                      value={isoToLocal(it.startsAt)}
+                      onChange={(e) =>
+                        update(i, { startsAt: localToIso(e.target.value) })
+                      }
+                      className={inputCls}
+                    />
+                  </div>
+                  <div>
+                    <label className={labelCls}>Ends (local, optional)</label>
+                    <input
+                      type="datetime-local"
+                      value={isoToLocal(it.endsAt)}
+                      onChange={(e) =>
+                        update(i, { endsAt: localToIso(e.target.value) })
+                      }
+                      className={inputCls}
+                    />
+                  </div>
+                </div>
+
+                <div className="mb-3 flex flex-wrap items-center gap-4">
+                  <label className="flex items-center gap-2 text-sm text-foreground">
                     <input
                       type="checkbox"
-                      checked={it.platforms?.includes(p) ?? false}
-                      onChange={() => togglePlatform(i, p)}
+                      checked={!!it.reshowEachLaunch}
+                      onChange={(e) =>
+                        update(i, { reshowEachLaunch: e.target.checked })
+                      }
                     />
-                    {p}
+                    Re-show each launch (until it ends)
                   </label>
-                ))}
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs text-muted">Platforms:</span>
+                    {PLATFORMS.map((p) => (
+                      <label
+                        key={p}
+                        className="flex items-center gap-1.5 text-sm text-foreground"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={it.platforms?.includes(p) ?? false}
+                          onChange={() => togglePlatform(i, p)}
+                        />
+                        {p}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mb-3 grid grid-cols-2 gap-3">
+                  <div>
+                    <label className={labelCls}>
+                      Min app version (optional)
+                    </label>
+                    <input
+                      value={it.minAppVersion ?? ""}
+                      onChange={(e) =>
+                        update(i, { minAppVersion: e.target.value || null })
+                      }
+                      placeholder="1.0.36"
+                      className={`${inputCls} font-mono`}
+                    />
+                  </div>
+                  <div>
+                    <label className={labelCls}>
+                      Max app version (optional)
+                    </label>
+                    <input
+                      value={it.maxAppVersion ?? ""}
+                      onChange={(e) =>
+                        update(i, { maxAppVersion: e.target.value || null })
+                      }
+                      placeholder=""
+                      className={`${inputCls} font-mono`}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className={labelCls}>Action label (optional)</label>
+                    <input
+                      value={it.actionLabel ?? ""}
+                      onChange={(e) =>
+                        update(i, { actionLabel: e.target.value || null })
+                      }
+                      placeholder="Learn more"
+                      className={inputCls}
+                    />
+                  </div>
+                  <div>
+                    <label className={labelCls}>Action URL (optional)</label>
+                    <input
+                      value={it.actionUrl ?? ""}
+                      onChange={(e) =>
+                        update(i, { actionUrl: e.target.value || null })
+                      }
+                      placeholder="https://…"
+                      className={inputCls}
+                    />
+                  </div>
+                </div>
+
+                {PRESETS[it.severity] &&
+                  (it.platforms?.length === 1 ? (
+                    <p className="mt-2 text-xs text-muted">
+                      Button and store link filled in for{" "}
+                      <span className="font-mono">{it.platforms[0]}</span>. Both
+                      fields are still editable.
+                    </p>
+                  ) : (
+                    <p className="mt-2 text-xs text-amber-300">
+                      Tick exactly one platform to fill the store link in — a
+                      single action URL can only point at one store, so this
+                      preset needs one message per platform.
+                    </p>
+                  ))}
               </div>
             </div>
-
-            <div className="mb-3 grid grid-cols-2 gap-3">
-              <div>
-                <label className={labelCls}>Min app version (optional)</label>
-                <input
-                  value={it.minAppVersion ?? ""}
-                  onChange={(e) =>
-                    update(i, { minAppVersion: e.target.value || null })
-                  }
-                  placeholder="1.0.36"
-                  className={`${inputCls} font-mono`}
-                />
-              </div>
-              <div>
-                <label className={labelCls}>Max app version (optional)</label>
-                <input
-                  value={it.maxAppVersion ?? ""}
-                  onChange={(e) =>
-                    update(i, { maxAppVersion: e.target.value || null })
-                  }
-                  placeholder=""
-                  className={`${inputCls} font-mono`}
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className={labelCls}>Action label (optional)</label>
-                <input
-                  value={it.actionLabel ?? ""}
-                  onChange={(e) =>
-                    update(i, { actionLabel: e.target.value || null })
-                  }
-                  placeholder="Learn more"
-                  className={inputCls}
-                />
-              </div>
-              <div>
-                <label className={labelCls}>Action URL (optional)</label>
-                <input
-                  value={it.actionUrl ?? ""}
-                  onChange={(e) =>
-                    update(i, { actionUrl: e.target.value || null })
-                  }
-                  placeholder="https://…"
-                  className={inputCls}
-                />
-              </div>
-            </div>
-
-            {PRESETS[it.severity] &&
-              (it.platforms?.length === 1 ? (
-                <p className="mt-2 text-xs text-muted">
-                  Button and store link filled in for{" "}
-                  <span className="font-mono">{it.platforms[0]}</span>. Both
-                  fields are still editable.
-                </p>
-              ) : (
-                <p className="mt-2 text-xs text-amber-300">
-                  Tick exactly one platform to fill the store link in — a single
-                  action URL can only point at one store, so this preset needs
-                  one message per platform.
-                </p>
-              ))}
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="sticky bottom-0 mt-6 -mx-6 border-t border-white/10 bg-background/90 px-6 py-4 backdrop-blur">

@@ -10,6 +10,18 @@
         "C:/Spotter App/stp-website"
       ],
       "port": 3000
+    },
+    {
+      "name": "stp-website-dev",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Spotter App/stp-website/node_modules/next/dist/bin/next",
+        "dev",
+        "C:/Spotter App/stp-website",
+        "-p",
+        "3001"
+      ],
+      "port": 3001
     }
   ]
 }
