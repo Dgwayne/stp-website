@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import MarkdownField from "./MarkdownField";
+import CardPreview from "./CardPreview";
 
 type Severity =
   | "info"
@@ -227,6 +228,88 @@ export default function AnnouncementsAdmin() {
   // reads as a table of headers; a freshly added message opens for editing.
   const [open, setOpen] = useState<Set<string>>(() => new Set());
   const [filter, setFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState<Schedule | "all">("all");
+  // Which cards show the rendered phone preview beside the editor.
+  const [previewing, setPreviewing] = useState<Set<string>>(() => new Set());
+  // The list as last loaded/published, keyed by id, so the page can tell
+  // what is unsaved: badge the Publish button, warn before closing the tab,
+  // and refuse to re-publish an unchanged list by accident.
+  const [saved, setSaved] = useState<Map<string, string>>(() => new Map());
+
+  // Insertion order of the Map is the list order, which is compared too.
+  function snapshot(list: Item[]): Map<string, string> {
+    return new Map(
+      cleanForPublish(list).map((it) => [it.id, JSON.stringify(it)]),
+    );
+  }
+  const current = snapshot(items);
+  let changed = 0;
+  for (const [id, json] of current) if (saved.get(id) !== json) changed++;
+  for (const id of saved.keys()) if (!current.has(id)) changed++;
+  // Order matters too: the app shows the first active message, so a pure
+  // reorder is a real change even though every row is byte-identical.
+  const orderChanged =
+    changed === 0 &&
+    [...current.keys()].join("|") !== [...saved.keys()].join("|");
+  if (orderChanged) changed = 1;
+  const dirty = changed > 0;
+
+  useEffect(() => {
+    if (!dirty) return;
+    const warn = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+    };
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [dirty]);
+
+  function setPreviewFor(uid: string, value: boolean) {
+    setPreviewing((prev) => {
+      const next = new Set(prev);
+      if (value) next.add(uid);
+      else next.delete(uid);
+      return next;
+    });
+  }
+  function move(index: number, dir: -1 | 1) {
+    setItems((prev) => {
+      const j = index + dir;
+      if (j < 0 || j >= prev.length) return prev;
+      const next = prev.slice();
+      [next[index], next[j]] = [next[j], next[index]];
+      return next;
+    });
+  }
+  function duplicate(index: number) {
+    const src = items[index];
+    if (!src) return;
+    const copy: Item = { ...src, _uid: nextUid(), id: `${src.id}-copy` };
+    setItems((prev) => [
+      ...prev.slice(0, index + 1),
+      copy,
+      ...prev.slice(index + 1),
+    ]);
+    setOpenFor(copy._uid, true);
+  }
+  function remove(uid: string) {
+    const it = items.find((x) => x._uid === uid);
+    const name = it?.title.trim() || it?.id || "this message";
+    if (!window.confirm(`Remove “${name}”? It stays live until you Publish.`))
+      return;
+    setItems((p) => p.filter((x) => x._uid !== uid));
+  }
+  function removeExpired() {
+    const gone = items.filter((it) => scheduleOf(it) === "expired");
+    if (!gone.length) return;
+    if (
+      !window.confirm(
+        `Remove ${gone.length} expired message${gone.length === 1 ? "" : "s"}? They stay live until you Publish.`,
+      )
+    )
+      return;
+    const ids = new Set(gone.map((it) => it._uid));
+    setItems((p) => p.filter((x) => !ids.has(x._uid)));
+  }
 
   function setOpenFor(uid: string, value: boolean) {
     setOpen((prev) => {
@@ -274,13 +357,13 @@ export default function AnnouncementsAdmin() {
       const list = Array.isArray(data?.announcements)
         ? (data.announcements as PublishItem[])
         : [];
-      setItems(
-        list.map((it) => ({
-          ...it,
-          _uid: nextUid(),
-          severity: it.severity ?? "info",
-        })),
-      );
+      const loaded = list.map((it) => ({
+        ...it,
+        _uid: nextUid(),
+        severity: it.severity ?? "info",
+      }));
+      setItems(loaded);
+      setSaved(snapshot(loaded));
       setUnlocked(true);
       setStatus({
         kind: "info",
@@ -323,6 +406,7 @@ export default function AnnouncementsAdmin() {
         });
         return;
       }
+      setSaved(snapshot(items));
       setStatus({
         kind: "success",
         msg: `Published ${data?.count ?? payload.length} message${
@@ -340,6 +424,26 @@ export default function AnnouncementsAdmin() {
     setItems((prev) =>
       prev.map((it, i) => (i === index ? { ...it, ...patch } : it)),
     );
+  }
+  // The body editor rewrote the markdown on mount without the user touching
+  // it. Apply the rewrite, and if the message was otherwise identical to what
+  // is saved, move the saved baseline with it so it does not read as an edit.
+  function normalizeBody(uid: string, body: string) {
+    setItems((prev) => {
+      const idx = prev.findIndex((it) => it._uid === uid);
+      if (idx < 0) return prev;
+      const before = prev[idx];
+      const after = { ...before, body };
+      const [cleanBefore] = cleanForPublish([before]);
+      const [cleanAfter] = cleanForPublish([after]);
+      setSaved((s) => {
+        if (s.get(cleanBefore.id) !== JSON.stringify(cleanBefore)) return s;
+        const next = new Map(s);
+        next.set(cleanAfter.id, JSON.stringify(cleanAfter));
+        return next;
+      });
+      return prev.map((it, i) => (i === idx ? after : it));
+    });
   }
   function setSeverity(index: number, severity: Severity) {
     // Re-keying the row (below) changes its uid, so keep it expanded under
@@ -437,13 +541,20 @@ export default function AnnouncementsAdmin() {
 
   const q = filter.trim().toLowerCase();
   const matches = (it: Item) =>
-    !q ||
-    it.id.toLowerCase().includes(q) ||
-    it.title.toLowerCase().includes(q) ||
-    it.severity.toLowerCase().includes(q) ||
-    (it.platforms ?? []).some((p) => p.includes(q));
+    (statusFilter === "all" || scheduleOf(it) === statusFilter) &&
+    (!q ||
+      it.id.toLowerCase().includes(q) ||
+      it.title.toLowerCase().includes(q) ||
+      it.severity.toLowerCase().includes(q) ||
+      (it.platforms ?? []).some((p) => p.includes(q)));
   const visibleCount = items.filter(matches).length;
-  const liveCount = items.filter((it) => scheduleOf(it) === "live").length;
+  const counts: Record<Schedule, number> = {
+    live: 0,
+    scheduled: 0,
+    expired: 0,
+  };
+  for (const it of items) counts[scheduleOf(it)]++;
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   return (
     <main className="mx-auto max-w-3xl px-6 pt-28 pb-24">
@@ -451,8 +562,13 @@ export default function AnnouncementsAdmin() {
         <div>
           <h1 className="text-3xl font-bold">Announcements</h1>
           <p className="mt-1 text-xs text-muted">
-            {items.length} message{items.length === 1 ? "" : "s"}, {liveCount}{" "}
+            {items.length} message{items.length === 1 ? "" : "s"}, {counts.live}{" "}
             live now
+            {dirty && (
+              <span className="ml-2 text-amber-300">
+                · {changed} unsaved change{changed === 1 ? "" : "s"}
+              </span>
+            )}
           </p>
         </div>
         <button
@@ -483,6 +599,33 @@ export default function AnnouncementsAdmin() {
           >
             Collapse all
           </button>
+          <div className="flex w-full flex-wrap items-center gap-2">
+            {(["all", "live", "scheduled", "expired"] as const).map((s) => {
+              const n = s === "all" ? items.length : counts[s];
+              const active = statusFilter === s;
+              return (
+                <button
+                  key={s}
+                  onClick={() => setStatusFilter(s)}
+                  className={`rounded-full border px-3 py-1 text-xs ${
+                    active
+                      ? "border-brand-teal bg-brand-teal/15 text-brand-teal"
+                      : "border-white/10 text-muted hover:bg-white/5"
+                  }`}
+                >
+                  {s} ({n})
+                </button>
+              );
+            })}
+            {counts.expired > 0 && (
+              <button
+                onClick={removeExpired}
+                className="ml-auto rounded-md border border-red-500/40 px-3 py-1 text-xs text-red-300 hover:bg-red-500/10"
+              >
+                Remove {counts.expired} expired
+              </button>
+            )}
+          </div>
         </div>
       )}
 
@@ -496,7 +639,8 @@ export default function AnnouncementsAdmin() {
       )}
       {items.length > 0 && visibleCount === 0 && (
         <p className="rounded-md border border-white/10 bg-surface px-4 py-6 text-center text-sm text-muted">
-          No messages match “{filter.trim()}”.
+          No {statusFilter === "all" ? "" : `${statusFilter} `}messages
+          {filter.trim() ? ` match “${filter.trim()}”` : ""}.
         </p>
       )}
 
@@ -560,6 +704,35 @@ export default function AnnouncementsAdmin() {
                   {it.platforms?.join(", ") ?? ""}
                   {!when && !it.platforms?.length ? "all platforms" : ""}
                 </span>
+                <span
+                  className="flex shrink-0 items-center gap-1"
+                  onClick={(e) => e.stopPropagation()}
+                  onKeyDown={(e) => e.stopPropagation()}
+                >
+                  <button
+                    title="Move up"
+                    disabled={i === 0}
+                    onClick={() => move(i, -1)}
+                    className="rounded px-1.5 py-0.5 text-xs text-muted hover:bg-white/10 disabled:opacity-30"
+                  >
+                    ↑
+                  </button>
+                  <button
+                    title="Move down"
+                    disabled={i === items.length - 1}
+                    onClick={() => move(i, 1)}
+                    className="rounded px-1.5 py-0.5 text-xs text-muted hover:bg-white/10 disabled:opacity-30"
+                  >
+                    ↓
+                  </button>
+                  <button
+                    title="Duplicate"
+                    onClick={() => duplicate(i)}
+                    className="rounded px-1.5 py-0.5 text-xs text-muted hover:bg-white/10"
+                  >
+                    ⧉
+                  </button>
+                </span>
               </div>
 
               <div
@@ -585,8 +758,18 @@ export default function AnnouncementsAdmin() {
                   </select>
                   <button
                     onClick={() =>
-                      setItems((p) => p.filter((x) => x._uid !== it._uid))
+                      setPreviewFor(it._uid, !previewing.has(it._uid))
                     }
+                    className={`shrink-0 rounded-md border px-3 py-2 text-sm ${
+                      previewing.has(it._uid)
+                        ? "border-brand-teal bg-brand-teal/15 text-brand-teal"
+                        : "border-white/10 text-muted hover:bg-white/5"
+                    }`}
+                  >
+                    Preview
+                  </button>
+                  <button
+                    onClick={() => remove(it._uid)}
                     className="shrink-0 rounded-md border border-red-500/40 px-3 py-2 text-sm text-red-300 hover:bg-red-500/10"
                   >
                     Remove
@@ -608,13 +791,29 @@ export default function AnnouncementsAdmin() {
                   <MarkdownField
                     value={it.body}
                     onChange={(md) => update(i, { body: md })}
+                    onNormalize={(md) => normalizeBody(it._uid, md)}
                     password={password}
                   />
                 </div>
 
+                {previewing.has(it._uid) && (
+                  <div className="mb-3">
+                    <label className={labelCls}>
+                      How it looks in the app (approximate)
+                    </label>
+                    <CardPreview
+                      severity={it.severity}
+                      title={it.title}
+                      body={it.body}
+                      actionLabel={it.actionLabel}
+                      actionUrl={it.actionUrl}
+                    />
+                  </div>
+                )}
+
                 <div className="mb-3 grid grid-cols-2 gap-3">
                   <div>
-                    <label className={labelCls}>Starts (local, optional)</label>
+                    <label className={labelCls}>Starts ({tz}, optional)</label>
                     <input
                       type="datetime-local"
                       value={isoToLocal(it.startsAt)}
@@ -625,7 +824,7 @@ export default function AnnouncementsAdmin() {
                     />
                   </div>
                   <div>
-                    <label className={labelCls}>Ends (local, optional)</label>
+                    <label className={labelCls}>Ends ({tz}, optional)</label>
                     <input
                       type="datetime-local"
                       value={isoToLocal(it.endsAt)}
@@ -743,10 +942,14 @@ export default function AnnouncementsAdmin() {
       <div className="sticky bottom-0 mt-6 -mx-6 border-t border-white/10 bg-background/90 px-6 py-4 backdrop-blur">
         <button
           onClick={publish}
-          disabled={busy}
+          disabled={busy || !dirty}
           className="w-full rounded-md bg-brand-teal px-4 py-2.5 font-medium text-background disabled:opacity-50"
         >
-          {busy ? "Publishing…" : "Publish (replaces the live list)"}
+          {busy
+            ? "Publishing…"
+            : dirty
+              ? `Publish ${changed} change${changed === 1 ? "" : "s"} (replaces the live list)`
+              : "Nothing to publish — live list matches"}
         </button>
       </div>
 

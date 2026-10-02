@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 
 // MDXEditor is client-only (it reaches for `document` at import), so load it
 // with ssr:false. This must live in a client component.
@@ -24,10 +24,13 @@ const MdxEditorImpl = dynamic(() => import("./MdxEditorImpl"), {
 export default function MarkdownField({
   value,
   onChange,
+  onNormalize,
   password,
 }: {
   value: string;
   onChange: (markdown: string) => void;
+  /** Editor-initiated rewrites before any user interaction (see below). */
+  onNormalize?: (markdown: string) => void;
   password: string;
 }) {
   const imageUploadHandler = useCallback(
@@ -80,11 +83,25 @@ export default function MarkdownField({
     [password],
   );
 
+  // MDXEditor re-serialises the markdown on mount (e.g. "- item" becomes
+  // "* item") and reports that through onChange exactly like a user edit. A
+  // change can only be the user's once they have clicked or typed in the
+  // field, so anything before that goes to onNormalize instead, letting the
+  // caller fold it into its "last saved" baseline rather than counting it as
+  // an unsaved change.
+  const touched = useRef(false);
+
   return (
-    <div className="overflow-hidden rounded-md border border-white/10 bg-white text-black">
+    <div
+      className="overflow-hidden rounded-md border border-white/10 bg-white text-black"
+      onPointerDownCapture={() => (touched.current = true)}
+      onKeyDownCapture={() => (touched.current = true)}
+    >
       <MdxEditorImpl
         value={value}
-        onChange={onChange}
+        onChange={(md) =>
+          touched.current || !onNormalize ? onChange(md) : onNormalize(md)
+        }
         imageUploadHandler={imageUploadHandler}
         videoUpload={videoUpload}
       />
