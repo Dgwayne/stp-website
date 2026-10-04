@@ -121,7 +121,7 @@ const blocks: Block[] = [
       poster: "/videos/tornado-id-poster.jpg",
       width: 720,
       height: 720,
-      caption: "Recorded in the app: the Tornado ID card on a live Key West (KBYX) scan",
+      caption: "Recorded on live radar: the card for a low-scoring circulation, seen by the Key West radar (KBYX)",
     },
   },
   {

@@ -30,9 +30,10 @@ const newHeadline: Spotlight = {
   title: "A Tornado Detector Built Into the Radar",
   description:
     "Tornado ID looks at every circulation the radar sees and estimates the chance a tornado is on the ground right now. Markers turn amber from 5%, orange from 30% and red from 60%, and a tap opens a plain-words card with the score, whether it is rising, how long the circulation has been tracked, how strong the rotation is, any debris signature and how high the beam is. Behind it is a machine learning model trained on every confirmed tornado from 2017 to 2025: more than 14,000 tornado track segments, 3,600 warnings that never produced one, and about 81,000 archived radar scans. It works on live radar and in archive mode. It is an estimate, not a warning, so always follow the National Weather Service.",
-  src: "/videos/tornado-id.mp4",
-  poster: "/videos/tornado-id-poster.jpg",
-  size: { width: 720, height: 720 },
+  src: "/images/v172/tornado-id-greenfield.jpg",
+  still: { width: 1000, height: 1000 },
+  caption:
+    "Archive replay in the app: the Greenfield, Iowa tornado of May 21, 2024, on the Des Moines radar (KDMX)",
   link: { href: "/radar#tornado-id", label: "How Tornado ID was built" },
 };
 

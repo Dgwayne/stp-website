@@ -27,6 +27,8 @@ export type Spotlight = {
   portrait?: boolean;
   /** Optional deep-dive link under the copy. */
   link?: { href: string; label: string };
+  /** Optional line under the media, e.g. where and when it was captured. */
+  caption?: string;
 };
 
 /**
@@ -45,6 +47,7 @@ export default function FeatureSpotlight({
   still,
   portrait = false,
   link,
+  caption,
   flip = false,
 }: Spotlight & { flip?: boolean }) {
   return (
@@ -82,6 +85,11 @@ export default function FeatureSpotlight({
             />
           )}
         </div>
+        {caption ? (
+          <figcaption className="mt-3 text-center text-xs text-muted">
+            {caption}
+          </figcaption>
+        ) : null}
       </figure>
       <div className={flip ? "lg:order-1" : ""}>
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-teal">
