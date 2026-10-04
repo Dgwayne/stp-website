@@ -7,12 +7,13 @@ export const metadata: Metadata = {
   title: "Storm Track | Spotter Tools Pro",
   description:
     "Draw the leading edge of a storm and Spotter Tools Pro projects where it is going, when it gets there, and which towns are in the path. Speed and direction are read from the radar automatically.",
+  alternates: { canonical: "/storm-track" },
   openGraph: {
     title: "Spotter Tools Pro | Storm Track",
     description:
       "Draw a storm edge, get arrival times for every town in its path. Motion read straight from the radar.",
     type: "website",
-    images: [{ url: "/images/stp-logo.png", width: 1024, height: 1024 }],
+    images: [{ url: "/images/og-card.jpg", width: 1200, height: 630 }],
   },
 };
 

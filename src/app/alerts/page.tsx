@@ -7,12 +7,14 @@ export const metadata: Metadata = {
   title: "Alerts | Spotter Tools Pro",
   description:
     "Smart on-device NWS alert watcher with custom watch zones, outbreak mode, full-screen tornado-emergency takeover, custom sounds and flash colors, mesoscale discussions, and convective outlooks.",
+  alternates: { canonical: "/alerts" },
   openGraph: {
     title: "Spotter Tools Pro | Alerts",
     description:
       "Smart push alerts, NWS warnings & watches, SPC mesoscale discussions, and convective outlooks.",
     type: "website",
-    images: [{ url: "/images/stp-logo.png", width: 1024, height: 1024 }],
+    url: "/alerts",
+    images: [{ url: "/images/og-card.jpg", width: 1200, height: 630 }],
   },
 };
 
@@ -23,6 +25,14 @@ type Block = {
   body: string[];
   bullets?: string[];
   screenshot?: { src: string; alt: string; caption: string };
+  /** A landscape capture, shown at half width instead of in a phone frame. */
+  still?: {
+    src: string;
+    alt: string;
+    caption: string;
+    width: number;
+    height: number;
+  };
   flip?: boolean;
 };
 
@@ -54,6 +64,7 @@ const blocks: Block[] = [
       "Fixed point or radius, perfect for home, family, or chase op-center",
       "County / forecast zone picker, pull-to-refresh list of NWS zones",
       "Combine zones, alerts fire when any of them is hit",
+      "With Settings Sync on, your zones and notification choices follow you to your other devices",
     ],
     flip: true,
   },
@@ -113,6 +124,15 @@ const blocks: Block[] = [
     ],
   },
   {
+    id: "windows-tray",
+    eyebrow: "Windows",
+    title: "Close the window, keep the alerts",
+    body: [
+      "On Windows, hit the X with alerts on and Spotter Tools Pro hides to the system tray instead of quitting, so the watch worker keeps polling and warnings still reach you while the window is gone. Watching the sky does not mean giving up your desktop.",
+      "It asks you once what you want the close button to do, and Settings holds the answer if you change your mind.",
+    ],
+  },
+  {
     id: "warnings-overlay",
     eyebrow: "Map Overlay",
     title: "Warnings, watches, and detail sheets",
@@ -150,7 +170,7 @@ const blocks: Block[] = [
     ],
     bullets: [
       "Mesoscale Discussions, short-fuse SPC forecast areas with full text",
-      "Day 1 / Day 2 Convective Outlooks, Categorical, Tornado, Wind, and Hail",
+      "Convective Outlooks from Day 1 through Day 8, Categorical, Tornado, Wind, and Hail",
       "Live NWS Local Storm Reports as map markers, every report type the offices publish",
       "Optional notification when a new MCD is posted that overlaps your zones",
       "Outlook notifications describe the risk over your own watch zones, not the highest risk anywhere in the country, so a moderate risk three states away no longer arrives quoting numbers you cannot find on your map",
@@ -162,6 +182,22 @@ const blocks: Block[] = [
       alt: "SPC Day 1 categorical outlook on the map",
       caption: "Day 1 Categorical outlook polygons drawn on the map",
     },
+  },
+  {
+    id: "storm-reports",
+    eyebrow: "Local Storm Reports",
+    title: "Ground truth, minutes old",
+    body: [
+      "Storm reports come straight from the NWS offices that publish them, minutes fresh, covering every report type from tornadoes and hail to downed trees and flooding. Tap any report for the full story, filter to what you care about, and read the times in your own clock.",
+    ],
+    still: {
+      src: "/images/v164/storm-reports-lsr.jpg",
+      alt: "NWS Local Storm Reports on the map with a report detail card open",
+      caption: "Local Storm Reports with the full report on tap",
+      width: 1387,
+      height: 955,
+    },
+    flip: true,
   },
   {
     id: "spc-detail",
@@ -200,7 +236,7 @@ const blocks: Block[] = [
 
 export default function AlertsPage() {
   return (
-    <main className="px-6 pt-32 pb-24">
+    <div className="px-6 pt-28 pb-24 sm:pt-32">
       <div className="mx-auto max-w-6xl">
         <SectionHeader
           eyebrow="Smart Alerts"
@@ -214,13 +250,33 @@ export default function AlertsPage() {
               key={b.id}
               id={b.id}
               className={`scroll-mt-24 grid gap-10 lg:items-center ${
-                b.screenshot
-                  ? b.flip
-                    ? "lg:grid-cols-[300px_1fr]"
-                    : "lg:grid-cols-[1fr_300px]"
-                  : ""
+                b.still
+                  ? "lg:grid-cols-2"
+                  : b.screenshot
+                    ? b.flip
+                      ? "lg:grid-cols-[300px_1fr]"
+                      : "lg:grid-cols-[1fr_300px]"
+                    : ""
               }`}
             >
+              {b.still ? (
+                <figure className={b.flip ? "lg:order-2" : ""}>
+                  <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+                    <Image
+                      src={b.still.src}
+                      alt={b.still.alt}
+                      width={b.still.width}
+                      height={b.still.height}
+                      sizes="(min-width: 1152px) 548px, (min-width: 1024px) 46vw, calc(100vw - 48px)"
+                      className="w-full"
+                    />
+                  </div>
+                  <figcaption className="mt-3 text-center text-xs text-muted">
+                    {b.still.caption}
+                  </figcaption>
+                </figure>
+              ) : null}
+
               {b.screenshot && b.flip ? (
                 <figure>
                   <div className="phone-frame mx-auto">
@@ -229,6 +285,7 @@ export default function AlertsPage() {
                       alt={b.screenshot.alt}
                       width={440}
                       height={960}
+                      sizes="220px"
                       className="object-cover"
                     />
                   </div>
@@ -238,7 +295,7 @@ export default function AlertsPage() {
                 </figure>
               ) : null}
 
-              <div>
+              <div className={b.still && b.flip ? "lg:order-1" : ""}>
                 <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-teal">
                   {b.eyebrow}
                 </p>
@@ -277,6 +334,7 @@ export default function AlertsPage() {
                       alt={b.screenshot.alt}
                       width={440}
                       height={960}
+                      sizes="220px"
                       className="object-cover"
                     />
                   </div>
@@ -315,6 +373,6 @@ export default function AlertsPage() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

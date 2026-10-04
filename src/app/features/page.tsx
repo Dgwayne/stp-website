@@ -10,13 +10,15 @@ import AutoVideo from "@/components/AutoVideo";
 export const metadata: Metadata = {
   title: "Features | Spotter Tools Pro",
   description:
-    "The full Spotter Tools Pro feature list: 3D storm volumes you can fly around, a radar archive back to the early 1990s, loop export to GIF or MP4, GPU radar (Level 2, III & TDWR) with eight-hour loops, ground-anchored map drawing, storm track projection, offline basemaps, wildfire and earthquake layers, live wind flow, mesoanalysis, on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras across 48 states, weather models, opt-in presence, smart push alerts, severe weather reporting, and a real Windows desktop app.",
+    "The full Spotter Tools Pro feature list: an experimental Tornado ID detector, Expert multi-radar mode, rain/snow/sleet/ice Precip Type, Settings Sync across phone, tablet and PC, 3D storm volumes you can fly around, a radar archive back to the early 1990s, loop export to GIF or MP4, GPU radar (Level 2, III & TDWR) with eight-hour loops, ground-anchored map drawing, storm track projection, offline basemaps, wildfire and earthquake layers, live wind flow, mesoanalysis, on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras across 48 states, weather models, opt-in presence, smart push alerts, severe weather reporting, and a real Windows desktop app.",
+  alternates: { canonical: "/features" },
   openGraph: {
     title: "Spotter Tools Pro | Features",
     description:
-      "The complete feature tour: beacon, radar, alerts, reporting, and customization.",
+      "The complete feature tour: Tornado ID, radar, alerts, cameras, models, sync, reporting, and customization.",
     type: "website",
-    images: [{ url: "/images/stp-logo.png", width: 1024, height: 1024 }],
+    url: "/features",
+    images: [{ url: "/images/og-card.jpg", width: 1200, height: 630 }],
   },
 };
 
@@ -33,6 +35,14 @@ type Category = {
   features: Feature[];
   video?: { src: string; poster: string; caption: string };
   screenshot?: { src: string; alt: string; caption: string };
+  /** A UI panel or desktop capture of any aspect ratio, shown unframed. */
+  panel?: {
+    src: string;
+    alt: string;
+    caption: string;
+    width: number;
+    height: number;
+  };
   cta?: { href: string; label: string };
 };
 
@@ -109,9 +119,9 @@ const categories: Category[] = [
           "Short-fuse SPC forecast areas (MCDs) and WPC Mesoscale Precipitation Discussions (flooding MPDs) overlaid as polygons, with full discussion text on tap.",
       },
       {
-        title: "Outlooks suite",
+        title: "Nearly every NOAA outlook",
         description:
-          "SPC convective outlooks Day 1 through Day 8 (Categorical, Tornado, Wind, Hail), plus general thunderstorm, WPC Excessive Rainfall and QPF, Fire Weather, Winter Storm Severity (WSSI), CPC 6 to 10 day temperature and precipitation, and the Drought Monitor, switchable from a single sheet.",
+          "SPC convective outlooks Day 1 through Day 8 (Categorical, Tornado, Wind, Hail) and general thunderstorm, plus WPC Winter Weather (the chance of 4, 8 or 12 inches of snow or a quarter inch of ice, Days 1 to 3), WPC Hazards for Days 3 to 7, CPC Hazards for Days 8 to 14 including extreme heat and rapid onset drought, Fire Weather out to Day 8, Excessive Rainfall and QPF out to Day 7, the Winter Storm Severity Index and its parts, CPC 6 to 10 day, monthly and seasonal temperature and precipitation, and the Drought Monitor with its monthly and seasonal outlooks. They load from our own servers in a fraction of the time, with NOAA as the backup.",
       },
       {
         title: "METARs",
@@ -131,7 +141,7 @@ const categories: Category[] = [
       {
         title: "City & place search",
         description:
-          "Type any city, town, or landmark in the map menu and fly straight to it, no panning and pinching across the country.",
+          "Type any city, town, address or landmark in the map menu and fly straight to it, no panning and pinching across the country.",
       },
       {
         title: "One rail, not a wall of buttons",
@@ -149,17 +159,12 @@ const categories: Category[] = [
           "The WPC Coded Surface Bulletin drawn on the map with cold, warm, stationary, and occluded fronts plus high and low pressure centers.",
       },
       {
-        title: "Map style picker",
-        description:
-          "Switch between basemap styles to match the conditions and your preference.",
-      },
-      {
         title: "Offline basemaps",
         description:
           "Download a map area before you head out and roads, town names and your GPS position keep working with no signal. Pick a centre from GPS or by searching, choose a radius and a detail level, see the size estimate, then download with live progress. Android and iOS.",
       },
       {
-        title: "A basemap roster that can grow",
+        title: "Basemap styles that can grow",
         description:
           "Eleven styles including our own Midnight, Blue Nav and Spotter Tools Grey, served from our backend so new basemaps arrive without waiting for an app update. Your Labels and Roads customisations still apply to whatever is pushed.",
       },
@@ -167,11 +172,6 @@ const categories: Category[] = [
         title: "Measure distance",
         description:
           "Drop points and read the distance and bearing between them, for sizing a hail swath or working out how far out a wall cloud is.",
-      },
-      {
-        title: "Mapbox location search",
-        description:
-          "Geocode addresses, towns, and landmarks to jump anywhere on the map instantly.",
       },
       {
         title: "Storm track projection",
@@ -205,8 +205,23 @@ const categories: Category[] = [
     eyebrow: "Radar",
     title: "GPU Radar: Level 2, Level III & TDWR",
     intro:
-      "Real, decoded NEXRAD in your hand, GPU-rendered and crisp at any zoom, now with a 3D storm volume you can fly around, WSR-88D Level III, dual-pol products, the full TDWR network, and dual-view split-screen compare.",
+      "Real, decoded NEXRAD in your hand, GPU-rendered and crisp at any zoom, with an experimental tornado detector, multi-radar Expert mode, rain/snow/sleet/ice Precip Type, a 3D storm volume you can fly around, WSR-88D Level III, dual-pol products, the full TDWR network, and dual-view split-screen compare.",
     features: [
+      {
+        title: "Tornado ID (experimental)",
+        description:
+          "Estimates the chance a tornado is on the ground for every circulation the radar sees, with amber, orange and red markers and a plain-words card: score, trend, time tracked, rotation, debris signature and beam height. A machine learning model trained on every confirmed tornado from 2017 to 2025, more than 14,000 track segments and about 81,000 archived scans. It marks circulations inside Tornado Warnings even at a low score, works live and in archive mode, and is off by default. An estimate, not a warning.",
+      },
+      {
+        title: "Expert mode: fill the radar holes",
+        description:
+          "Blend up to three radars into one image. Each paints only the ground it is closest to, so nothing is counted twice and there is no seam, every scan is lined up to the same moment, and numbered badges show which radars are in play. Level III at the lowest tilt.",
+      },
+      {
+        title: "Precip Type",
+        description:
+          "Colour single-site radar or the whole national mosaic as rain, snow, sleet or freezing rain. The strength is the radar and the type is the HRRR model, updated every 15 minutes, with the inspector reading the type at any spot and loops coloured frame by frame. Lower 48, live radar.",
+      },
       {
         title: "3D storm volume",
         description:
@@ -225,7 +240,7 @@ const categories: Category[] = [
       {
         title: "NEXRAD Level 2 decoding",
         description:
-          "Reflectivity (BR), Velocity (BV), Correlation Coefficient (CC), Spectrum Width, and Storm-Relative Velocity decoded directly from raw Level 2 data, no third-party tile server.",
+          "Reflectivity (BR), Velocity (BV), Correlation Coefficient (CC), Spectrum Width, and Storm-Relative Velocity decoded directly from raw Level 2 data, no third-party tile server. Velocity is unfolded by a rebuilt dealiasing pass that cut the wrong-colour patches, the kind that can look like a fake couplet, to about a third.",
       },
       {
         title: "Instant Level 2, six products",
@@ -270,7 +285,7 @@ const categories: Category[] = [
       {
         title: "FastScan sweep & range rings",
         description:
-          "A live sweep beam with your choice of colors, plus range rings labeled in miles with adaptive coloring so they stay readable over any product.",
+          "An optional beam-reveal sweep with your choice of colors and live pipeline status chips, off by default, plus range rings labeled in miles with adaptive coloring so they stay readable over any product.",
       },
       {
         title: "VAD Wind Profile",
@@ -278,9 +293,9 @@ const categories: Category[] = [
           "Open a VAD Wind Profile (VWP) panel from any radar-site pin to read the wind profile derived from the radar's velocity data.",
       },
       {
-        title: "Composite radar mosaic",
+        title: "A clean national mosaic",
         description:
-          "A GPU-rendered CONUS composite, crisp at every zoom, drawn in data space from the full MRMS product catalog, with a transport bar, hourly playback, and tap-to-read values.",
+          "A GPU-rendered CONUS composite, crisp at every zoom, drawn in data space from the full MRMS product catalog, with a transport bar, hourly playback, and tap-to-read values. It opens on Base Reflectivity (QC), with birds, insects and ground clutter removed, and the original is one tap away.",
       },
       {
         title: "Full animation transport",
@@ -291,11 +306,6 @@ const categories: Category[] = [
         title: "Loops about eight hours deep",
         description:
           "Level III loops now offer 48, 72 and 96 frames. Frames are held in a compact form and expanded only when they are shown, so a deep loop fits in memory, loads faster and plays smoothly instead of being thinned down to a handful of frames.",
-      },
-      {
-        title: "FastScan sweep (optional)",
-        description:
-          "An optional beam-reveal sweep animation with range rings and live pipeline status chips, off by default and switchable in settings.",
       },
       {
         title: "Dual-view split-screen",
@@ -498,7 +508,7 @@ const categories: Category[] = [
       {
         title: "48 states of DOT traffic cameras",
         description:
-          "State transportation cameras coast to coast, live HLS video where the agency offers it, frequently-updated stills where it doesn't. 61 sources in all, and new ones reach you without waiting for an app update.",
+          "State transportation cameras coast to coast, live HLS video where the agency offers it, frequently-updated stills where it doesn't. 61 sources in all, and new ones reach you without waiting for an app update: 38 New Mexico cameras, from Taos Ski Valley and Santa Fe Plaza to the towns of the eastern plains, arrived that way.",
       },
       {
         title: "Beyond the highways",
@@ -509,6 +519,11 @@ const categories: Category[] = [
         title: "Fullscreen & direction-aware",
         description:
           "Watch any feed fullscreen, and map icons point the direction each camera faces so you know what you're about to see.",
+      },
+      {
+        title: "Live video or stills, your call",
+        description:
+          "A filter at the top of the Live Cameras sheet shows All, Live video only or Stills only, with a count of each and of how many are on the map right now.",
       },
       {
         title: "Choose your sources",
@@ -650,7 +665,7 @@ const categories: Category[] = [
       {
         title: "Home screen widget",
         description:
-          "Put the forecast for any place on your home screen. Choose the location, whether to show the next few hours, the next few days, or both, and match it to the app's theme or pick your own. An optional strip appears when a warning or watch covers that spot.",
+          "Put the forecast for any place on your home screen. Choose the location, whether to show the next few hours, the next few days, or both, and match it to the app's theme or pick your own. An optional strip appears when a warning or watch covers that spot. It refreshes itself in the background on iPhone and iPad as well as Android, keeps going after a restart, and says so plainly if a forecast is out of date instead of showing stale numbers.",
       },
     ],
     video: {
@@ -662,9 +677,9 @@ const categories: Category[] = [
   {
     id: "imagery",
     eyebrow: "Lightning, Satellite & Tropical",
-    title: "Lightning, Satellite & Tropical",
+    title: "Lightning, Satellite, Tropical & Recon",
     intro:
-      "Three new layers for the full atmospheric picture: strike-by-strike lightning, satellite imagery, and tropical tracking.",
+      "The full atmospheric picture: strike-by-strike lightning, satellite imagery, worldwide tropical tracking, and the Hurricane Hunters flying into the storms.",
     features: [
       {
         title: "Live lightning (GOES GLM)",
@@ -691,7 +706,29 @@ const categories: Category[] = [
         description:
           "Named storms in every basin (typhoons too) via a global feed, plus NHC outlook areas-to-watch, forecast cones, tracks, intensity, and the observed past track. Tap any storm for a detail card.",
       },
+      {
+        title: "Every model's latest track",
+        description:
+          "Spaghetti plots show each model's newest run from the last 12 hours, ensembles and the slower models included, checked for updates often and kept on the map if an update fails. Storms crossing the 180 degree line in the Pacific keep their tracks and cones where they belong.",
+      },
+      {
+        title: "Hurricane Hunter reconnaissance",
+        description:
+          "A live Aviation layer carries NOAA and Air Force recon flights: the flight track, flight-level observations and the vortex centre fixes the crews send back from the eye. Recon Graphs charts the whole mission, surface wind against flight-level wind with the tropical storm and hurricane bands marked, then pressure and the centre-fix history.",
+      },
+      {
+        title: "Export a flight",
+        description:
+          "Share a mission as a clean two page picture brief, ready to post: headline numbers, the flight track, wind and pressure charts, the centre fixes and the crew's own remarks, dated and sourced so it still makes sense when it is reshared. Or share the raw data as two spreadsheets in the aircraft's own units, so they match the official bulletins.",
+      },
     ],
+    panel: {
+      src: "/images/howto-1.0.71/recon-export.png",
+      alt: "The Export flight sheet with the two page picture brief and the Share image and Share data buttons",
+      caption: "Export a Hurricane Hunter flight as a picture brief or spreadsheets",
+      width: 824,
+      height: 1380,
+    },
   },
   {
     id: "wind",
@@ -742,7 +779,7 @@ const categories: Category[] = [
       {
         title: "Observed + forecast profiles",
         description:
-          "Pull observed balloon data or HRRR forecast profiles for a point, the current state or the hours ahead, and scrub through hourly frames.",
+          "Pull observed balloon data or HRRR forecast profiles for a point, the current state or the hours ahead, and scrub through hourly frames. Forecast soundings open on the hour closest to now rather than the model's start time.",
       },
       {
         title: "GFS for the places HRRR does not reach",
@@ -771,7 +808,7 @@ const categories: Category[] = [
       {
         title: "Custom watch zones",
         description:
-          "Track your current location, a fixed home zone, custom counties / forecast zones, or any combination at once.",
+          "Track your current location, a fixed home zone, custom counties / forecast zones, or any combination at once. With Settings Sync on, your zones and notification choices follow you to your other devices.",
       },
       {
         title: "SPC outlooks matched to your zones",
@@ -924,9 +961,55 @@ const categories: Category[] = [
       {
         title: "Tuned for the machine you have",
         description:
-          "A 4K panel on integrated graphics asks for a lot of pixels. The map measures what your machine can actually do and trims its own work to match, so a laptop iGPU stays responsive instead of grinding.",
+          "A 4K panel on integrated graphics asks for a lot of pixels. The map measures what your machine can actually do and trims its own work to match, and layers you have not turned on cost nothing to draw, so a laptop iGPU stays responsive instead of grinding. Slower PCs on high resolution displays can also scale the whole app down a notch in Settings.",
       },
     ],
+  },
+  {
+    id: "sync",
+    eyebrow: "Settings Sync",
+    title: "Your Setup, on Every Device",
+    intro:
+      "Set the app up once. Sign in to your free Spotter Tools Pro account and every phone, tablet and PC you use gets the same map, layers and radar.",
+    features: [
+      {
+        title: "Signed in, it just works",
+        description:
+          "Sign in with Google, Apple or an email address under Settings and sync turns on by itself. Change your map style on your phone and it is sent within seconds; your PC picks it up the next time you open it or come back to its window, or straight away with Sync now.",
+      },
+      {
+        title: "What comes along",
+        description:
+          "Your map style and theme, which layers are on and their options, radar settings such as gate filters, colour palettes including your own imported .pal files, favorite radars, alert zones and notification choices, your map marker and your home location.",
+      },
+      {
+        title: "Choose what syncs",
+        description:
+          "Six groups you can untick on any device: Map style and theme, Layers and layer options, Radar, Alerts and zones, Marker and icon sizes, and Home location and other. Keep different layers on your PC and your phone if you like.",
+      },
+      {
+        title: "Sizes that make sense",
+        description:
+          "Marker and icon sizes sync between devices of the same kind, phones and tablets together and computers together, because the same slider looks different on a 6 inch screen and a 27 inch one.",
+      },
+      {
+        title: "Your phone stays your phone",
+        description:
+          "Some things never leave the device: passwords and your Spotter Network sign-in, your beacon, location sharing, the alerts on and off switch, Chaser Mode and screen settings. And changes from another device land when you open the app or come back to it, never while you are in the middle of something.",
+      },
+      {
+        title: "Your data, your call",
+        description:
+          "Already set up on two devices? The first time you sign in, the app asks which set to keep. Turn sync off on any device, or delete the saved copy from your account entirely. The account is free and optional, and the app works exactly as before without one.",
+      },
+    ],
+    panel: {
+      src: "/images/howto-1.0.72/sync-categories.png",
+      alt: "Settings Sync groups with tick boxes for each kind of setting",
+      caption: "Pick which groups follow you",
+      width: 824,
+      height: 1014,
+    },
   },
   {
     id: "customization",
@@ -973,7 +1056,7 @@ const categories: Category[] = [
       {
         title: "Private by default",
         description:
-          "No ads, no third-party trackers, and nothing sold to anyone. Your beacon goes to Spotter Network and weather data comes from NWS / SPC / Mapbox. The app collects anonymous usage statistics to guide what gets built next, with no account or identity attached, and you can turn it off in Settings under Privacy. The only thing we store is an optional account, if you choose to create one.",
+          "No ads, no third-party trackers, and nothing sold to anyone. Your beacon goes to Spotter Network and weather data comes from NWS / SPC / Mapbox. The app collects anonymous usage statistics to guide what gets built next, with no account or identity attached, and you can turn it off in Settings under Privacy. The only things we store are an optional account, if you choose to create one, and your synced settings if you turn sync on.",
       },
     ],
     screenshot: {
@@ -1039,7 +1122,7 @@ const extras: Screenshot[] = [
 
 export default function FeaturesPage() {
   return (
-    <main className="px-6 pt-32 pb-24">
+    <div className="px-6 pt-28 pb-24 sm:pt-32">
       <div className="mx-auto max-w-6xl">
         <SectionHeader
           eyebrow="Full feature list"
@@ -1048,12 +1131,15 @@ export default function FeaturesPage() {
         />
 
         {/* Quick jump */}
-        <nav className="mb-16 flex flex-wrap items-center justify-center gap-2 text-xs">
+        <nav
+          aria-label="Feature categories"
+          className="sticky top-[var(--stp-nav,57px)] z-30 -mx-6 mb-12 flex gap-2 overflow-x-auto whitespace-nowrap border-b border-white/5 bg-background/90 px-6 py-3 text-xs backdrop-blur-md [scrollbar-width:none] lg:static lg:mx-0 lg:mb-16 lg:flex-wrap lg:items-center lg:justify-center lg:overflow-visible lg:whitespace-normal lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none"
+        >
           {categories.map((cat) => (
             <a
               key={cat.id}
               href={`#${cat.id}`}
-              className="rounded-full border border-white/10 bg-surface px-3 py-1.5 text-muted transition-colors hover:border-brand-teal/30 hover:text-foreground"
+              className="shrink-0 rounded-full border border-white/10 bg-surface px-3 py-1.5 text-muted transition-colors hover:border-brand-teal/30 hover:text-foreground"
             >
               {cat.eyebrow}
             </a>
@@ -1065,7 +1151,7 @@ export default function FeaturesPage() {
             <section
               key={cat.id}
               id={cat.id}
-              className="scroll-mt-24 grid gap-10 lg:grid-cols-[1fr_280px] lg:items-start"
+              className="scroll-mt-36 grid gap-10 lg:scroll-mt-24 lg:grid-cols-[1fr_280px] lg:items-start"
             >
               <div>
                 <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-teal">
@@ -1115,6 +1201,22 @@ export default function FeaturesPage() {
                     {cat.video.caption}
                   </figcaption>
                 </figure>
+              ) : cat.panel ? (
+                <figure className="lg:sticky lg:top-24">
+                  <div className="mx-auto max-w-[300px] overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] shadow-2xl">
+                    <Image
+                      src={cat.panel.src}
+                      alt={cat.panel.alt}
+                      width={cat.panel.width}
+                      height={cat.panel.height}
+                      sizes="300px"
+                      className="w-full"
+                    />
+                  </div>
+                  <figcaption className="mt-3 text-center text-xs text-muted">
+                    {cat.panel.caption}
+                  </figcaption>
+                </figure>
               ) : cat.screenshot ? (
                 <figure className="lg:sticky lg:top-24">
                   <div className="phone-frame mx-auto">
@@ -1123,6 +1225,7 @@ export default function FeaturesPage() {
                       alt={cat.screenshot.alt}
                       width={440}
                       height={960}
+                      sizes="220px"
                       className="object-cover"
                     />
                   </div>
@@ -1161,6 +1264,6 @@ export default function FeaturesPage() {
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

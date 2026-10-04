@@ -16,11 +16,14 @@ export default function ScreenshotStrip({
       {screenshots.map((s) => (
         <div key={s.src} className="flex flex-col items-center gap-3">
           <div className="phone-frame">
+            {/* The frame is 220px wide, so ask for a 220px image (440 at 2x)
+                rather than letting next/image fall back to 100vw. */}
             <Image
               src={s.src}
               alt={s.alt}
               width={440}
               height={960}
+              sizes="220px"
               className="object-cover"
             />
           </div>

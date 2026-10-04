@@ -6,12 +6,13 @@ export const metadata: Metadata = {
   title: "Draw | Spotter Tools Pro",
   description:
     "Mark up the radar with fronts, outflow boundaries, rotation markers, hail cores and target boxes. Every mark belongs to the ground, so it stays on the storm when you pan and zoom.",
+  alternates: { canonical: "/draw" },
   openGraph: {
     title: "Spotter Tools Pro | Draw",
     description:
       "Draw on the radar with real weather symbols. Marks stay on the storm, measure themselves, and save automatically.",
     type: "website",
-    images: [{ url: "/images/stp-logo.png", width: 1024, height: 1024 }],
+    images: [{ url: "/images/og-card.jpg", width: 1200, height: 630 }],
   },
 };
 

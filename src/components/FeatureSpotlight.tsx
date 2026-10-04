@@ -1,26 +1,32 @@
 import Image from "next/image";
+import Link from "next/link";
 import AutoVideo from "@/components/AutoVideo";
 
-type Props = {
+export type Spotlight = {
+  /** Anchor id, so other pages and the nav can deep-link to one feature. */
+  id?: string;
   eyebrow: string;
   title: string;
   description: string;
   src: string;
   /** Poster frame for a video spotlight. Omit when `still` is set. */
   poster?: string;
+  /** Pixel size of the clip (videos) so its box is reserved before load. */
+  size?: { width: number; height: number };
   /**
    * Render `src` as a static screenshot instead of a video. The intrinsic
    * size keeps next/image from laying out at 0x0; the rendered width is
    * still the column's.
    */
   still?: { width: number; height: number };
-  flip?: boolean;
   /**
    * Tall phone-shaped capture (roughly 9:20). Left unconstrained it would run
    * ~1300px tall in a half-width column and dwarf its own copy, so cap it to
    * phone width and let it sit centered in the column.
    */
   portrait?: boolean;
+  /** Optional deep-dive link under the copy. */
+  link?: { href: string; label: string };
 };
 
 /**
@@ -29,17 +35,23 @@ type Props = {
  * page. On narrow screens the video always stacks above the text.
  */
 export default function FeatureSpotlight({
+  id,
   eyebrow,
   title,
   description,
   src,
   poster,
+  size,
   still,
-  flip = false,
   portrait = false,
-}: Props) {
+  link,
+  flip = false,
+}: Spotlight & { flip?: boolean }) {
   return (
-    <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+    <div
+      id={id}
+      className="grid scroll-mt-24 items-center gap-8 lg:grid-cols-2 lg:gap-14"
+    >
       <figure className={flip ? "lg:order-2" : ""}>
         <div
           className={`overflow-hidden rounded-2xl border border-white/10 shadow-2xl ${
@@ -52,10 +64,22 @@ export default function FeatureSpotlight({
               alt={title}
               width={still.width}
               height={still.height}
+              sizes={
+                portrait
+                  ? "280px"
+                  : "(min-width: 1152px) 548px, (min-width: 1024px) 46vw, calc(100vw - 48px)"
+              }
               className="w-full"
             />
           ) : (
-            <AutoVideo src={src} poster={poster ?? ""} className="w-full" />
+            <AutoVideo
+              src={src}
+              poster={poster ?? ""}
+              width={size?.width}
+              height={size?.height}
+              label={title}
+              className="w-full"
+            />
           )}
         </div>
       </figure>
@@ -65,6 +89,14 @@ export default function FeatureSpotlight({
         </p>
         <h3 className="mb-4 text-2xl font-bold sm:text-3xl">{title}</h3>
         <p className="leading-relaxed text-muted">{description}</p>
+        {link ? (
+          <Link
+            href={link.href}
+            className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-teal transition-colors hover:text-foreground"
+          >
+            {link.label} <span aria-hidden>&rarr;</span>
+          </Link>
+        ) : null}
       </div>
     </div>
   );
