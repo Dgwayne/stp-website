@@ -25,16 +25,16 @@ export const metadata: Metadata = {
  * this to the one feature people will share; the rest go in `newCards`.
  */
 const newHeadline: Spotlight = {
-  id: "tornado-id",
-  eyebrow: "Tornado ID · Experimental",
-  title: "A Tornado Detector Built Into the Radar",
+  id: "box-meteogram",
+  eyebrow: "Box Meteogram",
+  title: "Draw a Box, Read the Whole Setup",
   description:
-    "Tornado ID looks at every circulation the radar sees and estimates the chance a tornado is on the ground right now. Markers turn amber from 5%, orange from 30% and red from 60%, and a tap opens a plain-words card with the score, whether it is rising, how long the circulation has been tracked, how strong the rotation is, any debris signature and how high the beam is. Behind it is a machine learning model trained on every confirmed tornado from 2017 to 2025: more than 14,000 tornado track segments, 3,600 warnings that never produced one, and about 81,000 archived radar scans. It works on live radar and in archive mode. It is an estimate, not a warning, so always follow the National Weather Service.",
-  src: "/images/v172/tornado-id-greenfield.jpg",
-  still: { width: 1000, height: 1000 },
+    "Long-press the map, draw a box over the area you plan to chase, and see the severe setup hour by hour across all of it. A plain-language verdict sits on top, then a tornado, hail, damaging wind and flooding rain timeline, whether storms can form and whether the model actually makes them. Ensemble odds from NOAA's 14-member REFS add the chance of rotating storms, strong storms, 50 kt gusts and an inch of rain an hour, and 16 charts run from CAPE and shear to STP, the supercell composite and model radar. Switch between HRRR, RRFS and GFS, pick an earlier run, or tap Compare to see whether the threat is trending up or down.",
+  src: "/images/v175/box-meteogram.jpg",
+  still: { width: 965, height: 1212 },
   caption:
-    "Archive replay in the app: the Greenfield, Iowa tornado of May 21, 2024, on the Des Moines radar (KDMX)",
-  link: { href: "/radar#tornado-id", label: "How Tornado ID was built" },
+    "Captured in the app: a box over eastern New Mexico, HRRR with REFS ensemble odds",
+  link: { href: "/features#box-meteogram", label: "More on the box meteogram" },
 };
 
 type NewCard = {
@@ -53,47 +53,46 @@ type NewCard = {
 
 const newCards: NewCard[] = [
   {
-    id: "expert-mode",
-    eyebrow: "Expert mode",
-    title: "Fill the Radar Holes",
+    id: "prism-lens",
+    eyebrow: "Prism lens",
+    title: "See Inside the Storm",
     description:
-      "One radar can be overshooting a storm while the radar beside it sees thousands of feet lower. Expert mode builds one image from up to three radars, each painting only the ground it is closest to, lined up to the same moment, with numbered badges so you always know which is which.",
+      "Drag a circle over a storm and see a different product inside it: velocity, storm-relative velocity, correlation coefficient, spectrum width or reflectivity. Split it into up to four slices to compare products over the same spot. It keeps working while a loop plays and in archive mode.",
     image: {
-      src: "/images/v172/expert-mode.jpg",
-      width: 1600,
-      height: 1000,
-      alt: "Expert mode blending the Birmingham, Jackson and Atlanta radars into one image, with numbered site badges",
+      src: "/images/v175/prism-lens.jpg",
+      width: 1035,
+      height: 813,
+      alt: "The Prism lens over a storm, split between correlation coefficient and velocity inside the reflectivity",
     },
-    link: { href: "/radar#expert-mode", label: "How it works" },
+    link: { href: "/radar#prism", label: "How the lens works" },
   },
   {
-    id: "precip-type",
-    eyebrow: "Precip Type",
-    title: "Rain, Snow, Sleet or Ice",
+    id: "height-lines",
+    eyebrow: "3D radar",
+    title: "Height Lines on Every Storm",
     description:
-      "Colour the radar by what is actually falling: rain, snow, sleet or freezing rain. The strength comes from the radar and the type from the HRRR model, refreshed every 15 minutes, on single site radar and across the whole national mosaic.",
+      "The 3D volume now draws height lines every 10,000 feet and tags the echo tops right on the storms, so you can tell how tall a storm is at a glance. Sunlight and shadows give it shape, hail cores show through the storm, and 3D loops run up to 6 hours.",
     image: {
-      src: "/images/v172/precip-type.jpg",
+      src: "/images/v175/volume-3d-height-lines.jpg",
       width: 1600,
-      height: 1000,
-      alt: "The national radar over the Southeast coloured by precipitation type, with the rain, snow, sleet and freezing rain legend",
+      height: 696,
+      alt: "A line of storms in 3D over eastern New Mexico with 10k and 20k height lines and echo-top tags",
     },
-    link: { href: "/radar#precip-type", label: "See Precip Type" },
+    link: { href: "/radar#volume-3d", label: "More on 3D" },
   },
   {
-    id: "settings-sync",
-    eyebrow: "Settings Sync",
-    title: "Set It Up Once",
+    id: "pro-soundings",
+    eyebrow: "Soundings",
+    title: "A Pro Skew-T and Hodograph",
     description:
-      "Sign in with Google, Apple or email and your map style, layers, radar setup, colour palettes, alert zones and home location are the same on your phone, your tablet and your PC. Pick which groups sync, or keep a device to itself.",
+      "A new skew-T and hodograph with full parcel, shear and composite tables underneath. Pick an earlier model run and compare it with the one before, and the written read now looks ahead: when the threat peaks and whether the cap breaks.",
     image: {
-      src: "/images/howto-1.0.72/sync-categories.png",
-      width: 824,
-      height: 1014,
-      alt: "Settings Sync options: map style, layers, radar, alerts, marker sizes and home location",
+      src: "/images/v175/skew-t.jpg",
+      width: 1400,
+      height: 964,
+      alt: "The full point sounding with skew-T, hodograph and parcel, kinematics, thermodynamics and composite tables",
     },
-    fit: "top",
-    link: { href: "/features#sync", label: "What syncs" },
+    link: { href: "/features#soundings", label: "More on soundings" },
   },
 ];
 
@@ -109,14 +108,14 @@ const features: Feature[] = [
     icon: "🧊",
     title: "Storms in 3D",
     description:
-      "Stand the whole scan up as a solid you can fly around. Your own site's Level 2 volume in full detail, or the nationwide mosaic anywhere in the lower 48. Debris and rotation are marked inside the storm, cores show through the envelope, and it plays with the loop. Our servers build the volume, so it appears almost immediately.",
+      "Stand the whole scan up as a solid you can fly around. Your own site's Level 2 volume in full detail, or the nationwide mosaic anywhere in the lower 48. Height lines and echo-top tags are drawn on the storms, debris and rotation are marked inside them, hail cores show through, and it plays with the loop for up to 6 hours. Our servers build the volume, so it appears almost immediately.",
     href: "/radar#volume-3d",
   },
   {
     icon: "📡",
     title: "GPU Radar: Level 2, III & TDWR",
     description:
-      "GPU-rendered and crisp at any zoom. Level 2 decoded on-device, Level III and dual-pol, the 45-site TDWR network, cross sections and storm tracks. Expert mode blends up to three radars into one image, and Precip Type colours rain, snow, sleet and ice.",
+      "GPU-rendered and crisp at any zoom. Level 2 decoded on-device, Level III and dual-pol, the 45-site TDWR network, cross sections and storm tracks. The Prism lens shows velocity or CC inside your reflectivity, Expert mode blends up to three radars into one image, and Precip Type colours rain, snow, sleet and ice.",
     href: "/radar",
   },
   {
@@ -141,25 +140,25 @@ const features: Feature[] = [
     href: "/alerts",
   },
   {
-    icon: "🔄",
-    title: "Settings Sync",
+    icon: "🚗",
+    title: "Radar in Your Car",
     description:
-      "Sign in once and your map, layers, radar setup, palettes, alert zones and home location follow you between phone, tablet and PC. Choose which groups sync, and delete the saved copy whenever you like.",
-    href: "/features#sync",
+      "Live radar, warnings, storm cells and reports on your car's screen with CarPlay and Android Auto, plus turn-by-turn directions over the radar with spoken prompts that keep talking when your phone is locked.",
+    href: "/features#car",
   },
   {
     icon: "🎬",
-    title: "Share Any Loop as a GIF or MP4",
+    title: "Share Any Loop or Screen",
     description:
-      "Record what is on screen and hand it straight to the share sheet: single-site radar, the national composite, satellite, weather models or air quality. Every frame carries a stamp so the loop still says what it is once it leaves the app.",
+      "Record a loop as a GIF or MP4 and hand it straight to the share sheet: single-site radar, the national composite, satellite, weather models or air quality, with a stamp on every frame. The Share button captures any screen with a branded footer in one tap.",
     href: "/features#loop-share",
   },
   {
     icon: "🎈",
-    title: "On-Device Soundings",
+    title: "Box Meteogram & Pro Soundings",
     description:
-      "Skew-T and hodograph for any point, observed balloon data or forecast profiles, with a full parameter analysis and a plain-language read of what the environment supports.",
-    href: "/features#soundings",
+      "Draw a box and see the severe threat hour by hour with REFS ensemble odds. Tap a point for a pro skew-T and hodograph with full parameter tables, compare model runs, and get a plain-language read of what the environment supports.",
+    href: "/features#box-meteogram",
   },
   {
     icon: "📍",
@@ -179,7 +178,7 @@ const features: Feature[] = [
     icon: "🌀",
     title: "Tropical, and the Hurricane Hunters",
     description:
-      "Worldwide tropical cyclone tracking with forecast cones, wind fields and every model's latest track. Plus live NOAA and Air Force reconnaissance on the map, Recon Graphs for the whole mission, and a flight export that turns it into a ready-to-post picture brief or spreadsheet.",
+      "Worldwide tropical cyclone tracking with a spinning storm marker, forecast cones, wind fields and every model's latest track, Google DeepMind's AI model included and every line labelled. Plus live NOAA and Air Force reconnaissance on the map, Recon Graphs for the whole mission, and a flight export that turns it into a ready-to-post picture brief or spreadsheet.",
     href: "/features#imagery",
   },
 ];
@@ -222,7 +221,7 @@ const spotlights: Spotlight[] = [
     eyebrow: "Storms in 3D",
     title: "Fly Around the Whole Storm",
     description:
-      "Radar has always been a flat slice. Now the whole Level 2 scan stands up as a solid you can orbit, so you see how a storm is built instead of inferring it one tilt at a time. Debris and rotation are marked inside the storm rather than hidden in a couplet you have to go find. Opacity follows rain rate, so heavy cores stay solid while light rain goes sheer and you can see straight into it from any side. Height is yours to set, including true scale, and the volume runs with the loop.",
+      "Radar has always been a flat slice. Now the whole Level 2 scan stands up as a solid you can orbit, so you see how a storm is built instead of inferring it one tilt at a time. Height lines every 10,000 feet and echo-top tags sit right on the storms, and debris and rotation are marked inside them rather than hidden in a couplet you have to go find. Sunlight and shadows give the storm its shape, and hail cores show through it. Opacity follows rain rate, so heavy cores stay solid while light rain goes sheer and you can see straight into it from any side. Height is yours to set, including true scale, and the volume runs with the loop.",
     src: "/videos/radar-3d-volume.mp4",
     poster: "/videos/radar-3d-volume-poster.jpg",
     size: { width: 460, height: 1024 },
@@ -298,7 +297,7 @@ const spotlights: Spotlight[] = [
     eyebrow: "Compare",
     title: "Dual-View Radar",
     description:
-      "Split the screen to compare two radar views side by side (different products or two sites), each pane with its own independent controls. On Windows you can drag the divider to give either pane more room.",
+      "Split the screen to compare two radar views side by side, different products or two sites, with every Level II product available in both panes. Two panes on one radar share each download, search and site picks move both, and on Windows you can drag the divider to give either pane more room.",
     src: "/videos/radar-dualview.mp4",
     poster: "/videos/radar-dualview-poster.jpg",
     size: { width: 640, height: 670 },
@@ -362,8 +361,8 @@ export default function Home() {
               New
             </span>
             <span className="truncate">
-              Tornado ID, Expert mode, Precip Type
-              <span className="hidden sm:inline"> and Settings Sync</span>
+              Box Meteogram, Prism lens, 3D height lines
+              <span className="hidden sm:inline"> and CarPlay</span>
             </span>
             <span aria-hidden>&rarr;</span>
           </Link>
@@ -379,10 +378,10 @@ export default function Home() {
             <span className="gradient-text">Spotter Tools Pro</span>
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-muted sm:text-xl">
-            Severe weather, in your pocket and on your desktop. Tornado ID,
-            storms in 3D, GPU radar, a radar archive back to 1991, smart push
-            alerts, and the full NWS / SPC suite, built for chasers and
-            spotters.
+            Severe weather, in your pocket, on your desktop and in your car.
+            Tornado ID, storms in 3D, GPU radar, a box meteogram, a radar
+            archive back to 1991, smart push alerts, and the full NWS / SPC
+            suite, built for chasers and spotters.
           </p>
           <StoreBadges />
           <div className="mt-5 flex flex-col items-center gap-1.5">
@@ -462,11 +461,12 @@ export default function Home() {
           </div>
 
           <p className="mx-auto mt-10 max-w-3xl text-center text-sm leading-relaxed text-muted">
-            <strong className="text-foreground">Also new:</strong> nearly every
-            NOAA winter, hazard and long range outlook, Hurricane Hunter flight
-            export, cleaner Level 2 velocity, a quality-controlled national
-            radar, a live or stills camera filter, and 38 more New Mexico
-            cameras.{" "}
+            <strong className="text-foreground">Also new:</strong>{" "}CarPlay
+            and Android Auto, turn-by-turn directions with spoken prompts, live
+            chaser positions on the map, warnings that play back with the loop,
+            a one-tap command bar, a Share button, every Level II product in
+            dual view, about 25,000 more surface stations, and Google
+            DeepMind&apos;s AI hurricane track.{" "}
             <Link
               href="/features"
               className="font-semibold text-brand-teal hover:underline"

@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://spottertools.pro";
 
 const DESCRIPTION =
-  "A severe weather app for storm chasers, spotters and weather enthusiasts. An experimental Tornado ID detector, 3D storm volumes you can fly around, GPU-rendered NEXRAD Level 2 and Level III radar, Expert multi-radar mode, rain/snow/sleet/ice Precip Type, a radar archive back to 1991, smart push alerts, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras and the full NWS / SPC suite. $19.99 once, no subscription. On iOS, Android and Windows.";
+  "A severe weather app for storm chasers, spotters and weather enthusiasts. An experimental Tornado ID detector, 3D storm volumes you can fly around, a box meteogram with ensemble odds, the Prism radar lens, CarPlay and Android Auto, GPU-rendered NEXRAD Level 2 and Level III radar, Expert multi-radar mode, rain/snow/sleet/ice Precip Type, a radar archive back to 1991, smart push alerts, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras and the full NWS / SPC suite. $19.99 once, no subscription. On iOS, Android and Windows.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -40,6 +40,9 @@ export const metadata: Metadata = {
     "live storm chasers",
     "NEXRAD radar",
     "3D radar",
+    "box meteogram",
+    "CarPlay weather radar",
+    "Android Auto weather radar",
     "3D storm volume",
     "volumetric radar",
     "level 2 radar",
@@ -75,7 +78,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Spotter Tools Pro",
     description:
-      "Tornado ID, 3D storm volumes, Level 2 and Level III radar, Expert mode, Precip Type, alerts, live cameras and storm chasers, for enthusiasts, chasers and spotters. $19.99 once on iOS, Android and Windows.",
+      "Tornado ID, 3D storm volumes, a box meteogram, the Prism lens, CarPlay and Android Auto, Level 2 and Level III radar, alerts, live cameras and storm chasers, for enthusiasts, chasers and spotters. $19.99 once on iOS, Android and Windows.",
     type: "website",
     siteName: "Spotter Tools Pro",
     images: [

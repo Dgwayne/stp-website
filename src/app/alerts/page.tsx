@@ -144,6 +144,8 @@ const blocks: Block[] = [
       "Tornado and severe thunderstorm watch boxes",
       "Tap any polygon for the full NWS product text and threat info",
       "An alert disambiguation sheet when polygons overlap so you can pick the one you meant",
+      "Warnings play back with the radar loop, single site or national: each frame shows what was in effect at that moment, as warnings were issued, updated and cancelled",
+      "In the car, warnings ride along on the CarPlay and Android Auto radar, and CarPlay shows car alerts on its own screen",
     ],
     flip: true,
   },

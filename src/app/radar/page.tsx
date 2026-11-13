@@ -7,12 +7,12 @@ import AutoVideo from "@/components/AutoVideo";
 export const metadata: Metadata = {
   title: "Radar | Spotter Tools Pro",
   description:
-    "An experimental Tornado ID detector, Expert multi-radar mode, rain/snow/sleet/ice Precip Type, 3D storm volumes you can fly around, real-time NEXRAD Level 2 decoding, Level III and dual-pol, the full TDWR network, a quality-controlled national mosaic, a radar archive to the 1990s and custom GR2Analyst-style color tables, on iOS, Android and Windows.",
+    "The Prism lens for velocity or CC inside your reflectivity, an experimental Tornado ID detector, Expert multi-radar mode, rain/snow/sleet/ice Precip Type, 3D storm volumes you can fly around, real-time NEXRAD Level 2 decoding, Level III and dual-pol, the full TDWR network, a quality-controlled national mosaic, a radar archive to the 1990s and custom GR2Analyst-style color tables, on iOS, Android and Windows.",
   alternates: { canonical: "/radar" },
   openGraph: {
     title: "Spotter Tools Pro | Radar",
     description:
-      "Tornado ID, Expert mode, Precip Type, 3D storm volumes, Level 2 and Level III radar, and a radar archive back to 1991.",
+      "Prism lens, Tornado ID, Expert mode, Precip Type, 3D storm volumes with height lines, Level 2 and Level III radar, and a radar archive back to 1991.",
     type: "website",
     url: "/radar",
     images: [{ url: "/images/og-card.jpg", width: 1200, height: 630 }],
@@ -176,6 +176,31 @@ const blocks: Block[] = [
     },
   },
   {
+    id: "prism",
+    eyebrow: "Prism Lens",
+    title: "See velocity or CC inside your reflectivity",
+    body: [
+      "Switching products back and forth means losing your place on the storm. The Prism lens puts a second product inside a circle you drag over it, so reflectivity stays around the edge for context and the velocity, or the debris signature, sits right where you are looking.",
+      "Tap Prism in the single site radar controls and a circle opens in the middle of the map. Over reflectivity it shows velocity; over any other product it shows reflectivity. Tap the label on a slice to pick its product.",
+    ],
+    bullets: [
+      "Velocity, storm-relative velocity, correlation coefficient, spectrum width or reflectivity inside the lens",
+      "Split it into up to 4 slices to compare products side by side over the same spot",
+      "Drag the knob on its edge to resize it, or pinch inside it on a phone and Ctrl + scroll on Windows",
+      "Each slice is labelled with how old its scan is, and turns amber if it is more than 2 minutes behind the map",
+      "Keeps working while a loop plays and in archive mode",
+    ],
+    media: {
+      kind: "image",
+      src: "/images/v175/prism-lens.jpg",
+      alt: "The Prism lens over a storm, split between correlation coefficient and velocity inside the reflectivity",
+      width: 1035,
+      height: 813,
+      caption: "Captured in the app: CC and velocity inside the lens, over a storm in eastern New Mexico",
+    },
+    flip: true,
+  },
+  {
     id: "volume-3d",
     eyebrow: "3D Storm Volume",
     title: "The whole scan, standing up",
@@ -185,19 +210,23 @@ const blocks: Block[] = [
       "Our servers build the volume and send it down ready to draw, so it appears almost immediately rather than after your phone has ground through a full scan. If no prepared volume exists for your site, the app quietly builds one locally as before.",
     ],
     bullets: [
+      "Height lines every 10,000 feet and echo-top tags drawn right on the storms",
+      "Sunlight and shadows on every storm, so its shape reads at a glance",
+      "Hail cores show through the storm with the Cores toggle",
       "Debris and rotation marked inside the storm, not hidden in a couplet you have to find",
       "Opacity follows rain rate, so heavy cores stay solid and light rain goes sheer",
       "Height is yours to set, including true scale for real proportions",
-      "It plays with the loop, so you watch a storm build and collapse in three dimensions",
+      "It plays with the loop for up to 6 hours, so you watch a storm build and collapse in three dimensions",
       "Renders at whatever resolution keeps your device smooth, dropping detail before frames",
     ],
     media: {
-      kind: "phone",
-      src: "/images/v170/volume-3d.jpg",
-      alt: "Storm cells rendered as a 3D volume above the map",
-      caption: "The Level 2 volume, orbited around a line of storms",
+      kind: "image",
+      src: "/images/v175/volume-3d-height-lines.jpg",
+      alt: "A line of storms in 3D over eastern New Mexico with 10k and 20k height lines and echo-top tags",
+      width: 1600,
+      height: 696,
+      caption: "Captured in the app: height lines and echo-top tags on a line of storms",
     },
-    flip: true,
   },
   {
     id: "instant-l2",
@@ -208,6 +237,7 @@ const blocks: Block[] = [
       "The newest scan reaches the app about 12 seconds after the radar sends it. The scan time and VCP are printed on the panel, so you always know how old what you are looking at really is.",
       "Nothing about it can leave you worse off. If the fast lane is slow or unavailable, the app falls back to the full on-device decode it always did.",
     ],
+    flip: true,
     media: {
       kind: "phone",
       src: "/images/v170/instant-l2.jpg",
@@ -229,6 +259,8 @@ const blocks: Block[] = [
       "Pick playback speed, slow walk-throughs or full-pace loops",
       "Pick frame count, up to about eight hours of Level III history",
       "Background frame loading with progress so you know when it's ready",
+      "Warnings play back with the loop: each frame shows the warnings in effect at that moment, as they were issued, updated and cancelled, and the newest frame is always live",
+      "The radar legend shows the scan time and how old it is",
       "Optional FastScan sweep: a beam-reveal animation with range rings and live pipeline chips",
     ],
   },
@@ -266,7 +298,9 @@ const blocks: Block[] = [
       "Pick an output size and see the estimated file size before you commit, up to an XL 1440 pixels for a desktop-sized map",
       "Product, site and time burned into every frame, so the loop still says what it is",
       "The 3D volume comes with it, so what you share is what you were looking at",
-      "Encoding runs off the main thread, so the app keeps working while it renders",
+      "Encoding runs off the main thread, so the app keeps working while it renders, and export is two to three times faster",
+      "On Windows, a Full size option exports at your screen's full resolution and saves to your Videos or Pictures folder",
+      "Or tap the Share button to send a single screen, with a branded footer and the date and time",
     ],
   },
   {
@@ -387,6 +421,7 @@ const blocks: Block[] = [
     title: "Two radars, side by side",
     body: [
       "Split the screen to compare two radar views side by side, different products or two sites, each pane with its own independent controls. On Windows the divider drags, so either pane can have more room.",
+      "Every Level II product works in both panes, including storm-relative velocity, spectrum width and normalized rotation. Two panes on one radar share each download, so side by side costs no more data, and search, Center on me, a radar site pick or an alert move both panes together.",
     ],
     media: {
       kind: "video",
@@ -411,6 +446,10 @@ const blocks: Block[] = [
       "Precip Type for the whole country, coloured rain, snow, sleet or freezing rain",
       "The 3D volume works nationwide too",
       "The QC product and Precip Type loop up to 2 hours; Base Reflectivity reaches 3, 6 and 12 hours",
+      "Low + Mid rotation on one map, striped where both levels are spinning",
+      "Smooth colour scales for rotation, hail size, echo tops, VIL, rain totals and precip rate, with a quiet grey wash for weak values",
+      "Reflectivity layers use your own colour table and gate filter",
+      "Inspector reads the value under a crosshair, and the data age is shown on the panel",
     ],
     media: {
       kind: "phone",
@@ -487,7 +526,7 @@ export default function RadarPage() {
         <SectionHeader
           eyebrow="Radar"
           title="Real radar, not a screenshot"
-          description="NEXRAD Level 2 decoded on your device, an experimental Tornado ID, Expert multi-radar mode, Precip Type, a 3D storm volume you can fly around, a clean national mosaic, a full animation transport and an archive back to 1991."
+          description="NEXRAD Level 2 decoded on your device, the Prism lens, an experimental Tornado ID, Expert multi-radar mode, Precip Type, a 3D storm volume you can fly around, a clean national mosaic, a full animation transport and an archive back to 1991."
         />
 
         {/* Quick jump */}

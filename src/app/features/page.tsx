@@ -10,12 +10,12 @@ import AutoVideo from "@/components/AutoVideo";
 export const metadata: Metadata = {
   title: "Features | Spotter Tools Pro",
   description:
-    "The full Spotter Tools Pro feature list: an experimental Tornado ID detector, Expert multi-radar mode, rain/snow/sleet/ice Precip Type, Settings Sync across phone, tablet and PC, 3D storm volumes you can fly around, a radar archive back to the early 1990s, loop export to GIF or MP4, GPU radar (Level 2, III & TDWR) with eight-hour loops, ground-anchored map drawing, storm track projection, offline basemaps, wildfire and earthquake layers, live wind flow, mesoanalysis, on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras across 48 states, weather models, opt-in presence, smart push alerts, severe weather reporting, and a real Windows desktop app.",
+    "The full Spotter Tools Pro feature list: a box meteogram with REFS ensemble odds, the Prism radar lens, CarPlay and Android Auto, turn-by-turn directions over the radar, an experimental Tornado ID detector, Expert multi-radar mode, rain/snow/sleet/ice Precip Type, Settings Sync across phone, tablet and PC, 3D storm volumes you can fly around, a radar archive back to the early 1990s, loop export to GIF or MP4, GPU radar (Level 2, III & TDWR) with eight-hour loops, ground-anchored map drawing, storm track projection, offline basemaps, wildfire and earthquake layers, live wind flow, mesoanalysis, on-device soundings, dual-view compare, live lightning, satellite, worldwide tropical, live storm chasers, tens of thousands of live cameras across 48 states, weather models, opt-in presence, smart push alerts, severe weather reporting, and a real Windows desktop app.",
   alternates: { canonical: "/features" },
   openGraph: {
     title: "Spotter Tools Pro | Features",
     description:
-      "The complete feature tour: Tornado ID, radar, alerts, cameras, models, sync, reporting, and customization.",
+      "The complete feature tour: box meteogram, Prism lens, Tornado ID, radar, CarPlay and Android Auto, alerts, cameras, models, sync, reporting, and customization.",
     type: "website",
     url: "/features",
     images: [{ url: "/images/og-card.jpg", width: 1200, height: 630 }],
@@ -121,12 +121,12 @@ const categories: Category[] = [
       {
         title: "Nearly every NOAA outlook",
         description:
-          "SPC convective outlooks Day 1 through Day 8 (Categorical, Tornado, Wind, Hail) and general thunderstorm, plus WPC Winter Weather (the chance of 4, 8 or 12 inches of snow or a quarter inch of ice, Days 1 to 3), WPC Hazards for Days 3 to 7, CPC Hazards for Days 8 to 14 including extreme heat and rapid onset drought, Fire Weather out to Day 8, Excessive Rainfall and QPF out to Day 7, the Winter Storm Severity Index and its parts, CPC 6 to 10 day, monthly and seasonal temperature and precipitation, and the Drought Monitor with its monthly and seasonal outlooks. They load from our own servers in a fraction of the time, with NOAA as the backup.",
+          "SPC convective outlooks Day 1 through Day 8 (Categorical, Tornado, Wind, Hail) and general thunderstorm, plus WPC Winter Weather (the chance of 4, 8 or 12 inches of snow or a quarter inch of ice, Days 1 to 3), WPC Hazards for Days 3 to 7, CPC Hazards for Days 8 to 14 including extreme heat and rapid onset drought, Fire Weather out to Day 8, Excessive Rainfall and QPF out to Day 7, the Winter Storm Severity Index and its parts, CPC 6 to 10 day, monthly and seasonal temperature and precipitation, and the Drought Monitor with its monthly and seasonal outlooks. The picker groups them by Storms, Rain & flooding, Fire, Winter and Long range. They load from our own servers in a fraction of the time, with NOAA as the backup.",
       },
       {
-        title: "METARs",
+        title: "Surface Obs: about 25,000 more stations",
         description:
-          "Live airport observations with selectable variables (temperature, dew point, wind, pressure, visibility) and unit pickers.",
+          "Airport METARs plus fire weather (RAWS), government and mesonet, and citizen (CWOP) stations from NOAA MADIS, each type with its own dot colour and its own on/off switch. Read temperature, dew point, wind, wind gust, relative humidity, pressure or visibility, with unit pickers, and tap any station for its details. More stations appear as you zoom in.",
       },
       {
         title: "Surface observations (RTMA)",
@@ -144,14 +144,24 @@ const categories: Category[] = [
           "Type any city, town, address or landmark in the map menu and fly straight to it, no panning and pinching across the country.",
       },
       {
-        title: "One rail, not a wall of buttons",
+        title: "A command bar for the products you use most",
         description:
-          "Every layer used to pin its own row of controls under the app bar and they stacked, eating a quarter of the screen. They now share one compact rail whose height stays fixed no matter how many layers you run.",
+          "A bar floating at the top of the map puts Single Site, National, Models, Satellite and Outlooks one tap away, with search and your beacon status alongside. The controls for the product you picked hang right under it, every product panel has a red close button, and everything else is still in Map layers. On a phone it folds into one compact row.",
       },
       {
-        title: "One-tap base layer switching",
+        title: "Inspector on more products",
         description:
-          "A button in the bottom corner switches between the four layers that paint the map, single-site radar, composite, weather models, and satellite. It wears the icon of whatever is on screen, so it doubles as a status light.",
+          "Tap Inspector on national radar, weather models, mesoanalysis or observations and a crosshair reads the value under it as you move the map. National radar, mesoanalysis and observations also show how old their data is.",
+      },
+      {
+        title: "Map labels that stay put",
+        description:
+          "State names and major cities always show, whatever else is on the map, and a City density setting (Sparse, Normal, Dense or Maximum) decides how many smaller towns join them.",
+      },
+      {
+        title: "Share button",
+        description:
+          "A Share button in the bottom bar captures the screen you are on, map included, with a footer carrying the logo, spottertools.pro and the date and time, and hands it to your share sheet.",
       },
       {
         title: "Surface fronts & pressure",
@@ -223,9 +233,14 @@ const categories: Category[] = [
           "Colour single-site radar or the whole national mosaic as rain, snow, sleet or freezing rain. The strength is the radar and the type is the HRRR model, updated every 15 minutes, with the inspector reading the type at any spot and loops coloured frame by frame. Lower 48, live radar.",
       },
       {
+        title: "Prism lens",
+        description:
+          "Drag a circle over a storm to see a different product inside it: velocity, storm-relative velocity, correlation coefficient, spectrum width or reflectivity. Split it into up to four slices to compare products over the same spot, resize it with the knob on its edge, and read each slice's scan age on its label. It works while a loop plays and in archive mode.",
+      },
+      {
         title: "3D storm volume",
         description:
-          "Every tilt of a Level 2 scan resampled into a single solid you can orbit, so you read how a storm is built instead of inferring it one elevation at a time. Debris and rotation are marked inside the storm, opacity follows rain rate so heavy cores stay solid while light rain goes sheer, height is yours to set including true scale, and the volume plays with the loop.",
+          "Every tilt of a Level 2 scan resampled into a single solid you can orbit, so you read how a storm is built instead of inferring it one elevation at a time. Height lines every 10,000 feet and echo-top tags are drawn on the storms, sunlight and shadows give them shape, hail cores show through with the Cores toggle, and debris and rotation are marked inside. Opacity follows rain rate so heavy cores stay solid while light rain goes sheer, height is yours to set including true scale, and the volume plays with the loop for up to 6 hours.",
       },
       {
         title: "Nationwide 3D mosaic",
@@ -295,12 +310,12 @@ const categories: Category[] = [
       {
         title: "A clean national mosaic",
         description:
-          "A GPU-rendered CONUS composite, crisp at every zoom, drawn in data space from the full MRMS product catalog, with a transport bar, hourly playback, and tap-to-read values. It opens on Base Reflectivity (QC), with birds, insects and ground clutter removed, and the original is one tap away.",
+          "A GPU-rendered CONUS composite, crisp at every zoom, drawn in data space from the full MRMS product catalog, with a transport bar, hourly playback, and tap-to-read values. It opens on Base Reflectivity (QC), with birds, insects and ground clutter removed, and the original is one tap away. Low + Mid rotation puts both rotation levels on one map, striped where both are spinning; rotation, hail size, echo tops, VIL, rain totals and precip rate use smooth colour scales; and the reflectivity layers use your own colour table and gate filter.",
       },
       {
         title: "Full animation transport",
         description:
-          "Play, pause, scrub, change loop speed, and pick frame count, same controls you'd expect from a desktop radar app.",
+          "Play, pause, scrub, change loop speed, and pick frame count, same controls you'd expect from a desktop radar app. The radar legend shows the scan time and its age, and warnings play back with the loop.",
       },
       {
         title: "Loops about eight hours deep",
@@ -310,7 +325,7 @@ const categories: Category[] = [
       {
         title: "Dual-view split-screen",
         description:
-          "Compare two radar views side by side (different products or two sites), each pane with its own independent controls.",
+          "Compare two radar views side by side (different products or two sites), each pane with its own independent controls. Every Level II product works in both panes, including storm-relative velocity, spectrum width and normalized rotation. Two panes on one radar share each download, so side by side costs no more data, and search, Center on me, a radar site pick or an alert move both panes.",
       },
       {
         title: "Custom GR2Analyst-style color tables",
@@ -416,6 +431,16 @@ const categories: Category[] = [
         title: "A stamp burned into every frame",
         description:
           "Product, site and time ride on the image itself, so the loop still says what it is once it has left the app and nobody has to ask what they are looking at.",
+      },
+      {
+        title: "Faster, and easy to find on Windows",
+        description:
+          "Loop export runs two to three times faster. On Windows a Full size option exports at your screen's full resolution, and the file lands in your Videos or Pictures folder under Spotter Tools Pro with a Show in folder button.",
+      },
+      {
+        title: "Or share a single screen",
+        description:
+          "The Share button in the bottom bar captures whatever you are looking at, with a branded footer and the date and time, in one tap.",
       },
       {
         title: "It does not lock up the app",
@@ -531,6 +556,11 @@ const categories: Category[] = [
           "Pick exactly which states and agencies appear on the map from a single Camera Sources sheet, keeping it focused on your area.",
       },
       {
+        title: "Buoy data export",
+        description:
+          "Export data on a NOAA buoy's camera card shares its last 5 days of reports as a spreadsheet file.",
+      },
+      {
         title: "Readable in a dense metro",
         description:
           "An amber video badge marks a live feed and a blue-grey photo badge marks stills, so you know before you tap. Cluster bubbles are small and translucent rather than solid discs, and a Group nearby cameras switch lets you turn clustering off entirely when you want every camera in a metro shown individually.",
@@ -563,6 +593,11 @@ const categories: Category[] = [
         title: "Real-time LIVE badges",
         description:
           "The app checks who's broadcasting and surfaces live streams first, so you always land on someone actually on a storm.",
+      },
+      {
+        title: "Live chaser positions on the map",
+        description:
+          "A map layer shows featured chasers who are streaming on YouTube right now and sharing their position on Spotter Network. Tap a marker to watch their stream. Team channels show a marker for each member out chasing, and partner chasers get a gold-ringed marker with their photo.",
       },
     ],
     screenshot: {
@@ -613,11 +648,67 @@ const categories: Category[] = [
         description:
           "Quick chips switch model, product, and run without digging through menus.",
       },
+      {
+        title: "Follows the latest run",
+        description:
+          "Models stay on the newest run unless you pin one. A pinned run shows a pin icon, and a New run badge tells you when a newer run is out.",
+      },
+      {
+        title: "Inspector crosshair",
+        description:
+          "Tap Inspector and a crosshair in the middle of the map reads the model value under it as you pan.",
+      },
     ],
     screenshot: {
       src: "/images/screenshots/layers-models-cameras.jpg",
       alt: "Map layers sheet showing weather models and cameras",
       caption: "Weather models, cameras, and every layer in one sheet",
+    },
+  },
+  {
+    id: "box-meteogram",
+    eyebrow: "Box Meteogram",
+    title: "The Severe Setup, Hour by Hour",
+    intro:
+      "Draw a box over the area you plan to chase and see the whole setup across it, hour by hour, before the first storm fires.",
+    features: [
+      {
+        title: "Draw it on the map",
+        description:
+          "Long-press one corner of the area (right-click on Windows), choose Box meteogram and tap the opposite corner. Boxes run from about 100 km on a side up to 800 km across.",
+      },
+      {
+        title: "A verdict in plain words",
+        description:
+          "The top of the panel sums up the hour you are on: how much severe fuel there is, whether storms can form on their own, and whether the model actually makes them.",
+      },
+      {
+        title: "Setup timeline",
+        description:
+          "Tornado, hail, damaging wind and flooding rain rows, one box per hour, graded Low, Moderate, High or Extreme, with rows for how much of the box can form storms and how much of it the model fills with them.",
+      },
+      {
+        title: "Ensemble odds from REFS",
+        description:
+          "NOAA's 14-member REFS ensemble adds the hour-by-hour chance of rotating storms, strong storms, 50 kt gusts, an inch of rain an hour, CAPE over 2000 and SRH over 200.",
+      },
+      {
+        title: "16 charts",
+        description:
+          "Every ingredient across the box, from CAPE and shear to STP, the supercell composite, model radar and rain. The line is the middle of the box, the band is the spread, and the strongest spot is marked. Tap the i on any chart for what it means.",
+      },
+      {
+        title: "Pick the model, the run, and the trend",
+        description:
+          "Switch between HRRR, RRFS and GFS, pick an earlier run, or tap Compare to fade in the last few runs and see whether the threat is trending up or down.",
+      },
+    ],
+    panel: {
+      src: "/images/v175/box-meteogram.jpg",
+      alt: "The box meteogram with its verdict, setup timeline and REFS ensemble rows",
+      caption: "The verdict, setup timeline and REFS ensemble odds for one box",
+      width: 965,
+      height: 1212,
     },
   },
   {
@@ -704,12 +795,12 @@ const categories: Category[] = [
       {
         title: "Worldwide tropical & hurricane tracking",
         description:
-          "Named storms in every basin (typhoons too) via a global feed, plus NHC outlook areas-to-watch, forecast cones, tracks, intensity, and the observed past track. Tap any storm for a detail card.",
+          "Named storms in every basin (typhoons too) via a global feed, plus NHC outlook areas-to-watch, forecast cones, tracks, intensity, and the observed past track. Each storm's position is a spinning storm symbol with its category in the eye, spinning faster as it strengthens. New advisories show within about 5 minutes, and typhoons get their real category. Tap any storm for a detail card.",
       },
       {
         title: "Every model's latest track",
         description:
-          "Spaghetti plots show each model's newest run from the last 12 hours, ensembles and the slower models included, checked for updates often and kept on the map if an update fails. Storms crossing the 180 degree line in the Pacific keep their tracks and cones where they belong.",
+          "Spaghetti plots show each model's newest run from the last 12 hours, ensembles, the slower models and Google DeepMind's AI hurricane model included, with every line labelled with its model's name, checked for updates often and kept on the map if an update fails. Storms crossing the 180 degree line in the Pacific keep their tracks and cones where they belong.",
       },
       {
         title: "Hurricane Hunter reconnaissance",
@@ -760,21 +851,28 @@ const categories: Category[] = [
     title: "On-Device Soundings",
     intro:
       "Full atmospheric profiles without a desktop: skew-T, hodograph, and complete sounding analysis, right on your phone.",
-    video: {
-      src: "/videos/soundings.mp4",
-      poster: "/videos/soundings-poster.jpg",
-      caption: "Tap the map for a skew-T, hodograph, and full analysis.",
+    panel: {
+      src: "/images/v175/skew-t.jpg",
+      alt: "The full point sounding with skew-T, hodograph and parcel, kinematics, thermodynamics and composite tables",
+      caption: "The full sounding view with its parameter tables",
+      width: 1400,
+      height: 964,
     },
     features: [
       {
-        title: "Skew-T & hodograph",
+        title: "A pro-style skew-T & hodograph",
         description:
-          "Read the vertical profile the way forecasters do, a skew-T log-P diagram and hodograph, rendered on-device.",
+          "Read the vertical profile the way forecasters do: a skew-T log-P diagram with the parcel and its CAPE shaded, wind barbs and height marks, beside a hodograph coloured by layer with the storm motions marked. Tap View full sounding for the big version.",
       },
       {
-        title: "Full sounding analysis",
+        title: "Full parcel, shear and composite tables",
         description:
-          "Derived parameters and a complete sounding breakdown to size up instability, shear, and storm potential at a glance.",
+          "Surface, mixed-layer and most-unstable parcels with CAPE, CIN, LCL, LFC and EL; SRH and shear by layer and for the effective inflow; DCAPE, PWAT, freezing level and lapse rates; and STP, SCP and EHI.",
+      },
+      {
+        title: "Pick a run and compare",
+        description:
+          "Choose an earlier model run with the valid time held the same, then tap Compare to fade the previous run in behind the skew-T and hodograph. The read adds a section on what changed.",
       },
       {
         title: "Observed + forecast profiles",
@@ -789,7 +887,7 @@ const categories: Category[] = [
       {
         title: "Plain-language read",
         description:
-          "A written interpretation of the profile, including what happens to storms moving into the area rather than only whether new storms can fire. A capped sounding no longer makes an inbound mature storm look doomed, since inhibition guards initiation, not an established updraft. Adds a dry-microburst callout and handles high-shear low-CAPE setups.",
+          "A written interpretation of the profile, including what happens to storms moving into the area rather than only whether new storms can fire. A capped sounding no longer makes an inbound mature storm look doomed, since inhibition guards initiation, not an established updraft. Adds a dry-microburst callout and handles high-shear low-CAPE setups, and it looks ahead: when the threat peaks and whether the cap breaks.",
       },
     ],
   },
@@ -814,6 +912,11 @@ const categories: Category[] = [
         title: "SPC outlooks matched to your zones",
         description:
           "An outlook notification describes the risk over your own watch zones rather than the highest risk anywhere in the country, and tapping it turns the outlook layer on and flies you to your strongest zone. A nationwide zone no longer means the whole country for outlooks, and a setting brings the old behaviour back if you want it.",
+      },
+      {
+        title: "Warnings that play back with the loop",
+        description:
+          "Play any single site or national loop and each frame shows the warnings that were in effect at that moment, as they were issued, updated and cancelled. The newest frame is always live.",
       },
       {
         title: "Population inside the polygon",
@@ -928,6 +1031,35 @@ const categories: Category[] = [
         title: "Built to stay free & fast",
         description:
           "Powered by an edge-cached backend so the map stays snappy and the feature stays free, no subscription, ever.",
+      },
+    ],
+  },
+  {
+    id: "car",
+    eyebrow: "In the Car",
+    title: "CarPlay, Android Auto and Directions",
+    intro:
+      "Radar on the dashboard, and turn-by-turn directions that keep the storm on screen while you drive.",
+    features: [
+      {
+        title: "CarPlay",
+        description:
+          "Spotter Tools Pro is a CarPlay navigation app. Live radar on your car's screen with warning polygons, storm cells, storm reports and radar sites. Pick Reflectivity, Velocity, Storm-relative velocity, Correlation coefficient or the national composite, follow the nearest radar or choose one, turn warnings on or off, and pick a dark or light map.",
+      },
+      {
+        title: "Navigate from the car",
+        description:
+          "Search a town, ZIP code or address, or pick a recent place or a storm nearby, then Go for turn-by-turn on CarPlay's own turn cards. A trip started on your iPhone shows up in the car, and End in the car ends it on both. Car alerts appear on the CarPlay screen, with simpler maps for the Dashboard and instrument cluster.",
+      },
+      {
+        title: "Android Auto",
+        description:
+          "Live radar, warnings, storm cells and reports on your car's screen in Android Auto.",
+      },
+      {
+        title: "Turn-by-turn directions on your phone",
+        description:
+          "Route to any place over live radar with spoken prompts and automatic rerouting. On iPhone the voice keeps talking when the phone is locked or another app is in front. On iPhone and Android phones.",
       },
     ],
   },
